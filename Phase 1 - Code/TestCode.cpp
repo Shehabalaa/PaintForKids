@@ -363,6 +363,13 @@ int main()
 				pOut->PrintMessage("Action: Welcome to Draw Mode , Click anywhere");
 				break;
 
+			case DRAWING_AREA:
+				pOut->PrintMessage("Action: a click on the Playing Area, Click anywhere");
+				break;
+			case EMPTY:
+				pOut->PrintMessage("Action: Empty place in the toolbar , Click anywhere");
+				break;
+
 			case EXIT2:
 				break;
 			}

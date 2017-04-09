@@ -104,8 +104,8 @@ void Output::CreateDrawToolBars() const
 	MenuItemImages[ITM_LOAD]="images\\MenuItems\\load.jpg";//
 	MenuItemImages[ITM_TOPLAY]="images\\MenuItems\\switch.jpg";
 	MenuItemImages[ITM_EXIT1] = "images\\MenuItems\\exit.jpg";//
-	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\colorf.jpg";
-	MenuItemImages[ITM_REDO] = "images\\MenuItems\\colorf.jpg";
+	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
+	MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo.jpg";
 	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\resize.jpg"; 
 	MenuItemImages[ITM_CHNG_BORDER_WIDTH] = "images\\MenuItems\\colorf.jpg";
 	//TODO: Prepare images for each menu item and add it to the list
@@ -137,7 +137,7 @@ void Output::CreateDrawToolBars() const
 	col[orange] = "images\\MenuItems\\orange.jpg";
 
 	for (int i = 0; i<colors_num; i++)
-		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight + 1, UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
 
 	
 
@@ -160,10 +160,10 @@ void Output::CreatePlayToolBar() const
 	///TODO: write code to create Play mode menu
 
 	string MenuItemImages[PLAY_ITM_COUNT];
-	MenuItemImages[ITM_PICK] = "images\\MenuItems\\Menu_Circ.jpg";
-	MenuItemImages[ITM_SCRAMBLE] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_PICK] = "images\\MenuItems\\FIND.jpg";
+	MenuItemImages[ITM_SCRAMBLE] = "images\\MenuItems\\SCRAMBLE.jpg";
 	MenuItemImages[ITM_TODRAW] = "images\\MenuItems\\switch.jpg";
-	MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
 
 	
 	//First drawing white area to clear last toolbar

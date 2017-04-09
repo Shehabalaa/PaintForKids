@@ -112,30 +112,21 @@ ActionType Input::GetUserAction() const
 			case ITM_TODRAW:	return TODRAW;
 			case ITM_EXIT2:return EXIT2;
 
-
-			
 				//ME : TODO write here 2l actions 3la 7asab 2l icons w 3adadha ..w nktbha bl tarteeb zi 2l enum
-
-
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 
-
-			//[2] User clicks on the drawing area
-			if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
-			{
-				return DRAWING_AREA;
-			}
-
-			//[3] User clicks on the status bar
-			return STATUS;
-
-
-
-
-
-			return TODRAW;	//just for now. This should be updated
 		}
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS;
+
+
 
 	}
 }
