@@ -14,7 +14,7 @@ Output::Output()
 	
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 55;   //2zabt 2l icons l width bta3ha
+	UI.MenuItemWidth = 53.7;   //2zabt 2l icons l width bta3ha
 
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
@@ -92,6 +92,7 @@ void Output::CreateDrawToolBars() const
 	MenuItemImages[ITM_CHNG_DRAW_CLR]="images\\MenuItems\\colord.jpg";//
 	MenuItemImages[ITM_CHNG_FILL_CLR]="images\\MenuItems\\colorf.jpg";//
 	MenuItemImages[ITM_CHNG_BK_CLR] = "images\\MenuItems\\colorbg.jpg";//
+	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\select.jpg";//
 	MenuItemImages[ITM_DELETE]="images\\MenuItems\\delete.jpg";//
 	MenuItemImages[ITM_MOVE]="images\\MenuItems\\move.jpg";//
 	MenuItemImages[ITM_RESIZE]="images\\MenuItems\\resize.jpg";//
@@ -102,12 +103,12 @@ void Output::CreateDrawToolBars() const
 	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";//
 	MenuItemImages[ITM_SAVE]="images\\MenuItems\\save.jpg";//
 	MenuItemImages[ITM_LOAD]="images\\MenuItems\\load.jpg";//
-	MenuItemImages[ITM_TOPLAY]="images\\MenuItems\\switch.jpg";
+	MenuItemImages[ITM_TOPLAY]="images\\MenuItems\\play.jpg";
 	MenuItemImages[ITM_EXIT1] = "images\\MenuItems\\exit.jpg";//
 	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
 	MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo.jpg";
-	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\resize.jpg"; 
-	MenuItemImages[ITM_CHNG_BORDER_WIDTH] = "images\\MenuItems\\colorf.jpg";
+	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\rotate.jpg"; 
+	MenuItemImages[ITM_CHNG_BORDER_WIDTH] = "images\\MenuItems\\bwidth.jpg";
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//First drawing white area to clear last toolbar

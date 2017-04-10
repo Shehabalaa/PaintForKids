@@ -266,6 +266,10 @@ int main()
 				pOut->PrintMessage("Action: Change the background color , Click anywhere");
 				break;
 
+			case SELECT:
+				pOut->PrintMessage("Action: select figure , Click anywhere");
+				break;
+
 			case DEL:
 				pOut->PrintMessage("Action: Delete a figure , Click anywhere");
 				break;

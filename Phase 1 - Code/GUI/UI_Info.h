@@ -36,6 +36,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_CHNG_FILL_CLR, // Changing fill color
 	ITM_CHNG_BORDER_WIDTH, // Changing border width
 	ITM_CHNG_BK_CLR,   // Changing background color
+	ITM_SELECT,
 	ITM_DELETE,        // Deleting item(s) from graph
 	ITM_MOVE,			// Moving item(s)
 	ITM_ROTATE,         // Rotating item(s)

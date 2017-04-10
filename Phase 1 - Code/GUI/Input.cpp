@@ -58,6 +58,7 @@ ActionType Input::GetUserAction() const
 			case ITM_CHNG_FILL_CLR:	return CHNG_FILL_CLR;
 			case ITM_CHNG_BORDER_WIDTH:return CHNG_BORDER_WIDTH;
 			case ITM_CHNG_BK_CLR:	return CHNG_BK_CLR;
+			case ITM_SELECT: return SELECT;
 			case ITM_DELETE:	return DEL;
 			case ITM_MOVE:	return MOVE;
 			case ITM_RESIZE:	return RESIZE;
