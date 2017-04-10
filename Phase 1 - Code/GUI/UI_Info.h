@@ -14,13 +14,13 @@ enum GUI_MODE	//Graphical user interface mode
 };
 enum ColorMenuItem //for drawing fillg background colors
 {
-	black,
-	green,
-	yellow,
-	blue,
-	red,
-	brown,
-	orange,
+	ITM_black,
+	ITM_green,
+	ITM_yellow,
+	ITM_blue,
+	ITM_red,
+	ITM_brown,
+	ITM_orange,
 	colors_num
 };
 

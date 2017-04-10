@@ -56,7 +56,7 @@ ActionType Input::GetUserAction() const
 			case ITM_CIRC:	return DRAW_CIRC;
 			case ITM_CHNG_DRAW_CLR: return CHNG_DRAW_CLR;
 			case ITM_CHNG_FILL_CLR:	return CHNG_FILL_CLR;
-			case ITM_CHNG_BORDER_WIDTH :return CHNG_BORDER_WIDTH;
+			case ITM_CHNG_BORDER_WIDTH:return CHNG_BORDER_WIDTH;
 			case ITM_CHNG_BK_CLR:	return CHNG_BK_CLR;
 			case ITM_DELETE:	return DEL;
 			case ITM_MOVE:	return MOVE;
@@ -82,17 +82,36 @@ ActionType Input::GetUserAction() const
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
-
 		//[2] User clicks on the drawing area
-		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		else if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight  && x < UI.width - 70)
 		{
 			return DRAWING_AREA;
 		}
+		else if (y >= UI.height - UI.StatusBarHeight) //[3] User clicks on the status bar
+			return STATUS;
 
-		//[3] User clicks on the status bar
-		return STATUS;
+		else
+		{
+
+			int ClickedItemOrder = ((y- UI.ToolBarHeight) / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_black:	return SELECT_BLACK_COLOR;
+			case ITM_green:	return SELECT_GREEN_COLOR;
+			case ITM_yellow:	return SELECT_YELLOW_COLOR;
+			case ITM_red:	return SELECT_RED_COLOR;
+			case ITM_blue:	return SELECT_BLUE_COLOR;
+			case ITM_brown: return SELECT_BROWN_COLOR;
+			case ITM_orange: return SELECT_ORANGE_COLOR;
+			default: return EMPTY2;
+
+			}
+		}
 	}
-	else	//GUI is in PLAY mode    // eldraw
+	else //GUI is in PLAY mode    // eldraw
 	{
 		///TODO:
 		//perform checks similar to Draw mode checks above
@@ -126,10 +145,11 @@ ActionType Input::GetUserAction() const
 		//[3] User clicks on the status bar
 		return STATUS;
 
-
-
 	}
+	
+
 }
+
 /////////////////////////////////
 	
 Input::~Input()

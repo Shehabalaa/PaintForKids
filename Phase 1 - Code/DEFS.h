@@ -40,6 +40,14 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK,
 	SCRAMBLE,
 	TODRAW,
+	SELECT_BLACK_COLOR,
+	SELECT_GREEN_COLOR,
+	SELECT_YELLOW_COLOR,
+	SELECT_BLUE_COLOR,
+	SELECT_RED_COLOR,
+	SELECT_BROWN_COLOR,
+	SELECT_ORANGE_COLOR,
+	EMPTY2,
 	EXIT2
 	///TODO: Add more action types (if needed)
 };

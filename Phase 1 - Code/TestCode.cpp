@@ -342,6 +342,33 @@ int main()
 				pOut->PrintMessage("Action: Empty place in the toolbar , Click anywhere");
 				break;
 
+			case SELECT_BLACK_COLOR:
+				pOut->PrintMessage("Action: Selection Black , Click anywhere");
+				break;
+			case SELECT_GREEN_COLOR:
+				pOut->PrintMessage("Action: Selection GREEN , Click anywhere");
+				break;
+			case SELECT_YELLOW_COLOR:
+				pOut->PrintMessage("Action: Selection YELLOW , Click anywhere");
+				break;
+			case SELECT_BLUE_COLOR:
+				pOut->PrintMessage("Action: Selection BLUE , Click anywhere");
+				break;
+			case SELECT_RED_COLOR:
+				pOut->PrintMessage("Action: Selection RED , Click anywhere");
+				break;
+
+			case SELECT_BROWN_COLOR:
+				pOut->PrintMessage("Action: Selection BROWN , Click anywhere");
+				break;
+			case SELECT_ORANGE_COLOR:
+				pOut->PrintMessage("Action: Selection ORANGE , Click anywhere");
+				break;
+			case EMPTY2:
+				pOut->PrintMessage("Action: Empty place in color tool bar , Click anywhere");
+				break;
+
+
 
 			case EXIT1:
 				break;

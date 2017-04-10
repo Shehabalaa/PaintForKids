@@ -128,13 +128,13 @@ void Output::CreateDrawToolBars() const
 
 
 	string col[colors_num]; // here we drawing colors coulom
-	col[black] = "images\\MenuItems\\black.jpg";
-	col[green] = "images\\MenuItems\\green.jpg";
-	col[blue] = "images\\MenuItems\\blue.jpg";
-	col[red] = "images\\MenuItems\\red.jpg";
-	col[yellow] = "images\\MenuItems\\yellow.jpg";
-	col[brown] = "images\\MenuItems\\brown.jpg";
-	col[orange] = "images\\MenuItems\\orange.jpg";
+	col[ITM_black] = "images\\MenuItems\\black.jpg";
+	col[ITM_green] = "images\\MenuItems\\green.jpg";
+	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
+	col[ITM_red] = "images\\MenuItems\\red.jpg";
+	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
+	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
+	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
 
 	for (int i = 0; i<colors_num; i++)
 		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
@@ -147,7 +147,7 @@ void Output::CreateDrawToolBars() const
 	else
 		pWind->SetPen(BLUE, 1);
 
-	pWind->DrawLine(UI.width-70, UI.ToolBarHeight, UI.width-70, UI.height);	
+	pWind->DrawLine(UI.width-70, UI.ToolBarHeight, UI.width-70, UI.height-UI.StatusBarHeight);	
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
