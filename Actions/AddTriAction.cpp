@@ -1,12 +1,47 @@
+#include"..\CTriangle.h"
+#include "..\Figures\CRectangle.h"
+#include "..\ApplicationManager.h"
+#include "..\GUI\input.h"
+#include "..\GUI\Output.h"
+#include"..\Actions\Action.h"
 #include "AddTriAction.h"
 
 
-//
-//AddTriAction::AddTriAction()
-//{
-//}
-//
-//
-//AddTriAction::~AddTriAction()
-//{
-//}
+AddTriAction::AddTriAction(ApplicationManager * pApp) : Action(pApp)
+{}
+
+void AddTriAction::ReadActionParameters()
+{
+	//Get a Pointer to the Input / Output Interfaces
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	pOut->ClearStatusBar();
+	pOut->PrintMessage("New Triangle: Click at first corner");
+	pIn->GetPointClicked(c1.x, c1.y);
+	pOut->PrintMessage("New Triangle: Click at second corner");
+	pIn->GetPointClicked(c2.x, c2.y);
+	pOut->PrintMessage("New Triangle: Click at third corner");
+	pIn->GetPointClicked(c3.x, c3.y);
+	TriGfxInfo.isFilled = false;
+	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
+	TriGfxInfo.FillClr = pOut->getCrntFillColor();
+	TriGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+
+	pOut->ClearStatusBar();
+
+}
+
+void AddTriAction::Execute()
+{
+	ReadActionParameters();
+
+
+	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo);
+
+	//Add the line to the list of figures
+	pManager->AddFigure(t);
+}
+
+AddTriAction::~AddTriAction()
+{
+}

@@ -13,3 +13,7 @@ void CTriangle::Draw(Output* pOut) const
 	//Call Output::DrawRect to draw a rectangle on the screen	
 	pOut->DrawTri(corner1, corner2,corner3, FigGfxInfo, Selected);
 }
+figures  CTriangle::FigType() {
+	return tri;
+}
+

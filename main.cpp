@@ -20,7 +20,7 @@ int main()
 		AppManager.UpdateInterface();
 		
 
-	}while(ActType != EXIT1);
+	}while(ActType != EXIT1 || ActType != EXIT2);
 	
 
 	

@@ -18,12 +18,14 @@ public:
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
 	virtual void Draw(Output* pOut) const  = 0 ;		//Draw the figure
 	
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 
+
+	virtual figures FigType()=0;
+	virtual bool check(int,int) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 

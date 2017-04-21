@@ -9,10 +9,12 @@ class Cline: public CFigure
 private:
 	Point start;
 	Point end;
-
+	float slope;
 public:
 	Cline(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	virtual figures FigType();
+	virtual bool check(int, int);
 };
 
 #endif

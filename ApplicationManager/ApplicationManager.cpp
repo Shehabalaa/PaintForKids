@@ -2,7 +2,7 @@
 #include "..\Actions\AddRectAction.h"
 #include"..\Actions\AddlineAction.h"
 #include"..\Actions\AddCircleAction.h"
-
+#include"AddTriAction.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -35,31 +35,34 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
-		case DRAW_RECT:
-			pAct = new AddRectAction(this);
-			break;
+	case DRAW_RECT:
+		pAct = new AddRectAction(this);
+		break;
 
-		case DRAW_LINE:
-			pAct = new  addlineaction(this);
-			break;
-		case DRAW_CIRC:
-			pAct = new AddCircleAction(this);
+	case DRAW_LINE:
+		pAct = new  addlineaction(this);
+		break;
+	case DRAW_CIRC:
+		pAct = new AddCircleAction(this);
+		break;
+	case DRAW_TRI:
+		pAct = new AddTriAction(this);
+		break;
+	case DRAWING_AREA:
+		pOut->PrintMessage("a click on the drawing area");
+		break;
+	case EXIT1:
+		break;
 
-		case EXIT1:
-			///create ExitAction here
-			
-			break;
-		
-		case STATUS:	//a click on the status bar ==> no action
-			return;
+	case STATUS:	//a click on the status bar ==> no action
+		return;
 	}
 	
 	//Execute the created action
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		delete pAct;	//Action is not needed any more ==> delete it
-		pAct = NULL;
+	
 	}
 }
 //==================================================================================//
@@ -77,9 +80,18 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 {
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
+	bool check;
 
+	for (int i = 0; i < FigCount; i++)
+	{
+		check = FigList[i]->check(x,y);
 
-	///Add your code here to search for a figure given a point x,y	
+		if (check == true)
+		{
+			return FigList[i];
+		}
+	}
+
 
 	return NULL;
 }

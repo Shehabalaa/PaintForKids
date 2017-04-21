@@ -2,13 +2,31 @@
 CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	center = P1;
-	rad = P2;
+	circum = P2;
+	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
 }
 
 
 void CCircle::Draw(Output* pOut) const
 {
-	int R;
-	R = sqrt(pow((rad.x - center.x), 2) + pow((rad.y - center.y), 2));
-	pOut->DrawCirc(center, R, FigGfxInfo, Selected);
+
+	pOut->DrawCirc(center, rad, FigGfxInfo, Selected);
+}
+
+figures CCircle::FigType()
+{
+	return circle;
+}
+
+
+bool CCircle::check(int x,int y)
+{
+	int d;
+	d= sqrt(pow((x - center.x), 2) + pow((y - center.y), 2));
+	if (d <= rad)
+	{
+		return true;
+	}
+	else return false;
+
 }

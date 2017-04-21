@@ -8,11 +8,16 @@ class CCircle : public CFigure
 {
 private:
 	Point center;
-	Point rad;
+	Point circum;
+	int rad;
 
 public:
 	CCircle(Point, Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	virtual figures FigType();
+	virtual bool check(int x,int y);
 };
+
+
 
 #endif

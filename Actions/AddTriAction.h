@@ -4,18 +4,15 @@
 class AddTriAction : public Action
 {
 private:
-	Point s, e;
-	GfxInfo LineGfxInfo;
+	Point c1, c2, c3;
+	GfxInfo TriGfxInfo;
 public:
 	AddTriAction(ApplicationManager *pApp);
 
-	//Reads rectangle parameters
 	virtual void ReadActionParameters();
-
-	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 
-	AddTriAction();
+	~AddTriAction();
 
 };
 
