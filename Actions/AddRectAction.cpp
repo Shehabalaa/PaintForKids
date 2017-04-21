@@ -1,10 +1,6 @@
 #include "AddRectAction.h"
 #include "..\Figures\CRectangle.h"
-
-#include "..\ApplicationManager.h"
-
-#include "..\GUI\input.h"
-#include "..\GUI\Output.h"
+#include "..\ApplicationManager\ApplicationManager.h"
 
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 {}
