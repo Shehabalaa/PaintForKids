@@ -12,6 +12,7 @@ class ApplicationManager
 	enum { MaxFigCount = 200 };	//Max no of figures
 
 private:
+	bool FigListSaved; // true if newst information already saved in file else otherwise
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
 
@@ -35,7 +36,9 @@ public:
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() const;	//Redraws all the drawing window
+	void SaveAll(ofstream &) ; //Saves whole Graph to a file it is not const to change figlistsaved variable to true
+	bool GetIfListSaved() const; //Retrun true of all list with its last information saved else otherwise
 };
 
 #endif

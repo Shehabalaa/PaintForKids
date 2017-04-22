@@ -14,7 +14,9 @@ private:
 public:
 	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
+	virtual bool check(int, int);
 	virtual figures FigType();
+	virtual void Save(ofstream &) const;
 };
 
 #endif

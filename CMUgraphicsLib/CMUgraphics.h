@@ -6,7 +6,9 @@ This file was last modified on 05.16.1999
 #ifndef CMUGRAPHICS_H
 #define CMUGRAPHICS_H
 
-#include <string>
+
+#include <iomanip>
+
 
 #ifndef WINDOWS_H
   #define WINDOWS_H

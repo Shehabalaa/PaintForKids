@@ -1,14 +1,14 @@
-#include "Addlineaction.h"
+#include "AddlineAction.h"
 #include"..\Figures\Cline.h"
 #include "..\ApplicationManager\ApplicationManager.h"
 #include"..\Actions\Action.h"
 
 
 
-addlineaction::addlineaction(ApplicationManager * pApp) : Action(pApp)
+AddlineAction::AddlineAction(ApplicationManager * pApp) : Action(pApp)
 {}
 
-void addlineaction::ReadActionParameters()
+void AddlineAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
@@ -35,7 +35,7 @@ void addlineaction::ReadActionParameters()
 }
 
 //Execute the action
-void addlineaction::Execute()
+void AddlineAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
@@ -49,6 +49,6 @@ void addlineaction::Execute()
 
 
 
-addlineaction::~addlineaction()
+AddlineAction::~AddlineAction()
 {
 }

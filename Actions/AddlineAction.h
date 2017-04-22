@@ -1,13 +1,13 @@
 #pragma once
 #include "Action.h"
 
-class addlineaction : public Action
+class AddlineAction : public Action
 {
 private:
 	Point s, e; 
 	GfxInfo LineGfxInfo;
 public:
-	addlineaction(ApplicationManager *pApp);
+	AddlineAction(ApplicationManager *pApp);
 
 	//Reads rectangle parameters
 	virtual void ReadActionParameters();
@@ -15,7 +15,7 @@ public:
 	//Add rectangle to the ApplicationManager
 	virtual void Execute();
 
-	~addlineaction();
+	~AddlineAction();
 
 };
 

@@ -166,6 +166,12 @@
     <ClCompile Include="Actions\Select.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\SaveAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMUgraphicsLib\colors.cpp">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -274,5 +280,16 @@
     <ClInclude Include="Actions\Select.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\SaveAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CMUgraphicsLib\Manual.txt">
+      <Filter>CMUgraphicsLib</Filter>
+    </Text>
+    <Text Include="CMUgraphicsLib\Readme.txt">
+      <Filter>CMUgraphicsLib</Filter>
+    </Text>
   </ItemGroup>
 </Project>

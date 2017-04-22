@@ -2,7 +2,10 @@
 #include "..\Actions\AddRectAction.h"
 #include"..\Actions\AddlineAction.h"
 #include"..\Actions\AddCircleAction.h"
-#include"AddTriAction.h"
+#include"..\Actions\AddTriAction.h"
+#include "..\Actions\SaveAction.h"
+#include<iomanip>
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -10,7 +13,7 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	
+	FigListSaved = true;
 	FigCount = 0;
 		
 	//Create an array of figure pointers and set them to NULL		
@@ -40,7 +43,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 
 	case DRAW_LINE:
-		pAct = new  addlineaction(this);
+		pAct = new  AddlineAction(this);
 		break;
 	case DRAW_CIRC:
 		pAct = new AddCircleAction(this);
@@ -51,7 +54,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAWING_AREA:
 		pOut->PrintMessage("a click on the drawing area");
 		break;
+	case SAVE:
+		pAct = new SaveAction(this);
+		break;
 	case EXIT1:
+		//pAct = new Exit1Action(this);
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -72,8 +79,11 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if(FigCount < MaxFigCount )
-		FigList[FigCount++] = pFig;	
+	if (FigCount < MaxFigCount)
+	{
+		FigList[FigCount++] = pFig;
+		FigListSaved = false;
+	}
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
@@ -95,6 +105,25 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+
+void ApplicationManager::SaveAll(ofstream& fOut)
+{
+	//firstly writing all colors names and total number of figures then calling all Virtual Save functions of all figures in FigList
+	FigListSaved = true;
+	fOut<<left<<setw(10)<< UI.DrawColor.getColorName() << setw(10) << UI.FillColor.getColorName();
+	fOut << setw(10) << UI.BkGrndColor.getColorName()<<endl;
+	fOut << FigCount << endl;
+	for (int i = 0; i<FigCount; i++)
+		FigList[i]->Save(fOut);
+	
+}
+
+bool ApplicationManager::GetIfListSaved() const
+{
+	return FigListSaved;
+}
+
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//

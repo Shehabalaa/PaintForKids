@@ -2,8 +2,8 @@
 #define ACTION_H
 
 #include "..\DefS.h"
+#include"../ApplicationManager/ApplicationManager.h"
 
-class ApplicationManager; //forward class declaration
 
 
 //Base class for all possible actions

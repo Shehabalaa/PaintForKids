@@ -2,7 +2,7 @@
 #define DEFS_H
 
 #include "CMUgraphicsLib\CMUgraphics.h"
-
+#include<fstream>
 //This file contais some global constants and definitions to be used in the project.
 enum ActionType //The actions supported (you can add more if needed)
 {
@@ -71,8 +71,7 @@ enum figures {
 	line,
 	rec,
 	tri,
-	circle,
-
+	circle
 
 };
 
