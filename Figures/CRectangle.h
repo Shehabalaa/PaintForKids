@@ -13,6 +13,7 @@ public:
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType();
 	virtual bool check(int, int);
+	virtual void Save(ofstream &) const;
 };
 
 #endif

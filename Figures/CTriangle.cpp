@@ -32,3 +32,12 @@ bool CTriangle::check(int x, int y)
 		return true;
 	else return false;
 }
+
+void CTriangle::Save(ofstream &fOut) const
+
+{
+	fOut << left << setw(5) << "RECTANGLE" << setw(10) << ID << setw(12) << corner1.x << setw(14) << corner1.y;
+	fOut << setw(16) << corner2.x << setw(18) << corner2.y << setw(23) << setw(25) << corner3.x << setw(30) << corner3.y;
+	fOut << FigGfxInfo.DrawClr.getColorName() << setw(35) << FigGfxInfo.FillClr.getColorName() << endl;
+		
+}

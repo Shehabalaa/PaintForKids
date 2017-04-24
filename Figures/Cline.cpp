@@ -35,3 +35,10 @@ bool Cline::check(int x, int y)
 
 
 }
+
+void Cline::Save(ofstream & fOut) const
+{
+	fOut << left << setw(5) << "LINE" << setw(10) << ID << setw(12) << start.x << setw(14) << start.y;
+	fOut << setw(16) << end.x << setw(18) << end.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
+
+}
