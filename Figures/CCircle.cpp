@@ -4,6 +4,7 @@ CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxIn
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
+	//ID =
 }
 
 
@@ -28,13 +29,5 @@ bool CCircle::check(int x,int y)
 		return true;
 	}
 	else return false;
-
-}
-
-void CCircle::Save(ofstream &fOut) const
-{
-
-	fOut << left << setw(5) << "CIRCLE" << setw(10) << ID << setw(12) << center.x << setw(14) << center.y;
-	fOut << setw(16) <<  rad << setw(21) << FigGfxInfo.DrawClr.getColorName() << setw(26) << FigGfxInfo.FillClr.getColorName() << endl;
 
 }

@@ -3,7 +3,9 @@ Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
 	start = P1;
 	end = P2;
-	slope = (P1.y - P2.y) / (P1.x - P2.x);
+	if ((P1.x - P2.x) != 0)
+	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
+	else slope = 0;
 }
 
 
@@ -19,9 +21,11 @@ figures Cline::FigType()
 }
 bool Cline::check(int x, int y)
 {
-	if (y == slope*x || y == -1 * slope*x)
+
+	float slope2 = float(y - start.y) / float(x - start.x);
+	if (abs(slope - slope2) <5)
 	{
-		if ((((x > start.x) && (x < end.x))&&((y < start.y) && (y > end.y))) || ((( x<start.x && x>end.x)   && (y>start.y && y<end.y))))
+		if (1)
 		{
 			return true;
 
@@ -29,11 +33,5 @@ bool Cline::check(int x, int y)
 		else return true;
 	}
 
-	
-}
-void Cline::Save(ofstream & fOut) const
-{
-	fOut << left << setw(5) << "LINE" << setw(10) << ID << setw(12) << start.x << setw(14) << start.y;
-	fOut << setw(16) << end.x << setw(18) << end.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
 
 }

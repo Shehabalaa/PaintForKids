@@ -3,7 +3,7 @@
 #define CRECT_H
 
 #include "CFigure.h"
-
+#include<cmath>
 class CTriangle: public CFigure
 {
 private:
@@ -14,9 +14,8 @@ private:
 public:
 	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo);
 	virtual void Draw(Output* pOut) const;
-	virtual bool check(int, int);
 	virtual figures FigType();
-	virtual void Save(ofstream &) const;
+	virtual bool check(int, int);
 };
 
 #endif
