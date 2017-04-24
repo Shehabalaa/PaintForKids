@@ -43,7 +43,12 @@ void ActionSelect::Execute()
 			fig->SetSelected(true);
 		}
 	}
-
+	count = countselect();
+	if(count>1)
+	{
+		
+		pManager->GetOutput()->DrawInt(10, 660, count);
+	}
 }
 
 ActionSelect::~ActionSelect()

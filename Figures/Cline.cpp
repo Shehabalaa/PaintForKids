@@ -26,21 +26,23 @@ bool Cline::check(int x, int y)
 {
 	if (slope == -1)
 	{
+		if ((y > start.y && y < end.y) || (y<start.y && y>end.y))
+			return true;
 
 	}
 	else if (slope == 0)
 	{
-
-
+		if ((x> start.x && x< end.x) || (x<start.x && x>end.x))
+			return true;
 	}
 	else
 	{
 		float slope2 = float(y - start.y) / float(x - start.x);
 		if (abs(slope - slope2) < 3)
 		{
-			int l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
-			int l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
-			if (abs((l1 + l2) - length) <= 1)
+			float l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
+			float l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
+			if (abs((l1 + l2) - length) <= 0.1)
 				return true;
 			else return false;
 		}
@@ -63,7 +65,5 @@ bool  Cline::InDrawingArea()
 		return true;
 	}
 	else return false;
-
-
 
 }

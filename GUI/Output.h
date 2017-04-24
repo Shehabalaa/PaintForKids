@@ -29,7 +29,7 @@ public:
 	void DrawCirc(Point P1, int R, GfxInfo RectGfxInfo, bool selected = false) const;
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
-
+	void DrawInt(const int iX, const int iY, const long);
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width

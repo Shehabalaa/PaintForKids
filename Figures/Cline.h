@@ -10,7 +10,7 @@ private:
 	Point start;
 	Point end;
 	float slope;
-	int length;
+	float length;
 public:
 	Cline(Point, Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;

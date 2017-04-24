@@ -11,18 +11,14 @@ Output::Output()
 	UI.wy =5;
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 53.7;   //2zabt 2l icons l width bta3h
+	UI.MenuItemWidth = 53.7;  
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = BLACK;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
-	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	
+	UI.HighlightColor = MAGENTA;	
 	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	//width of the figures frames
-
-	//ana 2det lohm kyam ibtda2ya f l2wl w b3den 3mlt lhm creation
-	
-	//Create the output window
+	UI.PenWidth = 3;	
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids -team 13");
@@ -68,9 +64,6 @@ void Output::ClearStatusBar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBars() const
 {
-	// Here we have 2 tool bars
-	// 1. actions toolbar
-	// 2. colors toolbar
 
 	UI.InterfaceMode = MODE_DRAW;
 
@@ -332,7 +325,15 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 
 }
 
+void Output::DrawInt(const int iX, const int iY, const long lNumber)
+{
+	ClearStatusBar();	//First clear the status bar
 
+	pWind->SetPen(UI.MsgColor, 50);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawInteger(iX, iY, lNumber);
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()

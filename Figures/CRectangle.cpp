@@ -19,25 +19,20 @@ figures  CRectangle::FigType()
 }
 bool CRectangle::check(int x, int y)
 {
-
-	Point middle;
-	middle.x = (Corner1.x + Corner2.x) / 2;
-	middle.y = (Corner1.y + Corner2.y) / 2;
-	float distance; // distance between corner and center
-	distance = sqrt(pow((Corner1.x - middle.x), 2) + pow((Corner1.y - middle.y), 2));
-
-
-	float dis = sqrt(pow((x - middle.x), 2) + pow((y - middle.y), 2)); // distance between clicked point and center
-
-
-
-	if (dis<=distance)
+	if (Corner1.x < Corner2.x)
 	{
-		return true;
+		if (x > Corner1.x && x < Corner2.x)
+			if ((y > Corner1.y && y < Corner2.y) || (y<Corner1.y && y>Corner2.y))
+				return true;
 	}
-	else return false;
+	else if (Corner1.x > Corner2.x)
+	{
+		if (x < Corner1.x && x > Corner2.x)
+			if ((y > Corner2.y && y < Corner1.y) || (y<Corner2.y && y>Corner1.y))
+				return true;
+	}
 
-
+	return false;
 
 }
 
