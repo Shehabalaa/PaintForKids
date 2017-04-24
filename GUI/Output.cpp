@@ -25,7 +25,7 @@ Output::Output()
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
-	pWind->ChangeTitle("Paint for Kids -team 17");
+	pWind->ChangeTitle("Paint for Kids -team 13");
 	
 	CreateDrawToolBars();
 	CreateStatusBar();
