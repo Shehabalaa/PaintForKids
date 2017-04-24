@@ -4,6 +4,7 @@
 #include"..\Actions\AddCircleAction.h"
 #include"..\Actions\AddTriAction.h"
 #include "..\Actions\SaveAction.h"
+#include "..\Actions\Select.h"
 #include<iomanip>
 
 
@@ -54,6 +55,10 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAWING_AREA:
 		pOut->PrintMessage("a click on the drawing area");
 		break;
+	case SELECT:
+		pAct = new ActionSelect(this);
+		break;
+
 	case SAVE:
 		pAct = new SaveAction(this);
 		break;
@@ -69,8 +74,28 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
+		pAct = NULL;
+		delete pAct;
 	
 	}
+}
+int ApplicationManager::countselected()
+{
+	int count = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] != NULL)
+		{
+			if (FigList[i]->IsSelected())
+				count++;
+		}
+	}
+	return count;
+}
+void ApplicationManager::PrintSelected()
+{
+
+
 }
 //==================================================================================//
 //						Figures Management Functions								//
@@ -113,8 +138,8 @@ void ApplicationManager::SaveAll(ofstream& fOut)
 	fOut<<left<<setw(10)<< UI.DrawColor.getColorName() << setw(10) << UI.FillColor.getColorName();
 	fOut << setw(10) << UI.BkGrndColor.getColorName()<<endl;
 	fOut << FigCount << endl;
-	for (int i = 0; i<FigCount; i++)
-		FigList[i]->Save(fOut);
+	//for (int i = 0; i<FigCount; i++)
+		//FigList[i]->Save(fOut);
 	
 }
 

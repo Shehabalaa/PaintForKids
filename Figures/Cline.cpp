@@ -5,7 +5,9 @@ Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 	end = P2;
 	if ((P1.x - P2.x) != 0)
 	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
-	else slope = 0;
+	else slope = -1;
+
+	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
 }
 
 
@@ -21,18 +23,28 @@ figures Cline::FigType()
 }
 bool Cline::check(int x, int y)
 {
-
-	float slope2 = float(y - start.y) / float(x - start.x);
-	if (abs(slope - slope2) <5)
+	if (slope == -1)
 	{
-		if (1)
-		{
-			return true;
 
-		}
-		else return true;
 	}
+	else if (slope == 0)
+	{
 
+
+	}
+	else
+	{
+		float slope2 = float(y - start.y) / float(x - start.x);
+		if (abs(slope - slope2) < 3)
+		{
+			int l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
+			int l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
+			if (abs((l1 + l2) - length) <= 1)
+				return true;
+			else return false;
+		}
+	}
+	return false;
 
 }
 
