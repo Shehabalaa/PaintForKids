@@ -9,7 +9,7 @@ private:
 	Point Corner1;	
 	Point Corner2;
 public:
-	CRectangle(Point , Point, GfxInfo FigureGfxInfo );
+	CRectangle(Point , Point, GfxInfo FigureGfxInfo,int );
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType();
 	virtual bool check(int, int);

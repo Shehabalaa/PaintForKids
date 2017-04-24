@@ -29,11 +29,10 @@ void AddCircleAction::ReadActionParameters()
 //Execute the action
 void AddCircleAction::Execute()
 {
-	//This action needs to read some parameters first
 	ReadActionParameters();
-
-	//Create a circle with the parameters read from the user
-	CCircle *cir = new CCircle(c, r, CircleGfxInfo);
+	int fig = pManager->GetFigCount();
+	
+	CCircle *cir = new CCircle(c, r, CircleGfxInfo,fig);
 	if (cir->InDrawingArea())
 		pManager->AddFigure(cir);
 	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");

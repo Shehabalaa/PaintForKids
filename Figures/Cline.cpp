@@ -1,5 +1,5 @@
 #include "Cline.h"
-Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo,int fig) :CFigure(FigureGfxInfo)
 {
 	start = P1;
 	end = P2;
@@ -8,6 +8,7 @@ Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 	else slope = -1;
 
 	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+	ID = fig + 13;
 }
 
 

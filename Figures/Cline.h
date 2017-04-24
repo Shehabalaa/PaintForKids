@@ -12,7 +12,7 @@ private:
 	float slope;
 	int length;
 public:
-	Cline(Point, Point, GfxInfo FigureGfxInfo);
+	Cline(Point, Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType();
 	virtual bool check(int, int);

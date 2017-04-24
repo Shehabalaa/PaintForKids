@@ -1,11 +1,12 @@
 #include "CTriangle.h"
 #include<cmath>
 
-CTriangle::CTriangle(Point P1, Point P2, Point p3,GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+CTriangle::CTriangle(Point P1, Point P2, Point p3,GfxInfo FigureGfxInfo,int fig) :CFigure(FigureGfxInfo)
 {
 	corner1 = P1;
 	corner2 = P2;
 	corner3 = p3;
+	ID = fig + 13;
 }
 
 

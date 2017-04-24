@@ -12,7 +12,7 @@ private:
 	int rad;
 
 public:
-	CCircle(Point, Point, GfxInfo FigureGfxInfo);
+	CCircle(Point, Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType();
 	virtual bool check(int x,int y);

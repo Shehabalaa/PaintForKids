@@ -148,7 +148,10 @@ bool ApplicationManager::GetIfListSaved() const
 {
 	return FigListSaved;
 }
-
+int ApplicationManager::GetFigCount()
+{
+	return FigCount;
+}
 
 //==================================================================================//
 //							Interface Management Functions							//

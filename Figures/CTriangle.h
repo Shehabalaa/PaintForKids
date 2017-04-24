@@ -12,7 +12,7 @@ private:
 	Point corner3;
 
 public:
-	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo);
+	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo,int);
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType();
 	virtual bool check(int, int);

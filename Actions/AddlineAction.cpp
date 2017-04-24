@@ -39,9 +39,9 @@ void AddlineAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-
+	int fig = pManager->GetFigCount();
 	//Create a rectangle with the parameters read from the user
-	Cline *l = new Cline(s, e, LineGfxInfo);
+	Cline *l = new Cline(s, e, LineGfxInfo,fig);
 
 	if (l->InDrawingArea())
 		pManager->AddFigure(l);

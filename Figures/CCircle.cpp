@@ -1,10 +1,10 @@
 #include "CCircle.h"
-CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
+CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo,int fig) :CFigure(FigureGfxInfo)
 {
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
-	//ID =
+	ID = fig + 13;
 }
 
 
