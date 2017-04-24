@@ -34,9 +34,9 @@ void AddCircleAction::Execute()
 
 	//Create a circle with the parameters read from the user
 	CCircle *cir = new CCircle(c, r, CircleGfxInfo);
-
-	//Add the line to the list of figures
-	pManager->AddFigure(cir);
+	if (cir->InDrawingArea())
+		pManager->AddFigure(cir);
+	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
 }
 
 

@@ -223,9 +223,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 
 void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
-	//check if rectangle in drawing area
-	if (P1.y > UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y > UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight && P1.x< UI.width - 70 && P2.x< UI.width - 70)
-	{
+
 		color DrawingClr;
 		if (selected)
 			DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -245,26 +243,10 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 
 		pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
-
-
-	}
-	else
-	{
-
-		int x = 0, y = 0;
-		PrintMessage("Wrong Points!!! Figure Out of Drawing Area!!!,Click to continue");
-		
-		
-	}
-	
 }
 //LINE
 void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const
 {
-	//check if Line in drawing area
-	if (P1.y > UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y > UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight && P1.x< UI.width - 70 && P2.x < UI.width - 70)
-	{
-
 
 		color DrawingClr;
 		if (selected)
@@ -285,18 +267,6 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 
 
 		pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
-	}
-	else
-	{
-		int x = 0, y = 0;
-		PrintMessage("Wrong Points!!! Figure Out of Drawing Area!!!,Click to continue");
-		pWind->WaitMouseClick(x, y);
-		ClearStatusBar();
-		
-
-
-		
-	}
 
 }
 //Trianlge
@@ -339,8 +309,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 {
 	//check if cricle in drawing area
-	if (P1.y > UI.ToolBarHeight && P1.y < (UI.height - UI.StatusBarHeight) && P1.x - R >= 0 && P1.x+R < UI.width-70 &&  P1.y - R > UI.ToolBarHeight && P1.y + R < UI.height - UI.StatusBarHeight )
-	{
+	
 		color DrawingClr;
 		if (selected)
 			DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -360,14 +329,6 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 
 
 		pWind->DrawCircle(P1.x, P1.y, R, style);
-	}
-	else
-	{
-		int x = 0, y = 0;
-		PrintMessage("Wrong Points!!! Figure Out of Drawing Area!!!,Click to continue");
-		pWind->WaitMouseClick(x, y);
-		ClearStatusBar();
-	}
 
 }
 

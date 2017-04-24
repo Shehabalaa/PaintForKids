@@ -54,3 +54,15 @@ void Cline::Save(ofstream & fOut) const
 	fOut << setw(16) << end.x << setw(18) << end.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
 
 }
+
+bool  Cline::InDrawingArea()
+{
+	if (start.y > UI.ToolBarHeight && start.y < UI.height - UI.StatusBarHeight && end.y > UI.ToolBarHeight && end.y < UI.height - UI.StatusBarHeight && start.x < UI.width - 70 && end.x < UI.width - 70)
+	{
+		return true;
+	}
+	else return false;
+
+
+
+}

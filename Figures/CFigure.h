@@ -25,6 +25,9 @@ public:
 
 
 	virtual figures FigType()=0;
+
+	virtual bool InDrawingArea() = 0;
+
 	virtual bool check(int,int) = 0;
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure

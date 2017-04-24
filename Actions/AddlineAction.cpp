@@ -43,8 +43,9 @@ void AddlineAction::Execute()
 	//Create a rectangle with the parameters read from the user
 	Cline *l = new Cline(s, e, LineGfxInfo);
 
-	//Add the line to the list of figures
-	pManager->AddFigure(l);
+	if (l->InDrawingArea())
+		pManager->AddFigure(l);
+	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
 }
 
 

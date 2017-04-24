@@ -36,8 +36,9 @@ void AddTriAction::Execute()
 
 	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo);
 
-	//Add the line to the list of figures
-	pManager->AddFigure(t);
+	if (t->InDrawingArea())
+		pManager->AddFigure(t);
+	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
 }
 
 AddTriAction::~AddTriAction()

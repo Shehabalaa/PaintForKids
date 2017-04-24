@@ -17,6 +17,7 @@ public:
 	virtual figures FigType();
 	virtual bool check(int x,int y);
 	virtual void Save(ofstream &) const;
+	virtual bool InDrawingArea();
 };
 
 

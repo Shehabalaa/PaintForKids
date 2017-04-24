@@ -41,3 +41,12 @@ void CTriangle::Save(ofstream &fOut) const
 	fOut << FigGfxInfo.DrawClr.getColorName() << setw(35) << FigGfxInfo.FillClr.getColorName() << endl;
 		
 }
+bool CTriangle::InDrawingArea()
+{
+	if (corner1.y > UI.ToolBarHeight && corner1.y < UI.height - UI.StatusBarHeight && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight  && corner1.x < UI.width - 70 && corner2.x < UI.width - 70 && corner3.x < UI.width - 70)
+	{
+		return true;
+	}
+	else return false;
+
+}

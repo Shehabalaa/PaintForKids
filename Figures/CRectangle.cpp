@@ -43,7 +43,15 @@ bool CRectangle::check(int x, int y)
 
 void CRectangle::Save(ofstream & fOut) const
 {
-	-fOut << left << setw(14) << "RECTANGLE" /*<< setw(10) << ID*/ << setw(12) << Corner1.x << setw(14) << Corner1.y;
-	-fOut << setw(16) << Corner2.x << setw(18) << Corner2.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
+	fOut << left << setw(14) << "RECTANGLE" /*<< setw(10) << ID*/ << setw(12) << Corner1.x << setw(14) << Corner1.y;
+	fOut << setw(16) << Corner2.x << setw(18) << Corner2.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
 
+}
+bool CRectangle::InDrawingArea()
+{
+	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - 70 && Corner2.x < UI.width - 70)
+	{
+		return true;
+	}
+	else return false;
 }
