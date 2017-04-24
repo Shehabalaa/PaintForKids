@@ -12,7 +12,6 @@ SaveAction::~SaveAction()
 
 void SaveAction::Execute()
 {
-	Output*pOut = pManager->GetOutput();
 	ReadActionParameters(); //read file_name
 	OutFile.open(file_name, ios::out); // opening file
 	while (!OutFile.is_open())
@@ -33,8 +32,6 @@ void SaveAction::Execute()
 
 bool SaveAction::ActionFailedEvent()
 {
-	Output*pOut = pManager->GetOutput();
-	Input*pIn = pManager->GetInput();
 	pOut->PrintMessage("Error:File name is wrong, Try again?(Y/n)");;
 	string temp = pIn->GetSrting(pOut);
 	if ('n' == temp[0]|| 'N' == temp[0])
@@ -47,9 +44,8 @@ bool SaveAction::ActionFailedEvent()
 }
 void SaveAction::ReadActionParameters()
 {
-	Output*pOut = pManager->GetOutput();
 	pOut->PrintMessage("Please Enter filename!");
-	Input*pIn = pManager->GetInput(); //geting file name
+	pIn = pManager->GetInput(); //geting file name
 	file_name=pIn->GetSrting(pOut);
 
 	if (file_name.find(".txt") == string::npos)

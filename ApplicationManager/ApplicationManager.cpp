@@ -5,6 +5,7 @@
 #include"..\Actions\AddTriAction.h"
 #include "..\Actions\SaveAction.h"
 #include "..\Actions\Select.h"
+#include "..\Actions\ExitAction.h";
 #include<iomanip>
 
 
@@ -62,8 +63,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case SAVE:
 		pAct = new SaveAction(this);
 		break;
-	case EXIT1:
-		//pAct = new Exit1Action(this);
+	case EXIT:
+		pAct = new ExitAction(this);
 		break;
 
 	case STATUS:	//a click on the status bar ==> no action
@@ -139,8 +140,8 @@ void ApplicationManager::SaveAll(ofstream& fOut)
 	fOut<<left<<setw(10)<< UI.DrawColor.getColorName() << setw(10) << UI.FillColor.getColorName();
 	fOut << setw(10) << UI.BkGrndColor.getColorName()<<endl;
 	fOut << FigCount << endl;
-	//for (int i = 0; i<FigCount; i++)
-		//FigList[i]->Save(fOut);
+	for (int i = 0; i<FigCount; i++)
+		FigList[i]->Save(fOut);
 	
 }
 

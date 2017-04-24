@@ -25,7 +25,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	//BRNG_FRNT,		//Bring a figure to the front of all figures
 	SAVE,			//Save the whole graph to a file
 	LOAD,			//Load a graph from a file
-	EXIT1,			//Exit the application
+	EXIT,			//Exit the application
 
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
@@ -33,11 +33,11 @@ enum ActionType //The actions supported (you can add more if needed)
 
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,			//Switch interface to Play mode
-	ZOOMIN,
-	ZOOMOUT,
-	COPY,
-	CUT,
-	PASTE,
+	ZOOMIN,          //Zoom in
+	ZOOMOUT,		//Zoom out
+	COPY,			// Copy Figure(s) to clipboard
+	CUT,			// Copy Figure(s) to clipboard and remove it form figlist
+	PASTE,			// Paste Figure(s) from clipboard to figlist
 	PICK,
 	SCRAMBLE,
 	TODRAW,
@@ -48,8 +48,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	SELECT_RED_COLOR,
 	SELECT_BROWN_COLOR,
 	SELECT_ORANGE_COLOR,
-	EMPTY2,
-	EXIT2
+	EMPTY2 //empty on colors bar
 	///TODO: Add more action types (if needed)
 };
 

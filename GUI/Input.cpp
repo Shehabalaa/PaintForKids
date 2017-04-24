@@ -73,7 +73,7 @@ ActionType Input::GetUserAction() const
 			case ITM_SAVE: return SAVE;
 			case ITM_LOAD:return LOAD;
 			case ITM_TOPLAY:return TO_PLAY;
-			case ITM_EXIT1:return EXIT1;
+			case ITM_EXIT1:return EXIT;
 
 
 				//kml dool
@@ -130,7 +130,7 @@ ActionType Input::GetUserAction() const
 			case ITM_PICK:	return PICK;
 			case ITM_SCRAMBLE:	return SCRAMBLE;
 			case ITM_TODRAW:	return TODRAW;
-			case ITM_EXIT2:return EXIT2;
+			case ITM_EXIT2:return EXIT;
 
 				//ME : TODO write here 2l actions 3la 7asab 2l icons w 3adadha ..w nktbha bl tarteeb zi 2l enum
 			default: return EMPTY;	//A click on empty place in desgin toolbar
