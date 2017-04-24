@@ -133,6 +133,7 @@
     <ClCompile Include="Actions\AddlineAction.cpp" />
     <ClCompile Include="Actions\AddRectAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
+    <ClCompile Include="Actions\ExitActioncpp.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\Select.cpp" />
     <ClCompile Include="ApplicationManager\ApplicationManager.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Actions\AddlineAction.h" />
     <ClInclude Include="Actions\AddRectAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
+    <ClInclude Include="Actions\ExitAction.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\Select.h" />
     <ClInclude Include="ApplicationManager\ApplicationManager.h" />
