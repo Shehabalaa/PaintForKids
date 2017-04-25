@@ -146,6 +146,10 @@ Colors Input::GetColor()
 		case ITM_blue:	return SELECT_BLUE_COLOR;
 		case ITM_brown: return SELECT_BROWN_COLOR;
 		case ITM_orange: return SELECT_ORANGE_COLOR;
+		case ITM_rose: return SELECT_ROSE_COLOR;
+		case ITM_grey: return SELECT_GREY_COLOR;
+		case ITM_lime: return SELECT_LIME_COLOR;
+		case ITM_white: return SELECT_WHITE_COLOR;
 		default: return EMPTY2;
 
 		}

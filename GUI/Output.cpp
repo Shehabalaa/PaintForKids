@@ -123,13 +123,16 @@ void Output::CreateDrawToolBars() const
 
 	string col[colors_num]; // here we drawing colors coulom
 	col[ITM_black] = "images\\MenuItems\\black.jpg";
-	col[ITM_green] = "images\\MenuItems\\green.jpg";
+	col[ITM_green] = "images\\MenuItems\\lime.jpg";
 	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
 	col[ITM_red] = "images\\MenuItems\\red.jpg";
 	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
 	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
 	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-
+	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
+	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
+	col[ITM_lime] = "images\\MenuItems\\green.jpg";
+	col[ITM_white] = "images\\MenuItems\\white.jpg";
 	for (int i = 0; i<colors_num; i++)
 		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
 

@@ -167,8 +167,8 @@ void ApplicationManager::UpdateInterface() const
 
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1230, 650);
-
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, 650);
+	pOut->CreateDrawToolBars();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

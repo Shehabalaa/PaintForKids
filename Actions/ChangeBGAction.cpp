@@ -46,6 +46,18 @@ void ChangeBGAction::Execute()
 	case SELECT_ORANGE_COLOR:
 		pOut->SetBGColor(ORANGE);
 		break;
+	case SELECT_ROSE_COLOR:
+		pOut->SetBGColor(ROSYBROWN);
+		break;
+	case SELECT_GREY_COLOR:
+		pOut->SetBGColor(GREY);
+		break;
+	case SELECT_LIME_COLOR:
+		pOut->SetBGColor(LIMEGREEN);
+		break;
+	case SELECT_WHITE_COLOR:
+		pOut->SetBGColor(WHITE);
+		break;
 
 
 	}
