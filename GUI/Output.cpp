@@ -50,6 +50,16 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
 }
+
+
+
+
+window * Output::GetWindow()
+{
+	return pWind;
+}
+
+
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
@@ -132,7 +142,10 @@ void Output::CreateDrawToolBars() const
 	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
 	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
 	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-
+	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
+	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
+	col[ITM_lime] = "images\\MenuItems\\green.jpg";
+	col[ITM_white] = "images\\MenuItems\\white.jpg";
 	for (int i = 0; i<colors_num; i++)
 		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
 
@@ -216,6 +229,10 @@ color Output::getCrntFillColor() const	//get current filling color
 	
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+
+
+void Output::SetBGColor(color c)
+{	UI.BkGrndColor = c;}
 
 //======================================================================================//
 //								Figures Drawing Functions								//
@@ -332,6 +349,15 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 
 }
 
+void Output::DrawInt(const int iX, const int iY, const long lNumber)
+ {
+			//First clear the status bar
+
+	pWind->SetPen(UI.MsgColor, 50);
+	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
+	pWind->DrawInteger(iX, iY, lNumber);
+	
+}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////

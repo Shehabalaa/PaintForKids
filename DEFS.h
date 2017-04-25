@@ -42,14 +42,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK,
 	SCRAMBLE,
 	TODRAW,
-	SELECT_BLACK_COLOR,
-	SELECT_GREEN_COLOR,
-	SELECT_YELLOW_COLOR,
-	SELECT_BLUE_COLOR,
-	SELECT_RED_COLOR,
-	SELECT_BROWN_COLOR,
-	SELECT_ORANGE_COLOR,
-	EMPTY2 //empty on colors bar
+	Color_Palette
 	///TODO: Add more action types (if needed)
 };
 
@@ -66,6 +59,23 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not
 	int BorderWidth;	//Width of figure borders
+
+};
+
+enum Colors {
+	
+	SELECT_BLACK_COLOR,
+	SELECT_GREEN_COLOR,
+	SELECT_YELLOW_COLOR,
+	SELECT_BLUE_COLOR,
+	SELECT_RED_COLOR,
+	SELECT_BROWN_COLOR,
+	SELECT_ORANGE_COLOR,
+	SELECT_ROSE_COLOR,
+	SELECT_GREY_COLOR,
+	SELECT_LIME_COLOR,
+	SELECT_WHITE_COLOR,
+	EMPTY2,
 
 };
 

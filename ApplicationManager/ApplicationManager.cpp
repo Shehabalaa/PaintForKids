@@ -6,8 +6,8 @@
 #include "..\Actions\AddCircleAction.h"
 #include "..\Actions\SaveAction.h"
 #include "..\Actions\ExitAction.h";
-#include "..\Actions\Select.h"
-
+#include "..\Actions\SelectAction.h"
+#include "..\Actions\ChangeBGAction.h";
 
 
 //Constructor
@@ -57,6 +57,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAWING_AREA:
 		pOut->PrintMessage("A click on drawing area");
 		break;
+
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
@@ -66,6 +67,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case LOAD:
 		pAct = new LoadAction(this);
 		break;
+	case CHNG_BK_CLR:
+		pAct = new ChangeBGAction(this);
+			break;
 	case EXIT:
 		pAct = new ExitAction(this);
 		break;
@@ -208,6 +212,10 @@ int ApplicationManager::GetFigCount()
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
+	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, 650);
+	pOut->CreateDrawToolBars();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
