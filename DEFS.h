@@ -2,6 +2,7 @@
 #define DEFS_H
 
 #include "CMUgraphicsLib\CMUgraphics.h"
+#include "CMUgraphicsLib\Global_Colors.h"
 #include<fstream>
 //This file contais some global constants and definitions to be used in the project.
 enum ActionType //The actions supported (you can add more if needed)
@@ -26,9 +27,11 @@ enum ActionType //The actions supported (you can add more if needed)
 	SAVE,			//Save the whole graph to a file
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
+
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
+
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,			//Switch interface to Play mode
 	ZOOMIN,          //Zoom in
@@ -39,20 +42,30 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK,
 	SCRAMBLE,
 	TODRAW,
-	Color_Palette,
-	//empty on colors bar
+	SELECT_BLACK_COLOR,
+	SELECT_GREEN_COLOR,
+	SELECT_YELLOW_COLOR,
+	SELECT_BLUE_COLOR,
+	SELECT_RED_COLOR,
+	SELECT_BROWN_COLOR,
+	SELECT_ORANGE_COLOR,
+	EMPTY2 //empty on colors bar
 	///TODO: Add more action types (if needed)
 };
 
 struct Point	//To be used for figures points
-{ int x,y; };
+{
+	Point() :x(0), y(0) {} // default constructor
+	int x,y; 
+};
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
 {
+	GfxInfo( ) :DrawClr(WHITE), FillClr(WHITE), isFilled(false), BorderWidth(0){} // default constructor
 	color DrawClr;	//Draw color of the figure
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not
-	int BorderWdth;	//Width of figure borders
+	int BorderWidth;	//Width of figure borders
 
 };
 
@@ -66,20 +79,4 @@ enum figures {
 
 };
 
-enum Colors {
-
-	SELECT_BLACK_COLOR,
-	SELECT_GREEN_COLOR,
-	SELECT_YELLOW_COLOR,
-	SELECT_BLUE_COLOR,
-	SELECT_RED_COLOR,
-	SELECT_BROWN_COLOR,
-	SELECT_ORANGE_COLOR,
-	SELECT_ROSE_COLOR,
-	SELECT_GREY_COLOR,
-	SELECT_LIME_COLOR,
-	SELECT_WHITE_COLOR,
-	EMPTY2,
-
-};
 #endif

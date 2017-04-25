@@ -1,20 +1,14 @@
-#include"CMUgraphics.h"
 #include"colors.h"
 #include <fstream>
-#include <map>
-#include <iostream>
 
-map <string, color* > color::Colors_map;
+map <string ,color *> color::Colors_map;
 
-color::color(unsigned char Red , unsigned char Green , unsigned char Blue , string Name ):Color_Name(Name)
+color::color(unsigned char Red , unsigned char Green , unsigned char Blue , string Name):Color_Name(Name)
 {
 	ucRed = Red;  ucGreen = Green;  ucBlue = Blue;
-	if (!this)
-	{
+	if (Name!= "" && Name != "NULL")
 		Colors_map[Name]=this;
-	}
 }
-
 
 
 bool color::operator==(color b)
@@ -31,7 +25,7 @@ string color::getColorName()const // geting color name
 {
 	return Color_Name;
 }
-color& color::getColorObject(const string& clr_name) const // this func taking color name al big back aliasof object
+color& color::getColorObject(const string& clr_name)   // this static func taking color name al big back aliasof object
 {
 	return *(Colors_map[clr_name]);
 }

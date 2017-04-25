@@ -1,8 +1,5 @@
 #include "AddlineAction.h"
-#include"..\Figures\Cline.h"
-#include "..\ApplicationManager\ApplicationManager.h"
-#include"..\Actions\Action.h"
-
+#include "../Figures/Cline.h"
 
 
 AddlineAction::AddlineAction(ApplicationManager * pApp) : Action(pApp)
@@ -28,7 +25,7 @@ void AddlineAction::ReadActionParameters()
 									//get drawing, filling colors and pen width from the interface
 	LineGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	LineGfxInfo.FillClr = pOut->getCrntFillColor();
-	LineGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+	LineGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
 
@@ -39,9 +36,9 @@ void AddlineAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	int fig = pManager->GetFigCount();
+	int figs_count = pManager->GetFigCount();
 	//Create a rectangle with the parameters read from the user
-	Cline *l = new Cline(s, e, LineGfxInfo,fig);
+	Cline *l = new Cline(s, e, LineGfxInfo,figs_count);
 
 	if (l->InDrawingArea())
 		pManager->AddFigure(l);

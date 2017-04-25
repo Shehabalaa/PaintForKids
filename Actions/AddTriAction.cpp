@@ -1,8 +1,5 @@
-#include"..\Figures\CTriangle.h"
-#include "..\Figures\CRectangle.h"
-#include "..\ApplicationManager\ApplicationManager.h"
-#include"..\Actions\Action.h"
 #include "..\Actions\AddTriAction.h"
+
 
 
 AddTriAction::AddTriAction(ApplicationManager * pApp) : Action(pApp)
@@ -23,7 +20,7 @@ void AddTriAction::ReadActionParameters()
 	TriGfxInfo.isFilled = false;
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();
-	TriGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+	TriGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
 
@@ -33,8 +30,8 @@ void AddTriAction::Execute()
 {
 	ReadActionParameters();
 
-	int fig = pManager->GetFigCount();
-	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo,fig);
+	int figs_count = pManager->GetFigCount();
+	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo,figs_count);
 
 	if (t->InDrawingArea())
 		pManager->AddFigure(t);

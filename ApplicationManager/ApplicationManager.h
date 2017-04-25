@@ -1,10 +1,10 @@
 #ifndef APPLICATION_MANAGER_H
 #define APPLICATION_MANAGER_H
-
+#include"..\Figures\CFigure.h"
 #include "..\DEFS.h"
-#include "..\Figures\CFigure.h"
 #include "..\GUI\input.h"
 #include "..\GUI\output.h"
+#include<iomanip>
 
 //Main class that manages everything in the application.
 class ApplicationManager
@@ -38,8 +38,11 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
-	void SaveAll(ofstream &) ; //Saves whole Graph to a file it is not const to change figlistsaved variable to true
+	void SaveAll(ofstream &); //Saves whole Graph to a file it is not const to change figlistsaved variable to true
+	void LoadAll(ifstream &); //Load Graph from a file
 	bool GetIfListSaved() const; //Retrun true of all list with its last information saved else otherwise
+	void CleanFiglist(); // Free all fig list memory
+
 };
 
 #endif

@@ -1,9 +1,9 @@
 #include "AddRectAction.h"
-#include "..\Figures\CRectangle.h"
-#include "..\ApplicationManager\ApplicationManager.h"
+
 
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
-{}
+{
+}
 
 void AddRectAction::ReadActionParameters() 
 {	
@@ -25,7 +25,7 @@ void AddRectAction::ReadActionParameters()
 	//get drawing, filling colors and pen width from the interface
 	RectGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	RectGfxInfo.FillClr = pOut->getCrntFillColor();
-	RectGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+	RectGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
 
@@ -36,9 +36,9 @@ void AddRectAction::Execute()
 {
 	//This action needs to read some parameters first
 	ReadActionParameters();
-	int fig = pManager->GetFigCount();
+	int figs_count = pManager->GetFigCount(); 
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo, fig);
+	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo, figs_count);
 
 	if (R->InDrawingArea())
 		pManager->AddFigure(R);

@@ -1,7 +1,7 @@
 #ifndef ADD_RECT_ACTION_H
 #define ADD_RECT_ACTION_H
-
 #include "Action.h"
+#include "../Figures/CRectangle.h"
 
 //Add Rectangle Action class
 class AddRectAction: public Action

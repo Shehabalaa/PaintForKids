@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EXITACTION_H
+#define EXITACTION_H
 #include"Action.h"
 
 class ExitAction:public Action
@@ -11,3 +12,5 @@ public:
 	virtual void Execute();
 	virtual void ReadActionParameters();
 };
+
+#endif // !EXITACTION_H

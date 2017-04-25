@@ -1,13 +1,13 @@
 #include "ApplicationManager.h"
+#include "..\Actions\LoadAction.h"
 #include "..\Actions\AddRectAction.h"
-#include"..\Actions\AddlineAction.h"
-#include"..\Actions\AddCircleAction.h"
-#include"..\Actions\AddTriAction.h"
+#include "..\Actions\AddTriAction.h"
+#include "..\Actions\AddlineAction.h"
+#include "..\Actions\AddCircleAction.h"
 #include "..\Actions\SaveAction.h"
-#include "..\Actions\SelectAction.h"
-#include "..\Actions\ExitAction.h"
-#include "..\Actions\ChangeBGAction.h";
-#include<iomanip>
+#include "..\Actions\ExitAction.h";
+#include "..\Actions\Select.h"
+
 
 
 //Constructor
@@ -55,16 +55,16 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		pAct = new AddTriAction(this);
 		break;
 	case DRAWING_AREA:
-		pOut->PrintMessage("a click on the drawing area");
-		break;
-	case CHNG_BK_CLR:
-		pAct = new ChangeBGAction(this);
+		pOut->PrintMessage("A click on drawing area");
 		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
 	case SAVE:
 		pAct = new SaveAction(this);
+		break;
+	case LOAD:
+		pAct = new LoadAction(this);
 		break;
 	case EXIT:
 		pAct = new ExitAction(this);
@@ -78,9 +78,8 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	if(pAct != NULL)
 	{
 		pAct->Execute();//Execute
-		pAct = NULL;
 		delete pAct;
-	
+		pAct = NULL;
 	}
 }
 int ApplicationManager::countselected()
@@ -96,6 +95,8 @@ int ApplicationManager::countselected()
 	}
 	return count;
 }
+
+
 void ApplicationManager::PrintSelected()
 {
 
@@ -148,10 +149,53 @@ void ApplicationManager::SaveAll(ofstream& fOut)
 	
 }
 
+
+
+
+void ApplicationManager::LoadAll( ifstream & InFile)
+{
+	//firstly load UI information (crnt draw color,bg color,etc..)
+	string temp; // this string will be used several time to read strings from file
+	InFile>>temp; UI.DrawColor = color::getColorObject(temp);
+	InFile >> temp; UI.FillColor = color::getColorObject(temp);
+	InFile >> temp; UI.BkGrndColor = color::getColorObject(temp);
+	InFile >> temp; 
+	FigCount = stoi(temp);
+	for (int i = 0; i < FigCount && !InFile.eof(); i++)
+	{
+		InFile >> temp;
+		if (temp == "RECTANGLE")
+			FigList[i] = new CRectangle;
+		//else if (temp == "CIRCLE")
+		//	FigList[i] = new Cline;
+		//else if (temp == "TRIANGLE")
+		//	FigList[i] = new CTriangle;
+		//else if (temp == "LINE")
+			//FigList[i] = new Cline;
+		
+
+		FigList[i]->Load(InFile);
+	}
+
+
+
+}
+
+
 bool ApplicationManager::GetIfListSaved() const
 {
 	return FigListSaved;
 }
+void ApplicationManager::CleanFiglist()
+{
+	for (int i = 0; i < FigCount; i++)
+		delete FigList[i];
+
+	FigCount = 0;
+	FigListSaved = true;
+}
+
+
 int ApplicationManager::GetFigCount()
 {
 	return FigCount;
@@ -163,12 +207,7 @@ int ApplicationManager::GetFigCount()
 
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
-{
-
-	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
-	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, 650);
-	pOut->CreateDrawToolBars();
+{	
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

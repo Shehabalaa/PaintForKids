@@ -1,5 +1,6 @@
 #pragma once
 #include "Action.h"
+#include "../Figures/CTriangle.h"
 
 class AddTriAction : public Action
 {

@@ -11,14 +11,18 @@ Output::Output()
 	UI.wy =5;
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 53.7;  
+	UI.MenuItemWidth = 53.7;   //2zabt 2l icons l width bta3h
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = BLACK;		//Messages color
-	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	
-	UI.HighlightColor = MAGENTA;	
+	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
+	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 3;	
+	UI.PenWidth = 3;	//width of the figures frames
+
+	//ana 2det lohm kyam ibtda2ya f l2wl w b3den 3mlt lhm creation
+	
+	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
 	pWind->ChangeTitle("Paint for Kids -team 13");
@@ -46,10 +50,6 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
 }
-window * Output::GetWindow()
-{
-	return pWind;
-}
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
@@ -68,6 +68,9 @@ void Output::ClearStatusBar() const
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBars() const
 {
+	// Here we have 2 tool bars
+	// 1. actions toolbar
+	// 2. colors toolbar
 
 	UI.InterfaceMode = MODE_DRAW;
 
@@ -123,16 +126,13 @@ void Output::CreateDrawToolBars() const
 
 	string col[colors_num]; // here we drawing colors coulom
 	col[ITM_black] = "images\\MenuItems\\black.jpg";
-	col[ITM_green] = "images\\MenuItems\\lime.jpg";
+	col[ITM_green] = "images\\MenuItems\\green.jpg";
 	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
 	col[ITM_red] = "images\\MenuItems\\red.jpg";
 	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
 	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
 	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
-	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
-	col[ITM_lime] = "images\\MenuItems\\green.jpg";
-	col[ITM_white] = "images\\MenuItems\\white.jpg";
+
 	for (int i = 0; i<colors_num; i++)
 		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
 
@@ -217,10 +217,6 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
-void Output::SetBGColor(color c)
-{
-	UI.BkGrndColor = c;
-}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
@@ -234,7 +230,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		else
 			DrawingClr = RectGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth);	//Set Drawing color & width
 
 		drawstyle style;
 		if (RectGfxInfo.isFilled)
@@ -258,7 +254,7 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 		else
 			DrawingClr = LineGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, LineGfxInfo.BorderWdth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, LineGfxInfo.BorderWidth);	//Set Drawing color & width
 
 		drawstyle style;
 		if (LineGfxInfo.isFilled)
@@ -285,7 +281,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 		else
 			DrawingClr = TriGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, TriGfxInfo.BorderWdth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, TriGfxInfo.BorderWidth);	//Set Drawing color & width
 
 		drawstyle style;
 		if (TriGfxInfo.isFilled)
@@ -320,7 +316,7 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 		else
 			DrawingClr = CircGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, CircGfxInfo.BorderWdth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, CircGfxInfo.BorderWidth);	//Set Drawing color & width
 
 		drawstyle style;
 		if (CircGfxInfo.isFilled)
@@ -336,15 +332,7 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 
 }
 
-void Output::DrawInt(const int iX, const int iY, const long lNumber)
-{
-		//First clear the status bar
 
-	pWind->SetPen(UI.MsgColor, 50);
-	pWind->SetFont(20, BOLD, BY_NAME, "Arial");
-	pWind->DrawInteger(iX, iY, lNumber);
-
-}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()

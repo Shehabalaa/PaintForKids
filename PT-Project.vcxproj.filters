@@ -163,6 +163,9 @@
     <ClCompile Include="Actions\AddlineAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\Select.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\SaveAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -172,14 +175,11 @@
     <ClCompile Include="Actions\ExitActioncpp.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\SelectAction.cpp">
+    <ClCompile Include="Actions\LoadAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\Resize.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="Actions\ChangeBGAction.cpp">
-      <Filter>Action Classes</Filter>
+    <ClCompile Include="CMUgraphicsLib\Global_Colors.cpp">
+      <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,9 +187,6 @@
       <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h">
-      <Filter>CMUgraphicsLib</Filter>
-    </ClInclude>
-    <ClInclude Include="CMUgraphicsLib\colors.h">
       <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
     <ClInclude Include="CMUgraphicsLib\error.h">
@@ -286,20 +283,23 @@
     <ClInclude Include="Actions\AddlineAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\Select.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
     <ClInclude Include="Actions\SaveAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ExitAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\SelectAction.h">
+    <ClInclude Include="Actions\LoadAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\Resize.h">
-      <Filter>Action Classes</Filter>
+    <ClInclude Include="CMUgraphicsLib\colors.h">
+      <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ChangeBGAction.h">
-      <Filter>Action Classes</Filter>
+    <ClInclude Include="CMUgraphicsLib\Global_Colors.h">
+      <Filter>CMUgraphicsLib</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

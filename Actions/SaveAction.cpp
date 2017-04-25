@@ -1,5 +1,4 @@
 #include "SaveAction.h"
-#include <iostream>
 
 
 SaveAction::SaveAction(ApplicationManager* pApp):Action(pApp)
@@ -26,7 +25,8 @@ void SaveAction::Execute()
 			return;
 	} 
 	pManager->SaveAll(OutFile); // saving all figures information to file
-	pOut->PrintMessage("File successfully opened and Data Saved");
+	pOut->PrintMessage("Data successfully Saved in "+file_name);
+
 	OutFile.close();
 }
 
@@ -45,9 +45,7 @@ bool SaveAction::ActionFailedEvent()
 void SaveAction::ReadActionParameters()
 {
 	pOut->PrintMessage("Please Enter filename!");
-	pIn = pManager->GetInput(); //geting file name
 	file_name=pIn->GetSrting(pOut);
-
 	if (file_name.find(".txt") == string::npos)
 	{
 		file_name += ".txt";

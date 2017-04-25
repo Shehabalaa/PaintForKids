@@ -17,17 +17,19 @@ void ExitAction::Execute()
 		pManager->ExecuteAction(SAVE);
 		if (pManager->GetIfListSaved())
 		{
-			pOut->PrintMessage("File successfully opened and Data Saved Press Enter to Exit");
+			pOut->PrintMessage("Data Saved successfully Press Enter to Exit");
 			string temp = pIn->GetSrting(pOut); // this temp just read user replay
 		}
 	}
+
+	pManager->CleanFiglist();
 }
 
 void ExitAction::ReadActionParameters()
 {
 	if(!pManager->GetIfListSaved())
 	{
-		pOut->PrintMessage("Do you want to save graph befor exit?(Y,n)");
+		pOut->PrintMessage("Do you want to save graph before exit?(Y,n)");
 		string temp = pIn->GetSrting(pOut); // this temp just read user replay
 		if (temp[0] == 'n' || temp[0] == 'N')
 			Answer = false;

@@ -1,5 +1,6 @@
 #pragma once
 #include "Action.h"
+#include "../Figures/Cline.h"
 
 class AddlineAction : public Action
 {

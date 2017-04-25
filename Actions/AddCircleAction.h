@@ -1,5 +1,6 @@
 #pragma once
 #include "Action.h"
+#include "../Figures/CCircle.h"
 
 class AddCircleAction : public Action
 {

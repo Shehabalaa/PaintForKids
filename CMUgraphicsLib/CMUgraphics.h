@@ -18,8 +18,9 @@ This file was last modified on 05.16.1999
 #include "mousequeue.h"
 #include "keyqueue.h"
 #include "image.h"
-#include "colors.h"
 #include "version.h"
+#include "colors.h"
+
 
 // Aproximate value of Pi, used in some calculations
 const double cdPi = 3.141592653589793238462643383279;
@@ -324,6 +325,14 @@ class window {
 
     // Prints the contents of the window
     void Print();
+
+
+
+	///////////////////////////////////// GLOBAL CLOLRS /////////////////////////////////////////
+
+
+
+
    
 };
 

@@ -12,12 +12,14 @@ private:
 	Point corner3;
 
 public:
-	CTriangle(Point, Point,Point, GfxInfo FigureGfxInfo,int);
+	CTriangle(const Point& = Point(), const Point& = Point(), const Point& = Point(),const GfxInfo& = GfxInfo(),int = -2);
 	virtual void Draw(Output* pOut) const;
-	virtual figures FigType();
-	virtual bool check(int, int);
+	virtual figures FigType() const;
+	virtual bool check(int, int) const;
 	virtual void Save(ofstream &) const;
-	virtual bool InDrawingArea();
+	virtual bool InDrawingArea() const;
+	virtual void Load(ifstream &Infile);
+	virtual ~CTriangle(); // virtual destructor
 };
 
 #endif

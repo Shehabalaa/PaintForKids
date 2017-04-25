@@ -1,10 +1,11 @@
 #include "CCircle.h"
-CCircle::CCircle(Point P1, Point P2, GfxInfo FigureGfxInfo,int fig) :CFigure(FigureGfxInfo)
+
+CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo , int figs_count) :CFigure(FigureGfxInfo)
 {
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
-	ID = fig + 13;
+	ID = figs_count + 1;
 }
 
 
@@ -14,13 +15,13 @@ void CCircle::Draw(Output* pOut) const
 	pOut->DrawCirc(center, rad, FigGfxInfo, Selected);
 }
 
-figures CCircle::FigType()
+figures CCircle::FigType() const
 {
 	return circle;
 }
 
 
-bool CCircle::check(int x,int y)
+bool CCircle::check(int x,int y) const
 {
 	int d;
 	d= sqrt(pow((x - center.x), 2) + pow((y - center.y), 2));
@@ -28,21 +29,49 @@ bool CCircle::check(int x,int y)
 	{
 		return true;
 	}
-	else return false;
+	else 
+		return false;
 
 }
 
 void CCircle::Save(ofstream &fOut) const
 {
 
-	fOut << left << setw(5) << "CIRCLE" << setw(10) << ID << setw(12) << center.x << setw(14) << center.y;
-	fOut << setw(16) << rad << setw(21) << FigGfxInfo.DrawClr.getColorName() << setw(26) << FigGfxInfo.FillClr.getColorName() << endl;
+	fOut << left << setw(15) << "CIRCLE" << setw(5) << ID << setw(8) << center.x << setw(8) << center.y;
+	fOut << setw(36) << rad << setw(18) << FigGfxInfo.DrawClr.getColorName()<< setw(18);
+	(FigGfxInfo.isFilled) ? fOut << FigGfxInfo.FillClr.getColorName() : fOut << "NO_FILL";
+	fOut << FigGfxInfo.BorderWidth << endl;
+
 }
-bool  CCircle::InDrawingArea()
+bool  CCircle::InDrawingArea() const
 {
 	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && center.x - rad >= 0 && center.x + rad < UI.width - 70 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
 	{
 		return true;
 	}
-	else return false;
+	else
+		return false;
+}
+
+void CCircle::Load(ifstream & Infile)
+{
+	string temp; // this string will be used several time to read strings from file
+	Infile >> temp; ID = stoi(temp);
+	Infile >> temp; center.x = stoi(temp);
+	Infile >> temp; center.y = stoi(temp);
+	Infile >> temp; rad = stoi(temp);
+	Infile >> temp; FigGfxInfo.DrawClr = color::getColorObject(temp);
+	Infile >> temp;
+	if (temp == "NO_FILL")
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.isFilled = true;
+		FigGfxInfo.FillClr = color::getColorObject(temp);
+	}
+	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+}
+
+CCircle::~CCircle()
+{
 }

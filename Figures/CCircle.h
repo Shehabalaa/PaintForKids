@@ -12,12 +12,14 @@ private:
 	int rad;
 
 public:
-	CCircle(Point, Point, GfxInfo FigureGfxInfo,int);
+	CCircle(const Point& = Point(), const Point& = Point(), const GfxInfo& = GfxInfo(),int = -2);
 	virtual void Draw(Output* pOut) const;
-	virtual figures FigType();
-	virtual bool check(int x,int y);
+	virtual figures FigType() const;
+	virtual bool check(int x,int y) const;
 	virtual void Save(ofstream &) const;
-	virtual bool InDrawingArea();
+	virtual bool InDrawingArea() const;
+	virtual void Load(ifstream &Infile);
+	virtual ~CCircle();
 };
 
 

@@ -1,6 +1,4 @@
 #include "AddCircleAction.h"
-#include "..\ApplicationManager/ApplicationManager.h"
-#include"..\Figures\CCircle.h"
 
 
 
@@ -13,14 +11,14 @@ void AddCircleAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->ClearStatusBar();
-	pOut->PrintMessage("New Line: Click at the center");
+	pOut->PrintMessage("New Circle: Click at the center");
 	pIn->GetPointClicked(c.x, c.y);
-	pOut->PrintMessage("New Line: Click at the circumference");
+	pOut->PrintMessage("New Circle: Click at the circumference");
 	pIn->GetPointClicked(r.x, r.y);
 	CircleGfxInfo.isFilled = false;					
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();
-	CircleGfxInfo.BorderWdth = pOut->getCrntPenWidth();
+	CircleGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
 
@@ -30,12 +28,12 @@ void AddCircleAction::ReadActionParameters()
 void AddCircleAction::Execute()
 {
 	ReadActionParameters();
-	int fig = pManager->GetFigCount();
+	int figs_count = pManager->GetFigCount();
 	
-	CCircle *cir = new CCircle(c, r, CircleGfxInfo,fig);
+	CCircle *cir = new CCircle(c, r, CircleGfxInfo, figs_count);
 	if (cir->InDrawingArea())
 		pManager->AddFigure(cir);
-	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+	else pManager->GetOutput()->PrintMessage("Out of the Drawing area ");
 }
 
 

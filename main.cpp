@@ -1,6 +1,5 @@
 #include "ApplicationManager/ApplicationManager.h"
 
-
 int main()
 {
 
@@ -27,3 +26,4 @@ int main()
 	return 0;
 }
 
+/// note lma akl figures ttms7 y3ny figcount =0 figlistsaved=true //mashy yahmed y3ny lma klo ytms7o fe del mtnsash t3mlha

@@ -1,5 +1,5 @@
 #include "Cline.h"
-Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo,int fig) :CFigure(FigureGfxInfo)
+Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo , int figs_count ) :CFigure(FigureGfxInfo)
 {
 	start = P1;
 	end = P2;
@@ -8,7 +8,7 @@ Cline::Cline(Point P1, Point P2, GfxInfo FigureGfxInfo,int fig) :CFigure(FigureG
 	else slope = -1;
 
 	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
-	ID = fig + 13;
+	ID = figs_count + 1;
 }
 
 
@@ -18,31 +18,29 @@ void Cline::Draw(Output* pOut) const
 	pOut->DrawLine(start, end, FigGfxInfo, Selected);
 }
 
-figures Cline::FigType()
+figures Cline::FigType() const
 {
 	return line;
 }
-bool Cline::check(int x, int y)
+bool Cline::check(int x, int y) const
 {
 	if (slope == -1)
 	{
-		if ((y > start.y && y < end.y) || (y<start.y && y>end.y))
-			return true;
 
 	}
 	else if (slope == 0)
 	{
-		if ((x> start.x && x< end.x) || (x<start.x && x>end.x))
-			return true;
+
+
 	}
 	else
 	{
 		float slope2 = float(y - start.y) / float(x - start.x);
 		if (abs(slope - slope2) < 3)
 		{
-			float l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
-			float l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
-			if (abs((l1 + l2) - length) <= 0.1)
+			int l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
+			int l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
+			if (abs((l1 + l2) - length) <= 1)
 				return true;
 			else return false;
 		}
@@ -53,12 +51,12 @@ bool Cline::check(int x, int y)
 
 void Cline::Save(ofstream & fOut) const
 {
-	fOut << left << setw(5) << "LINE" << setw(10) << ID << setw(12) << start.x << setw(14) << start.y;
-	fOut << setw(16) << end.x << setw(18) << end.y << setw(23) << FigGfxInfo.DrawClr.getColorName() << setw(28) << FigGfxInfo.FillClr.getColorName() << endl;
-
+	fOut << left << setw(15) << "LINE" << setw(5) << ID << setw(8) << start.x << setw(8) << start.y;
+	fOut << setw(8) << end.x << setw(28) << end.y << setw(36) << FigGfxInfo.DrawClr.getColorName();
+	fOut << FigGfxInfo.BorderWidth << endl;
 }
 
-bool  Cline::InDrawingArea()
+bool  Cline::InDrawingArea() const
 {
 	if (start.y > UI.ToolBarHeight && start.y < UI.height - UI.StatusBarHeight && end.y > UI.ToolBarHeight && end.y < UI.height - UI.StatusBarHeight && start.x < UI.width - 70 && end.x < UI.width - 70)
 	{
@@ -66,4 +64,23 @@ bool  Cline::InDrawingArea()
 	}
 	else return false;
 
+
+
+}
+
+void Cline::Load(ifstream & Infile)
+{
+	string temp; // this string will be used several time to read strings from file
+	Infile >> temp; ID = stoi(temp);
+	Infile >> temp; start.x = stoi(temp);
+	Infile >> temp; start.y = stoi(temp);
+	Infile >> temp; end.x = stoi(temp);
+	Infile >> temp; end.y = stoi(temp);
+	Infile >> temp; FigGfxInfo.DrawClr = color::getColorObject(temp);
+	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+
+}
+
+Cline::~Cline()
+{
 }
