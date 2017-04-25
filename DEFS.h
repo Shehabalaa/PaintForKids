@@ -26,11 +26,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	SAVE,			//Save the whole graph to a file
 	LOAD,			//Load a graph from a file
 	EXIT,			//Exit the application
-
 	DRAWING_AREA,	//A click on the drawing area
 	STATUS,			//A click on the status bar
 	EMPTY,			//A click on empty place in the toolbar
-
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,			//Switch interface to Play mode
 	ZOOMIN,          //Zoom in
@@ -41,14 +39,8 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK,
 	SCRAMBLE,
 	TODRAW,
-	SELECT_BLACK_COLOR,
-	SELECT_GREEN_COLOR,
-	SELECT_YELLOW_COLOR,
-	SELECT_BLUE_COLOR,
-	SELECT_RED_COLOR,
-	SELECT_BROWN_COLOR,
-	SELECT_ORANGE_COLOR,
-	EMPTY2 //empty on colors bar
+	Color_Palette,
+	//empty on colors bar
 	///TODO: Add more action types (if needed)
 };
 
@@ -74,4 +66,16 @@ enum figures {
 
 };
 
+enum Colors {
+
+	SELECT_BLACK_COLOR,
+	SELECT_GREEN_COLOR,
+	SELECT_YELLOW_COLOR,
+	SELECT_BLUE_COLOR,
+	SELECT_RED_COLOR,
+	SELECT_BROWN_COLOR,
+	SELECT_ORANGE_COLOR,
+	EMPTY2,
+
+};
 #endif

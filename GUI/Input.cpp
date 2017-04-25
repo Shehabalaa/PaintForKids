@@ -76,10 +76,6 @@ ActionType Input::GetUserAction() const
 			case ITM_EXIT1:return EXIT;
 
 
-				//kml dool
-				//ME : TODO write here 2l actions 3la 7asab 2l icons w 3adadha ..w nktbha bl tarteeb zi 2l enum
-
-
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
@@ -90,26 +86,9 @@ ActionType Input::GetUserAction() const
 		}
 		else if (y >= UI.height - UI.StatusBarHeight) //[3] User clicks on the status bar
 			return STATUS;
-
-		else
+		else if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
 		{
-
-			int ClickedItemOrder = ((y - UI.ToolBarHeight) / UI.MenuItemWidth);
-			//Divide x coord of the point clicked by the menu item width (int division)
-			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
-
-			switch (ClickedItemOrder)
-			{
-			case ITM_black:	return SELECT_BLACK_COLOR;
-			case ITM_green:	return SELECT_GREEN_COLOR;
-			case ITM_yellow:	return SELECT_YELLOW_COLOR;
-			case ITM_red:	return SELECT_RED_COLOR;
-			case ITM_blue:	return SELECT_BLUE_COLOR;
-			case ITM_brown: return SELECT_BROWN_COLOR;
-			case ITM_orange: return SELECT_ORANGE_COLOR;
-			default: return EMPTY2;
-
-			}
+			return Color_Palette;
 		}
 	}
 	else //GUI is in PLAY mode    // eldraw
@@ -148,6 +127,29 @@ ActionType Input::GetUserAction() const
 
 	}
 
+
+}
+Colors Input::GetColor()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);
+	if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
+	{
+		int Clicked =((y - UI.ToolBarHeight) / UI.MenuItemWidth);
+
+		switch (Clicked)
+		{
+		case ITM_black:	return SELECT_BLACK_COLOR;
+		case ITM_green:	return SELECT_GREEN_COLOR;
+		case ITM_yellow:	return SELECT_YELLOW_COLOR;
+		case ITM_red:	return SELECT_RED_COLOR;
+		case ITM_blue:	return SELECT_BLUE_COLOR;
+		case ITM_brown: return SELECT_BROWN_COLOR;
+		case ITM_orange: return SELECT_ORANGE_COLOR;
+		default: return EMPTY2;
+
+		}
+	}
 
 }
 

@@ -46,6 +46,10 @@ window* Output::CreateWind(int w, int h, int x, int y) const
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
 }
+window * Output::GetWindow()
+{
+	return pWind;
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateStatusBar() const
 {
@@ -210,6 +214,10 @@ color Output::getCrntFillColor() const	//get current filling color
 int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
+void Output::SetBGColor(color c)
+{
+	UI.BkGrndColor = c;
+}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
@@ -327,7 +335,7 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 
 void Output::DrawInt(const int iX, const int iY, const long lNumber)
 {
-	ClearStatusBar();	//First clear the status bar
+		//First clear the status bar
 
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD, BY_NAME, "Arial");

@@ -163,9 +163,6 @@
     <ClCompile Include="Actions\AddlineAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\Select.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\SaveAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -173,6 +170,15 @@
       <Filter>CMUgraphicsLib</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ExitActioncpp.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\SelectAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\Resize.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ChangeBGAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -280,13 +286,19 @@
     <ClInclude Include="Actions\AddlineAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\Select.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\SaveAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ExitAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\SelectAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\Resize.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ChangeBGAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

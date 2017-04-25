@@ -1,4 +1,4 @@
-#include"..\Actions\Select.h"
+#include"..\Actions\SelectAction.h"
 #include "..\ApplicationManager\ApplicationManager.h"
 
 
@@ -46,8 +46,8 @@ void ActionSelect::Execute()
 	count = countselect();
 	if(count>1)
 	{
-		
-		pManager->GetOutput()->DrawInt(10, 660, count);
+		pManager->GetOutput()->PrintMessage("NO. of selected figures :");
+		pManager->GetOutput()->DrawInt(230, 667, count);
 	}
 }
 
