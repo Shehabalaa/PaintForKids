@@ -8,8 +8,12 @@
 #include "..\Actions\ExitAction.h"
 #include "..\Actions\SelectAction.h"
 #include "..\Actions\ChangeBGAction.h"
+
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
+
+#include "..\Actions\MoveAction.h"
+
 #include "..\Figures\Cline.h"
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
@@ -27,6 +31,8 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+
+	
 }
 
 //==================================================================================//
@@ -71,6 +77,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case SAVE:
 		pAct = new SaveAction(this);
 		break;
+	case MOVE :
+		pAct = new MoveAction(this);
+		break;
 	case LOAD:
 		pAct = new LoadAction(this);
 		break;
@@ -112,6 +121,7 @@ int ApplicationManager::countselected()
 	}
 	return count;
 }
+
 
 
 void ApplicationManager::PrintSelected()
@@ -198,6 +208,19 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 
 }
 
+void ApplicationManager::MoveFigures(int x,int y)
+{
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			FigList[i]->Move(x,y);
+			FigList[i]->Draw(pOut);
+		}
+	}
+
+}
 
 bool ApplicationManager::GetIfListSaved() const
 {

@@ -54,6 +54,22 @@ bool CRectangle::InDrawingArea() const
 	}
 	else return false;
 }
+void CRectangle::Move(int x, int y)
+{
+	int Corner1x = Corner1.x+x;
+	int Corner1y = Corner1.y+y;
+	int Corner2x = Corner2.x +x;
+	int Corner2y = Corner2.y +y;
+
+	if (Corner1y > UI.ToolBarHeight && Corner1y < UI.height - UI.StatusBarHeight && Corner2y > UI.ToolBarHeight && Corner2y < UI.height - UI.StatusBarHeight && Corner1x < UI.width - 70 && Corner2x < UI.width - 70)
+	{
+		Corner1.x += x;
+		Corner1.y += y;
+		Corner2.x += x;
+		Corner2.y += y;
+	}
+
+}
 
 void CRectangle::Load(ifstream & Infile)
 {

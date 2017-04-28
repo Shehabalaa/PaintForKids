@@ -50,6 +50,7 @@ bool Cline::check(int x, int y) const
 
 }
 
+
 void Cline::Save(ofstream & fOut) const
 {
 	fOut << left << setw(15) << "LINE" << setw(5) << ID << setw(8) << start.x << setw(8) << start.y;
@@ -68,7 +69,24 @@ bool  Cline::InDrawingArea() const
 
 
 }
+void Cline::Move(int x, int y)
+{
+	int startx = start.x + x;
+	int starty = start.y + y;
+	int endx = end.x + x;
+	int endy = end.y + y;
 
+	if (starty > UI.ToolBarHeight && starty < UI.height - UI.StatusBarHeight && endy > UI.ToolBarHeight && endy < UI.height - UI.StatusBarHeight && startx < UI.width - 70 && endx < UI.width - 70)
+	{
+		start.x += x;
+		start.y += y;
+		end.x += x;
+		end.y += y;
+	}
+
+
+
+}
 void Cline::Load(ifstream & Infile)
 {
 	string temp; // this string will be used several time to read strings from file

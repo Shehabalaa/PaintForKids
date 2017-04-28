@@ -16,6 +16,7 @@ public:
 	virtual void Save(ofstream &) const;
 	virtual void Load(ifstream &Infile);
 	virtual bool InDrawingArea() const;
+	virtual void Move(int x, int y);
 	virtual ~CRectangle();
 };
 

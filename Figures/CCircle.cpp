@@ -34,6 +34,7 @@ bool CCircle::check(int x,int y) const
 
 }
 
+
 void CCircle::Save(ofstream &fOut) const
 {
 
@@ -51,6 +52,22 @@ bool  CCircle::InDrawingArea() const
 	}
 	else
 		return false;
+}
+void CCircle::Move(int x, int y)
+{
+	int centerx;
+	int centery;
+	 centerx = center.x + x;
+	 centery = center.y + y;
+
+	if (centery > UI.ToolBarHeight && centery < (UI.height - UI.StatusBarHeight) && centerx - rad >= 0 && centerx + rad < UI.width - 70 && centery - rad > UI.ToolBarHeight && centery + rad < UI.height - UI.StatusBarHeight)
+	{
+		center.x += x;
+		center.y += y;
+	
+	}
+		
+
 }
 
 void CCircle::Load(ifstream & Infile)

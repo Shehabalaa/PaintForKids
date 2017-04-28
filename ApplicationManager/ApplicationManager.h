@@ -15,7 +15,7 @@ private:
 	bool FigListSaved; // true if newst information already saved in file else otherwise
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-
+	CFigure* SelectedFigList[MaxFigCount];
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
@@ -30,6 +30,7 @@ public:
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	int countselected();
 	void PrintSelected();
+	void MoveFigures(int ,int);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure

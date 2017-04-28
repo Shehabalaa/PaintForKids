@@ -187,10 +187,14 @@
     <ClCompile Include="Actions\SelectAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+<<<<<<< Updated upstream
     <ClCompile Include="Actions\ToDrawAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ToPlayAction.cpp">
+=======
+    <ClCompile Include="Actions\MoveAction.cpp">
+>>>>>>> Stashed changes
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -319,10 +323,14 @@
     <ClInclude Include="Actions\SelectAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+<<<<<<< Updated upstream
     <ClInclude Include="Actions\ToPlayAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ToDrawAction.h">
+=======
+    <ClInclude Include="Actions\MoveAction.h">
+>>>>>>> Stashed changes
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>
