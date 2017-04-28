@@ -1,5 +1,5 @@
 #include "AddCircleAction.h"
-
+#include "../Figures/CCircle.h"
 
 
 AddCircleAction::AddCircleAction(ApplicationManager * pApp) : Action(pApp)

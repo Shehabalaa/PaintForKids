@@ -16,8 +16,6 @@ This file was last modified on 05.16.1999
 #endif //WINDOWS_H
 
 #include "mousequeue.h"
-#include "keyqueue.h"
-#include "image.h"
 #include "version.h"
 #include "colors.h"
 

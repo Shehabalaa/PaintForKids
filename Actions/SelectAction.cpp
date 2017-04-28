@@ -1,6 +1,5 @@
 #include"..\Actions\SelectAction.h"
-#include "..\ApplicationManager\ApplicationManager.h"
-
+#include "../Figures/Cline.h"
 
 ActionSelect::ActionSelect(ApplicationManager *pApp) :Action(pApp)
 {

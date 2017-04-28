@@ -1,10 +1,10 @@
 #ifndef APPLICATION_MANAGER_H
 #define APPLICATION_MANAGER_H
-#include"..\Figures\CFigure.h"
-#include "..\DEFS.h"
+
 #include "..\GUI\input.h"
 #include "..\GUI\output.h"
 #include<iomanip>
+class CFigure;
 
 //Main class that manages everything in the application.
 class ApplicationManager

@@ -1,6 +1,6 @@
 #pragma once
 #include "..\Actions\Action.h"
-#include "..\ApplicationManager/ApplicationManager.h"
+
 
 class Resize : public Action 
 {

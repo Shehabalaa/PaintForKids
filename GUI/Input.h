@@ -4,7 +4,7 @@
 #include "..\DEFS.h"
 #include "UI_Info.h" 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
-#include"../CMUgraphicsLib/Global_Colors.h"
+
 
 class Output;
 class Input		//The application manager should have a pointer to this class

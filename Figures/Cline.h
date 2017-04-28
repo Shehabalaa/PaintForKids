@@ -1,6 +1,6 @@
 
-#ifndef CRECT_H
-#define CRECT_H
+#ifndef CLINE_H
+#define CLINE_H
 
 #include "CFigure.h"
 

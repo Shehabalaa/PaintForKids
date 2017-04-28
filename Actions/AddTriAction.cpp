@@ -1,5 +1,5 @@
 #include "..\Actions\AddTriAction.h"
-
+#include "../Figures/CTriangle.h"
 
 
 AddTriAction::AddTriAction(ApplicationManager * pApp) : Action(pApp)

@@ -1,4 +1,5 @@
 #include "AddRectAction.h"
+#include "../Figures/CRectangle.h"
 
 
 AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)

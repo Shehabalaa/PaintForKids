@@ -5,10 +5,13 @@
 #include "..\Actions\AddlineAction.h"
 #include "..\Actions\AddCircleAction.h"
 #include "..\Actions\SaveAction.h"
-#include "..\Actions\ExitAction.h";
+#include "..\Actions\ExitAction.h"
 #include "..\Actions\SelectAction.h"
-#include "..\Actions\ChangeBGAction.h";
-
+#include "..\Actions\ChangeBGAction.h"
+#include "..\Figures\Cline.h"
+#include"..\Figures\CRectangle.h"
+#include"..\Figures\CCircle.h"
+#include"..\Figures\CTriangle.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -170,16 +173,16 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 		InFile >> temp;
 		if (temp == "RECTANGLE")
 			FigList[i] = new CRectangle;
-		//else if (temp == "CIRCLE")
-		//	FigList[i] = new Cline;
-		//else if (temp == "TRIANGLE")
-		//	FigList[i] = new CTriangle;
-		//else if (temp == "LINE")
-			//FigList[i] = new Cline;
-		
+		else if (temp == "CIRCLE")
+			FigList[i] = new CCircle;
+		else if (temp == "TRIANGLE")
+			FigList[i] = new CTriangle;
+		else if (temp == "LINE")
+			FigList[i] = new Cline;
 
 		FigList[i]->Load(InFile);
 	}
+	FigListSaved = true;
 
 
 

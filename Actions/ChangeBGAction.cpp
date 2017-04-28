@@ -1,5 +1,4 @@
 #include"..\Actions\ChangeBGAction.h"
-#include "..\ApplicationManager\ApplicationManager.h"
 
 
 ChangeBGAction::ChangeBGAction(ApplicationManager *pApp) :Action(pApp)

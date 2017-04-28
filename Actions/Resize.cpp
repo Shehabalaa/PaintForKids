@@ -1,5 +1,5 @@
 #include "..\Actions\Resize.h"
-#include "..\ApplicationManager/ApplicationManager.h"
+
 
 
 ///leh m3aml4 destructor ?? fe add rect 

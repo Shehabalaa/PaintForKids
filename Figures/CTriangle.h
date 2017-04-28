@@ -1,6 +1,5 @@
-
-#ifndef CRECT_H
-#define CRECT_H
+#ifndef CTRIANGLE_H
+#define CTRIANGLE_H
 
 #include "CFigure.h"
 #include<cmath>

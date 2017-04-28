@@ -5,7 +5,6 @@ This file was last modified on 05.16.1999
 
 #ifndef COLORS_H
 #define COLORS_H
-#include "version.h"
 #include "mousequeue.h"
 #include "keyqueue.h"
 #include "image.h"

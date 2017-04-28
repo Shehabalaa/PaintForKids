@@ -1,8 +1,6 @@
 #ifndef ACTION_H
 #define ACTION_H
-
 #include"../ApplicationManager/ApplicationManager.h"
-
 
 
 //Base class for all possible actions

@@ -1,6 +1,6 @@
 
-#ifndef CRECT_H
-#define CRECT_H
+#ifndef CRECTANGLE_H
+#define CRECTANLGE_H
 #include "CFigure.h"
 
 class CRectangle : public CFigure
