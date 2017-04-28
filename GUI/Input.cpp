@@ -7,7 +7,7 @@ Input::Input(window* pW)
 	pWind = pW; //point to the passed window
 }
 
-void Input::GetPointClicked(int &x, int &y) const                          //????
+void Input::GetPointClicked(int &x, int &y) const 
 {
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
@@ -111,7 +111,7 @@ ActionType Input::GetUserAction() const
 			{
 			case ITM_PICK:	return PICK;
 			case ITM_SCRAMBLE:	return SCRAMBLE;
-			case ITM_TODRAW:	return TODRAW;
+			case ITM_TODRAW:	return TO_DRAW;
 			case ITM_EXIT2:return EXIT;
 
 				//ME : TODO write here 2l actions 3la 7asab 2l icons w 3adadha ..w nktbha bl tarteeb zi 2l enum
@@ -122,7 +122,7 @@ ActionType Input::GetUserAction() const
 		//[2] User clicks on the drawing area
 		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
 		{
-			return DRAWING_AREA;
+			return PLAYING_AREA;
 		}
 
 		//[3] User clicks on the status bar

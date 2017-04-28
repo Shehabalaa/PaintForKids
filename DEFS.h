@@ -29,8 +29,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	EXIT,			//Exit the application
 
 	DRAWING_AREA,	//A click on the drawing area
+	PLAYING_AREA,   //A click on the playing area
 	STATUS,			//A click on the status bar
-	EMPTY,			//A click on empty place in the toolbar
+	EMPTY,			//A click on empty place 
 
 	TO_DRAW,		//Switch interface to Draw mode
 	TO_PLAY,			//Switch interface to Play mode
@@ -41,7 +42,6 @@ enum ActionType //The actions supported (you can add more if needed)
 	PASTE,			// Paste Figure(s) from clipboard to figlist
 	PICK,
 	SCRAMBLE,
-	TODRAW,
 	Color_Palette
 	///TODO: Add more action types (if needed)
 };

@@ -87,11 +87,12 @@ struct UI_Info	//User Interface Info.
 	GUI_MODE InterfaceMode;
 	
 	int	width, height,	//Window width and height
-		wx , wy,			//Window starting coordinates
+		wx, wy,			//Window starting coordinates
 		StatusBarHeight,	//Status Bar Height
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
-		MenuItemWidth;		//Width of each item in toolbar menu
-	
+		MenuItemWidth,		//Width of each item in toolbar menu and Color Bar
+		ColorsBarHeight,   // Height of Color Bar
+		ColorsBarWidth;		// Width of Color Bar
 
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color

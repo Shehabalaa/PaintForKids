@@ -11,7 +11,7 @@ Output::Output()
 	UI.wy =5;
 	UI.StatusBarHeight = 50;
 	UI.ToolBarHeight = 50;
-	UI.MenuItemWidth = 53.7;   //2zabt 2l icons l width bta3h
+	UI.MenuItemWidth = 53.7;   //2zabt 2l icons l width bta3h //Width of each item in toolbar menu and Color Bar
 	UI.DrawColor = BLUE;	//Drawing color
 	UI.FillColor = GREEN;	//Filling color
 	UI.MsgColor = BLACK;		//Messages color
@@ -19,6 +19,8 @@ Output::Output()
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
+	UI.ColorsBarHeight = UI.ToolBarHeight+4;		// Height of Color Bar this 4 as we draw with penwodth 3 + 1 more good view 
+	UI.ColorsBarWidth = 70;		// Width of Color Bar 70 as we draw line of width one to sperate drawing area from colors area
 
 	//ana 2det lohm kyam ibtda2ya f l2wl w b3den 3mlt lhm creation
 	
@@ -68,14 +70,35 @@ void Output::CreateStatusBar() const
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);   
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::ClearStatusBar() const
+void Output::ClearStatusBar() const 
 {
-	//Clear Status bar by drawing a filled white rectangle
+	//Clear Status bar by drawing a filled white rectangle // tahis not white ? same code as create ?!!!!
 	pWind->SetPen(UI.StatusBarColor, 1);
 	pWind->SetBrush(UI.StatusBarColor);
 	pWind->DrawRectangle(0, UI.height - UI.StatusBarHeight, UI.width, UI.height);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+void Output::ClearDrawModeToolBars() const
+{
+	//Clear Toolbar by drawing a filled white rectangle
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0,0, UI.width, UI.ToolBarHeight);
+
+	//Clear colorsbar by drawing a filled rectangle of (Same Bg_color)
+	pWind->SetPen(UI.BkGrndColor, 1);
+	pWind->SetBrush(UI.BkGrndColor);
+	pWind->DrawRectangle(UI.width - UI.ColorsBarWidth + 1, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight); // +1 saftey Factor :D
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+void Output::ClearPlayModeToolBar() const
+{
+	//Clear Toolbar by drawing a filled white rectangle
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
+}
+///////////////////////////////////////////////////////////////////////////////////////////
 void Output::CreateDrawToolBars() const
 {
 	// Here we have 2 tool bars
@@ -118,10 +141,10 @@ void Output::CreateDrawToolBars() const
 	//TODO: Prepare images for each menu item and add it to the list
 
 	//First drawing white area to clear last toolbar
-	pWind->DrawImage("images\\MenuItems\\Blank.jpg", 0, 0, UI.width, UI.ToolBarHeight);
+	ClearPlayModeToolBar();
 
+	
 	//Then loading tool bar images
-
 	//Draw menu item one image at a time
 	for(int i=0; i<DRAW_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth,0, UI.MenuItemWidth, UI.ToolBarHeight);
@@ -131,10 +154,13 @@ void Output::CreateDrawToolBars() const
 	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-	string col[colors_num]; // here we drawing colors coulom
+	/////////////////////////////////////////////////////////////////////
+	// firstly clean bg of colors to keep their back ground color white 
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	pWind->DrawRectangle(UI.width-UI.ColorsBarWidth, UI.ColorsBarHeight, UI.width, UI.height-UI.StatusBarHeight);
+	////////////////////////////////////////////////////////////////////
+	string col[colors_num]; // here we drawing colors menu
 	col[ITM_black] = "images\\MenuItems\\black.jpg";
 	col[ITM_green] = "images\\MenuItems\\green.jpg";
 	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
@@ -147,7 +173,7 @@ void Output::CreateDrawToolBars() const
 	col[ITM_lime] = "images\\MenuItems\\green.jpg";
 	col[ITM_white] = "images\\MenuItems\\white.jpg";
 	for (int i = 0; i<colors_num; i++)
-		pWind->DrawImage(col[i], UI.width-69, (i*UI.MenuItemWidth) + UI.ToolBarHeight +4 , UI.MenuItemWidth, UI.ToolBarHeight);
+		pWind->DrawImage(col[i], UI.width- UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight , UI.MenuItemWidth, UI.ToolBarHeight);
 
 	
 
@@ -157,7 +183,7 @@ void Output::CreateDrawToolBars() const
 	else
 		pWind->SetPen(BLUE, 1);
 
-	pWind->DrawLine(UI.width-70, UI.ToolBarHeight, UI.width-70, UI.height-UI.StatusBarHeight);	
+	pWind->DrawLine(UI.width-UI.ColorsBarWidth, UI.ToolBarHeight, UI.width- UI.ColorsBarWidth, UI.height-UI.StatusBarHeight);
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -176,10 +202,8 @@ void Output::CreatePlayToolBar() const
 	MenuItemImages[ITM_EXIT2] = "images\\MenuItems\\exit.jpg";
 
 	
-	//First drawing white area to clear last toolbar
-	pWind->DrawImage("images\\MenuItems\\Blank.jpg", 0, 0, UI.width, UI.ToolBarHeight);
-	
-	ClearColorArea();// Clearing colors list its no more needed
+	//Cleaning last mode Tool bars by drawing white area on tool bar and rectangle filled of same bg_color on color area
+	ClearDrawModeToolBars();
  
 	//Then loading tool bar images
 	for (int i = 0; i<PLAY_ITM_COUNT; i++)
@@ -193,14 +217,6 @@ void Output::CreatePlayToolBar() const
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-void Output::ClearColorArea() const
-{
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(UI.width - 71, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
-
-}
-/////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
@@ -231,7 +247,7 @@ int Output::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
 
 
-void Output::SetBGColor(color c)
+void Output::SetBGColor(const color& c)
 {	UI.BkGrndColor = c;}
 
 //======================================================================================//

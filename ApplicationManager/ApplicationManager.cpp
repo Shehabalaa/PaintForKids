@@ -8,6 +8,8 @@
 #include "..\Actions\ExitAction.h"
 #include "..\Actions\SelectAction.h"
 #include "..\Actions\ChangeBGAction.h"
+#include "..\Actions\ToDrawAction.h"
+#include "..\Actions\ToPlayAction.h"
 #include "..\Figures\Cline.h"
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
@@ -60,7 +62,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAWING_AREA:
 		pOut->PrintMessage("A click on drawing area");
 		break;
-
+	case PLAYING_AREA:
+		pOut->PrintMessage("A click on Playing area");
+		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
 		break;
@@ -73,6 +77,12 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case CHNG_BK_CLR:
 		pAct = new ChangeBGAction(this);
 			break;
+	case TO_DRAW:
+		pAct = new ToDrawAction(this);
+		break;
+	case TO_PLAY:
+		pAct = new ToPlayAction(this);
+		break;
 	case EXIT:
 		pAct = new ExitAction(this);
 		break;
@@ -217,8 +227,12 @@ void ApplicationManager::UpdateInterface() const
 {	
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, 650);
-	pOut->CreateDrawToolBars();
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, UI.height- UI.StatusBarHeight);
+	if(UI.InterfaceMode==MODE_DRAW)
+		pOut->CreateDrawToolBars();
+	else
+		pOut->CreatePlayToolBar();
+
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }

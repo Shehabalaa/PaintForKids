@@ -7,7 +7,6 @@ class Output	//The application manager should have a pointer to this class
 {
 private:	
 	window* pWind;	//Pointer to the Graphics Window
-	void ClearColorArea() const; // Utility fucntion only used by createplaytool bar when switching to play mode
 public:
 	Output();		
 
@@ -15,11 +14,12 @@ public:
 	void CreateDrawToolBars() const;	//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreateStatusBar() const;	//create the status bar
-
 	Input* CreateInput() const; //creates a pointer to the Input object	
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
-	void SetBGColor(color);
+	void Output::ClearDrawModeToolBars() const; // Clears the DrawModeToolBars (Colors bar and toolbar)
+	void Output::ClearPlayModeToolBar() const; // Clears the PlayModeToolBar 
+	void Output::SetBGColor(const color&); // Changing BackGround Color
 	window * GetWindow();
 	
 	// -- Figures Drawing functions
