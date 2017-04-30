@@ -8,12 +8,10 @@
 #include "..\Actions\ExitAction.h"
 #include "..\Actions\SelectAction.h"
 #include "..\Actions\ChangeBGAction.h"
-
+#include "..\Actions\PickandHideAction.h"
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
-
 #include "..\Actions\MoveAction.h"
-
 #include "..\Figures\Cline.h"
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
@@ -92,6 +90,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case TO_PLAY:
 		pAct = new ToPlayAction(this);
 		break;
+	case PICK:
+		pAct = new PickandHideAction(this);
+		break;
 	case EXIT:
 		pAct = new ExitAction(this);
 		break;
@@ -150,7 +151,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 	bool check;
 
-	for (int i = 0; i < FigCount; i++)
+	for (int i = (FigCount-1); i >= 0; i--)
 	{
 		check = FigList[i]->check(x,y);
 
@@ -251,10 +252,12 @@ void ApplicationManager::UpdateInterface() const
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, UI.height- UI.StatusBarHeight);
-	if(UI.InterfaceMode==MODE_DRAW)
+	if (UI.InterfaceMode == MODE_DRAW)
 		pOut->CreateDrawToolBars();
-	else
+	else if (UI.InterfaceMode == MODE_PLAY)
 		pOut->CreatePlayToolBar();
+	else if (UI.InterfaceMode == MODE_PICKANDHIDE)
+		pOut->CreatePickandHideToolBar();
 
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)

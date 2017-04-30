@@ -39,10 +39,18 @@ enum ActionType //The actions supported (you can add more if needed)
 	ZOOMOUT,		//Zoom out
 	COPY,			// Copy Figure(s) to clipboard
 	CUT,			// Copy Figure(s) to clipboard and remove it form figlist
-	PASTE,			// Paste Figure(s) from clipboard to figlist
+	PASTE,	// Paste Figure(s) from clipboard to figlist
+	Color_Palette,
 	PICK,
 	SCRAMBLE,
-	Color_Palette
+	PICK_TYPE,
+	PICK_FILL,
+	PICK_TYPEFILL,
+	PICK_AREA,
+	PICKED_rec,
+	PICKED_Line,
+	PICKED_Circ,
+	PICKED_Tri,
 	///TODO: Add more action types (if needed)
 };
 

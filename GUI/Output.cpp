@@ -217,6 +217,106 @@ void Output::CreatePlayToolBar() const
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }
+void Output::CreatePickandHideToolBar() const
+{
+
+	UI.InterfaceMode = MODE_PICKANDHIDE;
+
+
+	string MenuItemImages[PickandHide_ITM_COUNT];
+	MenuItemImages[ITM_By_Type] = "images\\MenuItems\\bytype.jpg";
+	MenuItemImages[ITM_By_Filling_Color] = "images\\MenuItems\\bycolor.jpg";
+	MenuItemImages[ITM_By_TypeandFilling_color] = "images\\MenuItems\\bycolortype.jpg";
+	MenuItemImages[ITM_By_Area] = "images\\MenuItems\\byarea.jpg";
+	MenuItemImages[ITM_Back] = "images\\MenuItems\\switch.jpg";
+
+	//Cleaning last mode Tool bars by drawing white area on tool bar and rectangle filled of same bg_color on color area
+	ClearDrawModeToolBars();
+
+	//Then loading tool bar images
+	for (int i = 0; i<PickandHide_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	////////////////////////////////////////////////////////////////////
+	string col[colors_num]; // here we drawing colors menu
+	col[ITM_black] = "images\\MenuItems\\black.jpg";
+	col[ITM_green] = "images\\MenuItems\\green.jpg";
+	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
+	col[ITM_red] = "images\\MenuItems\\red.jpg";
+	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
+	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
+	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
+	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
+	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
+	col[ITM_lime] = "images\\MenuItems\\green.jpg";
+	col[ITM_white] = "images\\MenuItems\\white.jpg";
+	for (int i = 0; i<colors_num; i++)
+		pWind->DrawImage(col[i], UI.width - UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line parllel to colors toolbar
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
+void Output::CreatePickandHideFiguresToolBar() const
+{
+
+	string MenuItemImages[PICKTYPE_ITM_COUNT];
+	MenuItemImages[ITM_PICK_REC] = "images\\MenuItems\\rec.jpg";
+	MenuItemImages[ITM_PICK_LINE] = "images\\MenuItems\\line.jpg";
+	MenuItemImages[ITM_PICK_CIRC] = "images\\MenuItems\\circle.jpg";
+	MenuItemImages[ITM_PICK_TRI] = "images\\MenuItems\\tri.jpg";
+	ClearDrawModeToolBars();
+
+	//Then loading tool bar images
+	for (int i = 0; i<PICKTYPE_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i*UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line under the toolbar
+	pWind->SetPen(BLACK, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	////////////////////////////////////////////////////////////////////
+	string col[colors_num]; // here we drawing colors menu
+	col[ITM_black] = "images\\MenuItems\\black.jpg";
+	col[ITM_green] = "images\\MenuItems\\green.jpg";
+	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
+	col[ITM_red] = "images\\MenuItems\\red.jpg";
+	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
+	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
+	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
+	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
+	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
+	col[ITM_lime] = "images\\MenuItems\\green.jpg";
+	col[ITM_white] = "images\\MenuItems\\white.jpg";
+	for (int i = 0; i<colors_num; i++)
+		pWind->DrawImage(col[i], UI.width - UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+
+
+
+	//Draw a line parllel to colors toolbar
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearDrawArea() const
 {
@@ -307,8 +407,7 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool selected) const
 {
 	//check if Tri in drawing area
-	if (P1.y > UI.ToolBarHeight && P1.y < UI.height - UI.StatusBarHeight && P2.y > UI.ToolBarHeight && P2.y < UI.height - UI.StatusBarHeight && P3.y > UI.ToolBarHeight && P3.y < UI.height - UI.StatusBarHeight  && P1.x< UI.width - 70 && P2.x < UI.width - 70 && P3.x < UI.width - 70)
-	{
+
 		color DrawingClr;
 		if (selected)
 			DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
@@ -328,15 +427,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 
 
 		pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
-	}
-	else
-	{
-		int x = 0, y = 0;
-		PrintMessage("Wrong Points!!! Figure Out of Drawing Area!!!,Click to continue");
-	
-		pWind->WaitMouseClick(x, y);
-		ClearStatusBar();
-	}
+
 
 }
 //Circle

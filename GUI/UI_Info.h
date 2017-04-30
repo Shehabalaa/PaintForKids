@@ -10,7 +10,8 @@
 enum GUI_MODE	//Graphical user interface mode
 {
 	MODE_DRAW,	//Drawing mode (startup mode)
-	MODE_PLAY	//Playing mode
+	MODE_PLAY,	//Playing mode
+	MODE_PICKANDHIDE
 };
 enum ColorMenuItem //for drawing fillg background colors
 {
@@ -78,7 +79,26 @@ enum PlayMenuItem //The items of the Play menu (you should add more items)
 
 
 
+enum PickandHideMenuItem //The items of the Play menu (you should add more items)
+{
+	ITM_By_Type,
+	ITM_By_Filling_Color,
+	ITM_By_TypeandFilling_color,
+	ITM_By_Area,
+	ITM_Back,
+	PickandHide_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
+};
+enum PickTypeMenuItem //The figures of the pick by type
+{
+	ITM_PICK_REC,
+	ITM_PICK_LINE,
+	ITM_PICK_CIRC,
+	ITM_PICK_TRI,
+
+	PICKTYPE_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
+
+};
 
 __declspec(selectany) //This line to prevent "redefinition error"
 
