@@ -4,7 +4,7 @@ CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfx
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	ID = figs_count + 1;
+	ID = figs_count + 13;
 }
 	
 
@@ -36,7 +36,13 @@ bool CRectangle::check(int x, int y) const
 
 	return false;
 }
+void CRectangle::PrintInfo(Output* pOut) const
+{
+	pOut->DrawString(230, 667, "Radius :");
+	pOut->DrawInt(270, 667, 5);
 
+
+}
 
 void CRectangle::Save(ofstream & fOut) const
 {

@@ -43,7 +43,13 @@ void ActionSelect::Execute()
 		}
 	}
 	count = countselect();
-	if(count>1)
+	if (count == 1)
+	{
+		CFigure * SelectedFigure = pManager->GetSelectedFigure();
+		SelectedFigure->PrintInfo(pManager->GetOutput());
+
+	}
+	else if(count>1)
 	{
 		pManager->GetOutput()->PrintMessage("NO. of selected figures :");
 		pManager->GetOutput()->DrawInt(230, 667, count);

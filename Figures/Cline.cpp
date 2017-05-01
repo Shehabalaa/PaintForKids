@@ -6,11 +6,17 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo , int 
 	if ((P1.x - P2.x) != 0)
 	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
 	else slope = -1;
-
 	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
-	ID = figs_count + 1;
-}
+	ID = figs_count + 13;
 
+}
+void Cline::PrintInfo(Output* pOut) const
+{
+	pOut->DrawString(230, 667, "Radius :");
+	pOut->DrawInt(270, 667, 5);
+
+
+}
 
 void Cline::Draw(Output* pOut) const
 {

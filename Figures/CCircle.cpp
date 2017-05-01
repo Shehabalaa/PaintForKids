@@ -5,7 +5,9 @@ CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
-	ID = figs_count + 1;
+	ID = figs_count + 13;
+	Area = 3.14 *rad*rad;
+
 }
 
 
@@ -33,7 +35,17 @@ bool CCircle::check(int x,int y) const
 		return false;
 
 }
+void CCircle::PrintInfo(Output* pOut) const
+{
+	pOut->PrintMessage("Figure Data->");
+	pOut->DrawString(120, 667, "Radius :");
+	pOut->DrawInt(185, 667,rad );
+	pOut->DrawString(217, 667, "Area :");
+	pOut->DrawInt(270, 667, Area);
+	pOut->DrawString(325, 667, "ID :");
+	pOut->DrawInt(357, 667, Area);
 
+}
 
 void CCircle::Save(ofstream &fOut) const
 {

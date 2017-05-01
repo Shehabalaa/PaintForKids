@@ -19,6 +19,7 @@ public:
 	virtual bool InDrawingArea() const;
 	virtual void Load(ifstream &Infile);
 	virtual void Move(int x, int y);
+	virtual void PrintInfo(Output* pOut) const;
 	virtual ~CCircle();
 };
 

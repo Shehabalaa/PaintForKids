@@ -164,6 +164,20 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+CFigure *ApplicationManager::GetSelectedFigure() const
+{
+
+	for (int i = 0; i < FigCount; i++)
+	{
+
+			if (FigList[i]->IsSelected())
+				return FigList[i];
+		}
+	return NULL;
+	}
+
+
+
 
 void ApplicationManager::SaveAll(ofstream& fOut)
 {
