@@ -6,8 +6,8 @@ CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const G
 	corner1 = P1;
 	corner2 = P2;
 	corner3 = P3;
-	ID = figs_count + 13;
-	Area= abs((corner1.x*corner2.y + corner2.x*corner3.y + corner3.x*corner1.y - corner1.y*corner2.x - corner2.y*corner3.x - corner3.y*corner1.x) / 2);
+	ID = figs_count + 1;
+	Area = abs((corner1.x*corner2.y + corner2.x*corner3.y + corner3.x*corner1.y - corner1.y*corner2.x - corner2.y*corner3.x - corner3.y*corner1.x) / 2);
 }
 
 
@@ -21,28 +21,27 @@ figures  CTriangle::FigType() const
 	return tri;
 }
 
-
 bool CTriangle::check(int x, int y) const
 {
-	double  area1, area2, area3, sum ;
 	
-	
+	double  area1, area2, area3, sum;
 	area1 = abs((x*corner2.y + corner2.x*corner3.y + corner3.x*y - y*corner2.x - corner2.y*corner3.x - corner3.y*x) / 2);
 	area2 = abs((corner1.x*y + x*corner3.y + corner3.x*corner1.y - corner1.y*x - y*corner3.x - corner3.y*corner1.x) / 2);
 	area3 = abs((corner1.x*corner2.y + corner2.x*y + x*corner1.y - corner1.y*corner2.x - corner2.y*x - y*corner1.x) / 2);
 
 	sum = area1 + area2 + area3;
-	if (abs(sum -Area)<5)
+	if (abs(sum - Area)<5)
 		return true;
-	else return false;
+	else
+		return false;
 }
+
 void CTriangle::PrintInfo(Output* pOut) const
 {
-	pOut->DrawString(230, 667, "Radius :");
-	pOut->DrawInt(270, 667, 5);
-
-
+	 pOut->DrawString(230, 667, "Radius :");
+	 pOut->DrawInt(270, 667, 5);
 }
+
 void CTriangle::Save(ofstream &fOut) const
 
 {
@@ -108,6 +107,22 @@ void CTriangle::Load(ifstream & Infile)
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
 
 }
+
+CFigure * CTriangle::CreateCopy() const
+{
+	return new CTriangle(*this);
+}
+
+Point CTriangle::CentroidOfFigure() const
+{
+	Point p;
+	p.x = (corner1.x + corner2.x + corner3.x) / 3;
+	p.y = (corner1.y + corner2.y + corner3.y) / 3;
+	return p;
+}
+
+
+
 
 CTriangle::~CTriangle()
 {

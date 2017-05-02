@@ -49,10 +49,11 @@ void ActionSelect::Execute()
 		SelectedFigure->PrintInfo(pManager->GetOutput());
 
 	}
-	else if(count>1)
+	else if(count >1 )
 	{
-		pManager->GetOutput()->PrintMessage("NO. of selected figures :");
-		pManager->GetOutput()->DrawInt(230, 667, count);
+		string temp =" NO.of selected figures : ";
+		temp += count;
+		pManager->GetOutput()->PrintMessage(temp);
 	}
 }
 

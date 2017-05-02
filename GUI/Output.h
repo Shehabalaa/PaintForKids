@@ -9,7 +9,7 @@ private:
 	window* pWind;	//Pointer to the Graphics Window
 public:
 	Output();		
-
+	
 	window* CreateWind(int, int, int , int) const; //creates the application window
 	void CreateDrawToolBars() const;	//creates Draw mode toolbar & menu
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
@@ -19,9 +19,9 @@ public:
 	Input* CreateInput() const; //creates a pointer to the Input object	
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
-	void Output::ClearDrawModeToolBars() const; // Clears the DrawModeToolBars (Colors bar and toolbar)
-	void Output::ClearPlayModeToolBar() const; // Clears the PlayModeToolBar 
-	void Output::SetBGColor(const color&); // Changing BackGround Color
+	void ClearDrawModeToolBars() const; // Clears the DrawModeToolBars (Colors bar and toolbar)
+	void ClearPlayModeToolBar() const; // Clears the PlayModeToolBar 
+	void SetBGColor(const color&); // Changing BackGround Color
 	window * GetWindow();
 	
 	// -- Figures Drawing functions
@@ -36,6 +36,7 @@ public:
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 	void DrawInt(const int iX, const int iY, const long);
 	void DrawString(const int iX, const int iY, const string strText);
+
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width

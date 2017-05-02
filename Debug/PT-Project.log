@@ -1,6 +1,0 @@
-﻿  CCircle.cpp
-c:\users\mohamed.x\downloads\comics\paintforkids\figures\ccircle.cpp(7): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\mohamed.x\downloads\comics\paintforkids\figures\ccircle.cpp(9): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-c:\users\mohamed.x\downloads\comics\paintforkids\figures\ccircle.cpp(29): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  PT-Project.vcxproj -> C:\Users\mohamed.X\Downloads\comics\paintforkids\.\Debug\PT Project.exe
-  PT-Project.vcxproj -> .\Debug/PT Project.pdb (Full PDB)

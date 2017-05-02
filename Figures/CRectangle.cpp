@@ -4,7 +4,7 @@ CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfx
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	ID = figs_count + 13;
+	ID = figs_count + 1;
 }
 	
 
@@ -36,6 +36,8 @@ bool CRectangle::check(int x, int y) const
 
 	return false;
 }
+
+
 void CRectangle::PrintInfo(Output* pOut) const
 {
 	pOut->DrawString(230, 667, "Radius :");
@@ -74,6 +76,20 @@ void CRectangle::Move(int x, int y)
 		Corner2.x += x;
 		Corner2.y += y;
 	}
+
+}
+
+CFigure * CRectangle::CreateCopy() const
+{
+	return new CRectangle(*this);
+}
+
+Point CRectangle::CentroidOfFigure() const
+{
+	Point p;
+	p.x = (Corner1.x + Corner2.x) / 2;
+	p.y = (Corner1.y + Corner2.y) / 2;
+	return p;
 
 }
 

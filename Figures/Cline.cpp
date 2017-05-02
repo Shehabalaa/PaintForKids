@@ -6,17 +6,22 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo , int 
 	if ((P1.x - P2.x) != 0)
 	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
 	else slope = -1;
+
 	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
-	ID = figs_count + 13;
-
+	ID = figs_count + 1;
 }
-void Cline::PrintInfo(Output* pOut) const
-{
-	pOut->DrawString(230, 667, "Radius :");
-	pOut->DrawInt(270, 667, 5);
 
 
-}
+
+
+
+ void Cline::PrintInfo(Output* pOut) const
+ {
+	 pOut->DrawString(230, 667, "Radius :");
+	 pOut->DrawInt(270, 667, 5);
+
+ }
+
 
 void Cline::Draw(Output* pOut) const
 {
@@ -93,6 +98,20 @@ void Cline::Move(int x, int y)
 
 
 }
+
+CFigure * Cline::CreateCopy() const
+{
+	return new Cline(*this);
+}
+
+Point Cline::CentroidOfFigure() const
+{
+	Point p;
+	p.x = (start.x + end.x) / 2;
+	p.y = (start.y + end.y) / 2;
+	return p;
+}
+
 void Cline::Load(ifstream & Infile)
 {
 	string temp; // this string will be used several time to read strings from file

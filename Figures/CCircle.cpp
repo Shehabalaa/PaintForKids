@@ -5,8 +5,19 @@ CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
-	ID = figs_count + 13;
+	ID = figs_count + 1;
 	Area = 3.14 *rad*rad;
+}
+
+void CCircle::PrintInfo(Output* pOut) const
+{
+	pOut->PrintMessage("Figure Data->");
+	pOut->DrawString(120, 667, "Radius :");
+	pOut->DrawInt(185, 667, rad);
+	pOut->DrawString(217, 667, "Area :");
+	pOut->DrawInt(270, 667, Area);
+	pOut->DrawString(325, 667, "ID :");
+	pOut->DrawInt(357, 667, Area);
 
 }
 
@@ -35,17 +46,7 @@ bool CCircle::check(int x,int y) const
 		return false;
 
 }
-void CCircle::PrintInfo(Output* pOut) const
-{
-	pOut->PrintMessage("Figure Data->");
-	pOut->DrawString(120, 667, "Radius :");
-	pOut->DrawInt(185, 667,rad );
-	pOut->DrawString(217, 667, "Area :");
-	pOut->DrawInt(270, 667, Area);
-	pOut->DrawString(325, 667, "ID :");
-	pOut->DrawInt(357, 667, Area);
 
-}
 
 void CCircle::Save(ofstream &fOut) const
 {
@@ -67,20 +68,29 @@ bool  CCircle::InDrawingArea() const
 }
 void CCircle::Move(int x, int y)
 {
-	int centerx;
-	int centery;
-	 centerx = center.x + x;
-	 centery = center.y + y;
+	center.x += x;
+	center.y += y;
 
-	if (centery > UI.ToolBarHeight && centery < (UI.height - UI.StatusBarHeight) && centerx - rad >= 0 && centerx + rad < UI.width - 70 && centery - rad > UI.ToolBarHeight && centery + rad < UI.height - UI.StatusBarHeight)
-	{
-		center.x += x;
-		center.y += y;
-	
-	}
-		
 
+	 if (!this->InDrawingArea())
+	 {
+		 if (center.x + rad > UI.width - UI.ColorsBarWidth)
+			 center.x = UI.width - UI.ColorsBarWidth - rad-1;
+		 else if (center.x - rad < 0)
+			 center.x = rad;
+
+		 if (center.y - rad < UI.ToolBarHeight)
+			 center.y = UI.ToolBarHeight + rad +1;
+		 else if (center.y + rad > UI.height-UI.StatusBarHeight)
+			 center.y = UI.height - UI.StatusBarHeight-rad-1;
+	 }
 }
+
+CFigure * CCircle::CreateCopy() const
+{
+	return new CCircle(*this);
+}
+
 
 void CCircle::Load(ifstream & Infile)
 {
@@ -100,6 +110,12 @@ void CCircle::Load(ifstream & Infile)
 	}
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
 }
+
+Point CCircle::CentroidOfFigure() const
+{
+	return center;
+}
+
 
 CCircle::~CCircle()
 {

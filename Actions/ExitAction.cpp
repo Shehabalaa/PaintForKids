@@ -23,6 +23,7 @@ void ExitAction::Execute()
 	}
 
 	pManager->CleanFiglist();
+	pManager->CleanClipboard();
 }
 
 void ExitAction::ReadActionParameters()

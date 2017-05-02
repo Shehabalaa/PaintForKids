@@ -466,13 +466,11 @@ void Output::DrawInt(const int iX, const int iY, const long lNumber)
 	pWind->DrawInteger(iX, iY, lNumber);
 	
 }
-void Output::DrawString(const int iX, const int iY, const string strText)
-{
 
-	pWind->DrawString( iX, iY, strText);
-}
-
-
+ void Output::DrawString(const int iX, const int iY, const string strText)
+ {
+	 pWind->DrawString(iX, iY, strText);
+ }
 //////////////////////////////////////////////////////////////////////////////////////////
 Output::~Output()
 {

@@ -1,3 +1,4 @@
+
 #include "ApplicationManager.h"
 #include "..\Actions\LoadAction.h"
 #include "..\Actions\AddRectAction.h"
@@ -12,6 +13,10 @@
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
 #include "..\Actions\MoveAction.h"
+#include "..\Actions\CutAction.h"
+#include "..\Actions\CopyAction.h"
+#include "..\Actions\PasteAction.h"
+#include "..\Actions\DeleteAction.h"
 #include "..\Figures\Cline.h"
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
@@ -93,6 +98,18 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case PICK:
 		pAct = new PickandHideAction(this);
 		break;
+	case COPY:
+		pAct = new CopyAction(this);
+		break;
+	case CUT:
+		pAct = new CutAction(this);
+		break;
+	case PASTE:
+		pAct = new PasteAction(this);
+		break;
+	case DEL:
+		pAct = new DeleteAction(this);
+		break;
 	case EXIT:
 		pAct = new ExitAction(this);
 		break;
@@ -170,13 +187,13 @@ CFigure *ApplicationManager::GetSelectedFigure() const
 	for (int i = 0; i < FigCount; i++)
 	{
 
-			if (FigList[i]->IsSelected())
-				return FigList[i];
-		}
-	return NULL;
+		if (FigList[i]->IsSelected())
+			return FigList[i];
 	}
-
-
+	return NULL;
+}
+ 
+ 
 
 
 void ApplicationManager::SaveAll(ofstream& fOut)
@@ -222,7 +239,7 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 
 
 }
-
+///////////////////////////////////////////////////////////////
 void ApplicationManager::MoveFigures(int x,int y)
 {
 
@@ -237,6 +254,86 @@ void ApplicationManager::MoveFigures(int x,int y)
 
 }
 
+///////////////////////////////////////////////////////////////////////////////
+
+void ApplicationManager::DeleteAll()
+{
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			delete FigList[i];
+			FigList[i] = NULL;
+			swap(FigList[i], FigList[FigCount - 1]);
+			FigCount--;
+			i--;
+		}
+	}
+
+	if (FigCount == 0)
+		FigListSaved = true;
+
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CutAll()
+{
+	CopyAll();
+	DeleteAll();
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CopyAll()
+{
+	ClipBoard.clear();
+
+	for (int i = 0; i <FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			ClipBoard.push_back(FigList[i]->CreateCopy());
+		}
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::PasteAll()
+{
+	Point p,centroid; int x = 0, y = 0;
+	pIn->GetPointClicked(p.x, p.y);
+	if (p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight  && p.x < UI.width - UI.ColorsBarWidth)
+	{
+		if (!ClipBoard.empty())
+		{
+			for (int i = 0; i < ClipBoard.size(); i++)
+			{
+				x += ClipBoard[i]->CentroidOfFigure().x;
+				y += ClipBoard[i]->CentroidOfFigure().y;
+
+			}
+			centroid.x = x / ClipBoard.size();
+			centroid.y = y / ClipBoard.size();
+
+
+			for (int i = 0; i < ClipBoard.size(); i++)
+			{
+				CFigure* tmp_ptr = ClipBoard[i]->CreateCopy();
+				tmp_ptr->Move(p.x - centroid.x, p.y - centroid.y);
+					AddFigure(tmp_ptr);
+			}
+		}
+		
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
 bool ApplicationManager::GetIfListSaved() const
 {
 	return FigListSaved;
@@ -248,6 +345,11 @@ void ApplicationManager::CleanFiglist()
 
 	FigCount = 0;
 	FigListSaved = true;
+}
+
+void ApplicationManager::CleanClipboard()
+{
+	ClipBoard.clear();
 }
 
 
@@ -265,13 +367,7 @@ void ApplicationManager::UpdateInterface() const
 {	
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, 1300, UI.height- UI.StatusBarHeight);
-	if (UI.InterfaceMode == MODE_DRAW)
-		pOut->CreateDrawToolBars();
-	else if (UI.InterfaceMode == MODE_PLAY)
-		pOut->CreatePlayToolBar();
-	else if (UI.InterfaceMode == MODE_PICKANDHIDE)
-		pOut->CreatePickandHideToolBar();
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width-UI.ColorsBarWidth, UI.height- UI.StatusBarHeight);
 
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
@@ -286,10 +382,10 @@ Output *ApplicationManager::GetOutput() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
-{
-	for(int i=0; i<FigCount; i++)
-		delete FigList[i];
+{//asdasdasdsaa
+	CleanFiglist();
 	delete pIn;
 	delete pOut;
 	
 }
+

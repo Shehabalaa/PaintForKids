@@ -161,7 +161,6 @@ ActionType Input::GetUserAction() const
 	}
 
 }
-
 Colors Input::GetColor()
 {
 	int x, y;
