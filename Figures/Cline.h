@@ -18,7 +18,7 @@ public:
 	virtual void Save(ofstream &) const;
 	virtual bool InDrawingArea() const;
 	virtual void Load(ifstream &Infile);
-	virtual void Move(int x, int y);
+	virtual BlockingDirection Move(int x, int y);
 	virtual CFigure * CreateCopy() const;
 	virtual Point CentroidOfFigure() const;
 	virtual void PrintInfo(Output* pOut) const;

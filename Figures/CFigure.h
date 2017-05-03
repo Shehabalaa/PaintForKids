@@ -20,7 +20,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	virtual void Draw(Output* pOut) const  = 0;	  //Draw the figure
-	virtual void Move(int ,int)=0;             //Move the figure
+	virtual BlockingDirection Move(int ,int)=0;     //Move the figure this enum will idicate that while moving figure gets out of drawing area in a certian direction
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual CFigure * CreateCopy() const = 0;// this fucntion create a copy form figure and return upcasted pointer to base of this copy

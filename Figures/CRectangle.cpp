@@ -62,21 +62,24 @@ bool CRectangle::InDrawingArea() const
 	}
 	else return false;
 }
-void CRectangle::Move(int x, int y)
+BlockingDirection CRectangle::Move(int x, int y)
 {
-	int Corner1x = Corner1.x+x;
-	int Corner1y = Corner1.y+y;
-	int Corner2x = Corner2.x +x;
-	int Corner2y = Corner2.y +y;
-
-	if (Corner1y > UI.ToolBarHeight && Corner1y < UI.height - UI.StatusBarHeight && Corner2y > UI.ToolBarHeight && Corner2y < UI.height - UI.StatusBarHeight && Corner1x < UI.width - 70 && Corner2x < UI.width - 70)
+	BlockingDirection tmp = No_Block;
+	Corner1.x += x;
+	Corner1.y += y;
+	Corner2.x += x;
+	Corner2.y += y;
+	if (!this->InDrawingArea())
 	{
-		Corner1.x += x;
-		Corner1.y += y;
-		Corner2.x += x;
-		Corner2.y += y;
+		if (Corner2.x > UI.width - UI.ColorsBarWidth || Corner2.x < 0|| Corner1.x > UI.width - UI.ColorsBarWidth || Corner1.x < 0)
+			tmp= Block_in_X_Direction;
+
+		if (Corner2.y < UI.ToolBarHeight || Corner2.y > UI.height - UI.StatusBarHeight || Corner1.y < UI.ToolBarHeight || Corner1.y > UI.height - UI.StatusBarHeight)
+			if(tmp==No_Block)
+				tmp= Block_in_Y_Direction;
 	}
 
+	return tmp;
 }
 
 CFigure * CRectangle::CreateCopy() const

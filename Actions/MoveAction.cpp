@@ -16,32 +16,51 @@ void   MoveAction::ReadActionParameters()
 	window * pWind = pOut->GetWindow();
 	do
 	{
-		pWind->GetMouseCoord(next.x, next.y);
+		pWind->GetMouseCoord(present.x, present.y);
 	} while (pWind->GetButtonState(LEFT_BUTTON, present.x, present.y) == BUTTON_UP);
 	
 	pOut->PrintMessage("Drag Figure(s)");
 
 }
-
+#include<iostream>
 void  MoveAction::Execute()
 {
 	ReadActionParameters();
-
 	window * pWind = pOut->GetWindow();
 
 	pWind->FlushMouseQueue();
+	pWind->GetMouseCoord(next.x, next.y);
+	while (pWind->GetButtonState(LEFT_BUTTON, next.x, next.y) != BUTTON_UP)
+		{
 
-	while ( pWind->GetButtonState(LEFT_BUTTON,next.x,next.y)!= BUTTON_UP)
-	{
+		pWind->FlushMouseQueue();
 		pWind->GetMouseCoord(next.x, next.y);
+
+		// these two statments to avoid havig bad parameters mouse going places on edges of window that cause to round edges
+
 		int x = (next.x - present.x);
 		int y = (next.y - present.y);
-		pManager->MoveFigures(x,y);
-		present.x = next.x; present.y = next.y;
-		pWind->FlushMouseQueue();
-		Sleep(25);
-	}
+		if (next.x > 65000 || next.x < 0)
+		{
+			next.x = 0;
+			x = 0;
+		}
+		if (next.y > 65000 || next.y < 0)
+		{
+			next.y = 0;
+			y = 0;
 
+		}
+		
+		pManager->MoveFigures(x,y);
+
+		present.x = next.x;
+		present.y = next.y;
+
+		Sleep(20);
+
+		}
+	
 }
 
 MoveAction ::~MoveAction()

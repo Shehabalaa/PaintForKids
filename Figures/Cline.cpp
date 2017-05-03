@@ -71,7 +71,7 @@ void Cline::Save(ofstream & fOut) const
 
 bool  Cline::InDrawingArea() const
 {
-	if (start.y > UI.ToolBarHeight && start.y < UI.height - UI.StatusBarHeight && end.y > UI.ToolBarHeight && end.y < UI.height - UI.StatusBarHeight && start.x < UI.width - 70 && end.x < UI.width - 70)
+	if (start.y > UI.ToolBarHeight +1 && start.y < UI.height - UI.StatusBarHeight -1 && end.y > UI.ToolBarHeight +1 && end.y < UI.height - UI.StatusBarHeight -1 && start.x < UI.width - UI.ColorsBarWidth -1 && end.x < UI.width - UI.ColorsBarWidth -1 && start.x >0 && end.x >0)
 	{
 		return true;
 	}
@@ -80,23 +80,24 @@ bool  Cline::InDrawingArea() const
 
 
 }
-void Cline::Move(int x, int y)
+BlockingDirection Cline::Move(int x, int y)
 {
-	int startx = start.x + x;
-	int starty = start.y + y;
-	int endx = end.x + x;
-	int endy = end.y + y;
+	start.x += x;
+	start.y += y;
+	end.x += x;
+	end.y += y;
 
-	if (starty > UI.ToolBarHeight && starty < UI.height - UI.StatusBarHeight && endy > UI.ToolBarHeight && endy < UI.height - UI.StatusBarHeight && startx < UI.width - 70 && endx < UI.width - 70)
+	if (1)
 	{
 		start.x += x;
 		start.y += y;
 		end.x += x;
 		end.y += y;
+		return No_Block;
+
 	}
 
-
-
+	
 }
 
 CFigure * Cline::CreateCopy() const

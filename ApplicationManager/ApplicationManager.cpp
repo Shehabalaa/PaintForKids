@@ -240,18 +240,59 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 
 }
 ///////////////////////////////////////////////////////////////
-void ApplicationManager::MoveFigures(int x,int y)
+bool ApplicationManager::MoveFigures(int x,int y)
 {
-
+	BlockingDirection tmp = No_Block;
+	bool CASE = true;
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
-			FigList[i]->Move(x,y);
-			FigList[i]->Draw(pOut);
+			tmp = FigList[i]->Move(x, y);
+			switch (tmp) // if any figure while moving gets out of drawing area ,unmove already moved figures and return false;
+			{
+			case No_Block:
+				break;
+			case Block_in_X_Direction:
+				for (int j = 0; j < i + 1; j++)
+				{
+					if (FigList[j]->IsSelected())
+					{
+						FigList[j]->Move(-x, 0);
+					}
+				}
+				CASE = false;
+				x = 0;
+				break;
+			case Block_in_Y_Direction:
+				for (int j = 0; j < i + 1; j++)
+				{
+					if (FigList[j]->IsSelected())
+					{
+						FigList[j]->Move(0, -y);
+					}
+				}
+				CASE = false;
+				y = 0;
+				break;
+
+			case Block_in_XY_Direction:
+				for (int j = 0; j < i + 1; j++)
+				{
+					if (FigList[j]->IsSelected())
+					{
+						FigList[j]->Move(-x, -y);
+					}
+				}
+				CASE = false;
+				return CASE;
+				break;
+
+			}
 		}
 	}
-
+	UpdateInterface();
+	return CASE;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

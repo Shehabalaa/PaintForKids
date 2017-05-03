@@ -7,6 +7,8 @@
 #include<vector>
 class CFigure;
 
+
+
 //Main class that manages everything in the application.
 class ApplicationManager
 {
@@ -21,18 +23,18 @@ private:
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
-
 public:	
 	ApplicationManager(); 
 	~ApplicationManager();
 	
+
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	int countselected();
 	void PrintSelected();
-	void MoveFigures(int ,int);
+	bool MoveFigures(int, int);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure

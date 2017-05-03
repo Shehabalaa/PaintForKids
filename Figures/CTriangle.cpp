@@ -61,26 +61,17 @@ bool CTriangle::InDrawingArea() const
 	else return false;
 
 }
-void CTriangle::Move(int x, int y)
+
+BlockingDirection CTriangle::Move(int x, int y)
 {
-	int corner1x = corner1.x + x;
-	int corner1y = corner1.y + y;
-	int corner2x = corner2.x + x;
-	int corner2y = corner2.y + y;
-	int corner3x = corner3.x + x;
-	int corner3y = corner3.y + y;
+	corner1.x += x;
+	corner1.y += y;
+	corner2.x += x;
+	corner2.y += y;
+	corner3.x += x;
+	corner3.y += y;
 
-	if (corner1y > UI.ToolBarHeight && corner1y < UI.height - UI.StatusBarHeight && corner2y > UI.ToolBarHeight && corner2y < UI.height - UI.StatusBarHeight && corner3y > UI.ToolBarHeight && corner3y < UI.height - UI.StatusBarHeight  && corner1x < UI.width - 70 && corner2x < UI.width - 70 && corner3x < UI.width - 70)
-	{
-		corner1.x += x;
-		corner1.y += y;
-		corner2.x += x;
-		corner2.y += y;
-		corner3.x += x;
-		corner3.y += y;
-	}
-
-
+	return (No_Block);
 
 }
 

@@ -66,24 +66,25 @@ bool  CCircle::InDrawingArea() const
 	else
 		return false;
 }
-void CCircle::Move(int x, int y)
+BlockingDirection CCircle::Move(int x, int y)
 {
 	center.x += x;
 	center.y += y;
-
+	BlockingDirection tmp = No_Block;
 
 	 if (!this->InDrawingArea())
 	 {
-		 if (center.x + rad > UI.width - UI.ColorsBarWidth)
-			 center.x = UI.width - UI.ColorsBarWidth - rad-1;
-		 else if (center.x - rad < 0)
-			 center.x = rad;
-
-		 if (center.y - rad < UI.ToolBarHeight)
-			 center.y = UI.ToolBarHeight + rad +1;
-		 else if (center.y + rad > UI.height-UI.StatusBarHeight)
-			 center.y = UI.height - UI.StatusBarHeight-rad-1;
+		 if (center.x + rad > UI.width - UI.ColorsBarWidth || center.x - rad < 0)
+			 tmp = Block_in_X_Direction;
+		 if (center.y - rad < UI.ToolBarHeight || center.y + rad > UI.height - UI.StatusBarHeight)
+		 {
+			 if (tmp == No_Block)
+				 tmp = Block_in_Y_Direction;
+			 else
+				 tmp = Block_in_XY_Direction;
+		 }
 	 }
+	 return tmp;
 }
 
 CFigure * CCircle::CreateCopy() const

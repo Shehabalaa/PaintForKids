@@ -97,4 +97,13 @@ enum figures {
 
 };
 
+enum BlockingDirection // this enum used to indcate stop moving in certain direction due to end of drawing area
+{
+	Block_in_X_Direction,
+	Block_in_Y_Direction,
+	Block_in_XY_Direction,
+	No_Block
+};
+
+
 #endif
