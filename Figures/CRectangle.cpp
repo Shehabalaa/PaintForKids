@@ -1,10 +1,10 @@
 #include "CRectangle.h"
 
-CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfxInfo , int figs_count ):CFigure(FigureGfxInfo)
+CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfxInfo  ):CFigure(FigureGfxInfo)
 {
 	Corner1 = P1;
 	Corner2 = P2;
-	ID = figs_count + 1;
+	ID = -999; // take any wrong id until be put in figlist
 }
 	
 
@@ -56,7 +56,7 @@ void CRectangle::Save(ofstream & fOut) const
 }
 bool CRectangle::InDrawingArea() const
 {
-	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - 70 && Corner2.x < UI.width - 70)
+	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - UI.ColorsBarWidth && Corner2.x < UI.width - UI.ColorsBarWidth  && Corner1.x >0 && Corner2.x >0)
 	{
 		return true;
 	}
@@ -77,6 +77,8 @@ BlockingDirection CRectangle::Move(int x, int y)
 		if (Corner2.y < UI.ToolBarHeight || Corner2.y > UI.height - UI.StatusBarHeight || Corner1.y < UI.ToolBarHeight || Corner1.y > UI.height - UI.StatusBarHeight)
 			if(tmp==No_Block)
 				tmp= Block_in_Y_Direction;
+			else
+				tmp = Block_in_XY_Direction;
 	}
 
 	return tmp;

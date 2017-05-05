@@ -1,5 +1,5 @@
 #include "Cline.h"
-Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo , int figs_count ) :CFigure(FigureGfxInfo)
+Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFigure(FigureGfxInfo)
 {
 	start = P1;
 	end = P2;
@@ -8,7 +8,7 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo , int 
 	else slope = -1;
 
 	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
-	ID = figs_count + 1;
+	ID = -999; // take any wrong id until be put in figlist
 }
 
 
@@ -71,31 +71,37 @@ void Cline::Save(ofstream & fOut) const
 
 bool  Cline::InDrawingArea() const
 {
-	if (start.y > UI.ToolBarHeight +1 && start.y < UI.height - UI.StatusBarHeight -1 && end.y > UI.ToolBarHeight +1 && end.y < UI.height - UI.StatusBarHeight -1 && start.x < UI.width - UI.ColorsBarWidth -1 && end.x < UI.width - UI.ColorsBarWidth -1 && start.x >0 && end.x >0)
+	if (start.y > UI.ToolBarHeight +1 && start.y < UI.height - UI.StatusBarHeight  && end.y > UI.ToolBarHeight +1 && end.y < (UI.height - UI.StatusBarHeight -1) && start.x < UI.width - UI.ColorsBarWidth -1 && end.x < UI.width - UI.ColorsBarWidth -1 && start.x >0 && end.x >0)
 	{
 		return true;
 	}
-	else return false;
+	else 
+		return false;
 
 
 
 }
 BlockingDirection Cline::Move(int x, int y)
 {
+	BlockingDirection tmp = No_Block;
 	start.x += x;
 	start.y += y;
 	end.x += x;
 	end.y += y;
 
-	if (1)
+	if (!this->InDrawingArea())
 	{
-		start.x += x;
-		start.y += y;
-		end.x += x;
-		end.y += y;
-		return No_Block;
+		if (start.x > UI.width - UI.ColorsBarWidth -1 || start.x < 0 || end.x > UI.width - UI.ColorsBarWidth -1 || end.x < 0)
+			tmp = Block_in_X_Direction;
 
+		if (start.y < UI.ToolBarHeight +1 || start.y > UI.height - UI.StatusBarHeight -2  || end.y < UI.ToolBarHeight +1 || end.y > UI.height - UI.StatusBarHeight -2)
+			if (tmp == No_Block)
+				tmp = Block_in_Y_Direction;
+			else
+				tmp = Block_in_XY_Direction;
 	}
+
+	return tmp;
 
 	
 }

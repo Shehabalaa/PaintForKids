@@ -9,9 +9,8 @@ private:
 	Point center;
 	Point circum;
 	int rad;
-
 public:
-	CCircle(const Point& = Point(), const Point& = Point(), const GfxInfo& = GfxInfo(),int = -2);
+	CCircle(const Point& = Point(), const Point& = Point(), const GfxInfo& = GfxInfo());
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType() const;
 	virtual bool check(int x,int y) const;

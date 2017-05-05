@@ -1,12 +1,12 @@
 #include "CTriangle.h"
 #include<cmath>
 
-CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const GfxInfo& FigureGfxInfo, int figs_count) : CFigure(FigureGfxInfo)
+CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const GfxInfo& FigureGfxInfo) : CFigure(FigureGfxInfo)
 {
 	corner1 = P1;
 	corner2 = P2;
 	corner3 = P3;
-	ID = figs_count + 1;
+	ID = -999; // take any wrong id until be put in figlist
 	Area = abs((corner1.x*corner2.y + corner2.x*corner3.y + corner3.x*corner1.y - corner1.y*corner2.x - corner2.y*corner3.x - corner3.y*corner1.x) / 2);
 }
 
@@ -54,16 +54,18 @@ void CTriangle::Save(ofstream &fOut) const
 }
 bool CTriangle::InDrawingArea() const
 {
-	if (corner1.y > UI.ToolBarHeight && corner1.y < UI.height - UI.StatusBarHeight && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight  && corner1.x < UI.width - 70 && corner2.x < UI.width - 70 && corner3.x < UI.width - 70)
+	if (corner1.y > UI.ToolBarHeight  && corner1.y < UI.height - UI.StatusBarHeight -1 && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight -1 && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight -1 && corner1.x < UI.width - UI.ColorsBarWidth -1 && corner2.x < UI.width - UI.ColorsBarWidth -1 && corner3.x < UI.width - UI.ColorsBarWidth -1 && corner1.x >0 && corner2.x > 0 && corner3.x > 0 )
 	{
 		return true;
 	}
-	else return false;
+	else 
+		return false;
 
 }
 
 BlockingDirection CTriangle::Move(int x, int y)
 {
+	BlockingDirection tmp = No_Block;
 	corner1.x += x;
 	corner1.y += y;
 	corner2.x += x;
@@ -71,7 +73,19 @@ BlockingDirection CTriangle::Move(int x, int y)
 	corner3.x += x;
 	corner3.y += y;
 
-	return (No_Block);
+	if (!this->InDrawingArea())
+	{
+		if (corner1.x > UI.width - UI.ColorsBarWidth -2 || corner1.x < 0 || corner2.x > UI.width - UI.ColorsBarWidth -2 || corner2.x < 0 || corner3.x > UI.width - UI.ColorsBarWidth -2 || corner3.x < 0)
+			tmp = Block_in_X_Direction;
+
+		if (corner1.y < UI.ToolBarHeight || corner1.y > UI.height - UI.StatusBarHeight -2 || corner2.y < UI.ToolBarHeight || corner2.y > UI.height - UI.StatusBarHeight -2 || corner3.y < UI.ToolBarHeight || corner3.y > UI.height - UI.StatusBarHeight -2)
+			if (tmp == No_Block)
+				tmp = Block_in_Y_Direction;
+			else
+				tmp = Block_in_XY_Direction;
+	}
+
+	return tmp;
 
 }
 

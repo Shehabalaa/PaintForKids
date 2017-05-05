@@ -39,7 +39,7 @@ void AddRectAction::Execute()
 	ReadActionParameters();
 	int figs_count = pManager->GetFigCount(); 
 	//Create a rectangle with the parameters read from the user
-	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo, figs_count);
+	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo);
 
 	if (R->InDrawingArea())
 		pManager->AddFigure(R);

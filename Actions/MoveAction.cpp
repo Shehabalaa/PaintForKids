@@ -51,8 +51,9 @@ void  MoveAction::Execute()
 			y = 0;
 
 		}
-		
-		pManager->MoveFigures(x,y);
+
+		if(x||y) // no need to move if both x and y =0
+		 pManager->MoveFigures(x,y);
 
 		present.x = next.x;
 		present.y = next.y;

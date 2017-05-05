@@ -1,11 +1,11 @@
 #include "CCircle.h"
 
-CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo , int figs_count) :CFigure(FigureGfxInfo)
+CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo ):CFigure(FigureGfxInfo)
 {
 	center = P1;
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
-	ID = figs_count + 1;
+	ID = -999; // take any wrong id until be put in figlist
 	Area = 3.14 *rad*rad;
 }
 

@@ -1,8 +1,7 @@
 #ifndef CFIGURE_H
 #define CFIGURE_H
 
-#include "..\DEFS.h"
-#include "..\GUI\Output.h"
+#include "..\ApplicationManager\ApplicationManager.h"
 
 //Base class for all figures
 class CFigure
@@ -12,7 +11,6 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	int Area; // Figure Area
-	
 	/// Add more parameters if needed.
 
 public:
@@ -24,9 +22,8 @@ public:
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual CFigure * CreateCopy() const = 0;// this fucntion create a copy form figure and return upcasted pointer to base of this copy
-
 	virtual figures FigType() const=0;
-
+	void SetID(int); // Changes figure id
 	virtual bool InDrawingArea() const = 0;
 
 	virtual bool check(int,int) const = 0;

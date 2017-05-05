@@ -47,7 +47,7 @@ public:
 	void DeleteAll();
 	void CutAll();
 	void CopyAll();
-	void PasteAll();
+	void PasteAll(const Point&);
 	CFigure *GetSelectedFigure() const;
 	// -- Interface Management Functions
 	Input *GetInput() const; //Return pointer to the input

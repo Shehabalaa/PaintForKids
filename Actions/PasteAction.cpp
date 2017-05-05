@@ -5,13 +5,17 @@ PasteAction::PasteAction(ApplicationManager * pApp) : Action(pApp)
 {}
 void PasteAction::Execute()
 {
-
-	pManager->PasteAll();
+	ReadActionParameters();
+	pManager->PasteAll(p);
+	
 }
 void  PasteAction::ReadActionParameters()
 {
-
+	pOut->PrintMessage("Please Select target Point");
+	pIn->GetPointClicked(p.x,p.y);
 }
 PasteAction::~PasteAction()
 {
+	
+	pIn->GetPointClicked(p.x, p.y);
 }

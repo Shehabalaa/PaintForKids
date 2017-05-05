@@ -31,7 +31,7 @@ void AddTriAction::Execute()
 	ReadActionParameters();
 
 	int figs_count = pManager->GetFigCount();
-	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo,figs_count);
+	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo);
 
 	if (t->InDrawingArea())
 		pManager->AddFigure(t);

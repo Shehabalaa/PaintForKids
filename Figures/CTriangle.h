@@ -11,7 +11,7 @@ private:
 	Point corner3;
 
 public:
-	CTriangle(const Point& = Point(), const Point& = Point(), const Point& = Point(),const GfxInfo& = GfxInfo(),int = -2);
+	CTriangle(const Point& = Point(), const Point& = Point(), const Point& = Point(),const GfxInfo& = GfxInfo());
 	virtual void Draw(Output* pOut) const;
 	virtual figures FigType() const;
 	virtual bool check(int, int) const;

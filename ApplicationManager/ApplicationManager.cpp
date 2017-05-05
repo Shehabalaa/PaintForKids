@@ -157,6 +157,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 	{
 		FigList[FigCount++] = pFig;
+		pFig->SetID(FigCount);
 		FigListSaved = false;
 	}
 	
@@ -291,6 +292,8 @@ bool ApplicationManager::MoveFigures(int x,int y)
 			}
 		}
 	}
+
+
 	UpdateInterface();
 	return CASE;
 }
@@ -314,6 +317,11 @@ void ApplicationManager::DeleteAll()
 
 	if (FigCount == 0)
 		FigListSaved = true;
+	else
+		for (int i = 0; i < FigCount; i++)
+		{
+			FigList[i]->SetID(i + 1);
+		}
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -340,10 +348,13 @@ void ApplicationManager::CopyAll()
 }
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::PasteAll()
+void ApplicationManager::PasteAll(const Point & p)
 {
-	Point p,centroid; int x = 0, y = 0;
-	pIn->GetPointClicked(p.x, p.y);
+	int x = 0, y = 0;
+	Point centroid;
+	centroid.x = 0;
+	centroid.y= 0;
+
 	if (p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight  && p.x < UI.width - UI.ColorsBarWidth)
 	{
 		if (!ClipBoard.empty())
@@ -361,8 +372,26 @@ void ApplicationManager::PasteAll()
 			for (int i = 0; i < ClipBoard.size(); i++)
 			{
 				CFigure* tmp_ptr = ClipBoard[i]->CreateCopy();
-				tmp_ptr->Move(p.x - centroid.x, p.y - centroid.y);
+				if(tmp_ptr->Move(p.x - centroid.x, p.y - centroid.y)==No_Block)
 					AddFigure(tmp_ptr);
+				else
+				{
+					delete tmp_ptr;
+					for (int j = 0; j < i; j++)
+					{
+
+						delete FigList[FigCount - 1];
+						FigList[FigCount - 1] = NULL;
+						FigCount--;
+					}
+
+
+					pOut->PrintMessage("Action Paste Cancelled (some pasted figures out of drawing area)");
+
+					return;
+
+				}
+
 			}
 		}
 		

@@ -30,7 +30,7 @@ void AddCircleAction::Execute()
 	ReadActionParameters();
 	int figs_count = pManager->GetFigCount();
 	
-	CCircle *cir = new CCircle(c, r, CircleGfxInfo, figs_count);
+	CCircle *cir = new CCircle(c, r, CircleGfxInfo);
 	if (cir->InDrawingArea())
 		pManager->AddFigure(cir);
 	else pManager->GetOutput()->PrintMessage("Out of the Drawing area ");
