@@ -11,8 +11,9 @@ class ActionSelect : public Action
 public:
 	ActionSelect(ApplicationManager *pApp);
 	int countselect();
-	virtual void ReadActionParameters();
-	~ActionSelect();
+	ActionState ReadActionParameters();
 	//Execute action (code depends on action type)
 	virtual void Execute();
+	~ActionSelect();
+
 };

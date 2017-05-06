@@ -5,7 +5,7 @@
 AddlineAction::AddlineAction(ApplicationManager * pApp) : Action(pApp)
 {}
 
-void AddlineAction::ReadActionParameters()
+ActionState AddlineAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
@@ -29,6 +29,8 @@ void AddlineAction::ReadActionParameters()
 
 	pOut->ClearStatusBar();
 
+
+	return Successful;
 }
 
 //Execute the action
@@ -43,6 +45,8 @@ void AddlineAction::Execute()
 	if (l->InDrawingArea())
 		pManager->AddFigure(l);
 	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+
+
 }
 
 

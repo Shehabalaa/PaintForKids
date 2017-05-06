@@ -15,6 +15,7 @@ public:
 	Input(window *pW);		//Consturctor
 	void GetPointClicked(int &x, int &y) const;//Get coordinate where user clicks
 	string GetSrting(Output* pO) const ;	 //Returns a string entered by the user
+	void GetPointClickedv2(int &x, int &y) const;//Get coordinate where user clicks but this func doesnot change mouse queue this means mouse click will remain in queue
 
 	ActionType GetUserAction() const; //Read the user click and map to an action
 	Colors GetColor();

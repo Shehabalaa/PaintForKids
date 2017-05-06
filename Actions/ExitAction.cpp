@@ -26,7 +26,7 @@ void ExitAction::Execute()
 	pManager->CleanClipboard();
 }
 
-void ExitAction::ReadActionParameters()
+ActionState ExitAction::ReadActionParameters()
 {
 	if(!pManager->GetIfListSaved())
 	{
@@ -37,5 +37,6 @@ void ExitAction::ReadActionParameters()
 		else
 			Answer = true;
 	}
-	
+
+	return Successful;
 }

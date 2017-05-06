@@ -12,7 +12,7 @@ private:
 							  // this func return true if user want to keep going and repeat action and false if i want just break the action
 public:
 	LoadAction(ApplicationManager* pApp);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 
 	~LoadAction();

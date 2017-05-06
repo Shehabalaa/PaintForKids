@@ -8,13 +8,15 @@ ChangeBGAction::ChangeBGAction(ApplicationManager *pApp) :Action(pApp)
 }
 
 
-void  ChangeBGAction::ReadActionParameters()
+ActionState ChangeBGAction::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
+
 
 	pOut->PrintMessage("Choose color");
 	co = pIn->GetColor();
+
+
+	return Successful;
 
 }
 

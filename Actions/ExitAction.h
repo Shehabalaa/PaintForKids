@@ -10,7 +10,7 @@ public:
 	ExitAction(ApplicationManager *);
 	~ExitAction();
 	virtual void Execute();
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 };
 
 #endif // !EXITACTION_H

@@ -6,7 +6,7 @@
 Resize::Resize( ApplicationManager * pApp ): Action( pApp)
 {}
 
-void Resize :: ReadActionParameters()
+ActionState Resize :: ReadActionParameters()
 {
 	Output * pOut= pManager->GetOutput();
 	Input * pIn =pManager->GetInput();
@@ -18,6 +18,7 @@ void Resize :: ReadActionParameters()
 	}
     ResizeRatio = x ;
 	 pOut->ClearStatusBar();
+	 return Successful;
 }
 void Resize :: Execute() 
 {

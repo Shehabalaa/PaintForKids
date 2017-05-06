@@ -203,6 +203,9 @@ class window {
 	// there is one
 	keytype WaitKeyPress(char &cKey);
 
+	// this function will set mouseclick throw program not buy user (used to reuse same mouse click as get mouse click removes this click after geting it)
+	clicktype SetMouseClick(int iX, int iY);
+
     // These two functions flush all waiting input out of the
     // mouse and keyboard input queues.  This is necessary
     // because if someone accidentally hits a key or clicks 

@@ -11,7 +11,7 @@ MoveAction::MoveAction(ApplicationManager *pApp) :Action(pApp)
 
 
 
-void   MoveAction::ReadActionParameters()
+ActionState MoveAction::ReadActionParameters()
 {
 	window * pWind = pOut->GetWindow();
 	do
@@ -21,6 +21,8 @@ void   MoveAction::ReadActionParameters()
 	
 	pOut->PrintMessage("Drag Figure(s)");
 
+
+	return Successful;
 }
 #include<iostream>
 void  MoveAction::Execute()

@@ -6,7 +6,7 @@ public:
 	ToPlayAction(ApplicationManager *pApp);
 	~ToPlayAction();
 	virtual void Execute();
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 
 };
 

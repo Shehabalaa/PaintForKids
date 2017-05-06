@@ -9,10 +9,12 @@ void PasteAction::Execute()
 	pManager->PasteAll(p);
 	
 }
-void  PasteAction::ReadActionParameters()
+ActionState PasteAction::ReadActionParameters()
 {
 	pOut->PrintMessage("Please Select target Point");
 	pIn->GetPointClicked(p.x,p.y);
+
+	return Successful;
 }
 PasteAction::~PasteAction()
 {

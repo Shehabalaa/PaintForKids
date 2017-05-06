@@ -9,7 +9,7 @@ class PickandHideAction : public Action
 	
 public:
 	PickandHideAction(ApplicationManager *pApp);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	~PickandHideAction();
 	//Execute action (code depends on action type)
 	virtual void Execute();

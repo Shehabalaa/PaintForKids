@@ -13,6 +13,7 @@ enum GUI_MODE	//Graphical user interface mode
 	MODE_PLAY,	//Playing mode
 	MODE_PICKANDHIDE
 };
+
 enum ColorMenuItem //for drawing fillg background colors
 {
 	ITM_black,

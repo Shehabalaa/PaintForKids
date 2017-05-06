@@ -4,7 +4,7 @@ class CutAction : public Action
 {
 public:
 	CutAction(ApplicationManager *);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 	~CutAction();
 

@@ -8,8 +8,9 @@ void CutAction::Execute()
 	pManager->CutAll();
 }
 
-void  CutAction::ReadActionParameters()
+ActionState CutAction::ReadActionParameters()
 {
+	return Successful;
 }
 CutAction::~CutAction()
 {

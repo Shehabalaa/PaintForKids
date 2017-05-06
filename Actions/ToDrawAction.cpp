@@ -11,8 +11,9 @@ void ToDrawAction::Execute()
 	pOut->PrintMessage("Welcome to DrawMode");
 }
 
-void ToDrawAction::ReadActionParameters()
+ActionState ToDrawAction::ReadActionParameters()
 {
+	return Successful;
 }
 
 

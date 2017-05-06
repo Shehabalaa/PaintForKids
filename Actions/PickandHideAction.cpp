@@ -7,7 +7,7 @@ PickandHideAction::PickandHideAction(ApplicationManager *pApp) :Action(pApp)
 	click.y = 0;
 }
 
-void  PickandHideAction::ReadActionParameters()
+ActionState  PickandHideAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
@@ -18,6 +18,8 @@ void  PickandHideAction::ReadActionParameters()
 	
 	
 	//pIn->GetPointClicked(click.x, click.y);
+
+	return Successful;
 }
 
 void PickandHideAction::Execute()

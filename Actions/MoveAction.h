@@ -14,7 +14,7 @@ class MoveAction : public Action
 public:
 	MoveAction(ApplicationManager *pApp);
 	
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	~MoveAction();
 	//Execute action (code depends on action type)
 	virtual void Execute();

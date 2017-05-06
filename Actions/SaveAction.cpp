@@ -42,7 +42,7 @@ bool SaveAction::ActionFailedEvent()
 	else
 		return true;
 }
-void SaveAction::ReadActionParameters()
+ActionState SaveAction::ReadActionParameters()
 {
 	pOut->PrintMessage("Please Enter filename!");
 	file_name=pIn->GetSrting(pOut);
@@ -50,5 +50,5 @@ void SaveAction::ReadActionParameters()
 	{
 		file_name += ".txt";
 	}
-
+	return Successful;
 }

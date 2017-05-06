@@ -10,9 +10,9 @@ void DeleteAction::Execute()
 
 }
 
-void  DeleteAction::ReadActionParameters()
+ActionState  DeleteAction::ReadActionParameters()
 {
-
+	return Successful;
 }
 
 DeleteAction::~DeleteAction()

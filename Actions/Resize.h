@@ -9,7 +9,7 @@ private:
 public :
 	Resize(ApplicationManager * pApp );    //constructor
 		// read resize parameters 
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	
 	//resize (chaange the figures dimentions in figure list in application manager)
 	virtual void Execute() ;

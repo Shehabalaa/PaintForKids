@@ -6,6 +6,6 @@ public:
 	ToDrawAction(ApplicationManager *pApp);
 	~ToDrawAction();
 	virtual void Execute();
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 };
 

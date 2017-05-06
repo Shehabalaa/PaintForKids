@@ -11,8 +11,9 @@ void ToPlayAction::Execute()
 	pOut->PrintMessage("Welcome to PlayMode");
 }
 
-void ToPlayAction::ReadActionParameters()
+ActionState ToPlayAction::ReadActionParameters()
 {
+	return Successful;
 }
 
 

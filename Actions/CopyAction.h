@@ -5,7 +5,7 @@ class CopyAction : public Action
 {
 public:
 	CopyAction(ApplicationManager *);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 	~CopyAction();
 

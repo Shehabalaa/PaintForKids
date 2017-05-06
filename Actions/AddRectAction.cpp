@@ -6,7 +6,7 @@ AddRectAction::AddRectAction(ApplicationManager * pApp):Action(pApp)
 {
 }
 
-void AddRectAction::ReadActionParameters() 
+ActionState AddRectAction::ReadActionParameters() 
 {	
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
@@ -29,7 +29,7 @@ void AddRectAction::ReadActionParameters()
 	RectGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
-
+	return Successful;
 }
 
 //Execute the action
@@ -44,4 +44,6 @@ void AddRectAction::Execute()
 	if (R->InDrawingArea())
 		pManager->AddFigure(R);
 	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+
+	
 }

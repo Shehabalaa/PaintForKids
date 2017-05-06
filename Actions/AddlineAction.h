@@ -9,7 +9,7 @@ private:
 	GfxInfo LineGfxInfo;
 public:
 	AddlineAction(ApplicationManager *pApp);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 	~AddlineAction();
 

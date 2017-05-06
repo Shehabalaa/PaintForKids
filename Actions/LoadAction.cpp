@@ -5,7 +5,7 @@ LoadAction::LoadAction(ApplicationManager * pApp):Action(pApp)
 {
 }
 
-void LoadAction::ReadActionParameters()
+ActionState LoadAction::ReadActionParameters()
 {
 
 	pOut->PrintMessage("Please Enter name of file to load graph from!");
@@ -15,6 +15,8 @@ void LoadAction::ReadActionParameters()
 	{
 		File_Name += ".txt";
 	}
+
+	return Successful;
 }
 
 void LoadAction::Execute()

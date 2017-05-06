@@ -10,7 +10,7 @@ private:
 public:
 	AddTriAction(ApplicationManager *pApp);
 
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 
 	~AddTriAction();

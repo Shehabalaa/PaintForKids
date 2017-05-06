@@ -13,7 +13,7 @@ class ChangeBGAction : public Action
 public:
 	ChangeBGAction(ApplicationManager *pApp);
 	
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	~ChangeBGAction();
 	//Execute action (code depends on action type)
 	virtual void Execute();

@@ -8,8 +8,9 @@ void CopyAction::Execute()
 	pManager->CopyAll();
 }
 
-void  CopyAction::ReadActionParameters()
+ActionState  CopyAction::ReadActionParameters()
 {
+	return Successful;
 }
 CopyAction::~CopyAction()
 {

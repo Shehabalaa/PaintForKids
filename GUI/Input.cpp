@@ -31,6 +31,29 @@ string Input::GetSrting(Output *pO) const
 	}
 }
 
+void Input::GetPointClickedv2(int & x, int & y) const
+{
+
+	int x1=0, y1=0, x2=100, y2=100;
+
+	while (abs(x1 - x2)>5 || abs(y1 - y2)>5) // 5 for aprox. as mouse usually moves slightly while clicking
+	{
+		do
+		{
+			pWind->GetMouseCoord(x1, y1);
+		} while (pWind->GetButtonState(LEFT_BUTTON, x1, y1) == BUTTON_UP);
+
+		do
+		{
+			pWind->GetMouseCoord(x2, y2);
+
+		} while (pWind->GetButtonState(LEFT_BUTTON, x2, y2) == BUTTON_DOWN);
+
+	}
+	x = x1;
+	y = y1;
+}
+
 //This function reads the position where the user clicks to determine the desired action
 ActionType Input::GetUserAction() const
 {

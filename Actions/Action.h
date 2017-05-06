@@ -14,8 +14,9 @@ public:
 
 	Action(ApplicationManager *pApp) { pManager = pApp; pOut = pApp->GetOutput(); pIn = pApp->GetInput();	}	//constructor
 
-	//Reads parameters required for action to execute (code depends on action type)
-	virtual void ReadActionParameters() =0;
+	//Reads parameters required for action to execute (code depends on action type) 
+	virtual ActionState ReadActionParameters() =0; // this action will detremine depending on these parameters to 
+	//go on and excuting action or these already readparameter are wrong and just cancel action
 	
 	//Execute action (code depends on action type)
 	virtual void Execute() =0;

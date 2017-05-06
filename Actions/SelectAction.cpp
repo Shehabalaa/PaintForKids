@@ -15,47 +15,66 @@ int ActionSelect::countselect()
 
 
 }
-void  ActionSelect::ReadActionParameters()
+ActionState ActionSelect::ReadActionParameters()
 {
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
-
+	window* pWind = pOut->GetWindow();
+	pWind->FlushKeyQueue(); // clear any bad Esc Left 
 	pOut->PrintMessage("Select: Click on a figure");
 
+	pIn->GetPointClickedv2(m.x,m.y);
+	if (m.y < UI.ToolBarHeight)
+	{
+		return Canceled_And_Switched_To_Another_One;
+	}
 
-	pIn->GetPointClicked(m.x, m.y);
+	pWind->FlushMouseQueue(); // to delete last mouse click as it won't be used again
+	return Successful;
 }
 
 void ActionSelect::Execute()
 {
-	ReadActionParameters();
-	CFigure * fig = NULL;
-	fig = pManager->GetFigure(m.x, m.y);
-	int count = countselect();
-
-	if (fig != NULL)
+	while (true)
 	{
-		if (fig->IsSelected())
-			fig->SetSelected(false);
-		else
+		switch (ReadActionParameters())
 		{
-			fig->SetSelected(true);
+		case Canceled_And_Switched_To_Another_One:
+			return;
+		case Successful: // do nothing and continue action excution
+			break;
 		}
-	}
-	count = countselect();
-	if (count == 1)
-	{
-		CFigure * SelectedFigure = pManager->GetSelectedFigure();
-		SelectedFigure->PrintInfo(pManager->GetOutput());
 
-	}
-	else if(count >1 )
-	{
-		string temp =" NO.of selected figures : ";
-		temp += count;
-		pManager->GetOutput()->PrintMessage(temp);
+
+		CFigure * fig = NULL;
+		fig = pManager->GetFigure(m.x, m.y);
+		int count = countselect();
+
+		if (fig != NULL)
+		{
+			if (fig->IsSelected())
+				fig->SetSelected(false);
+			else
+			{
+				fig->SetSelected(true);
+			}
+		}
+		count = countselect();
+		if (count == 1)
+		{
+			CFigure * SelectedFigure = pManager->GetSelectedFigure();
+			SelectedFigure->PrintInfo(pManager->GetOutput());
+
+		}
+		else if (count > 1)
+		{
+			string temp = " NO.of selected figures : ";
+			temp += count;
+			pManager->GetOutput()->PrintMessage(temp);
+		}
+		pManager->UpdateInterface();
 	}
 }
+
+
 
 ActionSelect::~ActionSelect()
 {

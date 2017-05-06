@@ -5,11 +5,8 @@
 AddTriAction::AddTriAction(ApplicationManager * pApp) : Action(pApp)
 {}
 
-void AddTriAction::ReadActionParameters()
+ActionState AddTriAction::ReadActionParameters()
 {
-	//Get a Pointer to the Input / Output Interfaces
-	Output* pOut = pManager->GetOutput();
-	Input* pIn = pManager->GetInput();
 	pOut->ClearStatusBar();
 	pOut->PrintMessage("New Triangle: Click at first corner");
 	pIn->GetPointClicked(c1.x, c1.y);
@@ -24,6 +21,8 @@ void AddTriAction::ReadActionParameters()
 
 	pOut->ClearStatusBar();
 
+
+	return Successful;
 }
 
 void AddTriAction::Execute()

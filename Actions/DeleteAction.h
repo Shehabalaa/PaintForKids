@@ -6,7 +6,7 @@ class DeleteAction :public Action
 {
 public:
 	DeleteAction(ApplicationManager *);
-	virtual void ReadActionParameters();
+	virtual ActionState ReadActionParameters();
 	virtual void Execute();
 	~DeleteAction();
 

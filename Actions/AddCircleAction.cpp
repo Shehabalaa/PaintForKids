@@ -5,7 +5,7 @@
 AddCircleAction::AddCircleAction(ApplicationManager * pApp) : Action(pApp)
 {}
 
-void AddCircleAction::ReadActionParameters()
+ActionState AddCircleAction::ReadActionParameters()
 {
 	//Get a Pointer to the Input / Output Interfaces
 	Output* pOut = pManager->GetOutput();
@@ -21,6 +21,8 @@ void AddCircleAction::ReadActionParameters()
 	CircleGfxInfo.BorderWidth = pOut->getCrntPenWidth();
 
 	pOut->ClearStatusBar();
+
+	return Successful;
 
 }
 

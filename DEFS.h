@@ -105,5 +105,11 @@ enum BlockingDirection // this enum used to indcate stop moving in certain direc
 	No_Block
 };
 
+enum ActionState // this enum will help to make some decions while excuting actions
+{
+	Successful,
+	Just_Canceled,
+	Canceled_And_Switched_To_Another_One
 
+};
 #endif
