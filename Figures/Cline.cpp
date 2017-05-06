@@ -37,8 +37,12 @@ bool Cline::check(int x, int y) const
 {
 	if (slope == -1)
 	{
+		
 		if ((y > start.y && y < end.y) || (y<start.y && y>end.y))
 			 return true;
+		if (start.x == end.x && abs(end.x - x) < 2 && start.y == end.y && abs(end.y - y) <2) // if line just a point this cals.- abd abs to make it easy to select just point :D
+			return true;
+		
 	}
 	else if (slope == 0)
 	{

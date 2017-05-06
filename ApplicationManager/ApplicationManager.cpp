@@ -436,7 +436,7 @@ int ApplicationManager::GetFigCount()
 void ApplicationManager::UpdateInterface() const
 {	
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
-	pOut->GetWindow()->SetPen(UI.BkGrndColor, 1);
+	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width-UI.ColorsBarWidth, UI.height- UI.StatusBarHeight);
 
 	for(int i=0; i<FigCount; i++)

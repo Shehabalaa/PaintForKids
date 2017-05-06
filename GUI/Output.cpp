@@ -18,7 +18,7 @@ Output::Output()
 	UI.BkGrndColor = LIGHTGOLDENRODYELLOW;	//Background color
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
-	UI.PenWidth = 1;	//width of the figures frames
+	UI.PenWidth = 3;	//width of the figures frames
 	UI.ColorsBarHeight = UI.ToolBarHeight+4;		// Height of Color Bar this 4 as we draw with penwodth 3 + 1 more good view 
 	UI.ColorsBarWidth = 70;		// Width of Color Bar 70 as we draw line of width one to sperate drawing area from colors area
 
@@ -153,7 +153,7 @@ void Output::CreateDrawToolBars() const
 
 	//Draw a line under actions toolbar
 	pWind->SetPen(BLACK, 1);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->DrawLine(0, UI.ToolBarHeight-1, UI.width, UI.ToolBarHeight-1);
 
 	/////////////////////////////////////////////////////////////////////
 	// firstly clean bg of colors to keep their back ground color white 
