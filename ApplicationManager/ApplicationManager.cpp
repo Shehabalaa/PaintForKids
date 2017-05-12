@@ -48,6 +48,8 @@ ApplicationManager::ApplicationManager()
 //==================================================================================//
 ActionType ApplicationManager::GetUserAction() const
 {
+	//this fucntion used to guide user first
+	UserGuide();
 	//Ask the input to get the action from the user.
 	return pIn->GetUserAction();		
 }
@@ -384,6 +386,23 @@ void ApplicationManager::change_Filled_color_Action(color C)
 		}
 	}
 
+}
+void ApplicationManager::UserGuide() const
+{
+	Sleep(2000);
+	int x, y;
+	window* ptr=pOut->GetWindow();
+	ptr->GetMouseCoord(x, y);
+	ActionType a1= EMPTY, a2= EMPTY;
+	while (ptr->GetButtonState(LEFT_BUTTON, x, y) == BUTTON_UP)
+	{
+		a1 = pIn->SeeAction(x,y);
+		if(a1!=a2&&a1)
+			pOut->PrintGuideMessages(a1);
+		ptr->GetMouseCoord(x, y);
+		a2 = a1;
+		
+	}
 }
 void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
 {

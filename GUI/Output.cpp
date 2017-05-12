@@ -362,6 +362,154 @@ int Output::getCrntPenWidth() const		//get current pen width
 void Output::SetBGColor(const color& c)
 {	UI.BkGrndColor = c;}
 
+void Output::PrintGuideMessages(ActionType ActType)
+{
+
+
+	if (UI.InterfaceMode == MODE_DRAW)
+	{
+		switch (ActType)
+		{
+		case DRAW_LINE:
+			PrintMessage("Draw a Line");
+			break;
+		case DRAW_RECT:
+			PrintMessage("Draw a Rectangle");
+			break;
+
+		case DRAW_TRI:
+			PrintMessage("Draw a Triangle");
+			break;
+
+		case DRAW_CIRC:
+			PrintMessage("Draw a Circle");
+			break;
+
+		case CHNG_DRAW_CLR:
+			PrintMessage("Change the drawing color");
+			break;
+
+		case CHNG_FILL_CLR:
+			PrintMessage("Change the filling color");
+			break;
+
+		case CHNG_BORDER_WIDTH:
+			PrintMessage("Change the border width");
+			break;
+
+		case CHNG_BK_CLR:
+			PrintMessage("Change the background color");
+			break;
+
+		case SELECT:
+			PrintMessage("Select figure(s)");
+			break;
+
+		case DEL:
+			PrintMessage("Delete a figure(s)");
+			break;
+
+		case MOVE:
+			PrintMessage("Move a figure(s)");
+			break;
+
+		case RESIZE:
+			PrintMessage("Resize a figure(s)");
+			break;
+
+		case ROTATE:
+			PrintMessage("Rotate a figure(s)");
+			break;
+
+		case UNDO:
+			PrintMessage("Undo");
+			break;
+		case REDO:
+			PrintMessage("Redo");
+			break;
+			/*
+			case SEND_BACK:
+			PrintMessage("Action: send a figure to the back of all figures ");
+			break;
+
+			case BRNG_FRNT:
+			PrintMessage("Action: Send a figure to the front of all figures ");
+			break;
+			*/
+		case SAVE:
+			PrintMessage("Save the whole graph to a file");
+			break;
+
+		case LOAD:
+			PrintMessage("Load a graph from a file");
+			break;
+
+		case STATUS:
+			PrintMessage("Status bar");
+			break;
+
+		case TO_PLAY:
+			PrintMessage("Switch to Play Mode ");
+			break;
+
+		case DRAWING_AREA:
+			PrintMessage("Drawing Area");
+			break;
+
+		case ZOOMIN:
+			PrintMessage("Zoom In");
+			break;
+		case ZOOMOUT:
+			PrintMessage("Zoom Out");
+			break;
+		case CUT:
+			PrintMessage("Cut");
+			break;
+		case COPY:
+			PrintMessage("Copy");
+			break;
+		case PASTE:
+			PrintMessage("Paste");
+			break;
+
+		case EMPTY:
+			PrintMessage("Empty place in the toolbar");
+			break;
+		case EXIT:
+			PrintMessage("Exit");
+			break;
+		}
+	}
+	else if (MODE_PLAY)
+	{
+		switch (ActType)
+		{
+		case SCRAMBLE:
+			PrintMessage("Scramble & find Game");
+			break;
+		case PICK:
+			PrintMessage("Pick & hide Game");
+			break;
+
+		case TO_DRAW:
+			PrintMessage("Switch to Draw Mode ");
+			break;
+
+		case DRAWING_AREA:
+			PrintMessage("Playing Area");
+			break;
+		case EMPTY:
+			PrintMessage("Action: Empty place in the toolbar ");
+			break;
+		case EXIT:
+			PrintMessage("Exit");
+			break;
+		}
+	}
+
+}
+
+
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//

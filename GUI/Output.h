@@ -23,6 +23,7 @@ public:
 	void ClearDrawModeToolBars() const; // Clears the DrawModeToolBars (Colors bar and toolbar)
 	void ClearPlayModeToolBar() const; // Clears the PlayModeToolBar 
 	void SetBGColor(const color&); // Changing BackGround Color
+	void PrintGuideMessages(ActionType); // this func guide user by tracking mouse and printing messages
 	window * GetWindow();
 	
 	// -- Figures Drawing functions

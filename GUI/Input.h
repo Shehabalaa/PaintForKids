@@ -18,6 +18,7 @@ public:
 	void GetPointClickedv2(int &x, int &y) const;//Get coordinate where user clicks but this func doesnot change mouse queue this means mouse click will remain in queue
 
 	ActionType GetUserAction() const; //Read the user click and map to an action
+	ActionType SeeAction(int,int) const; //only retruns user action give coord
 	Colors GetColor();
 	~Input();
 };

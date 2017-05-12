@@ -27,6 +27,7 @@ public:
 	ApplicationManager(); 
 	~ApplicationManager();
 	
+	void UserGuide() const;
 	void DeletePickedFigure(CFigure * FIGURE);
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
