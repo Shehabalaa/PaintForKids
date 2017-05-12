@@ -8,7 +8,7 @@ ToDrawAction::ToDrawAction(ApplicationManager *pApp):Action(pApp)
 void ToDrawAction::Execute()
 {
 	UI.InterfaceMode = MODE_DRAW;
-	pOut->CreateDrawToolBars();
+	pOut->CreateDrawToolBar();
 	pOut->PrintMessage("Welcome to DrawMode");
 }
 

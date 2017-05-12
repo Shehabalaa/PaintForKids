@@ -62,7 +62,7 @@ struct Point	//To be used for figures points
 
 struct GfxInfo	//Graphical info of each figure (you may add more members)
 {
-	GfxInfo( ) :DrawClr(WHITE), FillClr(WHITE), isFilled(false), BorderWidth(0){} // default constructor
+	GfxInfo( ) :DrawClr(BLUE), FillClr(GREEN), isFilled(false), BorderWidth(2) {} // default constructor
 	color DrawClr;	//Draw color of the figure
 	color FillClr;	//Fill color of the figure
 	bool isFilled;	//Figure Filled or not

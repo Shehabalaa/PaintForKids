@@ -35,9 +35,8 @@ void CCircle::PrintInfo(Output* pOut) const
 	pOut->PrintMessage(s);
 
 }
-#include<iostream>
 
-void CCircle::SetRandomCoord(int X_begin,int X_end,int Y_begin, int Y_end)
+void CCircle::MovetoRandomCoord(int X_begin,int X_end,int Y_begin, int Y_end)
 {
 	X_begin += rad;
 	X_end -= rad;
@@ -45,7 +44,22 @@ void CCircle::SetRandomCoord(int X_begin,int X_end,int Y_begin, int Y_end)
 	Y_end -= rad;
 	center.x = rand() % (X_end-X_begin+1) + X_begin;
 	center.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
-	std::cout << center.x << " " << center.y << endl;
+	circum.x = center.x + rad;
+	circum.y = center.y + rad;
+}
+
+void CCircle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
+{
+	rad= rand() %(100 + 1) + 5;
+	X_begin += rad;
+	X_end -= rad;
+	Y_begin += rad;
+	Y_end -= rad;
+	center.x = rand() % (X_end - X_begin + 1) + X_begin;
+	center.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	circum.x = center.x + rad;
+	circum.y = center.y + rad;
+	Area = 3.14*rad*rad;
 }
 
 
@@ -86,7 +100,7 @@ void CCircle::Save(ofstream &fOut) const
 }
 bool  CCircle::InDrawingArea() const
 {
-	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && center.x - rad >= 0 && center.x + rad < UI.width - 70 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
+	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) >= 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
 	{
 		return true;
 	}
@@ -101,7 +115,7 @@ BlockingDirection CCircle::Move(int x, int y)
 
 	 if (!this->InDrawingArea())
 	 {
-		 if (center.x + rad > UI.width - UI.ColorsBarWidth || center.x - rad < 0)
+		 if (center.x + rad > UI.width-15 || center.x - rad < 0)
 			 tmp = Block_in_X_Direction;
 		 if (center.y - rad < UI.ToolBarHeight || center.y + rad > UI.height - UI.StatusBarHeight)
 		 {

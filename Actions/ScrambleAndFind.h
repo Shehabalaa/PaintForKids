@@ -1,6 +1,6 @@
 #pragma once
 #include "Action.h"
-#include"../Figures/CFigure.h"
+
 
 class ScrampleAndFindAction : public Action
 {

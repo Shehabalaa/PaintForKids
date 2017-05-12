@@ -480,7 +480,7 @@ void ApplicationManager::PasteAll(const Point & p)
 	centroid.x = 0;
 	centroid.y= 0;
 
-	if (p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight  && p.x < UI.width - UI.ColorsBarWidth)
+	if (p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight  && p.x < UI.width )
 	{
 		if (!ClipBoard.empty())
 		{
@@ -606,13 +606,13 @@ ApplicationManager::~ApplicationManager()
 }
 
 // this fucntion update inter fance but with special list
-void ApplicationManager::UpdateInterface(CFigure ** Fig_List) const
+void ApplicationManager::UpdateInterface(CFigure ** Fig_List,int size) const
 {
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 
-	for (int i = 0; i<FigCount; i++)
+	for (int i = 0; i<size; i++)
 		Fig_List[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 

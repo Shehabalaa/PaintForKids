@@ -20,7 +20,8 @@ public:
 	virtual bool Resize(float ratio);
 	virtual Point CentroidOfFigure() const;
 	virtual void PrintInfo(Output* pOut) const;
-	virtual void SetRandomCoord(int, int, int, int);
+	virtual void MovetoRandomCoord(int, int, int, int);
+	virtual void SetRandomParameter(int, int, int, int);
 	virtual ~CRectangle();
 };
 

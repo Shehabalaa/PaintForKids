@@ -19,7 +19,7 @@ Output::Output()
 	UI.HighlightColor = MAGENTA;	//This color should NOT be used to draw figures. use if for highlight only
 	UI.StatusBarColor = TURQUOISE;
 	UI.PenWidth = 3;	//width of the figures frames
-	UI.ColorsBarHeight = UI.ToolBarHeight+4;		// Height of Color Bar this 4 as we draw with penwodth 3 + 1 more good view 
+	UI.ColorsBarHeight = UI.ToolBarHeight+1;		// Height of Color Bar this 1 more good view 
 	UI.ColorsBarWidth = 70;		// Width of Color Bar 70 as we draw line of width one to sperate drawing area from colors area
 
 	//ana 2det lohm kyam ibtda2ya f l2wl w b3den 3mlt lhm creation
@@ -27,9 +27,9 @@ Output::Output()
 	//Create the output window
 	pWind = CreateWind(UI.width, UI.height, UI.wx, UI.wy);
 	//Change the title
-	pWind->ChangeTitle("Paint for Kids -team 13");
+	pWind->ChangeTitle("Paint for Kids-team 13");
 	
-	CreateDrawToolBars();
+	CreateDrawToolBar();
 	CreateStatusBar();
 }
 
@@ -86,10 +86,6 @@ void Output::ClearDrawModeToolBars() const
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0,0, UI.width, UI.ToolBarHeight);
 
-	//Clear colorsbar by drawing a filled rectangle of (Same Bg_color)
-	pWind->SetPen(UI.BkGrndColor, 1);
-	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(UI.width - UI.ColorsBarWidth + 1, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight); // +1 saftey Factor :D
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
 void Output::ClearPlayModeToolBar() const
@@ -100,7 +96,7 @@ void Output::ClearPlayModeToolBar() const
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
 ///////////////////////////////////////////////////////////////////////////////////////////
-void Output::CreateDrawToolBars() const
+void Output::CreateDrawToolBar() const
 {
 	// Here we have 2 tool bars
 	// 1. actions toolbar
@@ -156,10 +152,13 @@ void Output::CreateDrawToolBars() const
 	pWind->DrawLine(0, UI.ToolBarHeight-1, UI.width, UI.ToolBarHeight-1);
 
 	/////////////////////////////////////////////////////////////////////
-	// firstly clean bg of colors to keep their back ground color white 
-	pWind->SetPen(WHITE, 1);
-	pWind->SetBrush(WHITE);
-	pWind->DrawRectangle(UI.width-UI.ColorsBarWidth, UI.ColorsBarHeight, UI.width, UI.height-UI.StatusBarHeight);
+
+
+}
+
+void Output::CreateColorsBar() const
+{
+
 	////////////////////////////////////////////////////////////////////
 	string col[colors_num]; // here we drawing colors menu
 	col[ITM_black] = "images\\MenuItems\\black.jpg";
@@ -173,20 +172,32 @@ void Output::CreateDrawToolBars() const
 	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
 	col[ITM_lime] = "images\\MenuItems\\green.jpg";
 	col[ITM_white] = "images\\MenuItems\\white.jpg";
-	for (int i = 0; i<colors_num; i++)
-		pWind->DrawImage(col[i], UI.width- UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight , UI.MenuItemWidth, UI.ToolBarHeight);
+	//Draw a line parllel to colors toolbar
 
 	
 
-	//Draw a line parllel to colors toolbar
-	if(UI.BkGrndColor == BLUE)
+	
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	for (int j = 1;j <= UI.ColorsBarWidth; j++)
+	{
+	
+		if(j==68)
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		else
+			for (int i = 0; i < colors_num; i++)
+				pWind->DrawImage(col[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+	
+	if (UI.BkGrndColor == BLUE)
 		pWind->SetPen(RED, 1);
 	else
 		pWind->SetPen(BLUE, 1);
-
-	pWind->DrawLine(UI.width-UI.ColorsBarWidth, UI.ToolBarHeight, UI.width- UI.ColorsBarWidth, UI.height-UI.StatusBarHeight);
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+	
 
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////
 
 void Output::CreatePlayToolBar() const
@@ -322,7 +333,7 @@ void Output::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
 	pWind->SetBrush(UI.BkGrndColor);
-	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width - 70, UI.height - UI.StatusBarHeight);
+	pWind->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////

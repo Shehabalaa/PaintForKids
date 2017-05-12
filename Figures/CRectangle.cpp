@@ -110,10 +110,9 @@ void CRectangle::PrintInfo(Output* pOut) const
 
 	pOut->PrintMessage(s);
 
-
 }
 
-void CRectangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
+void CRectangle::MovetoRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 {
 	int New_X = 0, New_Y = 0;
 	int min_x_indx = 0, min_y_indx = 0;
@@ -130,7 +129,7 @@ void CRectangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 		else if (arr[i]->x > arr[max_x_indx]->x)
 			max_x_indx = i;
 		
-		if (arr[i]->y < arr[min_y_indx]->x)
+		if (arr[i]->y < arr[min_y_indx]->y)
 			min_y_indx = i;
 		else if (arr[i]->y > arr[max_y_indx]->y)
 			max_y_indx = i;
@@ -139,21 +138,30 @@ void CRectangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 
 	// moving all points taking min_x as ref
 	X_end -= (arr[max_x_indx]->x - arr[min_x_indx]->x);
+	int Temp = arr[min_x_indx]->x;
 	New_X = rand() % (X_end - X_begin + 1) + X_begin;
 	for (int i = 0; i < 2; i++)
 	{
-		arr[i]->x += New_X - arr[min_x_indx]->x;
+		arr[i]->x += New_X - Temp;
 	}
 
 	// moving all points taking min_y as ref
-
+	Temp = arr[min_y_indx]->y;
 	Y_end -= (arr[max_y_indx]->y - arr[min_y_indx]->y);
 	New_Y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	for (int i = 0; i < 2; i++)
 	{
-		arr[i]->y += New_Y - arr[min_y_indx]->y;
+		arr[i]->y += New_Y - Temp;
 	}
 
+}
+
+void CRectangle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
+{
+	Corner1.x = rand() % (X_end - X_begin + 1) + X_begin;
+	Corner1.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	Corner2.x = rand() % (X_end - X_begin + 1) + X_begin;
+	Corner2.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 }
 
 void CRectangle::Save(ofstream & fOut) const
@@ -166,7 +174,7 @@ void CRectangle::Save(ofstream & fOut) const
 }
 bool CRectangle::InDrawingArea() const
 {
-	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - UI.ColorsBarWidth && Corner2.x < UI.width - UI.ColorsBarWidth  && Corner1.x >0 && Corner2.x >0)
+	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - 15  && Corner2.x < UI.width  && Corner1.x >0 && Corner2.x >0)
 	{
 		return true;
 	}
@@ -181,7 +189,7 @@ BlockingDirection CRectangle::Move(int x, int y)
 	Corner2.y += y;
 	if (!this->InDrawingArea())
 	{
-		if (Corner2.x > UI.width - UI.ColorsBarWidth || Corner2.x < 0|| Corner1.x > UI.width - UI.ColorsBarWidth || Corner1.x < 0)
+		if (Corner2.x > UI.width || Corner2.x < 0|| Corner1.x > UI.width -15 || Corner1.x < 0)
 			tmp= Block_in_X_Direction;
 
 		if (Corner2.y < UI.ToolBarHeight || Corner2.y > UI.height - UI.StatusBarHeight || Corner1.y < UI.ToolBarHeight || Corner1.y > UI.height - UI.StatusBarHeight)
@@ -228,6 +236,8 @@ void CRectangle::Load(ifstream & Infile)
 
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
 }
+
+
 
 CRectangle::~CRectangle()
 {

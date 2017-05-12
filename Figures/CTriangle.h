@@ -23,7 +23,8 @@ public:
 	virtual Point CentroidOfFigure() const;
 	virtual bool Resize(float ratio);
 	virtual void PrintInfo(Output* pOut) const;
-	virtual void SetRandomCoord(int, int, int, int);
+	virtual void MovetoRandomCoord(int, int, int, int);
+	void SetRandomParameter(int, int, int, int);
 	 ~CTriangle();
 };
 

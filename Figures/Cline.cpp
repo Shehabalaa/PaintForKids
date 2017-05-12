@@ -87,7 +87,7 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 	 }
  }
 
- void Cline::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
+ void Cline::MovetoRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
  {
 	 int New_X = 0, New_Y = 0;
 	 int min_x_indx = 0, min_y_indx = 0;
@@ -104,7 +104,7 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 		 else if (arr[i]->x > arr[max_x_indx]->x)
 			 max_x_indx = i;
 
-		 if (arr[i]->y < arr[min_y_indx]->x)
+		 if (arr[i]->y < arr[min_y_indx]->y)
 			 min_y_indx = i;
 		 else if (arr[i]->y > arr[max_y_indx]->y)
 			 max_y_indx = i;
@@ -112,23 +112,33 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 	 }
 
 	 // moving all points taking min_x as ref
+	 int Temp = arr[min_x_indx]->x;
 	 X_end -= (arr[max_x_indx]->x - arr[min_x_indx]->x);
 	 New_X = rand() % (X_end - X_begin + 1) + X_begin;
 	 for (int i = 0; i < 2; i++)
 	 {
-		 arr[i]->x += New_X - arr[min_x_indx]->x;
+		 arr[i]->x += New_X - Temp;
 	 }
 
 	 // moving all points taking min_y as ref
-
+	 Temp = arr[min_y_indx]->y;
 	 Y_end -= (arr[max_y_indx]->y - arr[min_y_indx]->y);
 	 New_Y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	 for (int i = 0; i < 2; i++)
 	 {
-		 arr[i]->y += New_Y - arr[min_y_indx]->y;
+		 arr[i]->y += New_Y - Temp;
 	 }
 
  }
+
+ void Cline::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
+ {
+	 start.x = rand() % (X_end - X_begin + 1) + X_begin;
+	 start.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	 end.x = rand() % (X_end - X_begin + 1) + X_begin;
+	 end.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+ }
+
 
 
 void Cline::Draw(Output* pOut) const
@@ -183,16 +193,15 @@ void Cline::Save(ofstream & fOut) const
 
 bool  Cline::InDrawingArea() const
 {
-	if (start.y > UI.ToolBarHeight +1 && start.y < UI.height - UI.StatusBarHeight  && end.y > UI.ToolBarHeight +1 && end.y < (UI.height - UI.StatusBarHeight -1) && start.x < UI.width - UI.ColorsBarWidth -1 && end.x < UI.width - UI.ColorsBarWidth -1 && start.x >0 && end.x >0)
+	if (start.y > UI.ToolBarHeight +1 && start.y < UI.height - UI.StatusBarHeight  && end.y > UI.ToolBarHeight +1 && end.y < (UI.height - UI.StatusBarHeight -1) && start.x < UI.width -15 && end.x < UI.width -1 && start.x >0 && end.x >0)
 	{
 		return true;
 	}
 	else 
 		return false;
-
-
-
 }
+
+
 BlockingDirection Cline::Move(int x, int y)
 {
 	BlockingDirection tmp = No_Block;
@@ -203,7 +212,7 @@ BlockingDirection Cline::Move(int x, int y)
 
 	if (!this->InDrawingArea())
 	{
-		if (start.x > UI.width - UI.ColorsBarWidth -1 || start.x < 0 || end.x > UI.width - UI.ColorsBarWidth -1 || end.x < 0)
+		if (start.x > UI.width -1 || start.x < 0 || end.x > UI.width -15 || end.x < 0)
 			tmp = Block_in_X_Direction;
 
 		if (start.y < UI.ToolBarHeight +1 || start.y > UI.height - UI.StatusBarHeight -2  || end.y < UI.ToolBarHeight +1 || end.y > UI.height - UI.StatusBarHeight -2)
@@ -243,6 +252,7 @@ void Cline::Load(ifstream & Infile)
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
 
 }
+
 
 Cline::~Cline()
 {

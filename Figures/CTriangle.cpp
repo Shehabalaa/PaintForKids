@@ -109,7 +109,7 @@ void CTriangle::PrintInfo(Output* pOut) const
 	pOut->PrintMessage(s);
 }
 
-void CTriangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
+void CTriangle::MovetoRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 {
 	int New_X = 0, New_Y = 0;
 	int min_x_indx = 0, min_y_indx = 0;
@@ -126,7 +126,7 @@ void CTriangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 		else if (arr[i]->x > arr[max_x_indx]->x)
 			max_x_indx = i;
 
-		if (arr[i]->y < arr[min_y_indx]->x)
+		if (arr[i]->y < arr[min_y_indx]->y)
 			min_y_indx = i;
 		else if (arr[i]->y > arr[max_y_indx]->y)
 			max_y_indx = i;
@@ -134,21 +134,33 @@ void CTriangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
 	}
 
 	// moving all points taking min_x as ref
+	int Temp = arr[min_x_indx]->x;
 	X_end -= (arr[max_x_indx]->x - arr[min_x_indx]->x);
 	New_X = rand() % (X_end - X_begin + 1) + X_begin;
 	for (int i = 0; i < 3; i++)
 	{
-		arr[i]->x += New_X - arr[min_x_indx]->x;
+		arr[i]->x += New_X - Temp;
 	}
 
 	// moving all points taking min_y as ref
-
+	Temp = arr[min_y_indx]->y;
 	Y_end -= (arr[max_y_indx]->y - arr[min_y_indx]->y);
 	New_Y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	for (int i = 0; i < 3; i++)
 	{
-		arr[i]->y += New_Y - arr[min_y_indx]->y;
+		arr[i]->y += New_Y - Temp;
 	}
+
+}
+
+void CTriangle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
+{
+	corner1.x = rand() % (X_end - X_begin + 1) + X_begin;
+	corner1.y= rand() % (Y_end - Y_begin + 1) + Y_begin;
+	corner2.x = rand() % (X_end - X_begin + 1) + X_begin;
+	corner2.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	corner3.x = rand() % (X_end - X_begin + 1) + X_begin;
+	corner3.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 
 }
 
@@ -164,7 +176,7 @@ void CTriangle::Save(ofstream &fOut) const
 }
 bool CTriangle::InDrawingArea() const
 {
-	if (corner1.y > UI.ToolBarHeight  && corner1.y < UI.height - UI.StatusBarHeight -1 && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight -1 && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight -1 && corner1.x < UI.width - UI.ColorsBarWidth -1 && corner2.x < UI.width - UI.ColorsBarWidth -1 && corner3.x < UI.width - UI.ColorsBarWidth -1 && corner1.x >0 && corner2.x > 0 && corner3.x > 0 )
+	if (corner1.y > UI.ToolBarHeight  && corner1.y < UI.height - UI.StatusBarHeight -1 && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight -1 && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight -1 && corner1.x < UI.width -15 && corner2.x < UI.width-1 && corner3.x < UI.width -1 && corner1.x >0 && corner2.x > 0 && corner3.x > 0 )
 	{
 		return true;
 	}
@@ -185,7 +197,7 @@ BlockingDirection CTriangle::Move(int x, int y)
 
 	if (!this->InDrawingArea())
 	{
-		if (corner1.x > UI.width - UI.ColorsBarWidth -2 || corner1.x < 0 || corner2.x > UI.width - UI.ColorsBarWidth -2 || corner2.x < 0 || corner3.x > UI.width - UI.ColorsBarWidth -2 || corner3.x < 0)
+		if (corner1.x > UI.width -15 || corner1.x < 0 || corner2.x > UI.width  -15 || corner2.x < 0 || corner3.x > UI.width -15 || corner3.x < 0)
 			tmp = Block_in_X_Direction;
 
 		if (corner1.y < UI.ToolBarHeight || corner1.y > UI.height - UI.StatusBarHeight -2 || corner2.y < UI.ToolBarHeight || corner2.y > UI.height - UI.StatusBarHeight -2 || corner3.y < UI.ToolBarHeight || corner3.y > UI.height - UI.StatusBarHeight -2)

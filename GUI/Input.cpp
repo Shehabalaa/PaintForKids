@@ -31,6 +31,7 @@ string Input::GetSrting(Output *pO) const
 	}
 }
 
+
 void Input::GetPointClickedv2(int & x, int & y) const
 {
 
