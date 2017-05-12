@@ -28,13 +28,18 @@ public:
 	virtual void SetRandomCoord(int,int,int,int)=0; // this func change figure coord in random way within certian range
 	virtual bool InDrawingArea() const = 0;
 	virtual bool check(int,int) const = 0;
+	color GetDrawClr()const;
+	void ChngBorderWidth(int PenWidth);
+	int GetArea() const;
+	color GetFillClr()const;
 	//virtual void Rotate() = 0;	//Rotate the figure
 	//virtual void Resize() = 0;	//Resize the figure
 	virtual void Save(ofstream &OutFile) const = 0;	//Save the figure parameters to the file
 	virtual void Load(ifstream &Infile) = 0;	//Load the figure parameters to the file
 	virtual Point CentroidOfFigure() const = 0; // Returns the centre(x,y) of figure as the kind as of the figure
 	virtual void PrintInfo(Output* pOut) const = 0;	//print all figure info on the status bar
-
+	bool IsFilled() const;
+	virtual bool Resize(float Ratio) = 0;
 	virtual ~CFigure(); // virtual destructor to avoid delete with pointer to figure and hold address of real fig(rec,tri,...) in heap
 
 };

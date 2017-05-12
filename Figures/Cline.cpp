@@ -17,9 +17,74 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 
  void Cline::PrintInfo(Output* pOut) const
  {
-	 pOut->DrawString(230, 667, "Radius :");
-	 pOut->DrawInt(270, 667, 5);
+	 string s = "Figure Data->";
+	 s = s + " Length ";
+	 s = s + to_string(Area);
+	 s = s + " Start Point: (";
+	 s = s + to_string(start.x);
+	 s = s + ",";
+	 s = s + to_string(start.y);
+	 s = s + ") ";
+	 s = s + " End Point: (";
+	 s = s + to_string(end.x);
+	 s = s + ",";
+	 s = s + to_string(end.y);
+	 s = s + ") ";
+	 s = s + " ID: ";
+	 s = s + to_string(ID);
 
+	 pOut->PrintMessage(s);
+
+ }
+ bool Cline::Resize(float ratio)
+ {
+	 Point tmp1 = start;
+	 Point tmp2 = end;
+	 float X, Y, X1, Y1, X2, Y2 = 0;
+	 double z, w, m;
+	 X = abs(start.x - end.x);
+	 Y = abs(start.y - end.y);
+	 //z= modf((double)((ratio-1)*X),&w);
+	 //m= modf((double)((ratio-1)*Y),&w);
+	 if (start.x>end.x)
+	 {
+		 X1 = (0.5)*(ratio - 1)*X + start.x;
+		 X2 = -(0.5)*(ratio - 1)*X + end.x;
+	 }
+	 else
+	 {
+		 X1 = -(0.5)*(ratio - 1)*X + start.x;
+		 X2 = (0.5)*(ratio - 1)*X + end.x;
+	 }
+	 if (start.y>end.y)
+	 {
+		 Y1 = (0.5)*(ratio - 1)*Y + start.y;
+		 Y2 = -(0.5)*(ratio - 1)*Y + end.y;
+	 }
+	 else
+	 {
+		 Y1 = -(0.5)*(ratio - 1)*Y + start.y;
+		 Y2 = (0.5)*(ratio - 1)*Y + end.y;
+	 }
+	 start.x = X1;
+	 start.y = Y1;
+	 end.x = X2;
+	 end.y = Y2;
+	 //more approximations 
+	 // Y1=(0.5)*(ratio-1)*Y + start.y+m;
+	 //Y2= (0.5)*(ratio-1)*Y - end.y-m;
+	 //  X1=(0.5)*(ratio-1)*X + start.x+z;
+	 //	X2=(0.5)*(ratio-1)*X + end.x-z;    
+	 if (InDrawingArea())
+	 {
+		 return true;
+	 }
+	 else
+	 {
+		 start = tmp1;
+		 end = tmp2;
+		 return false;
+	 }
  }
 
  void Cline::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)

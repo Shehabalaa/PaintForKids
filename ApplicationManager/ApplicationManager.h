@@ -27,7 +27,7 @@ public:
 	ApplicationManager(); 
 	~ApplicationManager();
 	
-
+	void DeletePickedFigure(CFigure * FIGURE);
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
@@ -44,6 +44,15 @@ public:
 	void CleanFiglist(); // Free all fig list memory
 	void CleanClipboard(); // Free all Clipboard list memory this fun called befor exit porgram as clipboard private
 	int GetFigCount();
+	void Resize_Action(float Ratio);
+	/////
+
+	void change_border_color_Action(color C);
+	void change_PenWidth_Action(int PW);        //PW:Pen Width
+	void change_Filled_color_Action(color C);
+
+	int CountFigure(figures);
+	int CountFigure(color, bool);
 	void DeleteAll();
 	void CutAll();
 	void CopyAll();

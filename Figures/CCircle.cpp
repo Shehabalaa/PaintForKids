@@ -9,15 +9,30 @@ CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo
 	Area = 3.14 *rad*rad;
 }
 
+bool CCircle::Resize(float ratio)
+{
+	int tmp = rad;
+	rad = rad*ratio;
+	if (InDrawingArea())
+		return true;
+	else
+	{
+		rad = tmp;
+		return false;
+	}
+
+}
 void CCircle::PrintInfo(Output* pOut) const
 {
-	pOut->PrintMessage("Figure Data->");
-	pOut->DrawString(120, 667, "Radius :");
-	pOut->DrawInt(185, 667, rad);
-	pOut->DrawString(217, 667, "Area :");
-	pOut->DrawInt(270, 667, Area);
-	pOut->DrawString(325, 667, "ID :");
-	pOut->DrawInt(357, 667, Area);
+	string s = "Figure Data->";
+	s = s + " Area: ";
+	s = s + to_string(Area);
+	s = s + " Radius: ";
+	s = s + to_string(rad);
+	s = s + " ID: ";
+	s = s + to_string(ID);
+
+	pOut->PrintMessage(s);
 
 }
 #include<iostream>

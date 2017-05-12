@@ -21,6 +21,7 @@ public:
 	virtual void Load(ifstream &Infile);
 	virtual CFigure * CreateCopy() const;
 	virtual Point CentroidOfFigure() const;
+	virtual bool Resize(float ratio);
 	virtual void PrintInfo(Output* pOut) const;
 	virtual void SetRandomCoord(int, int, int, int);
 	 ~CTriangle();

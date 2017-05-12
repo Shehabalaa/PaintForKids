@@ -67,8 +67,8 @@ void ActionSelect::Execute()
 		else if (count > 1)
 		{
 			string temp = " NO.of selected figures : ";
-			temp += count;
-			pManager->GetOutput()->PrintMessage(temp);
+			temp += to_string(count);
+			pOut->PrintMessage(temp);
 		}
 		pManager->UpdateInterface();
 	}

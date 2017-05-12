@@ -1,3 +1,4 @@
+
 #include "ApplicationManager.h"
 #include "..\Actions\LoadAction.h"
 #include "..\Actions\AddRectAction.h"
@@ -7,6 +8,7 @@
 #include "..\Actions\SaveAction.h"
 #include "..\Actions\ExitAction.h"
 #include "..\Actions\SelectAction.h"
+#include "..\Actions\Resize.h"
 #include "..\Actions\ChangeBGAction.h"
 #include "..\Actions\PickandHideAction.h"
 #include "..\Actions\ToDrawAction.h"
@@ -20,6 +22,9 @@
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
 #include"..\Figures\CTriangle.h"
+#include "..\Actions\CNGcolor.h"
+#include "..\Actions\CNGborderwidth.h"
+#include "..\Actions\CNGborderColor.h"
 #include"..\Actions\ScrambleAndFind.h"
 
 //Constructor
@@ -68,6 +73,15 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case DRAW_TRI:
 		pAct = new AddTriAction(this);
 		break;
+	case CHNG_DRAW_CLR:
+		pAct = new CNGborderColor(this);
+		break;
+	case CHNG_FILL_CLR:
+		pAct = new CNGcolor(this);
+		break;
+	case  CHNG_BORDER_WIDTH:
+		pAct = new CNGborderwidth(this);
+		break;
 	case DRAWING_AREA:
 		pOut->PrintMessage("A click on drawing area");
 		break;
@@ -76,6 +90,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case SELECT:
 		pAct = new ActionSelect(this);
+		break;
+	case RESIZE :
+		pAct = new Resize(this);
 		break;
 	case SAVE:
 		pAct = new SaveAction(this);
@@ -301,6 +318,111 @@ bool ApplicationManager::MoveFigures(int x,int y)
 	return CASE;
 }
 
+int ApplicationManager::CountFigure(figures figtype) {
+	int count = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->FigType() == figtype)
+			count++;
+
+	}
+	return count;
+}
+void ApplicationManager::Resize_Action(float Ratio)
+{
+	for (int i = 0; i<FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			//corner left - corner right in x & in y
+			if (Ratio == 4 || Ratio == 2 || Ratio == 0.5 || Ratio == 0.25)
+				if (!FigList[i]->Resize(Ratio))
+					pOut->PrintMessage(" Out of drawing Area !!");
+		}
+	}
+}
+void ApplicationManager::change_border_color_Action(color C)
+{
+
+
+	for (int i = 0; i<FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+			FigList[i]->ChngDrawClr(C);
+
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::change_PenWidth_Action(int PW)
+{
+
+
+
+	for (int i = 0; i<FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			FigList[i]->ChngBorderWidth(PW);
+
+		}
+	}
+
+
+
+}
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::change_Filled_color_Action(color C)
+{
+
+	for (int i = 0; i<FigCount; i++)
+	{
+		if (FigList[i]->IsSelected())
+		{
+			FigList[i]->ChngFillClr(C);
+
+		}
+	}
+
+}
+void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
+{
+
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i] == FIGURE)
+		{
+			delete FigList[i];
+			FigList[i] = NULL;
+			swap(FigList[i], FigList[FigCount - 1]);
+			FigCount--;
+			i--;
+		}
+	}
+}
+int ApplicationManager::CountFigure(color c , bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->GetFillClr() == c)
+				count++;
+
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (!FigList[i]->IsFilled())
+				count++;
+
+		}
+		return count;
+	}
+}
 ///////////////////////////////////////////////////////////////////////////////
 
 void ApplicationManager::DeleteAll()

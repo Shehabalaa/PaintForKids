@@ -21,6 +21,52 @@ figures  CTriangle::FigType() const
 	return tri;
 }
 
+bool CTriangle::Resize(float ratio)
+{
+	Point tmpc1 = corner1;
+	Point tmpc2 = corner2;
+	Point tmp3 = corner3;
+	float X1, Y1, X2, Y2, X3, Y3 = 0;
+	Point centre = CentroidOfFigure();
+	//X=(ratio-1);
+
+	X1 = (ratio - 1)*(corner1.x - centre.x) + (corner1.x);
+	X2 = (ratio - 1)*(corner2.x - centre.x) + (corner2.x);
+	X3 = (ratio - 1)*(corner3.x - centre.x) + (corner3.x);
+	Y1 = (ratio - 1)*(corner1.y - centre.y) + (corner1.y);
+	Y2 = (ratio - 1)*(corner2.y - centre.y) + (corner2.y);
+	Y3 = (ratio - 1)*(corner3.y - centre.y) + (corner3.y);
+	//double z,w,m;
+	//M3mlt4 2l handling of ratio hna
+	//z= modf((double)((ratio-1)*X),&w);
+	//m=modf((double)((ratio-1)*Y),&w);
+	/*	X=(0.5)*(ratio-1);
+
+	X1=X*((corner1.x -corner2.x)+ (corner1.x -corner3.x))+corner1.x;
+	X2=X*((corner2.x -corner1.x) + (corner2.x -corner3.x))+corner2.x;
+	X3=X*((corner3.x -corner1.x) + (corner3.x -corner2.x))+corner3.x;
+
+	Y1=X*((corner1.y -corner2.y) + (corner1.y -corner3.y))+corner1.y;
+	Y2=X*((corner2.y -corner1.y )+ (corner2.y -corner3.y))+corner2.y;
+	Y3=X*((corner3.y -corner1.y )+ (corner3.y -corner2.y))+corner3.y;*/
+
+	corner1.x = X1;
+	corner1.y = Y1;
+	corner2.x = X2;
+	corner2.y = Y2;
+	corner3.x = X3;
+	corner3.y = Y3;
+	if (InDrawingArea())
+		return true;
+	else
+	{
+		corner1 = tmpc1;
+		corner2 = tmpc2;
+		corner3 = tmp3;
+		return false;
+	}
+
+}
 bool CTriangle::check(int x, int y) const
 {
 	
@@ -38,8 +84,29 @@ bool CTriangle::check(int x, int y) const
 
 void CTriangle::PrintInfo(Output* pOut) const
 {
-	 pOut->DrawString(230, 667, "Radius :");
-	 pOut->DrawInt(270, 667, 5);
+
+	string s = "Figure Data->";
+	s = s + " Area: ";
+	s = s + to_string(Area);
+	s = s + " First Corner: (";
+	s = s + to_string(corner1.x);
+	s = s + ",";
+	s = s + to_string(corner2.y);
+	s = s + ") ";
+	s = s + " Second Corner: (";
+	s = s + to_string(corner2.x);
+	s = s + ",";
+	s = s + to_string(corner2.y);
+	s = s + ") ";
+	s = s + " Third Corner: (";
+	s = s + to_string(corner3.x);
+	s = s + ",";
+	s = s + to_string(corner3.y);
+	s = s + ") ";
+	s = s + " ID: ";
+	s = s + to_string(ID);
+
+	pOut->PrintMessage(s);
 }
 
 void CTriangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)

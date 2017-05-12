@@ -6,7 +6,59 @@ CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfx
 	Corner2 = P2;
 	ID = -999; // take any wrong id until be put in figlist
 }
-	
+bool CRectangle::Resize(float ratio)
+{
+	Point tmpc1 = Corner1;
+	Point tmpc2 = Corner2;
+
+	float X = 0, Y = 0, X1 = 0, Y1 = 0, X2 = 0, Y2 = 0;
+	//double z,w,m;
+	X = abs(Corner1.x - Corner2.x);
+	Y = abs(Corner1.y - Corner2.y);
+	//z= modf((double)((ratio-1)*X),&w);
+	//m= modf((double)((ratio-1)*Y),&w);
+
+	if (Corner1.x >Corner2.x)
+	{
+		X1 = (0.5)*(ratio - 1)*X + Corner1.x;
+		X2 = -(0.5)*(ratio - 1)*X + Corner2.x;
+	}
+	else
+	{
+		X1 = -(0.5)*(ratio - 1)*X + Corner1.x;
+		X2 = (0.5)*(ratio - 1)*X + Corner2.x;
+	}
+
+	if (Corner1.y >Corner2.y)
+	{
+		Y1 = (0.5)*(ratio - 1)*Y + Corner1.y;
+		Y2 = -(0.5)*(ratio - 1)*Y + Corner2.y;
+	}
+	else
+	{
+		Y1 = -(0.5)*(ratio - 1)*Y + Corner1.y;
+		Y2 = (0.5)*(ratio - 1)*Y + Corner2.y;
+	}
+
+	/*
+	X1=(0.5)*(ratio-1)*X+ Corner1.x+z;
+	X2=(0.5)*(ratio-1)*X+ Corner2.x-z;
+	Y1=(0.5)*(ratio-1)*Y+ Corner1.y+m;
+	Y2= (0.5)*(ratio-1)*Y+ Corner2.y-m;
+	/*/
+	(Corner1.x) = X1;
+	(Corner1.y) = Y1;
+	(Corner2.x) = X2;
+	(Corner2.y) = Y2;
+	if (InDrawingArea())
+		return true;
+	else
+	{
+		Corner1 = tmpc1;
+		Corner2 = tmpc2;
+		return false;
+	}
+}
 
 void CRectangle::Draw(Output* pOut) const
 {
@@ -40,8 +92,23 @@ bool CRectangle::check(int x, int y) const
 
 void CRectangle::PrintInfo(Output* pOut) const
 {
-	pOut->DrawString(230, 667, "Radius :");
-	pOut->DrawInt(270, 667, 5);
+	string s = "Figure Data->";
+	s = s + " Area: ";
+	s = s + to_string(Area);
+	s = s + " First Corner: (";
+	s = s + to_string(Corner1.x);
+	s = s + ",";
+	s = s + to_string(Corner2.y);
+	s = s + ") ";
+	s = s + " Second Corner: (";
+	s = s + to_string(Corner2.x);
+	s = s + ",";
+	s = s + to_string(Corner2.y);
+	s = s + ") ";
+	s = s + " ID: ";
+	s = s + to_string(ID);
+
+	pOut->PrintMessage(s);
 
 
 }

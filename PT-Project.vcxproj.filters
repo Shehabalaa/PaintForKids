@@ -196,9 +196,6 @@
     <ClCompile Include="Actions\MoveAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="Actions\PickandHideAction.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\CopyAction.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -212,6 +209,24 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ScrambleAndFind.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickandHideAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByFillingColorAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\PickByTypeAction.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\CNGborderColor.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\CNGborderwidth.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\CNGcolor.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -349,9 +364,6 @@
     <ClInclude Include="Actions\MoveAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\PickandHideAction.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\CopyAction.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -365,6 +377,24 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ScrambleAndFind.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickandHideAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByFillingColorAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\PickByTypeAction.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\cngbordercolor.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\cngborderwidth.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\cngcolor.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

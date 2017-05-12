@@ -134,6 +134,9 @@
     <ClCompile Include="Actions\AddRectAction.cpp" />
     <ClCompile Include="Actions\AddTriAction.cpp" />
     <ClCompile Include="Actions\ChangeBGAction.cpp" />
+    <ClCompile Include="Actions\CNGborderColor.cpp" />
+    <ClCompile Include="Actions\CNGborderwidth.cpp" />
+    <ClCompile Include="Actions\CNGcolor.cpp" />
     <ClCompile Include="Actions\CopyAction.cpp" />
     <ClCompile Include="Actions\CutAction.cpp" />
     <ClCompile Include="Actions\DeleteAction.cpp" />
@@ -142,6 +145,8 @@
     <ClCompile Include="Actions\MoveAction.cpp" />
     <ClCompile Include="Actions\PasteAction.cpp" />
     <ClCompile Include="Actions\PickandHideAction.cpp" />
+    <ClCompile Include="Actions\PickByFillingColorAction.cpp" />
+    <ClCompile Include="Actions\PickByTypeAction.cpp" />
     <ClCompile Include="Actions\Resize.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\ScrambleAndFind.cpp" />
@@ -202,6 +207,9 @@
     <ClInclude Include="Actions\AddRectAction.h" />
     <ClInclude Include="Actions\AddTriAction.h" />
     <ClInclude Include="Actions\ChangeBGAction.h" />
+    <ClInclude Include="Actions\cngbordercolor.h" />
+    <ClInclude Include="Actions\cngborderwidth.h" />
+    <ClInclude Include="Actions\cngcolor.h" />
     <ClInclude Include="Actions\CopyAction.h" />
     <ClInclude Include="Actions\CutAction.h" />
     <ClInclude Include="Actions\DeleteAction.h" />
@@ -210,6 +218,8 @@
     <ClInclude Include="Actions\MoveAction.h" />
     <ClInclude Include="Actions\PasteAction.h" />
     <ClInclude Include="Actions\PickandHideAction.h" />
+    <ClInclude Include="Actions\PickByFillingColorAction.h" />
+    <ClInclude Include="Actions\PickByTypeAction.h" />
     <ClInclude Include="Actions\Resize.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\ScrambleAndFind.h" />

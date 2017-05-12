@@ -17,6 +17,7 @@ public:
 	virtual bool InDrawingArea() const;
 	virtual BlockingDirection Move(int x, int y);
 	virtual CFigure * CreateCopy() const;
+	virtual bool Resize(float ratio);
 	virtual Point CentroidOfFigure() const;
 	virtual void PrintInfo(Output* pOut) const;
 	virtual void SetRandomCoord(int, int, int, int);
