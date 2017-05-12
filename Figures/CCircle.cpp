@@ -20,6 +20,18 @@ void CCircle::PrintInfo(Output* pOut) const
 	pOut->DrawInt(357, 667, Area);
 
 }
+#include<iostream>
+
+void CCircle::SetRandomCoord(int X_begin,int X_end,int Y_begin, int Y_end)
+{
+	X_begin += rad;
+	X_end -= rad;
+	Y_begin += rad;
+	Y_end -= rad;
+	center.x = rand() % (X_end-X_begin+1) + X_begin;
+	center.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	std::cout << center.x << " " << center.y << endl;
+}
 
 
 void CCircle::Draw(Output* pOut) const

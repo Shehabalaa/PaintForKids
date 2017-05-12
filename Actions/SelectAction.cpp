@@ -18,7 +18,7 @@ int ActionSelect::countselect()
 ActionState ActionSelect::ReadActionParameters()
 {
 	window* pWind = pOut->GetWindow();
-	pWind->FlushKeyQueue(); // clear any bad Esc Left 
+	//pWind->FlushKeyQueue(); // clear any bad Esc Left 
 	pOut->PrintMessage("Select: Click on a figure");
 
 	pIn->GetPointClickedv2(m.x,m.y);
@@ -26,8 +26,8 @@ ActionState ActionSelect::ReadActionParameters()
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
-
 	pWind->FlushMouseQueue(); // to delete last mouse click as it won't be used again
+
 	return Successful;
 }
 

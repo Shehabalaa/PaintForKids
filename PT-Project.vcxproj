@@ -144,6 +144,7 @@
     <ClCompile Include="Actions\PickandHideAction.cpp" />
     <ClCompile Include="Actions\Resize.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
+    <ClCompile Include="Actions\ScrambleAndFind.cpp" />
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ToDrawAction.cpp" />
     <ClCompile Include="Actions\ToPlayAction.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Actions\PickandHideAction.h" />
     <ClInclude Include="Actions\Resize.h" />
     <ClInclude Include="Actions\SaveAction.h" />
+    <ClInclude Include="Actions\ScrambleAndFind.h" />
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ToDrawAction.h" />
     <ClInclude Include="Actions\ToPlayAction.h" />

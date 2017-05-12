@@ -19,6 +19,7 @@ public:
 	virtual CFigure * CreateCopy() const;
 	virtual Point CentroidOfFigure() const;
 	virtual void PrintInfo(Output* pOut) const;
+	virtual void SetRandomCoord(int, int, int, int);
 	virtual ~CRectangle();
 };
 

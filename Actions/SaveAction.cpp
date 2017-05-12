@@ -5,13 +5,37 @@ SaveAction::SaveAction(ApplicationManager* pApp):Action(pApp)
 {
 }
 
-SaveAction::~SaveAction()
+
+ActionState SaveAction::ReadActionParameters()
 {
+	if (!pManager->GetFigCount())
+	{
+		pOut->PrintMessage("Error! No Graph to be Saved!");
+		return Just_Canceled;
+	}
+
+	pOut->PrintMessage("Please Enter filename!(Esc to cancel)");
+	file_name = pIn->GetSrting(pOut);
+
+	if (file_name == "")
+	{
+		pOut->PrintMessage("ActionCanceled");
+		return Just_Canceled;
+	}
+
+	if (file_name.find(".txt") == string::npos)
+	{
+		file_name += ".txt";
+	}
+
+	return Successful;
 }
 
 void SaveAction::Execute()
 {
-	ReadActionParameters(); //read file_name
+	if(ReadActionParameters() == Just_Canceled ) //read file_name
+		return;
+
 	OutFile.open(file_name, ios::out); // opening file
 	while (!OutFile.is_open())
 	{
@@ -42,13 +66,8 @@ bool SaveAction::ActionFailedEvent()
 	else
 		return true;
 }
-ActionState SaveAction::ReadActionParameters()
+
+
+SaveAction::~SaveAction()
 {
-	pOut->PrintMessage("Please Enter filename!");
-	file_name=pIn->GetSrting(pOut);
-	if (file_name.find(".txt") == string::npos)
-	{
-		file_name += ".txt";
-	}
-	return Successful;
 }

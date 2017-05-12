@@ -5,8 +5,8 @@
 #include "..\GUI\output.h"
 #include<iomanip>
 #include<vector>
+#include"../Figures/CFigure.h"
 class CFigure;
-
 
 
 //Main class that manages everything in the application.
@@ -53,6 +53,8 @@ public:
 	Input *GetInput() const; //Return pointer to the input
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
+	void UpdateInterface(CFigure **) const; // over load update inter face with another version
+	CFigure** GetDeepCopyFromFigList(int&) const; // this fucn big back a copylist from fig list and writes its size to var sent by ref 
 	
 
 };

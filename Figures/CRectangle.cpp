@@ -46,6 +46,49 @@ void CRectangle::PrintInfo(Output* pOut) const
 
 }
 
+void CRectangle::SetRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
+{
+	int New_X = 0, New_Y = 0;
+	int min_x_indx = 0, min_y_indx = 0;
+	int max_x_indx = 0, max_y_indx = 0;
+	Point *arr[2] = {&Corner1,&Corner2};
+
+	// i will work on min_X_point and adjust the other point_X_coord depeding on that
+	// then on min_Y_point adjust the other point_Y_coord depeding on that
+
+	for (int i = 1; i < 2; i++)
+	{
+		if (arr[i]->x < arr[min_x_indx]->x)
+			min_x_indx = i;
+		else if (arr[i]->x > arr[max_x_indx]->x)
+			max_x_indx = i;
+		
+		if (arr[i]->y < arr[min_y_indx]->x)
+			min_y_indx = i;
+		else if (arr[i]->y > arr[max_y_indx]->y)
+			max_y_indx = i;
+
+	}
+
+	// moving all points taking min_x as ref
+	X_end -= (arr[max_x_indx]->x - arr[min_x_indx]->x);
+	New_X = rand() % (X_end - X_begin + 1) + X_begin;
+	for (int i = 0; i < 2; i++)
+	{
+		arr[i]->x += New_X - arr[min_x_indx]->x;
+	}
+
+	// moving all points taking min_y as ref
+
+	Y_end -= (arr[max_y_indx]->y - arr[min_y_indx]->y);
+	New_Y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	for (int i = 0; i < 2; i++)
+	{
+		arr[i]->y += New_Y - arr[min_y_indx]->y;
+	}
+
+}
+
 void CRectangle::Save(ofstream & fOut) const
 {
 	fOut << left << setw(15) << "RECTANGLE" << setw(5) << ID << setw(8) << Corner1.x << setw(8) << Corner1.y;

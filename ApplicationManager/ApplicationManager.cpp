@@ -1,4 +1,3 @@
-
 #include "ApplicationManager.h"
 #include "..\Actions\LoadAction.h"
 #include "..\Actions\AddRectAction.h"
@@ -21,6 +20,7 @@
 #include"..\Figures\CRectangle.h"
 #include"..\Figures\CCircle.h"
 #include"..\Figures\CTriangle.h"
+#include"..\Actions\ScrambleAndFind.h"
 
 //Constructor
 ApplicationManager::ApplicationManager()
@@ -109,6 +109,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case DEL:
 		pAct = new DeleteAction(this);
+		break;
+	case SCRAMBLE:
+		pAct = new ScrampleAndFindAction(this);
 		break;
 	case EXIT:
 		pAct = new ExitAction(this);
@@ -428,6 +431,26 @@ int ApplicationManager::GetFigCount()
 	return FigCount;
 }
 
+CFigure ** ApplicationManager::GetDeepCopyFromFigList(int & size) const
+{
+	CFigure ** newlist=NULL;
+	size = 0;
+	if (FigCount)
+	{
+		newlist = new CFigure*[FigCount];
+		size = FigCount;
+	}
+	else
+		return NULL;
+	for (int i = 0; i < size; i++)
+	{
+		newlist[i] = FigList[i]->CreateCopy();
+	}
+
+	return newlist;
+	
+}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -437,11 +460,12 @@ void ApplicationManager::UpdateInterface() const
 {	
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width-UI.ColorsBarWidth, UI.height- UI.StatusBarHeight);
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height- UI.StatusBarHeight);
 
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
+
 ////////////////////////////////////////////////////////////////////////////////////
 //Return a pointer to the input
 Input *ApplicationManager::GetInput() const
@@ -457,5 +481,16 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+
+// this fucntion update inter fance but with special list
+void ApplicationManager::UpdateInterface(CFigure ** Fig_List) const
+{
+	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
+	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+
+	for (int i = 0; i<FigCount; i++)
+		Fig_List[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 
