@@ -454,17 +454,28 @@ int ApplicationManager::CountFigure(color c , bool filled) {
 
 void ApplicationManager::DeleteAll()
 {
-
-	for (int i = 0; i < FigCount; i++)
+	int size = FigCount;
+	for (int i = 0; i < size; i++)
 	{
 		if (FigList[i]->IsSelected())
 		{
 			delete FigList[i];
 			FigList[i] = NULL;
-			swap(FigList[i], FigList[FigCount - 1]);
 			FigCount--;
-			i--;
 		}
+	}
+
+	int temp = 0, i = 0;
+
+	while ( temp!=FigCount)
+	{
+		if (FigList[i])
+		{
+			FigList[temp++] = FigList[i];
+			if (i != (temp - 1))
+				FigList[i] = NULL;
+		}
+		i++;
 	}
 
 	if (FigCount == 0)
