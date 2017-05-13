@@ -472,6 +472,14 @@ void window::GetWindowSize(int &iX, int &iY) const {
 	iY = iWindowHeight;
 }
 
+bool window::getifqueuempty()
+{
+	mqueuenode* mqueTmp = mqueInput.Remove();
+	if(mqueTmp)
+		mqueInput.Insert(mqueTmp);
+	return !mqueTmp;
+}
+
 void window::GetMouseCoord(int &iX, int &iY) {
 
     ProcessMessage(); // Kludge

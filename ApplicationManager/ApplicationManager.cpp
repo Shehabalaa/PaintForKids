@@ -51,7 +51,8 @@ ActionType ApplicationManager::GetUserAction() const
 	//this fucntion used to guide user first
 	UserGuide();
 	//Ask the input to get the action from the user.
-	return pIn->GetUserAction();		
+	return pIn->GetUserAction();	
+	
 }
 ////////////////////////////////////////////////////////////////////////////////////
 //Creates an action and executes it
@@ -387,22 +388,29 @@ void ApplicationManager::change_Filled_color_Action(color C)
 	}
 
 }
+
 void ApplicationManager::UserGuide() const
 {
-	Sleep(2000);
-	int x, y;
-	window* ptr=pOut->GetWindow();
-	ptr->GetMouseCoord(x, y);
+	window* ptr = pOut->GetWindow();
+	int x,y,count=0;
 	ActionType a1= EMPTY, a2= EMPTY;
-	while (ptr->GetButtonState(LEFT_BUTTON, x, y) == BUTTON_UP)
+
+	while (ptr->getifqueuempty() && ptr->GetButtonState(LEFT_BUTTON, x, y) == BUTTON_UP)
 	{
-		a1 = pIn->SeeAction(x,y);
-		if(a1!=a2&&a1)
+		a1 = pIn->SeeAction(x, y);
+		if (a1 != a2 && a1 != DRAWING_AREA)
 			pOut->PrintGuideMessages(a1);
+		//else if (a1 == DRAWING_AREA )
+		//{
+		//	if(count==990000)
+		//		pOut->PrintGuideMessages(a1);
+		//	count++;
+		//}
 		ptr->GetMouseCoord(x, y);
 		a2 = a1;
-		
 	}
+
+
 }
 void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
 {
@@ -586,6 +594,7 @@ CFigure ** ApplicationManager::GetDeepCopyFromFigList(int & size) const
 	for (int i = 0; i < size; i++)
 	{
 		newlist[i] = FigList[i]->CreateCopy();
+		newlist[i]->SetSelected(false);
 	}
 
 	return newlist;

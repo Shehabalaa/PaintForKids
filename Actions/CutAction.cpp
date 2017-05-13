@@ -5,7 +5,9 @@ CutAction::CutAction(ApplicationManager * pApp) : Action(pApp)
 {}
 void CutAction::Execute()
 {
-	pManager->CutAll();
+	if (pManager->GetFigCount())
+		pManager->CutAll();
+
 }
 
 ActionState CutAction::ReadActionParameters()
