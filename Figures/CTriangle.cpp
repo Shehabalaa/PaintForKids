@@ -1,4 +1,5 @@
 #include "CTriangle.h"
+#include<algorithm>
 #include<cmath>
 
 CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const GfxInfo& FigureGfxInfo) : CFigure(FigureGfxInfo)
@@ -153,14 +154,23 @@ void CTriangle::MovetoRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end
 
 }
 
+
 void CTriangle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
 {
-	corner1.x = rand() % (X_end - X_begin + 1) + X_begin;
-	corner1.y= rand() % (Y_end - Y_begin + 1) + Y_begin;
-	corner2.x = rand() % (X_end - X_begin + 1) + X_begin;
-	corner2.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
-	corner3.x = rand() % (X_end - X_begin + 1) + X_begin;
-	corner3.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	int d12=0, d13=0, d23=0;
+	//do
+	//{
+		corner1.x = rand() % (X_end - X_begin + 1) + X_begin;
+		corner1.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+		corner2.x = rand() % (X_end - X_begin + 1) + X_begin;
+		corner2.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+		corner3.x = rand() % (X_end - X_begin + 1) + X_begin;
+		corner3.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+		d12 = sqrt(pow((corner1.x - corner2.x), 2) + pow((corner1.y - corner2.y), 2));
+		d13 = sqrt(pow((corner1.x - corner3.x), 2) + pow((corner1.y - corner3.y), 2));
+		d23 = sqrt(pow((corner3.x - corner2.x), 2) + pow((corner3.y - corner2.y), 2));	
+//	} while ((!d12 ||!d13 || !d23) && min(d12,d13)/float(max(d12, d13)) < 1.0/2  && min(d12,d23) / float(max(d12,d23))< 1.0/ 2 && min(d13, d23) / float(max(d13, d23)) < 1.0 / 2);
+
 
 }
 

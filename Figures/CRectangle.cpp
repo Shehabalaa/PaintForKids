@@ -174,7 +174,7 @@ void CRectangle::Save(ofstream & fOut) const
 }
 bool CRectangle::InDrawingArea() const
 {
-	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - 15  && Corner2.x < UI.width  && Corner1.x >0 && Corner2.x >0)
+	if (Corner1.y > UI.ToolBarHeight && Corner1.y < UI.height - UI.StatusBarHeight && Corner2.y > UI.ToolBarHeight && Corner2.y < UI.height - UI.StatusBarHeight && Corner1.x < UI.width - 15  && Corner2.x < UI.width -15  && Corner1.x >0 && Corner2.x >0)
 	{
 		return true;
 	}
@@ -189,7 +189,7 @@ BlockingDirection CRectangle::Move(int x, int y)
 	Corner2.y += y;
 	if (!this->InDrawingArea())
 	{
-		if (Corner2.x > UI.width || Corner2.x < 0|| Corner1.x > UI.width -15 || Corner1.x < 0)
+		if (Corner2.x > UI.width-15 || Corner2.x < 0|| Corner1.x > UI.width -15 || Corner1.x < 0)
 			tmp= Block_in_X_Direction;
 
 		if (Corner2.y < UI.ToolBarHeight || Corner2.y > UI.height - UI.StatusBarHeight || Corner1.y < UI.ToolBarHeight || Corner1.y > UI.height - UI.StatusBarHeight)
