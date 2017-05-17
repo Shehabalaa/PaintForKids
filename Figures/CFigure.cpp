@@ -52,6 +52,10 @@ void CFigure::SetID(int x)
 }
 
 
+void CFigure::UpdateArea()
+{
+}
+
 CFigure::~CFigure()
 {
 }

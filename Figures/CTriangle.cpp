@@ -8,6 +8,11 @@ CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const G
 	corner2 = P2;
 	corner3 = P3;
 	ID = -999; // take any wrong id until be put in figlist
+	UpdateArea();
+}
+
+void CTriangle::UpdateArea()
+{
 	Area = abs((corner1.x*corner2.y + corner2.x*corner3.y + corner3.x*corner1.y - corner1.y*corner2.x - corner2.y*corner3.x - corner3.y*corner1.x) / 2);
 }
 
@@ -58,7 +63,10 @@ bool CTriangle::Resize(float ratio)
 	corner3.x = X3;
 	corner3.y = Y3;
 	if (InDrawingArea())
+	{
+		UpdateArea();
 		return true;
+	}
 	else
 	{
 		corner1 = tmpc1;
@@ -67,6 +75,7 @@ bool CTriangle::Resize(float ratio)
 		return false;
 	}
 
+	
 }
 bool CTriangle::check(int x, int y) const
 {
@@ -171,7 +180,7 @@ void CTriangle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_en
 		d23 = sqrt(pow((corner3.x - corner2.x), 2) + pow((corner3.y - corner2.y), 2));	
 //	} while ((!d12 ||!d13 || !d23) && min(d12,d13)/float(max(d12, d13)) < 1.0/2  && min(d12,d23) / float(max(d12,d23))< 1.0/ 2 && min(d13, d23) / float(max(d13, d23)) < 1.0 / 2);
 
-
+		UpdateArea();
 }
 
 void CTriangle::Save(ofstream &fOut) const
@@ -186,7 +195,7 @@ void CTriangle::Save(ofstream &fOut) const
 }
 bool CTriangle::InDrawingArea() const
 {
-	if (corner1.y > UI.ToolBarHeight  && corner1.y < UI.height - UI.StatusBarHeight -1 && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight -1 && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight -1 && corner1.x < UI.width -15 && corner2.x < UI.width-1 && corner3.x < UI.width -1 && corner1.x >0 && corner2.x > 0 && corner3.x > 0 )
+	if (corner1.y > UI.ToolBarHeight  && corner1.y < UI.height - UI.StatusBarHeight -1 && corner2.y > UI.ToolBarHeight && corner2.y < UI.height - UI.StatusBarHeight -1 && corner3.y > UI.ToolBarHeight && corner3.y < UI.height - UI.StatusBarHeight -1 && corner1.x < UI.width -15 && corner2.x < UI.width-15 && corner3.x < UI.width -15 && corner1.x >0 && corner2.x > 0 && corner3.x > 0 )
 	{
 		return true;
 	}
@@ -242,6 +251,7 @@ void CTriangle::Load(ifstream & Infile)
 		FigGfxInfo.FillClr = color::getColorObject(temp);
 	}
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+	UpdateArea();
 
 }
 

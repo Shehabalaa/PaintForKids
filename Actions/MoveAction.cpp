@@ -60,7 +60,7 @@ void  MoveAction::Execute()
 		present.x = next.x;
 		present.y = next.y;
 
-		Sleep(20);
+		Sleep(30);
 
 		}
 	

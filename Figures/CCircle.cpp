@@ -6,7 +6,7 @@ CCircle::CCircle(const Point& P1 , const Point& P2,const GfxInfo & FigureGfxInfo
 	circum = P2;
 	rad = sqrt(pow((circum.x - center.x), 2) + pow((circum.y - center.y), 2));
 	ID = -999; // take any wrong id until be put in figlist
-	Area = 3.14 *rad*rad;
+	UpdateArea();
 }
 
 bool CCircle::Resize(float ratio)
@@ -14,12 +14,16 @@ bool CCircle::Resize(float ratio)
 	int tmp = rad;
 	rad = rad*ratio;
 	if (InDrawingArea())
+	{
+		UpdateArea();
 		return true;
+	}
 	else
 	{
 		rad = tmp;
 		return false;
 	}
+
 
 }
 void CCircle::PrintInfo(Output* pOut) const
@@ -59,7 +63,12 @@ void CCircle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
 	center.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	circum.x = center.x + rad;
 	circum.y = center.y + rad;
-	Area = 3.14*rad*rad;
+	UpdateArea();
+}
+
+void CCircle::UpdateArea()
+{
+	Area = 3.14 *rad*rad;
 }
 
 
@@ -151,6 +160,7 @@ void CCircle::Load(ifstream & Infile)
 		FigGfxInfo.FillClr = color::getColorObject(temp);
 	}
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+	UpdateArea();
 }
 
 Point CCircle::CentroidOfFigure() const

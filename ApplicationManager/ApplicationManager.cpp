@@ -276,6 +276,7 @@ bool ApplicationManager::MoveFigures(int x,int y)
 			switch (tmp) // if any figure while moving gets out of drawing area ,unmove already moved figures and return false;
 			{
 			case No_Block:
+				FigListSaved = false;
 				break;
 			case Block_in_X_Direction:
 				for (int j = 0; j < i + 1; j++)
@@ -340,7 +341,7 @@ void ApplicationManager::Resize_Action(float Ratio)
 			//corner left - corner right in x & in y
 			if (Ratio == 4 || Ratio == 2 || Ratio == 0.5 || Ratio == 0.25)
 				if (!FigList[i]->Resize(Ratio))
-					pOut->PrintMessage(" Out of drawing Area !!");
+					pOut->PrintMessage("Not Resized Figures are out of drawing Area !!");
 		}
 	}
 }

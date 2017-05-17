@@ -51,13 +51,17 @@ bool CRectangle::Resize(float ratio)
 	(Corner2.x) = X2;
 	(Corner2.y) = Y2;
 	if (InDrawingArea())
+	{
+		UpdateArea();
 		return true;
+	}
 	else
 	{
 		Corner1 = tmpc1;
 		Corner2 = tmpc2;
 		return false;
 	}
+
 }
 
 void CRectangle::Draw(Output* pOut) const
@@ -235,6 +239,7 @@ void CRectangle::Load(ifstream & Infile)
 	}
 
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+	UpdateArea();
 }
 
 

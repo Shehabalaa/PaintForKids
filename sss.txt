@@ -1,0 +1,9 @@
+BLUE      GREEN     LIGHTGOLDENRODYELLOW
+7
+CIRCLE         1    864     306     108                                 BLUE              NO_FILL           3
+TRIANGLE       2    573     341     683     210     692     339         BLUE              NO_FILL           3
+RECTANGLE      3    877     361     1027    417                         BLUE              NO_FILL           3
+TRIANGLE       4    1010    352     1057    300     1118    423         BLUE              NO_FILL           3
+RECTANGLE      5    794     199     944     259                         BLUE              NO_FILL           3
+CIRCLE         6    969     260     118                                 BLUE              NO_FILL           3
+CIRCLE         7    877     488     60                                  BLUE              NO_FILL           3
