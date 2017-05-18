@@ -133,6 +133,9 @@ enum ZoomMenuItem
 	zcount
 };
 
+
+
+
 __declspec(selectany) //This line to prevent "redefinition error"
 
 struct UI_Info	//User Interface Info.
@@ -146,7 +149,7 @@ struct UI_Info	//User Interface Info.
 		MenuItemWidth,		//Width of each item in toolbar menu and Color Bar
 		ColorsBarHeight,   // Height of Color Bar
 		ColorsBarWidth;		// Width of Color Bar
-
+	bool FilledFigures;//global variable to determine the next figure
 	float ZoomFactor;
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color

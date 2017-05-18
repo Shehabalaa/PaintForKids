@@ -14,7 +14,10 @@ ActionState AddTriAction::ReadActionParameters()
 	pIn->GetPointClicked(c2.x, c2.y);
 	pOut->PrintMessage("New Triangle: Click at third corner");
 	pIn->GetPointClicked(c3.x, c3.y);
-	TriGfxInfo.isFilled = false;
+	if (UI.FilledFigures)
+		TriGfxInfo.isFilled = true;
+	else TriGfxInfo.isFilled = false;
+
 	TriGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	TriGfxInfo.FillClr = pOut->getCrntFillColor();
 	TriGfxInfo.BorderWidth = pOut->getCrntPenWidth();

@@ -47,7 +47,7 @@ ActionState CNGcolor :: ReadActionParameters ()
 }
 void CNGcolor :: Execute ()
 {
-			ReadActionParameters();
+		ReadActionParameters();
 	if(pManager->countselected()>0)
 	{
 	pManager->change_Filled_color_Action(Colour);
@@ -56,6 +56,7 @@ void CNGcolor :: Execute ()
 	else
 	{
 		UI.FillColor=Colour;
+		UI.FilledFigures = true;
 	}
 }
 CNGcolor :: ~CNGcolor()

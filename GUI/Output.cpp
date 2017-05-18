@@ -22,7 +22,7 @@ Output::Output()
 	UI.PenWidth = 3;	//width of the figures frames
 	UI.ColorsBarHeight = UI.ToolBarHeight+1;		// Height of Color Bar this 1 more good view 
 	UI.ColorsBarWidth = 70;		// Width of Color Bar 70 as we draw line of width one to sperate drawing area from colors area
-
+	UI.FilledFigures = false;// default is the non-filled figures
 	//ana 2det lohm kyam ibtda2ya f l2wl w b3den 3mlt lhm creation
 	
 	//Create the output window
