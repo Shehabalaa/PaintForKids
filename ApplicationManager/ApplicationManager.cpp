@@ -325,7 +325,40 @@ bool ApplicationManager::MoveFigures(int x,int y)
 	UpdateInterface();
 	return CASE;
 }
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures figtype) {
+	int count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (PickList[i]->FigType() == figtype)
+			count++;
 
+	}
+	return count;
+}
+
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c && PickList[i]->FigType() != line)
+				count++;
+
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled())
+				count++;
+
+		}
+		return count;
+	}
+}
 int ApplicationManager::CountFigure(figures figtype) {
 	int count = 0;
 	for (int i = 0; i < FigCount; i++)
@@ -417,20 +450,39 @@ void ApplicationManager::UserGuide() const
 
 
 }
-void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
+void ApplicationManager::DeletePickedFigure(CFigure ** PickList, int& size, CFigure * FIGURE)
 {
 
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < size; i++)
 	{
-		if (FigList[i] == FIGURE)
+		if (PickList[i] == FIGURE)
 		{
-			delete FigList[i];
-			FigList[i] = NULL;
-			swap(FigList[i], FigList[FigCount - 1]);
-			FigCount--;
+			delete PickList[i];
+			PickList[i] = NULL;
+			swap(PickList[i], PickList[size - 1]);
+			size--;
 			i--;
 		}
 	}
+}
+CFigure *ApplicationManager::GetFigure(int x, int y, CFigure ** PickList, int size) const
+{
+	//If a figure is found return a pointer to it.
+	//if this point (x,y) does not belong to any figure return NULL
+	bool check;
+
+	for (int i = (size - 1); i >= 0; i--)
+	{
+		check = PickList[i]->check(x, y);
+
+		if (check == true)
+		{
+			return PickList[i];
+		}
+	}
+
+
+	return NULL;
 }
 int ApplicationManager::CountFigure(color c , bool filled) {
 	int count = 0;

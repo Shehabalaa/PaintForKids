@@ -5,6 +5,7 @@ PickandHideAction::PickandHideAction(ApplicationManager *pApp) :Action(pApp)
 	pManager = pApp;
 	click.x = 0;
 	click.y = 0;
+	PickList = pManager->GetDeepCopyFromFigList(size);
 }
 
 void PickandHideAction::InitData()
@@ -12,11 +13,12 @@ void PickandHideAction::InitData()
 	
 	CFigure * FirstFigure = NULL;
 	do {
-		if (pManager->GetFigCount() == 0)
-			break;
+		//if (pManager->GetFigCount() == 0)
+		//	break;
 		pOut->PrintMessage("Pick The First Figure  ");
 		pIn->GetPointClicked(click.x, click.y);
-		FirstFigure =pManager->GetFigure(click.x, click.y);
+
+		FirstFigure =pManager->GetFigure(click.x, click.y,PickList,size);
 		
 	} while (FirstFigure == NULL);
 		
@@ -32,17 +34,24 @@ void PickandHideAction::InitData()
 			Filled = false;
 		}
 
-		pManager->DeletePickedFigure(FirstFigure);
-		pManager->UpdateInterface();
+		pManager->DeletePickedFigure(PickList,size,FirstFigure);
+		pManager->UpdateInterface(PickList, size);
 
 }
+
+int PickandHideAction::Getsize()
+{
+	return size;
+}
+
 
 ActionState  PickandHideAction::ReadActionParameters()
 {
 	
 	pOut->PrintMessage("Choose a Playing Mode ");
-	PICKING_TYPE = pIn->GetUserAction();
 
+		PICKING_TYPE = pIn->GetUserAction();
+	
 
 	return Successful;
 }
@@ -58,17 +67,12 @@ void PickandHideAction::Execute()
 		
 	if (PICKING_TYPE == PICK_TYPE)
 	{
-
-		mode = new PickByTypeAction(pManager,fig );
+		mode = new PickByTypeAction(pManager,PickList,size,fig );
 		mode->Execute();
-
 	}
 	else if (PICKING_TYPE == PICK_FILL)
 	{
-
-		
-
-		mode = new ByFillingColor(pManager,Color,Filled);
+		mode = new ByFillingColor(pManager,PickList,size,Color,Filled);
 		mode->Execute();
 	}
 	else if (PICKING_TYPE == PICK_TYPEFILL)
