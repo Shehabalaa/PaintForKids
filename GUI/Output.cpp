@@ -169,10 +169,10 @@ void Output::CreateColorsBar() const
 	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
 	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
 	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
-	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
+	col[ITM_LIGHT] = "images\\MenuItems\\light.jpg";
 	col[ITM_lime] = "images\\MenuItems\\green.jpg";
 	col[ITM_white] = "images\\MenuItems\\white.jpg";
+	col[ITM_NON] = "images\\MenuItems\\non-color.jpg";
 	//Draw a line parllel to colors toolbar
 
 	
@@ -362,31 +362,7 @@ void Output::CreatePickandHideToolBar() const
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-	////////////////////////////////////////////////////////////////////
-	string col[colors_num]; // here we drawing colors menu
-	col[ITM_black] = "images\\MenuItems\\black.jpg";
-	col[ITM_green] = "images\\MenuItems\\green.jpg";
-	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
-	col[ITM_red] = "images\\MenuItems\\red.jpg";
-	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
-	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
-	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
-	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
-	col[ITM_lime] = "images\\MenuItems\\green.jpg";
-	col[ITM_white] = "images\\MenuItems\\white.jpg";
-	for (int i = 0; i<colors_num; i++)
-		pWind->DrawImage(col[i], UI.width - UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
 
-
-
-	//Draw a line parllel to colors toolbar
-	if (UI.BkGrndColor == BLUE)
-		pWind->SetPen(RED, 1);
-	else
-		pWind->SetPen(BLUE, 1);
-
-	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
 
 
 }
@@ -409,31 +385,7 @@ void Output::CreatePickandHideFiguresToolBar() const
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
-	////////////////////////////////////////////////////////////////////
-	string col[colors_num]; // here we drawing colors menu
-	col[ITM_black] = "images\\MenuItems\\black.jpg";
-	col[ITM_green] = "images\\MenuItems\\green.jpg";
-	col[ITM_blue] = "images\\MenuItems\\blue.jpg";
-	col[ITM_red] = "images\\MenuItems\\red.jpg";
-	col[ITM_yellow] = "images\\MenuItems\\yellow.jpg";
-	col[ITM_brown] = "images\\MenuItems\\brown.jpg";
-	col[ITM_orange] = "images\\MenuItems\\orange.jpg";
-	col[ITM_rose] = "images\\MenuItems\\rose.jpg";
-	col[ITM_grey] = "images\\MenuItems\\grey.jpg";
-	col[ITM_lime] = "images\\MenuItems\\green.jpg";
-	col[ITM_white] = "images\\MenuItems\\white.jpg";
-	for (int i = 0; i<colors_num; i++)
-		pWind->DrawImage(col[i], UI.width - UI.ColorsBarWidth, (i*UI.MenuItemWidth) + UI.ColorsBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
-
-
-
-	//Draw a line parllel to colors toolbar
-	if (UI.BkGrndColor == BLUE)
-		pWind->SetPen(RED, 1);
-	else
-		pWind->SetPen(BLUE, 1);
-
-	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+	
 
 
 }

@@ -23,10 +23,10 @@ enum ColorMenuItem //for drawing fillg background colors
 	ITM_blue,
 	ITM_brown,
 	ITM_orange,
-	ITM_rose,
-	ITM_grey,
+	ITM_LIGHT,
 	ITM_lime,
 	ITM_white,
+	ITM_NON,
 	colors_num
 };
 

@@ -9,6 +9,7 @@ ActionState CNGborderColor::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage(" Choose the Color for your Borders !");
+	pOut->CreateColorsBar();
 	C=pIn->GetColor();
 	switch (C)
 	{
@@ -36,8 +37,8 @@ ActionState CNGborderColor::ReadActionParameters()
 	case SELECT_ROSE_COLOR:
 		Colour=ROSYBROWN;
 		break;
-	case SELECT_GREY_COLOR:
-		Colour=GREY;
+	case SELECT_LIGHT_COLOR:
+		Colour=LIGHTGOLDENRODYELLOW;
 		break;
 	case SELECT_LIME_COLOR:
 		Colour=LIMEGREEN;

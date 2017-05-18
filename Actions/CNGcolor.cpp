@@ -6,6 +6,7 @@ ActionState CNGcolor :: ReadActionParameters ()
 {
 	Colors C;
 	pOut->PrintMessage(" Choose the Color to Fill your Figure(s) !");
+	pOut->CreateColorsBar();
 	C=pIn->GetColor();
 	switch (C)
 	{
@@ -33,8 +34,8 @@ ActionState CNGcolor :: ReadActionParameters ()
 	case SELECT_ROSE_COLOR:
 		Colour=ROSYBROWN;
 		break;
-	case SELECT_GREY_COLOR:
-		Colour=GREY;
+	case SELECT_LIGHT_COLOR:
+		Colour=LIGHTGOLDENRODYELLOW;
 		break;
 	case SELECT_LIME_COLOR:
 		Colour=LIMEGREEN;
