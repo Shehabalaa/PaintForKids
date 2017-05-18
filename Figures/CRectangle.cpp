@@ -76,17 +76,17 @@ figures  CRectangle::FigType() const
 bool CRectangle::check(int x, int y) const
 {
 
-	if (Corner1.x < Corner2.x)
+	if (Corner1.x *UI.ZoomFactor< Corner2.x*UI.ZoomFactor)
 	{
-		if (x > Corner1.x && x < Corner2.x)
-			if ((y > Corner1.y && y < Corner2.y) || (y<Corner1.y && y>Corner2.y))
+		if (x > Corner1.x*UI.ZoomFactor && x < Corner2.x*UI.ZoomFactor)
+			if ((y > Corner1.y*UI.ZoomFactor && y < Corner2.y*UI.ZoomFactor) || (y<Corner1.y *UI.ZoomFactor&& y>Corner2.y*UI.ZoomFactor))
 				return true;
 	}
-	else if (Corner1.x > Corner2.x)
+	else if (Corner1.x*UI.ZoomFactor > Corner2.x*UI.ZoomFactor)
 
 	{
-		if (x < Corner1.x && x > Corner2.x)
-			if ((y > Corner2.y && y < Corner1.y) || (y<Corner2.y && y>Corner1.y))
+		if (x < Corner1.x*UI.ZoomFactor && x > Corner2.x*UI.ZoomFactor)
+			if ((y > Corner2.y*UI.ZoomFactor && y < Corner1.y*UI.ZoomFactor) || (y<Corner2.y*UI.ZoomFactor && y>Corner1.y*UI.ZoomFactor))
 				return true;
 	}
 

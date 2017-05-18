@@ -12,6 +12,7 @@ ActionState ChangeBGAction::ReadActionParameters()
 {
 
 	pOut->CreateColorsBar();
+
 	pOut->PrintMessage("Choose color");
 	co = pIn->GetColor();
 

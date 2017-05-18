@@ -7,6 +7,7 @@ Output::Output()
 	UI.InterfaceMode = MODE_DRAW;
 	UI.width = 1300;
 	UI.height = 700;
+	UI.ZoomFactor = 1;
 	UI.wx = 5;
 	UI.wy =5;
 	UI.StatusBarHeight = 50;
@@ -198,14 +199,122 @@ void Output::CreateColorsBar() const
 
 }
 
+void Output::CreateBorderBar() const
+{
+
+	
+	string BorderMenueItem[6];
+	BorderMenueItem[one] = "images\\MenuItems\\one.jpg";
+	BorderMenueItem[three] = "images\\MenuItems\\three.jpg";
+	BorderMenueItem[five] = "images\\MenuItems\\five.jpg";
+	BorderMenueItem[seven] = "images\\MenuItems\\seven.jpg";
+	BorderMenueItem[nine] = "images\\MenuItems\\nine.jpg";
+	BorderMenueItem[eleven] = "images\\MenuItems\\eleven.jpg";
+
+	
+
+
+
+
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	for (int j = 1; j <= UI.ColorsBarWidth; j++)
+	{
+
+		if (j == 68)
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		else
+			for (int i = 0; i < 6; i++)
+				pWind->DrawImage(BorderMenueItem[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::CreateZoomBar() const
+{
+
+	//z stands for zoom 
+	/*/a7la comment*/
+	string ZoomMenueItem[zcount];
+	ZoomMenueItem[z10] = "images\\MenuItems\\10.jpg";
+	ZoomMenueItem[z25] = "images\\MenuItems\\25.jpg";
+	ZoomMenueItem[z50] = "images\\MenuItems\\50.jpg";
+	ZoomMenueItem[z75] = "images\\MenuItems\\75.jpg";
+	ZoomMenueItem[z100]= "images\\MenuItems\\100.jpg";
+	ZoomMenueItem[z125] = "images\\MenuItems\\125.jpg";
+	ZoomMenueItem[z150] = "images\\MenuItems\\125.jpg";
+		ZoomMenueItem[z175] = "images\\MenuItems\\175.jpg";
+		ZoomMenueItem[z200] = "images\\MenuItems\\200.jpg";
+
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	for (int j = 1; j <= UI.ColorsBarWidth; j++)
+	{
+
+		if (j == 68)
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		else
+			for (int i = 0; i < zcount; i++)
+				pWind->DrawImage(ZoomMenueItem[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void Output::CreateResizeBar() const
+{
+
+
+	string ResizeMenueItem[4];
+	ResizeMenueItem[quarter] = "images\\MenuItems\\quarter.jpg";
+	ResizeMenueItem[half] = "images\\MenuItems\\half.jpg";
+	ResizeMenueItem[double2] = "images\\MenuItems\\double.jpg";
+	ResizeMenueItem[quadrible] = "images\\MenuItems\\ddouble.jpg";
+
+
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	for (int j = 1; j <= UI.ColorsBarWidth; j++)
+	{
+
+		if (j == 68)
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		else
+			for (int i = 0; i < 4; i++)
+				pWind->DrawImage(ResizeMenueItem[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
 
 void Output::CreatePlayToolBar() const
 {
 
 	UI.InterfaceMode = MODE_PLAY;
 
-	///TODO: write code to create Play mode menu
+	
 
 	string MenuItemImages[PLAY_ITM_COUNT];
 	MenuItemImages[ITM_PICK] = "images\\MenuItems\\FIND.jpg";
@@ -523,7 +632,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 		else
 			DrawingClr = RectGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, RectGfxInfo.BorderWidth*UI.ZoomFactor);	//Set Drawing color & width
 
 		drawstyle style;
 		if (RectGfxInfo.isFilled)
@@ -535,7 +644,7 @@ void Output::DrawRect(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 			style = FRAME;
 
 
-		pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+		pWind->DrawRectangle(P1.x*UI.ZoomFactor, P1.y*UI.ZoomFactor, P2.x*UI.ZoomFactor, P2.y*UI.ZoomFactor, style);
 }
 //LINE
 void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const
@@ -547,19 +656,14 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 		else
 			DrawingClr = LineGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, LineGfxInfo.BorderWidth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, LineGfxInfo.BorderWidth*UI.ZoomFactor);	//Set Drawing color & width
 
 		drawstyle style;
-		if (LineGfxInfo.isFilled)
-		{
-			style = FILLED;
-			pWind->SetBrush(LineGfxInfo.FillClr);
-		}
-		else
+
 			style = FRAME;
 
 
-		pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
+		pWind->DrawLine(P1.x*UI.ZoomFactor, P1.y*UI.ZoomFactor, P2.x*UI.ZoomFactor, P2.y*UI.ZoomFactor, style);
 
 }
 //Trianlge
@@ -573,7 +677,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 		else
 			DrawingClr = TriGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, TriGfxInfo.BorderWidth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, TriGfxInfo.BorderWidth*UI.ZoomFactor);	//Set Drawing color & width
 
 		drawstyle style;
 		if (TriGfxInfo.isFilled)
@@ -585,7 +689,7 @@ void Output::DrawTri(Point P1, Point P2, Point P3, GfxInfo TriGfxInfo, bool sele
 			style = FRAME;
 
 
-		pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+		pWind->DrawTriangle(P1.x*UI.ZoomFactor, P1.y*UI.ZoomFactor, P2.x*UI.ZoomFactor, P2.y*UI.ZoomFactor, P3.x*UI.ZoomFactor, P3.y*UI.ZoomFactor, style);
 
 
 }
@@ -600,7 +704,7 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 		else
 			DrawingClr = CircGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, CircGfxInfo.BorderWidth);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr, CircGfxInfo.BorderWidth *UI.ZoomFactor);	//Set Drawing color & width
 
 		drawstyle style;
 		if (CircGfxInfo.isFilled)
@@ -612,7 +716,7 @@ void Output::DrawCirc(Point P1, int R, GfxInfo CircGfxInfo, bool selected) const
 			style = FRAME;
 
 
-		pWind->DrawCircle(P1.x, P1.y, R, style);
+		pWind->DrawCircle(P1.x*UI.ZoomFactor, P1.y*UI.ZoomFactor, R*UI.ZoomFactor, style);
 
 }
 

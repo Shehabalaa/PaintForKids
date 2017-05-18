@@ -87,7 +87,7 @@ figures CCircle::FigType() const
 bool CCircle::check(int x,int y) const
 {
 	int d;
-	d= sqrt(pow((x - center.x), 2) + pow((y - center.y), 2));
+	d= sqrt(pow((x - center.x*UI.ZoomFactor), 2) + pow((y - center.y*UI.ZoomFactor), 2));
 	if (d <= rad)
 	{
 		return true;

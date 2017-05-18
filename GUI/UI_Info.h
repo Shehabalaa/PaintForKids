@@ -96,9 +96,41 @@ enum PickTypeMenuItem //The figures of the pick by type
 	ITM_PICK_LINE,
 	ITM_PICK_CIRC,
 	ITM_PICK_TRI,
-
 	PICKTYPE_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 
+};
+enum BorderMenuItem
+{
+	one,
+	three,
+	five,
+	seven,
+	nine,
+	eleven,
+	
+
+};
+enum ResizeMenuItem
+{
+	quarter,
+	half,
+	double2,
+	quadrible
+
+
+};
+enum ZoomMenuItem
+{
+	z10,
+	z25,
+	z50,
+	z75,
+	z100,
+	z125,
+	z150,
+	z175,
+	z200,
+	zcount
 };
 
 __declspec(selectany) //This line to prevent "redefinition error"
@@ -115,6 +147,7 @@ struct UI_Info	//User Interface Info.
 		ColorsBarHeight,   // Height of Color Bar
 		ColorsBarWidth;		// Width of Color Bar
 
+	float ZoomFactor;
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color
 	color HighlightColor;	//Highlighting color

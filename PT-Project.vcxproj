@@ -153,6 +153,7 @@
     <ClCompile Include="Actions\SelectAction.cpp" />
     <ClCompile Include="Actions\ToDrawAction.cpp" />
     <ClCompile Include="Actions\ToPlayAction.cpp" />
+    <ClCompile Include="Actions\Zoom.cpp" />
     <ClCompile Include="ApplicationManager\ApplicationManager.cpp" />
     <ClCompile Include="CMUgraphicsLib\auxil.cpp" />
     <ClCompile Include="CMUgraphicsLib\CMUgraphics.cpp" />
@@ -226,6 +227,7 @@
     <ClInclude Include="Actions\SelectAction.h" />
     <ClInclude Include="Actions\ToDrawAction.h" />
     <ClInclude Include="Actions\ToPlayAction.h" />
+    <ClInclude Include="Actions\Zoom.h" />
     <ClInclude Include="ApplicationManager\ApplicationManager.h" />
     <ClInclude Include="CMUgraphicsLib\auxil.h" />
     <ClInclude Include="CMUgraphicsLib\CMUgraphics.h" />

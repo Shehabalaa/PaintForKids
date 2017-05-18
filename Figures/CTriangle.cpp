@@ -9,6 +9,7 @@ CTriangle::CTriangle(const Point& P1, const Point& P2 , const Point& P3, const G
 	corner3 = P3;
 	ID = -999; // take any wrong id until be put in figlist
 	UpdateArea();
+	
 }
 
 void CTriangle::UpdateArea()
@@ -81,12 +82,12 @@ bool CTriangle::check(int x, int y) const
 {
 	
 	double  area1, area2, area3, sum;
-	area1 = abs((x*corner2.y + corner2.x*corner3.y + corner3.x*y - y*corner2.x - corner2.y*corner3.x - corner3.y*x) / 2);
-	area2 = abs((corner1.x*y + x*corner3.y + corner3.x*corner1.y - corner1.y*x - y*corner3.x - corner3.y*corner1.x) / 2);
-	area3 = abs((corner1.x*corner2.y + corner2.x*y + x*corner1.y - corner1.y*corner2.x - corner2.y*x - y*corner1.x) / 2);
-
+	area1 = abs((x*corner2.y*UI.ZoomFactor + corner2.x*corner3.y*UI.ZoomFactor*UI.ZoomFactor + corner3.x*y*UI.ZoomFactor - y*corner2.x*UI.ZoomFactor - corner2.y*corner3.x *UI.ZoomFactor *UI.ZoomFactor - corner3.y*x*UI.ZoomFactor) / 2);
+	area2 = abs((corner1.x*y*UI.ZoomFactor + x*corner3.y *UI.ZoomFactor + corner3.x*corner1.y*UI.ZoomFactor*UI.ZoomFactor - corner1.y*x*UI.ZoomFactor - y*corner3.x*UI.ZoomFactor - corner3.y*corner1.x*UI.ZoomFactor*UI.ZoomFactor) / 2);
+	area3 = abs((corner1.x*corner2.y*UI.ZoomFactor*UI.ZoomFactor + corner2.x*y *UI.ZoomFactor + x*corner1.y *UI.ZoomFactor - corner1.y*corner2.x *UI.ZoomFactor *UI.ZoomFactor - corner2.y*x *UI.ZoomFactor - y*corner1.x*UI.ZoomFactor) / 2);
+	double ZoomedArea= abs((corner1.x*corner2.y*UI.ZoomFactor*UI.ZoomFactor + corner2.x*corner3.y *UI.ZoomFactor *UI.ZoomFactor + corner3.x*corner1.y *UI.ZoomFactor *UI.ZoomFactor - corner1.y*corner2.x *UI.ZoomFactor *UI.ZoomFactor - corner2.y*corner3.x *UI.ZoomFactor *UI.ZoomFactor - corner3.y*corner1.x*UI.ZoomFactor*UI.ZoomFactor) / 2);
 	sum = area1 + area2 + area3;
-	if (abs(sum - Area)<5)
+	if (abs(sum - ZoomedArea)<5)
 		return true;
 	else
 		return false;

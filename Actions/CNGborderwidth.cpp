@@ -6,9 +6,9 @@ CNGborderwidth :: CNGborderwidth (ApplicationManager *pApp) : Action (pApp)
 ActionState CNGborderwidth :: ReadActionParameters()
 {
 	
-	pOut->PrintMessage(" Please enter pen width of these options (1/3/5/7/9/11 )");
-	string S= pIn->GetSrting(pOut);
-	Pen=stoi(S);
+	pOut->PrintMessage(" choose Pen Width");
+	pOut->CreateBorderBar();
+	Pen = pIn->GetBorder();
 	return Successful;
 }
 
@@ -16,12 +16,18 @@ ActionState CNGborderwidth :: ReadActionParameters()
 void CNGborderwidth :: Execute ()
 {
 	ReadActionParameters();
-	if(pManager->countselected()>0)
-		pManager->change_PenWidth_Action(Pen);
-	else
+
+	if (Pen > 0)
 	{
-	UI.PenWidth=Pen;
+		if (pManager->countselected() > 0)
+			pManager->change_PenWidth_Action(Pen);
+		else
+		{
+
+			UI.PenWidth = Pen;
+		}
 	}
+	else { pOut->PrintMessage("you didn't choose a width "); }
 }
 CNGborderwidth :: ~ CNGborderwidth()
 {

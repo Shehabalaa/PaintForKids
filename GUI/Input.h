@@ -20,6 +20,9 @@ public:
 	ActionType GetUserAction() const; //Read the user click and map to an action
 	ActionType SeeAction(int,int) const; //only retruns user action give coord
 	Colors GetColor();
+	int GetBorder();
+	float GetResizeRatio();
+	float GetZoomPercentage();
 	~Input();
 };
 

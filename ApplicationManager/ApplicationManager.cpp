@@ -14,6 +14,7 @@
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
 #include "..\Actions\MoveAction.h"
+#include "..\Actions\Zoom.h"
 #include "..\Actions\CutAction.h"
 #include "..\Actions\CopyAction.h"
 #include "..\Actions\PasteAction.h"
@@ -96,6 +97,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 		break;
 	case RESIZE :
 		pAct = new Resize(this);
+		break;
+	case ZOOMIN:
+		pAct = new Zoom(this);
 		break;
 	case SAVE:
 		pAct = new SaveAction(this);
@@ -361,18 +365,18 @@ void ApplicationManager::change_border_color_Action(color C)
 void ApplicationManager::change_PenWidth_Action(int PW)
 {
 
+	
 
-
-	for (int i = 0; i<FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i]->ChngBorderWidth(PW);
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->ChngBorderWidth(PW);
 
+			}
 		}
-	}
 
-
+	
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -624,8 +628,16 @@ void ApplicationManager::UpdateInterface() const
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height- UI.StatusBarHeight);
 
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	for (int i = 0; i<FigCount; i++) 
+		FigList[i]->Draw(pOut);
+
+	if (UI.ZoomFactor != 1)//draw the toolbars to cover the zoomed figures 
+	{
+		pOut->CreateDrawToolBar();
+		pOut->ClearStatusBar();
+	}
+
+	//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
