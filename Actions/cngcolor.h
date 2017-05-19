@@ -6,6 +6,7 @@ class CNGcolor : public Action
 private :
                            
 	color Colour;
+	Colors C;
 public:
 	CNGcolor( ApplicationManager *pApp);
 	virtual ActionState ReadActionParameters();
