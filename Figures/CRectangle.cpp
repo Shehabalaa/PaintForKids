@@ -5,7 +5,13 @@ CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfx
 	Corner1 = P1;
 	Corner2 = P2;
 	ID = -999; // take any wrong id until be put in figlist
+	UpdateArea();
 }
+void CRectangle::UpdateArea()
+{
+	Area = abs(Corner1.x - Corner2.x)*abs(Corner1.y - Corner2.y);
+}
+
 bool CRectangle::Resize(float ratio)
 {
 	Point tmpc1 = Corner1;

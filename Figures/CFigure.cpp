@@ -13,7 +13,7 @@ void CFigure::ChngBorderWidth(int PenWidth)
 {
 	FigGfxInfo.BorderWidth = PenWidth;
 }
-color CFigure::GetDrawClr()const
+color CFigure::GetDrawClr() const
 {
 	return FigGfxInfo.DrawClr;
 }
@@ -21,9 +21,10 @@ color CFigure::GetFillClr()const
 {
 	return FigGfxInfo.FillClr;
 }
+
 int CFigure::GetArea() const
 {
-	return Area;
+	return Area; 
 }
 
 void CFigure::ChngFillClr(color Fclr)

@@ -6,12 +6,15 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 	if ((P1.x - P2.x) != 0)
 	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
 	else slope = -1;
-	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+	 UpdateArea();
+	 length = Area;
 	ID = -999; // take any wrong id until be put in figlist
 }
 
-
-
+void Cline::UpdateArea()
+{
+	Area = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+}
 
 
  void Cline::PrintInfo(Output* pOut) const
