@@ -167,7 +167,29 @@ int ApplicationManager::countselected()
 	return count;
 }
 
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c&&PickList[i]->FigType() == Type)
+				count++;
 
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled() && PickList[i]->FigType() == Type)
+				count++;
+
+		}
+		return count;
+	}
+}
 
 void ApplicationManager::PrintSelected()
 {

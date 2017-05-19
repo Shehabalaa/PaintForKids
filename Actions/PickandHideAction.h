@@ -2,6 +2,10 @@
 #include "Action.h"
 #include "..\Actions\PickByTypeAction.h"
 #include"PickByFillingColorAction.h"
+#include"Pick_By_Area.h"
+#include "..\Actions\PickByTypeAction.h"
+#include"PickByFillingColorAction.h"
+#include"PickBy_Type_and_FillingColor.h"
 class PickandHideAction : public Action
 {
 	Point click;

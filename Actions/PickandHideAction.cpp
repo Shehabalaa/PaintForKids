@@ -13,8 +13,8 @@ void PickandHideAction::InitData()
 	
 	CFigure * FirstFigure = NULL;
 	do {
-		//if (pManager->GetFigCount() == 0)
-		//	break;
+		if (pManager->GetFigCount() == 0)
+			break;
 		pOut->PrintMessage("Pick The First Figure  ");
 		pIn->GetPointClicked(click.x, click.y);
 
@@ -62,7 +62,8 @@ void PickandHideAction::Execute()
 	pOut->CreatePickandHideToolBar();
 	pOut->PrintMessage("Pick------&-----Hide");
 	ReadActionParameters();
-	InitData();
+	if (!(PICKING_TYPE == PICK_AREA))
+		InitData();
 	
 		
 	if (PICKING_TYPE == PICK_TYPE)
@@ -77,13 +78,15 @@ void PickandHideAction::Execute()
 	}
 	else if (PICKING_TYPE == PICK_TYPEFILL)
 	{
-		//
+		mode = new PickByTypeandFillingColorAction(pManager, PickList, size, fig, Color, Filled);
+		mode->Execute();
 	}
 
 	else if (PICKING_TYPE == PICK_AREA)
 	{
+		mode = new PickByArea(pManager, PickList, size);
+		mode->Execute();
 
-		//
 	}
 
 

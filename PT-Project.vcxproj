@@ -147,6 +147,8 @@
     <ClCompile Include="Actions\PickandHideAction.cpp" />
     <ClCompile Include="Actions\PickByFillingColorAction.cpp" />
     <ClCompile Include="Actions\PickByTypeAction.cpp" />
+    <ClCompile Include="Actions\PickBy_Type_and_FillingColor.cpp" />
+    <ClCompile Include="Actions\Pick_By_Area.cpp" />
     <ClCompile Include="Actions\Resize.cpp" />
     <ClCompile Include="Actions\SaveAction.cpp" />
     <ClCompile Include="Actions\ScrambleAndFind.cpp" />
@@ -221,6 +223,8 @@
     <ClInclude Include="Actions\PickandHideAction.h" />
     <ClInclude Include="Actions\PickByFillingColorAction.h" />
     <ClInclude Include="Actions\PickByTypeAction.h" />
+    <ClInclude Include="Actions\PickBy_Type_and_FillingColor.h" />
+    <ClInclude Include="Actions\Pick_By_Area.h" />
     <ClInclude Include="Actions\Resize.h" />
     <ClInclude Include="Actions\SaveAction.h" />
     <ClInclude Include="Actions\ScrambleAndFind.h" />

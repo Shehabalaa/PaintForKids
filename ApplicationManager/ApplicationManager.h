@@ -37,6 +37,7 @@ public:
 	void PrintSelected();
 	bool MoveFigures(int, int);
 	int CountFigure(CFigure **, int, figures);
+	int CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled);
 	int CountFigure(CFigure **, int, color, bool);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
@@ -57,6 +58,7 @@ public:
 
 	int CountFigure(figures);
 	int CountFigure(color, bool);
+	
 	void DeleteAll();
 	void CutAll();
 	void CopyAll();
