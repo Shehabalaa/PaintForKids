@@ -49,16 +49,16 @@ void  MoveAction::Execute()
 
 		int x = (next.x - present.x);
 		int y = (next.y - present.y);
-		if (next.x > UI.width || next.x < 0 || present.x > UI.width || present.x < 0)
+		if (next.x > UI.width-15 || next.x < 0 || present.x > UI.width-15 || present.x < 0)
 			x = 0;
-		if (next.y > UI.height || next.y < 0 || present.y > UI.width || present.y < 0)
+		if (next.y > UI.height-15 || next.y < 0 || present.y > UI.width-15 || present.y < 0)
 			y = 0;
 
 		if (x || y) // no need to move if both x and y =0
 			pManager->MoveFigures(x, y);
 		
 
-		if (clock() - start >= 32)
+		if (clock() - start >= 34)
 		{
 			pManager->UpdateInterface();
 			start = clock();

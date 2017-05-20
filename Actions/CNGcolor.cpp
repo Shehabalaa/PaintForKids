@@ -4,6 +4,7 @@ CNGcolor :: CNGcolor(ApplicationManager * pApp):Action (pApp)
 }
 ActionState CNGcolor :: ReadActionParameters ()
 {
+
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	Colors C;
@@ -36,8 +37,8 @@ ActionState CNGcolor :: ReadActionParameters ()
 	case SELECT_ROSE_COLOR:
 		Colour=ROSYBROWN;
 		break;
-	case SELECT_GREY_COLOR:
-		Colour=GREY;
+	case SELECT_LIGHT_COLOR:
+		Colour=LIGHTGOLDENRODYELLOW;
 		break;
 	case SELECT_LIME_COLOR:
 		Colour=LIMEGREEN;
@@ -48,20 +49,28 @@ ActionState CNGcolor :: ReadActionParameters ()
 	}
 	return Successful;
 }
-void CNGcolor :: Execute ()
+void CNGcolor::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
-	if(pManager->countselected()>0)
+	if (C != EMPTY2)
 	{
-	pManager->change_Filled_color_Action(Colour);
-	
+		if (pManager->countselected() > 0)
+		{
+			pManager->change_Filled_color_Action(Colour);
+			pManager->GraphSaved = false;
+			pManager->AdjustList(CHNG_FILL_CLR);
+
+		}
+		else
+		{
+			UI.FillColor = Colour;
+			UI.FilledFigures = true;
+			pManager->GraphSaved = false;
+			pManager->AdjustList(CHNG_FILL_CLR);
+		}
 	}
-	else
-	{
-		UI.FillColor=Colour;
-	}
-	pManager->GraphSaved = false;
-	pManager->AdjustList(CHNG_FILL_CLR);
+	else { pOut->PrintMessage("you didn't choose a color"); }
 
 }
 CNGcolor :: ~CNGcolor()

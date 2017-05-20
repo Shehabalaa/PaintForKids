@@ -27,7 +27,7 @@ public:
 	int GetMaxFigCount() const;
 	int GetClipBoardSize() const;
 	void UserGuide() const;
-	void DeletePickedFigure(CFigure * FIGURE);
+	void DeletePickedFigure(CFigure **, int&, CFigure * FIGURE);
 	// -- Action-Related Functions
 	//Reads the input command from the user and returns the corresponding action type
 	ActionType GetUserAction() const;
@@ -35,9 +35,13 @@ public:
 	int countselected();
 	void PrintSelected();
 	void MoveFigures(int, int);
+	int CountFigure(CFigure **, int, figures);
+	int CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled);
+	int CountFigure(CFigure **, int, color, bool);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure *GetFigure(int x, int y, CFigure **, int) const;
 	void SaveAll(ofstream &); //Saves whole Graph to a file it is not const to change figlistsaved variable to true
 	void LoadAll(ifstream &); //Load Graph from a file
 	bool GetIfListSaved() const; //Retrun true of all list with its last information saved else otherwise
@@ -52,6 +56,7 @@ public:
 	void AdjustList(ActionType);
 	int CountFigure(figures);
 	int CountFigure(color, bool);
+	
 	void DeleteAll();
 	void CutAll();
 	void CopyAll();

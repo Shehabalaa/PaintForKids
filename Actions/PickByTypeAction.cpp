@@ -3,16 +3,17 @@
 
 
 
-PickByTypeAction::PickByTypeAction(ApplicationManager *pApp, figures Type) :Action(pApp)
+PickByTypeAction::PickByTypeAction(ApplicationManager *pApp,CFigure ** PickList,int &size, figures Type) :Action(pApp)
 {
 	pManager = pApp;
 	click.x = 0;
 	click.y = 0;
 	RightCount = 0;
 	WrongCount = 5;
-	
+	this->size = size;
+	this->PickList = PickList;
 	type = Type;
-	PickedFigureNumber = pManager->CountFigure(type);
+	PickedFigureNumber = pManager->CountFigure(PickList,size,type);
 
 }
 
@@ -22,8 +23,13 @@ ActionState PickByTypeAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
-	pIn->GetPointClicked(click.x, click.y);
-
+	pIn->GetPointClickedv2(click.x, click.y);
+	
+	if (click.y < UI.ToolBarHeight)
+	{
+		return Canceled_And_Switched_To_Another_One;
+	}
+	pOut->GetWindow()->FlushMouseQueue(); // to delete last mouse click as it won't be used again
 
 
 	//pIn->GetPointClicked(click.x, click.y);
@@ -35,19 +41,20 @@ void PickByTypeAction::Execute()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	while (pManager->GetFigCount()>0)
+	while (size > 0)
 	{
+
 		if (WrongCount == 0)
 		{
 			pOut->PrintMessage("YOU LOSE");
 			string s;
-			s= "images\\MenuItems\\LOSE.jpg";
+			s = "images\\MenuItems\\LOSE.jpg";
+
 			
-			for (int j = 1; j <500; j++)
-			{
-				pOut->GetWindow()->DrawImage(s,UI.width- j, 150, 500, 350);
-			}
 			
+				pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
+			
+
 			int x, y;
 			pIn->GetPointClicked(x, y);
 			pOut->PrintMessage("Click to Continue");
@@ -66,27 +73,33 @@ void PickByTypeAction::Execute()
 			break;
 		}
 
-		ReadActionParameters();
-		CFigure *PickedFigure= pManager->GetFigure(click.x, click.y);
-		if (PickedFigure != NULL)
+		if (ReadActionParameters() == Successful)
 		{
-			if (PickedFigure->FigType() == type)
+			CFigure *PickedFigure = pManager->GetFigure(click.x, click.y, PickList, size);
+			if (PickedFigure != NULL)
 			{
-				RightCount++;
+				if (PickedFigure->FigType() == type)
+				{
+					RightCount++;
 
-				pManager->DeletePickedFigure(PickedFigure);
-				pManager->UpdateInterface();
-			}
+					pManager->DeletePickedFigure(PickList, size, PickedFigure);
+					pManager->UpdateInterface(PickList, size);
+				}
 
-			else
-			{
-				WrongCount--;
+				else
+				{
+					WrongCount--;
+				}
 			}
 		}
+		else {
+			return;
+		}
 	}
-
-
 }
+
+
+
 
 PickByTypeAction ::~ PickByTypeAction ()
 {

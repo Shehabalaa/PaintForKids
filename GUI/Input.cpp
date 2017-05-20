@@ -327,18 +327,89 @@ Colors Input::GetColor()
 		case ITM_blue:	return SELECT_BLUE_COLOR;
 		case ITM_brown: return SELECT_BROWN_COLOR;
 		case ITM_orange: return SELECT_ORANGE_COLOR;
-		case ITM_rose: return SELECT_ROSE_COLOR;
-		case ITM_grey: return SELECT_GREY_COLOR;
+		case ITM_LIGHT: return SELECT_LIGHT_COLOR;
 		case ITM_lime: return SELECT_LIME_COLOR;
 		case ITM_white: return SELECT_WHITE_COLOR;
+		case ITM_NON:return SELECT_NON_COLOR;
 		default: return EMPTY2;
 
 		}
 	}
-
+	return EMPTY2;
 }
 
 
+int Input::GetBorder()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);
+	if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
+	{
+		int Clicked = ((y - UI.ToolBarHeight) / UI.MenuItemWidth);
+
+		switch (Clicked)
+		{
+		case one:	return 1;
+		case three:	return 3;
+		case five:	return 5;
+		case seven:	return 7;
+		case nine:	return 9;
+		case eleven: return 11;
+	
+		default: return -1;
+
+		}
+	}
+	else return -1;
+
+
+}
+
+float Input::GetResizeRatio()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);
+	if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
+	{
+		int Clicked = ((y - UI.ToolBarHeight) / UI.MenuItemWidth);
+
+		switch (Clicked)
+		{
+		case quarter:	return 0.25;
+		case half:	return 0.5;
+		case double2:	return 2;
+		case quadrible:	return 4;
+		default: return -1;
+
+		}
+	}
+	return -1;
+}
+float Input::GetZoomPercentage()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);
+	if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
+	{
+		int Clicked = ((y - UI.ToolBarHeight) / UI.MenuItemWidth);
+
+		switch (Clicked)
+		{
+		case z10:	return 0.10;
+		case z25:	return 0.25;
+		case z50:	return 0.50;
+		case z75:	return 0.75;
+		case z100:	return 1;
+		case z125:	return 1.25;
+		case z150:	return 1.5;
+		case z200:	return 2;
+
+		default: return -1;
+
+		}
+	}
+	return -1;
+}
 /////////////////////////////////
 
 Input::~Input()

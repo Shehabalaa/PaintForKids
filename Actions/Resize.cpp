@@ -2,7 +2,7 @@
 
 
 
-///leh m3aml4 destructor ?? fe add rect 
+
 Resize::Resize( ApplicationManager * pApp ): Action( pApp)
 {}
 
@@ -11,20 +11,24 @@ ActionState Resize :: ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 
-	pOut->PrintMessage("Which ratio do you want to resize your figure(s),Choose one of those (2 / 4/ 0.5 / 0.25)");
-	float x = stof(pIn->GetSrting(pOut));
-	while (x != 2 && x != 4 && x != 0.25 && x != 0.5)
-	{
-		pOut->PrintMessage("Error : You didn't choose from previous RATIOS baka !! choose again (2 / 4 / 0.5 / 0.25)");
-		x = stof(pIn->GetSrting(pOut));
-	}
-	ResizeRatio = x;
+	pOut->PrintMessage("Which ratio do you want to resize your figure(s)");
+	pOut->CreateResizeBar();
+	ResizeRatio = pIn->GetResizeRatio();
+	
 	 return Successful;
 }
 void Resize :: Execute() 
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
-	pManager->Resize_Action(ResizeRatio);
+	if (ResizeRatio > 0)
+	{
+		pManager->Resize_Action(ResizeRatio);
+	}
+	else
+	{
+		pOut->PrintMessage("you didn't choose a ratio");
+	}
 }
 Resize ::~Resize()
 {}

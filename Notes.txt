@@ -1,0 +1,7 @@
+change graph saved after any of 4 changes
+
+message if no figures (pick and hide run time error)
+
+pick and hide user guide
+
+messages after changing colors

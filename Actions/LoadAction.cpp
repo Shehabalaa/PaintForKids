@@ -9,6 +9,7 @@ ActionState LoadAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
+	pOut->GetWindow()->FlushKeyQueue();// avoid non neccessary keypresses before action
 	pOut->PrintMessage("Please Enter name of file to load graph from!");
 	File_Name=pIn->GetSrting(pOut);
 

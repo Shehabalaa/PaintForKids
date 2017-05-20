@@ -5,7 +5,13 @@ CRectangle::CRectangle(const Point& P1, const Point& P2,const GfxInfo& FigureGfx
 	Corner1 = P1;
 	Corner2 = P2;
 	ID = -999; // take any wrong id until be put in figlist
+	UpdateArea();
 }
+void CRectangle::UpdateArea()
+{
+	Area = abs(Corner1.x - Corner2.x)*abs(Corner1.y - Corner2.y);
+}
+
 bool CRectangle::Resize(float ratio)
 {
 	Point tmpc1 = Corner1;
@@ -76,17 +82,17 @@ figures  CRectangle::FigType() const
 bool CRectangle::check(int x, int y) const
 {
 
-	if (Corner1.x < Corner2.x)
+	if (Corner1.x *UI.ZoomFactor< Corner2.x*UI.ZoomFactor)
 	{
-		if (x > Corner1.x && x < Corner2.x)
-			if ((y > Corner1.y && y < Corner2.y) || (y<Corner1.y && y>Corner2.y))
+		if (x > Corner1.x*UI.ZoomFactor && x < Corner2.x*UI.ZoomFactor)
+			if ((y > Corner1.y*UI.ZoomFactor && y < Corner2.y*UI.ZoomFactor) || (y<Corner1.y *UI.ZoomFactor&& y>Corner2.y*UI.ZoomFactor))
 				return true;
 	}
-	else if (Corner1.x > Corner2.x)
+	else if (Corner1.x*UI.ZoomFactor > Corner2.x*UI.ZoomFactor)
 
 	{
-		if (x < Corner1.x && x > Corner2.x)
-			if ((y > Corner2.y && y < Corner1.y) || (y<Corner2.y && y>Corner1.y))
+		if (x < Corner1.x*UI.ZoomFactor && x > Corner2.x*UI.ZoomFactor)
+			if ((y > Corner2.y*UI.ZoomFactor && y < Corner1.y*UI.ZoomFactor) || (y<Corner2.y*UI.ZoomFactor && y>Corner1.y*UI.ZoomFactor))
 				return true;
 	}
 

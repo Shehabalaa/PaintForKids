@@ -13,6 +13,7 @@
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
 #include "..\Actions\MoveAction.h"
+#include "..\Actions\Zoom.h"
 #include "..\Actions\CutAction.h"
 #include "..\Actions\CopyAction.h"
 #include "..\Actions\PasteAction.h"
@@ -96,6 +97,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case RESIZE :
 		pAct = new Resize(this);
 		break;
+	case ZOOMIN:
+		pAct = new Zoom(this);
+		break;
 	case SAVE:
 		pAct = new SaveAction(this);
 		break;
@@ -162,7 +166,29 @@ int ApplicationManager::countselected()
 	return count;
 }
 
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c&&PickList[i]->FigType() == Type)
+				count++;
 
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled() && PickList[i]->FigType() == Type)
+				count++;
+
+		}
+		return count;
+	}
+}
 
 void ApplicationManager::PrintSelected()
 {
@@ -323,7 +349,40 @@ void ApplicationManager::MoveFigures(int x,int y)
 	}
 
 }
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures figtype) {
+	int count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (PickList[i]->FigType() == figtype)
+			count++;
 
+	}
+	return count;
+}
+
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c && PickList[i]->FigType() != line)
+				count++;
+
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled())
+				count++;
+
+		}
+		return count;
+	}
+}
 int ApplicationManager::CountFigure(figures figtype) {
 	int count = 0;
 	for (int i = 0; i < FigCount; i++)
@@ -363,18 +422,18 @@ void ApplicationManager::change_border_color_Action(color C)
 void ApplicationManager::change_PenWidth_Action(int PW)
 {
 
+	
 
-
-	for (int i = 0; i<FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i]->ChngBorderWidth(PW);
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->ChngBorderWidth(PW);
 
+			}
 		}
-	}
 
-
+	
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -517,20 +576,39 @@ void ApplicationManager::UserGuide() const
 
 
 }
-void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
+void ApplicationManager::DeletePickedFigure(CFigure ** PickList, int& size, CFigure * FIGURE)
 {
 
-	for (int i = 0; i < FigCount; i++)
+	for (int i = 0; i < size; i++)
 	{
-		if (FigList[i] == FIGURE)
+		if (PickList[i] == FIGURE)
 		{
-			delete FigList[i];
-			FigList[i] = NULL;
-			swap(FigList[i], FigList[FigCount - 1]);
-			FigCount--;
+			delete PickList[i];
+			PickList[i] = NULL;
+			swap(PickList[i], PickList[size - 1]);
+			size--;
 			i--;
 		}
 	}
+}
+CFigure *ApplicationManager::GetFigure(int x, int y, CFigure ** PickList, int size) const
+{
+	//If a figure is found return a pointer to it.
+	//if this point (x,y) does not belong to any figure return NULL
+	bool check;
+
+	for (int i = (size - 1); i >= 0; i--)
+	{
+		check = PickList[i]->check(x, y);
+
+		if (check == true)
+		{
+			return PickList[i];
+		}
+	}
+
+
+	return NULL;
 }
 int ApplicationManager::CountFigure(color c , bool filled) {
 	int count = 0;
@@ -714,8 +792,16 @@ void ApplicationManager::UpdateInterface() const
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height- UI.StatusBarHeight);
 
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	for (int i = 0; i<FigCount; i++) 
+		FigList[i]->Draw(pOut);
+
+	if (UI.ZoomFactor != 1)//draw the toolbars to cover the zoomed figures 
+	{
+		pOut->CreateDrawToolBar();
+		pOut->ClearStatusBar();
+	}
+
+	//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////

@@ -6,12 +6,15 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 	if ((P1.x - P2.x) != 0)
 	slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
 	else slope = -1;
-	length = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+	 UpdateArea();
+	 length = Area;
 	ID = -999; // take any wrong id until be put in figlist
 }
 
-
-
+void Cline::UpdateArea()
+{
+	Area = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+}
 
 
  void Cline::PrintInfo(Output* pOut) const
@@ -155,24 +158,24 @@ bool Cline::check(int x, int y) const
 	if (slope == -1)
 	{
 		
-		if ((y > start.y && y < end.y) || (y<start.y && y>end.y))
+		if ((y > start.y*UI.ZoomFactor && y < end.y*UI.ZoomFactor) || (y<start.y*UI.ZoomFactor && y>end.y*UI.ZoomFactor))
 			 return true;
-		if (start.x == end.x && abs(end.x - x) < 2 && start.y == end.y && abs(end.y - y) <2) // if line just a point this cals.- abd abs to make it easy to select just point :D
+		if (start.x *UI.ZoomFactor == end.x*UI.ZoomFactor && abs(end.x*UI.ZoomFactor - x) < 2 && start.y *UI.ZoomFactor == end.y *UI.ZoomFactor&& abs(end.y*UI.ZoomFactor - y) <2) // if line just a point this cals.- abd abs to make it easy to select just point :D
 			return true;
 		
 	}
 	else if (slope == 0)
 	{
-		if ((x > start.x && x < end.x) || (x<start.x && x>end.x))
+		if ((x > start.x*UI.ZoomFactor && x < end.x*UI.ZoomFactor) || (x<start.x*UI.ZoomFactor && x>end.x*UI.ZoomFactor))
 			return true;
 	}
 	else
 	{
-		float slope2 = float(y - start.y) / float(x - start.x);
+		float slope2 = float(y - start.y*UI.ZoomFactor) / float(x - start.x*UI.ZoomFactor);
 		if (abs(slope - slope2) < 3)
 		{
-			float l1 = sqrt(pow((x - start.x), 2) + pow((y - start.y), 2));
-			float l2 = sqrt(pow((x - end.x), 2) + pow((y - end.y), 2));
+			float l1 = sqrt(pow((x - start.x*UI.ZoomFactor), 2) + pow((y - start.y*UI.ZoomFactor), 2));
+			float l2 = sqrt(pow((x - end.x*UI.ZoomFactor), 2) + pow((y - end.y*UI.ZoomFactor), 2));
 			if (abs((l1 + l2) - length) <= 1)
 				return true;
 			else return false;

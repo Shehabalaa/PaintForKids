@@ -14,6 +14,7 @@ ActionState ChangeBGAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	pOut->CreateColorsBar();
+
 	pOut->PrintMessage("Choose color");
 	co = pIn->GetColor();
 
@@ -52,8 +53,8 @@ void ChangeBGAction::Execute()
 	case SELECT_ROSE_COLOR:
 		pOut->SetBGColor(ROSYBROWN);
 		break;
-	case SELECT_GREY_COLOR:
-		pOut->SetBGColor(GREY);
+	case SELECT_LIGHT_COLOR:
+		pOut->SetBGColor(LIGHTGOLDENRODYELLOW);
 		break;
 	case SELECT_LIME_COLOR:
 		pOut->SetBGColor(LIMEGREEN);

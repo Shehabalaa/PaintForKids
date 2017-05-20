@@ -1,11 +1,13 @@
 #include"..\Actions\PickByFillingColorAction.h"
 #include"..\Figures\CFigure.h"
-ByFillingColor::ByFillingColor(ApplicationManager * pApp,color c,bool Filled) : Action(pApp)
+ByFillingColor::ByFillingColor(ApplicationManager * pApp,CFigure ** PickList,int &size,color c,bool Filled) : Action(pApp)
 {
 	this->Color = c;
 	WrongCount = 5; RightCount = 0;
 	fill = Filled;
-	PickedFigureNumber = pManager->CountFigure(c,fill);
+	this->PickList = PickList;
+	this->size = size;
+	PickedFigureNumber = pManager->CountFigure(PickList,size,c,fill);
 
 
 }
@@ -19,6 +21,7 @@ ActionState ByFillingColor::ReadActionParameters()
 
 	
 	return Successful;
+
 }
 
 void ByFillingColor::Execute()
@@ -37,7 +40,7 @@ void ByFillingColor::Execute()
 
 				for (int j = 1; j <500; j++)
 				{
-					pOut->GetWindow()->DrawImage(s, UI.width - j, 150, 500, 350);
+					pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
 				}
 
 				int x, y;
@@ -62,17 +65,17 @@ void ByFillingColor::Execute()
 		//checks
 		ReadActionParameters();
 
-		CFigure* F = pManager->GetFigure(click.x, click.y);
+		CFigure* F = pManager->GetFigure(click.x, click.y,PickList,size);
 		if (F != NULL)
 		{
 			if (fill)
 			{
-				if (F->GetFillClr() == Color)
+				if (F->GetFillClr() == Color  && F->FigType()!=line)
 				{
 
 					RightCount++;
-					pManager->DeletePickedFigure(F);
-					pManager->UpdateInterface();
+					pManager->DeletePickedFigure(PickList,size,F);
+					pManager->UpdateInterface(PickList,size);
 				}
 				else
 				{
@@ -85,8 +88,8 @@ void ByFillingColor::Execute()
 				if (!F->IsFilled())
 
 				{
-					pManager->DeletePickedFigure(F);
-					pManager->UpdateInterface();
+					pManager->DeletePickedFigure(PickList,size,F);
+					pManager->UpdateInterface(PickList,size);
 					RightCount++;
 				}
 				else WrongCount--;
@@ -95,6 +98,7 @@ void ByFillingColor::Execute()
 		}
 	}
 }
+
 ByFillingColor::~ByFillingColor()
 {
 }
