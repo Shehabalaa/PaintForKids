@@ -4,4 +4,6 @@ message if no figures (pick and hide run time error)
 
 pick and hide user guide
 
+scramble and find user guide
+
 messages after changing colors

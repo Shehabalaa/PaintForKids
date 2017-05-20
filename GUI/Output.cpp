@@ -541,7 +541,7 @@ void Output::PrintGuideMessages(ActionType ActType)
 			break;
 		}
 	}
-	else if (MODE_PLAY)
+	else if (UI.InterfaceMode == MODE_PLAY)
 	{
 		switch (ActType)
 		{
@@ -567,6 +567,16 @@ void Output::PrintGuideMessages(ActionType ActType)
 			break;
 		}
 	}
+	else if (UI.InterfaceMode == MODE_PICKANDHIDE)
+	{
+		//TODO
+		switch (ActType)
+		{
+		default:
+			break;
+		}
+	}
+
 
 }
 
