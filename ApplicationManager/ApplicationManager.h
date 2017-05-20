@@ -13,20 +13,19 @@ class CFigure;
 class ApplicationManager
 {
 	enum { MaxFigCount = 200 };	//Max no of figures
-
 private:
-	bool FigListSaved; // true if newst information already saved in file else otherwise
 	int FigCount;		//Actual number of figures
 	CFigure* FigList[MaxFigCount];	//List of all figures (Array of pointers)
-	//CFigure* SelectedFigList[MaxFigCount]; lw ht3mlha 2olna
 	vector<CFigure*> ClipBoard; // Clipboard (list of copied figures)
 	//Pointers to Input and Output classes
 	Input *pIn;
 	Output *pOut;
 public:	
+	bool GraphSaved; // true if newst information already saved in file else otherwise
 	ApplicationManager(); 
 	~ApplicationManager();
-	
+	int GetMaxFigCount() const;
+	int GetClipBoardSize() const;
 	void UserGuide() const;
 	void DeletePickedFigure(CFigure * FIGURE);
 	// -- Action-Related Functions
@@ -35,7 +34,7 @@ public:
 	void ExecuteAction(ActionType) ; //Creates an action and executes it
 	int countselected();
 	void PrintSelected();
-	bool MoveFigures(int, int);
+	void MoveFigures(int, int);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
@@ -47,11 +46,10 @@ public:
 	int GetFigCount();
 	void Resize_Action(float Ratio);
 	/////
-
 	void change_border_color_Action(color C);
 	void change_PenWidth_Action(int PW);        //PW:Pen Width
 	void change_Filled_color_Action(color C);
-
+	void AdjustList(ActionType);
 	int CountFigure(figures);
 	int CountFigure(color, bool);
 	void DeleteAll();

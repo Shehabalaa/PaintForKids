@@ -5,7 +5,13 @@ CopyAction::CopyAction(ApplicationManager * pApp) : Action(pApp)
 {}
 void CopyAction::Execute()
 {
-	pManager->CopyAll();
+	if(pManager->countselected())
+		pManager->CopyAll();
+	else
+	{
+		pManager->GetOutput()->PrintMessage("No Slected Figures to be Copied");
+		Sleep(1000);
+	}
 }
 
 ActionState  CopyAction::ReadActionParameters()

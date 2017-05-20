@@ -56,6 +56,8 @@ ScrampleAndFindAction::ScrampleAndFindAction(ApplicationManager * pApp) :Action(
 
 ActionState ScrampleAndFindAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	NormalList = pManager->GetDeepCopyFromFigList(ListSize);
 	RandomizdList = pManager->GetDeepCopyFromFigList(ListSize);
 	if (ListSize)

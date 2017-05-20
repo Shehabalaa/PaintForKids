@@ -1,5 +1,7 @@
 #include "CFigure.h"
 
+int CFigure::ForID = 1;
+
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
@@ -46,9 +48,9 @@ bool CFigure::IsFilled() const
 
 
 
-void CFigure::SetID(int x)
+void CFigure::SetID()
 {
-	ID = x;
+	ID = ForID++;
 }
 
 

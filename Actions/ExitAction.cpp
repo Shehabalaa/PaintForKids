@@ -11,6 +11,8 @@ ExitAction::~ExitAction()
 
 void ExitAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	ReadActionParameters();
 	if (Answer)
 	{
@@ -28,6 +30,8 @@ void ExitAction::Execute()
 
 ActionState ExitAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	if(!pManager->GetIfListSaved())
 	{
 		pOut->PrintMessage("Do you want to save graph before exit?(Y,n)");

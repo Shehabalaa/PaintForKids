@@ -8,11 +8,9 @@ class Action
 {
 protected:
 	ApplicationManager *pManager;	//Actions needs AppMngr to do their job
-	Output *pOut;	//Actions needs AppMngr to do their job( like getting pionter to ouput obj.)
-	Input *pIn;	//Actions needs AppMngr to do their job( like getting pionter to input obj.)
 public:
 
-	Action(ApplicationManager *pApp) { pManager = pApp; pOut = pApp->GetOutput(); pIn = pApp->GetInput();	}	//constructor
+	Action(ApplicationManager *pApp) { pManager = pApp; }	//constructor
 
 	//Reads parameters required for action to execute (code depends on action type) 
 	virtual ActionState ReadActionParameters() =0; // this action will detremine depending on these parameters to 

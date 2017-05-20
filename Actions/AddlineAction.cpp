@@ -36,15 +36,26 @@ ActionState AddlineAction::ReadActionParameters()
 //Execute the action
 void AddlineAction::Execute()
 {
-	//This action needs to read some parameters first
-	ReadActionParameters();
-	int figs_count = pManager->GetFigCount();
-	//Create a rectangle with the parameters read from the user
-	Cline *l = new Cline(s, e, LineGfxInfo);
+	Output* pOut = pManager->GetOutput();
+	if (pManager->GetFigCount() < pManager->GetMaxFigCount())
+	{
+		//This action needs to read some parameters first
+		ReadActionParameters();
+		//Create a rectangle with the parameters read from the user
+		Cline *l = new Cline(s, e, LineGfxInfo);
 
-	if (l->InDrawingArea())
-		pManager->AddFigure(l);
-	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+		if (l->InDrawingArea())
+		{
+			l->SetID();
+			pManager->AddFigure(l);
+			pManager->AdjustList(DRAW_LINE);
+		}
+		else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+	}
+	else
+	{
+		pOut->PrintMessage("Can't Add More Figures as figures reached its maximumnumber");
+	}
 
 
 }
