@@ -40,7 +40,7 @@ void PickByTypeAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	if (size > 0) {
+	
 		while (1)
 		{
 
@@ -91,8 +91,8 @@ void PickByTypeAction::Execute()
 				return;
 			}
 		}
-	}
-	else pOut->PrintMessage("No Figures to play with");
+	
+	
 }
 
 

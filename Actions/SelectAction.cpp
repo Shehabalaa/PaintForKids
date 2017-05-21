@@ -64,6 +64,7 @@ void ActionSelect::Execute()
 			}
 		}
 		count = countselect();
+
 		if (count == 1)
 		{
 			CFigure * SelectedFigure = pManager->GetSelectedFigure();

@@ -23,11 +23,15 @@ void CNGborderwidth :: Execute ()
 	if (Pen > 0)
 	{
 		if (pManager->countselected() > 0)
+		{
 			pManager->change_PenWidth_Action(Pen);
+			pManager->GraphSaved = false;
+		}
 		else
 		{
 
 			UI.PenWidth = Pen;
+
 		}
 	}
 	else { pOut->PrintMessage("you didn't choose a width "); }

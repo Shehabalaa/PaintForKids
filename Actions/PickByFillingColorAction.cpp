@@ -37,8 +37,8 @@ void ByFillingColor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	if (size > 0)
-	{
+	
+	
 		while (1)
 		{
 			if (WrongCount == 0)
@@ -102,8 +102,8 @@ void ByFillingColor::Execute()
 			}
 			else { return; }
 		}
-	}
-	else pOut->PrintMessage("No Figures to play with");
+	
+	
 }
 
 ByFillingColor::~ByFillingColor()

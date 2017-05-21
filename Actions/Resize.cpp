@@ -19,15 +19,22 @@ ActionState Resize :: ReadActionParameters()
 }
 void Resize :: Execute() 
 {
-	Output* pOut = pManager->GetOutput();
-	ReadActionParameters();
-	if (ResizeRatio > 0)
+	if (pManager->countselected())
 	{
-		pManager->Resize_Action(ResizeRatio);
+		Output* pOut = pManager->GetOutput();
+		ReadActionParameters();
+		if (ResizeRatio > 0)
+		{
+			pManager->Resize_Action(ResizeRatio);
+		}
+		else
+		{
+			pOut->PrintMessage("you didn't choose a ratio");
+		}
 	}
-	else
-	{
-		pOut->PrintMessage("you didn't choose a ratio");
+	else {
+		pManager->GetOutput()->PrintMessage("No Slected Figures to be Resized");
+		Sleep(1000);
 	}
 }
 Resize ::~Resize()

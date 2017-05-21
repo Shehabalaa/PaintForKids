@@ -600,10 +600,23 @@ void Output::PrintGuideMessages(ActionType ActType)
 	}
 	else if (UI.InterfaceMode == MODE_PICKANDHIDE)
 	{
-		//TODO
 		switch (ActType)
 		{
-		default:
+		case PICK_TYPE:
+			PrintMessage("Pick By Type ");
+			break;
+
+		case PICK_FILL:
+			PrintMessage("Pick By Filling Color");
+			break;
+		case PICK_TYPEFILL:
+			PrintMessage("Pick By Type and Filling Color ");
+			break;
+		case PICK_AREA:
+			PrintMessage("Pick By Area");
+			break;
+		case TO_PLAY:
+			PrintMessage("BACK");
 			break;
 		}
 	}

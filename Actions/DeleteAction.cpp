@@ -6,7 +6,17 @@ DeleteAction::DeleteAction(ApplicationManager * pApp) : Action(pApp)
 
 void DeleteAction::Execute()
 {
-	pManager->DeleteAll();
+	if (pManager->countselected())
+	{
+		if (pManager->GetFigCount())
+			pManager->DeleteAll();
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("No Slected Figures to be Deleted");
+		Sleep(1000);
+	}
+	
 
 }
 

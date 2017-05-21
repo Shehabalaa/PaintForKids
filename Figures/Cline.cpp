@@ -158,7 +158,7 @@ bool Cline::check(int x, int y) const
 	if (slope == -1)
 	{
 		
-		if ((y > start.y*UI.ZoomFactor && y < end.y*UI.ZoomFactor) || (y<start.y*UI.ZoomFactor && y>end.y*UI.ZoomFactor))
+		if ((y >= start.y*UI.ZoomFactor && y <= end.y*UI.ZoomFactor) || (y<=start.y*UI.ZoomFactor && y>=end.y*UI.ZoomFactor))
 			 return true;
 		if (start.x *UI.ZoomFactor == end.x*UI.ZoomFactor && abs(end.x*UI.ZoomFactor - x) < 2 && start.y *UI.ZoomFactor == end.y *UI.ZoomFactor&& abs(end.y*UI.ZoomFactor - y) <2) // if line just a point this cals.- abd abs to make it easy to select just point :D
 			return true;
@@ -172,7 +172,7 @@ bool Cline::check(int x, int y) const
 	else
 	{
 		float slope2 = float(y - start.y*UI.ZoomFactor) / float(x - start.x*UI.ZoomFactor);
-		if (abs(slope - slope2) < 3)
+		if (abs(slope - slope2) < 1)
 		{
 			float l1 = sqrt(pow((x - start.x*UI.ZoomFactor), 2) + pow((y - start.y*UI.ZoomFactor), 2));
 			float l2 = sqrt(pow((x - end.x*UI.ZoomFactor), 2) + pow((y - end.y*UI.ZoomFactor), 2));
