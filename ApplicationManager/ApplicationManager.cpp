@@ -409,14 +409,15 @@ void ApplicationManager::Resize_Action(float Ratio)
 void ApplicationManager::change_border_color_Action(color C)
 {
 
-
-	for (int i = 0; i<FigCount; i++)
+	if (C != AZURE)
 	{
-		if (FigList[i]->IsSelected())
-			FigList[i]->ChngDrawClr(C);
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+				FigList[i]->ChngDrawClr(C);
 
+		}
 	}
-
 }
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::change_PenWidth_Action(int PW)
@@ -451,34 +452,40 @@ void ApplicationManager::change_Filled_color_Action(color C)
 
 }
 
-void ApplicationManager::AdjustList(ActionType act) // start and end have default values start=0 end = figcount
+void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcount) // start and end have default values start=0 end = figcount
 {
+	if (!figlist)
+	{
+		figlist = FigList;
+		figcount = FigCount;
+	}
+
 	if (act == MOVE)
 	{
 		vector<CFigure*> unMoved_Not_Filled;
 		vector<CFigure*> Moved_Not_Filled;
 		vector<CFigure*> unMoved_Filled;
 		vector<CFigure*> Moved_Filled;
-		for  (int i = 0; i < FigCount; i++)
+		for  (int i = 0; i < figcount; i++)
 		{
-			if (FigList[i]->IsSelected()) // means moved
+			if (figlist[i]->IsSelected()) // means moved
 			{
-				if (FigList[i]->IsFilled())
-					Moved_Filled.push_back(FigList[i]);
+				if (figlist[i]->IsFilled())
+					Moved_Filled.push_back(figlist[i]);
 				else
-					Moved_Not_Filled.push_back(FigList[i]);
+					Moved_Not_Filled.push_back(figlist[i]);
 			}
 			else // means unmoved
 			{
-				if (FigList[i]->IsFilled())
-					unMoved_Filled.push_back(FigList[i]);
+				if (figlist[i]->IsFilled())
+					unMoved_Filled.push_back(figlist[i]);
 				else
-					unMoved_Not_Filled.push_back(FigList[i]);
+					unMoved_Not_Filled.push_back(figlist[i]);
 
 			}
 
 
-			FigList[i] = NULL;
+			figlist[i] = NULL;
 
 		}
 		int temp = 0;
@@ -501,14 +508,14 @@ void ApplicationManager::AdjustList(ActionType act) // start and end have defaul
 	{
 		vector<CFigure*> Not_Filled;
 		vector<CFigure*> Filled;
-		for (int i = 0; i < FigCount; i++)
+		for (int i = 0; i < figcount; i++)
 		{
-			if (FigList[i]->IsFilled())
-				Filled.push_back(FigList[i]);
+			if (figlist[i]->IsFilled())
+				Filled.push_back(figlist[i]);
 			else
-				Not_Filled.push_back(FigList[i]);
+				Not_Filled.push_back(figlist[i]);
 
-			FigList[i] = NULL;
+			figlist[i] = NULL;
 
 		}
 		int temp = 0;
@@ -523,13 +530,13 @@ void ApplicationManager::AdjustList(ActionType act) // start and end have defaul
 	else if (act == DEL)
 	{
 		int temp = 0, i = 0;
-		while (temp != FigCount)
+		while (temp != figcount)
 		{
-			if (FigList[i])
+			if (figlist[i])
 			{
-				FigList[temp++] = FigList[i];
+				FigList[temp++] = figlist[i];
 				if (i != (temp - 1))
-					FigList[i] = NULL;
+					figlist[i] = NULL;
 			}
 
 			i++;
@@ -537,17 +544,17 @@ void ApplicationManager::AdjustList(ActionType act) // start and end have defaul
 	}
 	else if (act == DRAW_LINE || act == DRAW_CIRC || act == DRAW_TRI || act == DRAW_RECT)
 	{
-		CFigure * ptr = FigList[FigCount - 1];
+		CFigure * ptr = FigList[figcount - 1];
 		if (!ptr->IsFilled())
 		{
 			int i=0;
 
-			for (i = FigCount-1; i >0&& FigList[i]->IsFilled(); i--)
+			for (i = figcount-1; i >0&& figlist[i]->IsFilled(); i--)
 			{
-				FigList[i] = FigList[i - 1];
+				figlist[i] = FigList[i - 1];
 			}
 
-			FigList[i] = ptr;
+			figlist[i] = ptr;
 		}
 	}
 
@@ -578,18 +585,19 @@ void ApplicationManager::UserGuide() const
 }
 void ApplicationManager::DeletePickedFigure(CFigure ** PickList, int& size, CFigure * FIGURE)
 {
-
-	for (int i = 0; i < size; i++)
+	int originalsize = size;
+	for (int i = 0; i < originalsize; i++)
 	{
 		if (PickList[i] == FIGURE)
 		{
 			delete PickList[i];
 			PickList[i] = NULL;
-			swap(PickList[i], PickList[size - 1]);
 			size--;
-			i--;
 		}
 	}
+
+	AdjustList(DEL, PickList,size);
+
 }
 CFigure *ApplicationManager::GetFigure(int x, int y, CFigure ** PickList, int size) const
 {

@@ -62,7 +62,9 @@ void ChangeBGAction::Execute()
 	case SELECT_WHITE_COLOR:
 		pOut->SetBGColor(WHITE);
 		break;
-
+	case SELECT_NON_COLOR:
+		pOut->SetBGColor(UI.BkGrndColor);
+		break;
 
 	}
 	pOut->PrintMessage("BackGround Color Changed");

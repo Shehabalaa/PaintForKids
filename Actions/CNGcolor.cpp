@@ -46,6 +46,9 @@ ActionState CNGcolor :: ReadActionParameters ()
 	case SELECT_WHITE_COLOR:
 		Colour=WHITE;
 		break;
+	case SELECT_NON_COLOR:
+		Colour = AZURE;
+		break;
 	}
 	return Successful;
 }
@@ -55,7 +58,7 @@ void CNGcolor::Execute()
 	ReadActionParameters();
 	if (C != EMPTY2)
 	{
-		if (pManager->countselected() > 0)
+		if (pManager->countselected() > 0 && Colour != AZURE)
 		{
 			pManager->change_Filled_color_Action(Colour);
 			pManager->GraphSaved = false;
@@ -64,10 +67,13 @@ void CNGcolor::Execute()
 		}
 		else
 		{
-			UI.FillColor = Colour;
-			UI.FilledFigures = true;
-			pManager->GraphSaved = false;
-			pManager->AdjustList(CHNG_FILL_CLR);
+			if (Colour != AZURE)
+			{
+				UI.FillColor = Colour;
+				UI.FilledFigures = true;
+				pManager->GraphSaved = false;
+				pManager->AdjustList(CHNG_FILL_CLR);
+			}
 		}
 	}
 	else { pOut->PrintMessage("you didn't choose a color"); }

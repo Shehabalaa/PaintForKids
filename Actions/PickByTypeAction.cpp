@@ -40,62 +40,59 @@ void PickByTypeAction::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-
-	while (size >= 0)
-	{
-
-		if (WrongCount == 0)
-		{
-			pOut->PrintMessage("YOU LOSE");
-			string s;
-			s = "images\\MenuItems\\LOSE.jpg";
-
-			
-			
-				pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
-			
-
-			int x, y;
-			pIn->GetPointClicked(x, y);
-			pOut->PrintMessage("Click to Continue");
-			break;
-		}
-		if (RightCount == PickedFigureNumber)
+	if (size > 0) {
+		while (1)
 		{
 
-			pOut->PrintMessage("YOU WIN");
-			string s;
-			s = "images\\MenuItems\\WIN.jpg";
-			pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
-			int x, y;
-			pIn->GetPointClicked(x, y);
-			pOut->PrintMessage("Click to Continue");
-			break;
-		}
-
-		if (ReadActionParameters() == Successful)
-		{
-			CFigure *PickedFigure = pManager->GetFigure(click.x, click.y, PickList, size);
-			if (PickedFigure != NULL)
+			if (WrongCount == 0)
 			{
-				if (PickedFigure->FigType() == type)
-				{
-					RightCount++;
+				pOut->PrintMessage("YOU LOSE");
+				string s;
+				s = "images\\MenuItems\\LOSE.jpg";
+				pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
+				int x, y;
+				pIn->GetPointClicked(x, y);
+				pOut->PrintMessage("Click to Continue");
+				break;
+			}
+			if (RightCount == PickedFigureNumber)
+			{
 
-					pManager->DeletePickedFigure(PickList, size, PickedFigure);
-					pManager->UpdateInterface(PickList, size);
-				}
+				pOut->PrintMessage("YOU WIN");
+				string s;
+				s = "images\\MenuItems\\WIN.jpg";
+				pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
+				int x, y;
+				pIn->GetPointClicked(x, y);
+				pOut->PrintMessage("Click to Continue");
+				break;
+			}
 
-				else
+			if (ReadActionParameters() == Successful)
+			{
+				CFigure *PickedFigure = pManager->GetFigure(click.x, click.y, PickList, size);
+				if (PickedFigure != NULL)
 				{
-					WrongCount--;
+					if (PickedFigure->FigType() == type)
+					{
+						RightCount++;
+
+						pManager->DeletePickedFigure(PickList, size, PickedFigure);
+						pManager->UpdateInterface(PickList, size);
+					}
+
+					else
+					{
+						WrongCount--;
+					}
 				}
 			}
-		}
-		else {
-			return;
+			else {
+				return;
+			}
 		}
 	}
+	else pOut->PrintMessage("No Figures to play with");
 }
 
 

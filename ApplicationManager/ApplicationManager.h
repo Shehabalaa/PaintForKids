@@ -53,7 +53,7 @@ public:
 	void change_border_color_Action(color C);
 	void change_PenWidth_Action(int PW);        //PW:Pen Width
 	void change_Filled_color_Action(color C);
-	void AdjustList(ActionType);
+	void AdjustList(ActionType,CFigure** = NULL,int = 0);
 	int CountFigure(figures);
 	int CountFigure(color, bool);
 	

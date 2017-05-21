@@ -46,6 +46,9 @@ ActionState CNGborderColor::ReadActionParameters()
 	case SELECT_WHITE_COLOR:
 		Colour=WHITE;
 		break;
+	case SELECT_NON_COLOR:
+		Colour = AZURE;
+		break;
 	}
 	return Successful;
 }
@@ -60,7 +63,8 @@ void CNGborderColor ::Execute()
 	
 	else
 	{
-		UI.DrawColor=Colour;
+		if(Colour != AZURE)
+			UI.DrawColor=Colour;
 	}
 
 }

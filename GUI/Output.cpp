@@ -324,7 +324,7 @@ void Output::CreateAreaTypeBar() const
 	{
 
 		if (j == 68)
-			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, (UI.height - UI.StatusBarHeight)+1);
 		else
 			for (int i = 0; i < 2; i++)
 				pWind->DrawImage(PickByAreaMenueItem[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);

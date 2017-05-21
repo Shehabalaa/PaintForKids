@@ -88,7 +88,7 @@ bool CCircle::check(int x,int y) const
 {
 	int d;
 	d= sqrt(pow((x - center.x*UI.ZoomFactor), 2) + pow((y - center.y*UI.ZoomFactor), 2));
-	if (d <= rad)
+	if (d <= rad*UI.ZoomFactor)
 	{
 		return true;
 	}

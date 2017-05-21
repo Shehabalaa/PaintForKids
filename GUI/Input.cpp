@@ -335,7 +335,7 @@ Colors Input::GetColor()
 
 		}
 	}
-	return EMPTY2;
+	return SELECT_NON_COLOR;
 }
 
 

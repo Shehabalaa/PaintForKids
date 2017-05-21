@@ -15,7 +15,7 @@ void PickandHideAction::InitData()
 	Input* pIn = pManager->GetInput();
 	CFigure * FirstFigure = NULL;
 	do {
-		if (pManager->GetFigCount() == 0)
+		if (size == 0)
 			break;
 		pOut->PrintMessage("Pick The First Figure  ");
 		pIn->GetPointClicked(click.x, click.y);
@@ -60,7 +60,7 @@ ActionState  PickandHideAction::ReadActionParameters()
 
 
 		PICKING_TYPE = pIn->GetUserAction();
-	} while (PICKING_TYPE == EMPTY);
+	} while (PICKING_TYPE != PICK_AREA&&PICKING_TYPE !=PICK_FILL &&PICKING_TYPE !=PICK_TYPEFILL &&PICKING_TYPE !=PICK_TYPE );
 	return Successful;
 }
 
