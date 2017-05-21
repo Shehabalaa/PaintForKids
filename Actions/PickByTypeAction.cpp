@@ -38,7 +38,7 @@ ActionState PickByTypeAction::ReadActionParameters()
 void PickByTypeAction::Execute()
 {
 
-	while (size > 0)
+	while (size >= 0)
 	{
 
 		if (WrongCount == 0)

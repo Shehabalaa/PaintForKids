@@ -47,10 +47,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK_FILL,
 	PICK_TYPEFILL,
 	PICK_AREA,
-	PICKED_rec,
-	PICKED_Line,
-	PICKED_Circ,
-	PICKED_Tri,
+	
 	///TODO: Add more action types (if needed)
 };
 

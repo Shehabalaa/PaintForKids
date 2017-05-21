@@ -308,6 +308,37 @@ void Output::CreateResizeBar() const
 
 
 }
+//////////////////////////////////////////
+void Output::CreateAreaTypeBar() const
+{
+
+
+	string PickByAreaMenueItem[2];
+	PickByAreaMenueItem[Max] = "images\\MenuItems\\maximum.jpg";
+	PickByAreaMenueItem[Min] = "images\\MenuItems\\minimum.jpg";
+	
+
+	pWind->SetPen(WHITE, 1);
+	pWind->SetBrush(WHITE);
+	for (int j = 1; j <= UI.ColorsBarWidth; j++)
+	{
+
+		if (j == 68)
+			pWind->DrawRectangle(UI.width - 70, UI.ColorsBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+		else
+			for (int i = 0; i < 2; i++)
+				pWind->DrawImage(PickByAreaMenueItem[i], UI.width - j, (i*UI.MenuItemWidth) + UI.ToolBarHeight, UI.MenuItemWidth, UI.ToolBarHeight);
+	}
+
+	if (UI.BkGrndColor == BLUE)
+		pWind->SetPen(RED, 1);
+	else
+		pWind->SetPen(BLUE, 1);
+	pWind->DrawLine(UI.width - UI.ColorsBarWidth, UI.ToolBarHeight, UI.width - UI.ColorsBarWidth, UI.height - UI.StatusBarHeight);
+
+
+}
+//////////////////////////////////////////
 
 void Output::CreatePlayToolBar() const
 {

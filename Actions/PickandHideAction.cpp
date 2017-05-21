@@ -6,6 +6,7 @@ PickandHideAction::PickandHideAction(ApplicationManager *pApp) :Action(pApp)
 	click.x = 0;
 	click.y = 0;
 	PickList = pManager->GetDeepCopyFromFigList(size);
+	pManager->UpdateInterface(PickList, size);
 }
 
 void PickandHideAction::InitData()
@@ -22,7 +23,9 @@ void PickandHideAction::InitData()
 		
 	} while (FirstFigure == NULL);
 		
-		fig=FirstFigure->FigType();
+	if (FirstFigure != NULL)
+	{
+		fig = FirstFigure->FigType();
 		if (FirstFigure->IsFilled())
 		{
 			Filled = true;
@@ -34,8 +37,10 @@ void PickandHideAction::InitData()
 			Filled = false;
 		}
 
-		pManager->DeletePickedFigure(PickList,size,FirstFigure);
-		pManager->UpdateInterface(PickList, size);
+		pManager->DeletePickedFigure(PickList, size, FirstFigure);
+		
+	}
+	pManager->UpdateInterface(PickList, size);
 
 }
 
@@ -47,12 +52,11 @@ int PickandHideAction::Getsize()
 
 ActionState  PickandHideAction::ReadActionParameters()
 {
-	
-	pOut->PrintMessage("Choose a Playing Mode ");
+	do {
+		pOut->PrintMessage("Choose a Playing Mode ");
 
 		PICKING_TYPE = pIn->GetUserAction();
-	
-
+	} while (PICKING_TYPE == EMPTY);
 	return Successful;
 }
 

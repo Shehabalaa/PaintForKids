@@ -132,6 +132,11 @@ enum ZoomMenuItem
 	z200,
 	zcount
 };
+enum PickByAreaMenueItem
+{
+	Max,
+	Min
+};
 
 
 

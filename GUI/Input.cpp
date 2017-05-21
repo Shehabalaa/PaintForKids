@@ -364,6 +364,28 @@ int Input::GetBorder()
 
 
 }
+int Input::GetAreaType()
+{
+	int x, y;
+	pWind->WaitMouseClick(x, y);
+	if (y >= 0 && y > UI.ToolBarHeight && x > UI.width - 70)
+	{
+		int Clicked = ((y - UI.ToolBarHeight) / UI.MenuItemWidth);
+
+		switch (Clicked)
+		{
+		case Max:	return Max;
+		case Min:	return Min;
+
+		default: return -1;
+
+		}
+	}
+	else return -1;
+
+
+}
+
 
 float Input::GetResizeRatio()
 {

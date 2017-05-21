@@ -16,6 +16,7 @@ public:
 	void CreateBorderBar() const;   
 	void CreateResizeBar() const;
 	void CreateZoomBar() const;
+	void CreateAreaTypeBar() const;
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreatePickandHideToolBar() const; //  draw the pick and hide toolbar
 	void CreatePickandHideFiguresToolBar() const;

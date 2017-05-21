@@ -25,26 +25,24 @@ ActionState ByFillingColor::ReadActionParameters()
 void ByFillingColor::Execute()
 {
 
-	while (pManager->GetFigCount() >= 0)
+	while (size >= 0)
 	{
 		if (WrongCount == 0)
 		{
-			
-				pOut->PrintMessage("YOU LOSE");
-				string s;
-				s = "images\\MenuItems\\LOSE.jpg";
+			pOut->PrintMessage("YOU LOSE");
+			string s;
+			s = "images\\MenuItems\\LOSE.jpg";
 
-				for (int j = 1; j <500; j++)
-				{
-					pOut->GetWindow()->DrawImage(s, 340, 150, 500, 350);
-				}
+			for (int j = 1; j < 500; j++)
+			{
+				pOut->GetWindow()->DrawImage(s, UI.width - j, 150, 500, 350);
+			}
 
-				int x, y;
-				pIn->GetPointClicked(x, y);
-				pOut->PrintMessage("Click to Continue");
-				break;
+			int x, y;
+			pIn->GetPointClicked(x, y);
+			pOut->PrintMessage("Click to Continue");
+			break;
 		}
-
 		if (RightCount == PickedFigureNumber)
 		{
 
@@ -57,7 +55,6 @@ void ByFillingColor::Execute()
 			pOut->PrintMessage("Click to Continue");
 			break;
 		}
-
 		//checks
 		ReadActionParameters();
 

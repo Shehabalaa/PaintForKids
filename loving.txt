@@ -1,4 +1,0 @@
-BLUE      GREEN     LIGHTGOLDENRODYELLOW
-2
-RECTANGLE      1    146     139     431     329                         BLUE              NO_FILL           3
-RECTANGLE      2    622     266     690     320                         BLUE              NO_FILL           3

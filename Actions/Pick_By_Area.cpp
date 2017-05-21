@@ -10,20 +10,30 @@ PickByArea::PickByArea(ApplicationManager * pApp, CFigure ** PickList, int &size
 	this->size = size;
 	MAX.first = 0;
 	MAX.second = NULL;
+	MIN.first = 1000000; 
+	MIN.second = NULL;
 	PickedFigureNumber = pManager->GetFigCount();
+	
 }
 ActionState PickByArea::ReadActionParameters()
 {
-	pOut->PrintMessage("Pick The Biggest Figure");
-	pIn->GetPointClicked(click.x, click.y);
-
-
+	pOut->PrintMessage("Choose Max||Min Area");
+	
+	do{
+		pOut->CreateAreaTypeBar();
+		Choice = pIn->GetAreaType();
+	} while (Choice == -1);
+	pOut->PrintMessage("You didn't choose");
+	pManager->UpdateInterface(PickList, size);
+	
 	return Successful;
 }
 void PickByArea::Execute()
 {
-
-	while (pManager->GetFigCount()> 0)
+	
+	ReadActionParameters();
+	
+	while (size>= 0)
 	{
 		if (WrongCount == 0)
 		{
@@ -58,40 +68,72 @@ void PickByArea::Execute()
 
 		//checks
 
-
-		ReadActionParameters();
-		MAX.first = 0; MAX.second = NULL;
-		for (int i = 0; i < size; i++)
-		{
-	        if (PickList[i]->GetArea() > MAX.first)
-			{
-				MAX.first = PickList[i]->GetArea();
-				MAX.second = PickList[i];
-			}
-		}
-	
-
-
-
-		CFigure* F = pManager->GetFigure(click.x, click.y, PickList, size);
+		pIn->GetPointClicked(click.x, click.y);
 		
-		if (F != NULL)
+		
+		
+		if (Choice == Max)
 		{
-			if (F == MAX.second)
+			MAX.first = 0; MAX.second = NULL;
+			for (int i = 0; i < size; i++)
 			{
-
-				RightCount++;
-				pManager->DeletePickedFigure(PickList, size, F);
-				pManager->UpdateInterface(PickList, size);
+				if (PickList[i]->GetArea() > MAX.first)
+				{
+					MAX.first = PickList[i]->GetArea();
+					MAX.second = PickList[i];
+				}
 			}
-			else
+			CFigure* F = pManager->GetFigure(click.x, click.y, PickList, size);
+			if (F != NULL)
 			{
-				WrongCount--;
+				if (F == MAX.second)
+				{
+
+					RightCount++;
+					pManager->DeletePickedFigure(PickList, size, F);
+					pManager->UpdateInterface(PickList, size);
+				}
+				else
+				{
+					WrongCount--;
+				}
+
+
 			}
-
-
 		}
 
+		else if (Choice == Min)
+		{
+			{
+				MIN.first = 1000000; MIN.second = NULL;
+				for (int i = 0; i < size; i++)
+				{
+					if (PickList[i]->GetArea() < MIN.first)
+					{
+						MIN.first = PickList[i]->GetArea();
+						MIN.second = PickList[i];
+					}
+				}
+			}
+			CFigure* F = pManager->GetFigure(click.x, click.y, PickList, size);
+			if (F != NULL)
+			{
+				if (F == MIN.second)
+				{
+
+					RightCount++;
+					pManager->DeletePickedFigure(PickList, size, F);
+					pManager->UpdateInterface(PickList, size);
+				}
+				else
+				{
+					WrongCount--;
+				}
+
+
+			}
+
+		}
 	}
 }
 PickByArea::~PickByArea()

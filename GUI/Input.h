@@ -23,6 +23,7 @@ public:
 	int GetBorder();
 	float GetResizeRatio();
 	float GetZoomPercentage();
+	int GetAreaType();
 	~Input();
 };
 

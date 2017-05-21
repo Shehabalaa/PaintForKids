@@ -36,7 +36,7 @@ ActionState PickByTypeandFillingColorAction::ReadActionParameters()
 void PickByTypeandFillingColorAction::Execute()
 {
 
-	while (pManager->GetFigCount() > 0)
+	while (size >= 0)
 	{
 		if (WrongCount == 0)
 		{
