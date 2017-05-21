@@ -43,7 +43,7 @@ void Cline::UpdateArea()
 	 Point tmp1 = start;
 	 Point tmp2 = end;
 	 float X, Y, X1, Y1, X2, Y2 = 0;
-	 double z, w, m;
+	 //double z, w, m;
 	 X = abs(start.x - end.x);
 	 Y = abs(start.y - end.y);
 	 //z= modf((double)((ratio-1)*X),&w);

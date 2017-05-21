@@ -10,6 +10,8 @@ ChangeBGAction::ChangeBGAction(ApplicationManager *pApp) :Action(pApp)
 
 ActionState ChangeBGAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
 	pOut->CreateColorsBar();
 
@@ -23,6 +25,7 @@ ActionState ChangeBGAction::ReadActionParameters()
 
 void ChangeBGAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	switch (co)
 	{
@@ -62,7 +65,6 @@ void ChangeBGAction::Execute()
 
 
 	}
-
 	pOut->PrintMessage("BackGround Color Changed");
 }
 

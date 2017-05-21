@@ -17,20 +17,24 @@ PickByArea::PickByArea(ApplicationManager * pApp, CFigure ** PickList, int &size
 }
 ActionState PickByArea::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Choose Max||Min Area");
-	
-	do{
+
+	do {
 		pOut->CreateAreaTypeBar();
 		Choice = pIn->GetAreaType();
 	} while (Choice == -1);
 	pOut->PrintMessage("You didn't choose");
 	pManager->UpdateInterface(PickList, size);
-	
+
+
 	return Successful;
 }
 void PickByArea::Execute()
 {
-	
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	ReadActionParameters();
 	
 	while (size>= 0)

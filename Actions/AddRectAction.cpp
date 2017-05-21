@@ -36,15 +36,27 @@ ActionState AddRectAction::ReadActionParameters()
 //Execute the action
 void AddRectAction::Execute() 
 {
-	//This action needs to read some parameters first
-	ReadActionParameters();
-	int figs_count = pManager->GetFigCount(); 
-	//Create a rectangle with the parameters read from the user
-	CRectangle *R = new CRectangle(P1, P2, RectGfxInfo);
+	Output* pOut = pManager->GetOutput();
+	if (pManager->GetFigCount() < pManager->GetMaxFigCount())
+	{
+		//This action needs to read some parameters first
+		ReadActionParameters();
 
-	if (R->InDrawingArea())
-		pManager->AddFigure(R);
-	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+		//Create a rectangle with the parameters read from the user
+		CRectangle *R = new CRectangle(P1, P2, RectGfxInfo);
 
+		if (R->InDrawingArea())
+		{
+			R->SetID();
+			pManager->AddFigure(R);
+			pManager->AdjustList(DRAW_RECT);
+		}
+		else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+
+	}
+	else
+	{
+		pOut->PrintMessage("Can't Add More Figures as figures reached its maximumnumber");
+	}
 	
 }

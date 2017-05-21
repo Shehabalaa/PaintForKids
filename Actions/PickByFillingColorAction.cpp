@@ -14,6 +14,8 @@ ByFillingColor::ByFillingColor(ApplicationManager * pApp,CFigure ** PickList,int
 
 ActionState ByFillingColor::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
 	pIn->GetPointClicked(click.x, click.y);
 
@@ -24,6 +26,8 @@ ActionState ByFillingColor::ReadActionParameters()
 
 void ByFillingColor::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
 	while (size >= 0)
 	{

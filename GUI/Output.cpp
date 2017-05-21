@@ -391,7 +391,7 @@ void Output::CreatePickandHideToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(BLACK, 1);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 
@@ -572,7 +572,7 @@ void Output::PrintGuideMessages(ActionType ActType)
 			break;
 		}
 	}
-	else if (MODE_PLAY)
+	else if (UI.InterfaceMode == MODE_PLAY)
 	{
 		switch (ActType)
 		{
@@ -598,6 +598,16 @@ void Output::PrintGuideMessages(ActionType ActType)
 			break;
 		}
 	}
+	else if (UI.InterfaceMode == MODE_PICKANDHIDE)
+	{
+		//TODO
+		switch (ActType)
+		{
+		default:
+			break;
+		}
+	}
+
 
 }
 

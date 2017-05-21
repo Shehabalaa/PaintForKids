@@ -7,7 +7,9 @@ LoadAction::LoadAction(ApplicationManager * pApp):Action(pApp)
 
 ActionState LoadAction::ReadActionParameters()
 {
-
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	pOut->GetWindow()->FlushKeyQueue();// avoid non neccessary keypresses before action
 	pOut->PrintMessage("Please Enter name of file to load graph from!");
 	File_Name=pIn->GetSrting(pOut);
 
@@ -21,6 +23,8 @@ ActionState LoadAction::ReadActionParameters()
 
 void LoadAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	// firstly ask user to save graph if isnot saved
 	if (!pManager->GetIfListSaved())
 	{
@@ -68,6 +72,8 @@ void LoadAction::Execute()
 
 bool LoadAction::ActionFailedEvent()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Error:File isn't found, Try again?(Y/n)");;
 	string temp = pIn->GetSrting(pOut);
 	if ('n' == temp[0] || 'N' == temp[0])

@@ -5,7 +5,9 @@ CNGborderwidth :: CNGborderwidth (ApplicationManager *pApp) : Action (pApp)
 }
 ActionState CNGborderwidth :: ReadActionParameters()
 {
-	
+
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage(" choose Pen Width");
 	pOut->CreateBorderBar();
 	Pen = pIn->GetBorder();
@@ -15,6 +17,7 @@ ActionState CNGborderwidth :: ReadActionParameters()
 
 void CNGborderwidth :: Execute ()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 
 	if (Pen > 0)

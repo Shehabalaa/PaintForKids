@@ -4,9 +4,12 @@ CNGcolor :: CNGcolor(ApplicationManager * pApp):Action (pApp)
 }
 ActionState CNGcolor :: ReadActionParameters ()
 {
-	
-	pOut->PrintMessage(" Choose the Color to Fill your Figure(s) !");
+
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	Colors C;
 	pOut->CreateColorsBar();
+	pOut->PrintMessage(" Choose the Color to Fill your Figure(s) !");
 	C=pIn->GetColor();
 	switch (C)
 	{
@@ -46,23 +49,29 @@ ActionState CNGcolor :: ReadActionParameters ()
 	}
 	return Successful;
 }
-void CNGcolor :: Execute ()
+void CNGcolor::Execute()
 {
-		ReadActionParameters();
-		if (C != EMPTY2)
+	Output* pOut = pManager->GetOutput();
+	ReadActionParameters();
+	if (C != EMPTY2)
+	{
+		if (pManager->countselected() > 0)
 		{
-			if (pManager->countselected() > 0)
-			{
-				pManager->change_Filled_color_Action(Colour);
+			pManager->change_Filled_color_Action(Colour);
+			pManager->GraphSaved = false;
+			pManager->AdjustList(CHNG_FILL_CLR);
 
-			}
-			else
-			{
-				UI.FillColor = Colour;
-				UI.FilledFigures = true;
-			}
 		}
-		else { pOut->PrintMessage("you didn't choose a color"); }
+		else
+		{
+			UI.FillColor = Colour;
+			UI.FilledFigures = true;
+			pManager->GraphSaved = false;
+			pManager->AdjustList(CHNG_FILL_CLR);
+		}
+	}
+	else { pOut->PrintMessage("you didn't choose a color"); }
+
 }
 CNGcolor :: ~CNGcolor()
 {

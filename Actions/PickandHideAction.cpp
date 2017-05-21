@@ -11,7 +11,8 @@ PickandHideAction::PickandHideAction(ApplicationManager *pApp) :Action(pApp)
 
 void PickandHideAction::InitData()
 {
-	
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	CFigure * FirstFigure = NULL;
 	do {
 		if (pManager->GetFigCount() == 0)
@@ -52,8 +53,11 @@ int PickandHideAction::Getsize()
 
 ActionState  PickandHideAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	do {
 		pOut->PrintMessage("Choose a Playing Mode ");
+
 
 		PICKING_TYPE = pIn->GetUserAction();
 	} while (PICKING_TYPE == EMPTY);
@@ -62,6 +66,8 @@ ActionState  PickandHideAction::ReadActionParameters()
 
 void PickandHideAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+
 	UI.InterfaceMode = MODE_PICKANDHIDE;
 	pOut->CreatePickandHideToolBar();
 	pOut->PrintMessage("Pick------&-----Hide");

@@ -23,11 +23,10 @@ PickByTypeandFillingColorAction::PickByTypeandFillingColorAction(ApplicationMana
 ActionState PickByTypeandFillingColorAction::ReadActionParameters()
 {
 
-
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
 	pIn->GetPointClicked(click.x, click.y);
-
-
 
 	//pIn->GetPointClicked(click.x, click.y);
 	return Successful;
@@ -35,6 +34,8 @@ ActionState PickByTypeandFillingColorAction::ReadActionParameters()
 
 void PickByTypeandFillingColorAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
 	while (size >= 0)
 	{

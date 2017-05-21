@@ -4,7 +4,8 @@ Zoom :: Zoom (ApplicationManager* pApp):Action(pApp)
 }
 ActionState Zoom::ReadActionParameters()
 {
-
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Which Percentage do you want to resize your figure(s)");
 	pOut->CreateZoomBar();
 	Percentage = pIn->GetZoomPercentage();
@@ -13,6 +14,7 @@ ActionState Zoom::ReadActionParameters()
 
 void Zoom :: Execute ()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	if (Percentage>0)
 		UI.ZoomFactor = Percentage;

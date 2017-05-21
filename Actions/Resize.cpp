@@ -8,6 +8,8 @@ Resize::Resize( ApplicationManager * pApp ): Action( pApp)
 
 ActionState Resize :: ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
 	pOut->PrintMessage("Which ratio do you want to resize your figure(s)");
 	pOut->CreateResizeBar();
@@ -17,6 +19,7 @@ ActionState Resize :: ReadActionParameters()
 }
 void Resize :: Execute() 
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	if (ResizeRatio > 0)
 	{

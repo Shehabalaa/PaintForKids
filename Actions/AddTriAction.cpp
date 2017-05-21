@@ -7,6 +7,8 @@ AddTriAction::AddTriAction(ApplicationManager * pApp) : Action(pApp)
 
 ActionState AddTriAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->ClearStatusBar();
 	pOut->PrintMessage("New Triangle: Click at first corner");
 	pIn->GetPointClicked(c1.x, c1.y);
@@ -30,14 +32,26 @@ ActionState AddTriAction::ReadActionParameters()
 
 void AddTriAction::Execute()
 {
-	ReadActionParameters();
+	Output* pOut = pManager->GetOutput();
+	if (pManager->GetFigCount() < pManager->GetMaxFigCount())
+	{
+		ReadActionParameters();
 
-	int figs_count = pManager->GetFigCount();
-	CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo);
+		int figs_count = pManager->GetFigCount();
+		CTriangle *t = new CTriangle(c1, c2, c3, TriGfxInfo);
 
-	if (t->InDrawingArea())
-		pManager->AddFigure(t);
-	else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+		if (t->InDrawingArea())
+		{
+			t->SetID();
+			pManager->AddFigure(t);
+			pManager->AdjustList(DRAW_TRI);
+		}
+		else pManager->GetOutput()->PrintMessage("out of the Drawing area ");
+	}
+	else
+	{
+		pOut->PrintMessage("Can't Add More Figures as figures reached its maximumnumber");
+	}
 }
 
 AddTriAction::~AddTriAction()

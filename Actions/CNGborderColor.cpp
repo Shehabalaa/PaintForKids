@@ -8,8 +8,8 @@ ActionState CNGborderColor::ReadActionParameters()
 	Colors C;
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage(" Choose the Color for your Borders !");
 	pOut->CreateColorsBar();
+	pOut->PrintMessage(" Choose the Color for your Borders !");
 	C=pIn->GetColor();
 	switch (C)
 	{
