@@ -59,12 +59,17 @@ void CNGborderColor ::Execute()
 	if(pManager->countselected()>0)
 	{
 		pManager->change_border_color_Action(Colour);
+		pManager->GraphSaved = false;
 	}
 	
 	else
 	{
-		if(Colour != AZURE)
-			UI.DrawColor=Colour;
+		if (Colour != AZURE)
+
+		{
+			UI.DrawColor = Colour;
+			pManager->GraphSaved = false;
+		}
 	}
 
 }

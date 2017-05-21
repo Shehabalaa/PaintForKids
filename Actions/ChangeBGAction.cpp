@@ -67,6 +67,7 @@ void ChangeBGAction::Execute()
 		break;
 
 	}
+	pManager->GraphSaved = false;
 	pOut->PrintMessage("BackGround Color Changed");
 }
 

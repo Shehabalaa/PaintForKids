@@ -39,8 +39,8 @@ void PickByArea::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	if (size > 0)
-	{
+
+	
 
 		pOut->CreateAreaTypeBar();
 		do {
@@ -152,8 +152,7 @@ void PickByArea::Execute()
 			}
 			else { return; }
 		}
-	}
-	else pOut->PrintMessage("NO Figures to play with");
+
 }
 PickByArea::~PickByArea()
 {

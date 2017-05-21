@@ -6,6 +6,7 @@
 #include "..\Actions\PickByTypeAction.h"
 #include"PickByFillingColorAction.h"
 #include"PickBy_Type_and_FillingColor.h"
+#include"ToPlayAction.h"
 class PickandHideAction : public Action
 {
 	Point click;
@@ -22,13 +23,11 @@ public:
 	PickandHideAction(ApplicationManager *pApp);
 	virtual ActionState ReadActionParameters();
 	~PickandHideAction();
-	int CountFigure(figures);
-	int CountFigure(color, bool);
+
 	void InitData();
 	int Getsize();
-	void DeletePickedFigure(CFigure *);
-	CFigure *GetFigure(int x, int y) const;
-	void UpdateInterface() const;
+
+	
 	//Execute action (code depends on action type)
 	virtual void Execute();
 };
