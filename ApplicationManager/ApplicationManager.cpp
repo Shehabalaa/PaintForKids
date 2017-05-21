@@ -290,7 +290,6 @@ void ApplicationManager::MoveFigures(int x,int y)
 {
 	int GraphChanginIndicator = 0;
 	BlockingDirection tmp = No_Block;
-	bool CASE = true;
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
@@ -335,7 +334,12 @@ void ApplicationManager::MoveFigures(int x,int y)
 						FigList[j]->Move(-x, -y);
 					}
 				}
-				CASE = false;
+				if (GraphChanginIndicator != 2)
+				{
+					GraphSaved = false;
+					AdjustList(MOVE);
+				}
+				return;
 				break;
 
 			}
@@ -490,16 +494,16 @@ void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcoun
 		}
 		int temp = 0;
 		for (int i = 0; i < unMoved_Not_Filled.size(); i++)
-			FigList[temp++] = unMoved_Not_Filled[i];
+			figlist[temp++] = unMoved_Not_Filled[i];
 
 		for (int i = 0; i < Moved_Not_Filled.size(); i++)
-			FigList[temp++] = Moved_Not_Filled[i];
+			figlist[temp++] = Moved_Not_Filled[i];
 
 		for (int i = 0; i < unMoved_Filled.size(); i++)
-			FigList[temp++] = unMoved_Filled[i];
+			figlist[temp++] = unMoved_Filled[i];
 
 		for (int i = 0; i < Moved_Filled.size(); i++)
-			FigList[temp++] = Moved_Filled[i];
+			figlist[temp++] = Moved_Filled[i];
 
 
 
@@ -520,10 +524,10 @@ void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcoun
 		}
 		int temp = 0;
 		for (int i = 0; i < Not_Filled.size(); i++)
-			FigList[temp++] = Not_Filled[i];
+			figlist[temp++] = Not_Filled[i];
 
 		for (int i = 0; i < Filled.size(); i++)
-			FigList[temp++] = Filled[i];
+			figlist[temp++] = Filled[i];
 
 
 	}
@@ -534,7 +538,7 @@ void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcoun
 		{
 			if (figlist[i])
 			{
-				FigList[temp++] = figlist[i];
+				figlist[temp++] = figlist[i];
 				if (i != (temp - 1))
 					figlist[i] = NULL;
 			}
@@ -544,14 +548,14 @@ void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcoun
 	}
 	else if (act == DRAW_LINE || act == DRAW_CIRC || act == DRAW_TRI || act == DRAW_RECT)
 	{
-		CFigure * ptr = FigList[figcount - 1];
+		CFigure * ptr = figlist[figcount - 1];
 		if (!ptr->IsFilled())
 		{
 			int i=0;
 
 			for (i = figcount-1; i >0&& figlist[i]->IsFilled(); i--)
 			{
-				figlist[i] = FigList[i - 1];
+				figlist[i] = figlist[i - 1];
 			}
 
 			figlist[i] = ptr;
@@ -593,6 +597,7 @@ void ApplicationManager::DeletePickedFigure(CFigure ** PickList, int& size, CFig
 			delete PickList[i];
 			PickList[i] = NULL;
 			size--;
+			break;// it is only one
 		}
 	}
 
@@ -822,9 +827,10 @@ Output *ApplicationManager::GetOutput() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
-{//asdasdasdsaa
+{
 	CleanFiglist();
-	delete pIn;
+	CleanClipboard();
+	delete pIn; // it can be reached only here os it destructed from here although application manager didnot create it
 	delete pOut;
 	
 }

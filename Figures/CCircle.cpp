@@ -109,7 +109,7 @@ void CCircle::Save(ofstream &fOut) const
 }
 bool  CCircle::InDrawingArea() const
 {
-	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) >= 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
+	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) > 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
 	{
 		return true;
 	}

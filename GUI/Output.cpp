@@ -243,7 +243,7 @@ void Output::CreateZoomBar() const
 {
 
 	//z stands for zoom 
-	/*/a7la comment*/
+	/*/a7la comment*/ // mashy ay3m al zref :D
 	string ZoomMenueItem[zcount];
 	ZoomMenueItem[z10] = "images\\MenuItems\\10.jpg";
 	ZoomMenueItem[z25] = "images\\MenuItems\\25.jpg";

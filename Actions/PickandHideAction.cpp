@@ -2,7 +2,6 @@
 
 PickandHideAction::PickandHideAction(ApplicationManager *pApp) :Action(pApp)
 {
-	pManager = pApp;
 	click.x = 0;
 	click.y = 0;
 	PickList = pManager->GetDeepCopyFromFigList(size);
@@ -103,5 +102,12 @@ void PickandHideAction::Execute()
 }
 PickandHideAction::~PickandHideAction()
 {
+	if(size)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			delete PickList[i];
 
+		}
+	 }
 }
