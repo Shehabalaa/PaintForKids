@@ -23,7 +23,12 @@ ActionState PickByArea::ReadActionParameters()
 	
 	if (!pIn->GetPointClickedv2(click.x, click.y))
 	{
-		return Canceled_And_Switched_To_Another_One;
+		if (click.y < UI.ToolBarHeight && click.x >212 && click.x < 276)
+		{
+			return Canceled_And_Switched_To_Another_One;
+		}
+		else
+			pOut->GetWindow()->FlushMouseQueue();
 	}
 
 	return Successful;
