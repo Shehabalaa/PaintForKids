@@ -7,6 +7,7 @@ ToPlayAction::ToPlayAction(ApplicationManager *pApp) :Action(pApp)
 
 void ToPlayAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	UI.InterfaceMode = MODE_PLAY;
 	pOut->CreatePlayToolBar();
 	pOut->PrintMessage("Welcome to PlayMode");

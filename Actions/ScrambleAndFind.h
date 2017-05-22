@@ -9,6 +9,7 @@ private:
 	CFigure ** RandomizdList; // randmized list of figures
 	CFigure **NormalList; // NormaLlist of figures
 	void GenerateNormalAndRandomLLists(); // this utillty func generate normal and random list in random way
+	void ResizeNormalList();
 public:
 	ScrampleAndFindAction(ApplicationManager*);
 	virtual ActionState ReadActionParameters();

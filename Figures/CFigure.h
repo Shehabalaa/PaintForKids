@@ -12,13 +12,13 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	int Area; // Figure Area
+	static int ForID;
 	/// Add more parameters if needed.
-
 public:
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-	void SetID(int); // Changes figure id
+	void SetID(); // Changes figure id
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual void Draw(Output* pOut) const  = 0;	  //Draw the figure

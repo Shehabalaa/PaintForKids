@@ -4,7 +4,10 @@ CNGcolor :: CNGcolor(ApplicationManager * pApp):Action (pApp)
 }
 ActionState CNGcolor :: ReadActionParameters ()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	Colors C;
+	pOut->CreateColorsBar();
 	pOut->PrintMessage(" Choose the Color to Fill your Figure(s) !");
 	C=pIn->GetColor();
 	switch (C)
@@ -47,7 +50,7 @@ ActionState CNGcolor :: ReadActionParameters ()
 }
 void CNGcolor :: Execute ()
 {
-			ReadActionParameters();
+	ReadActionParameters();
 	if(pManager->countselected()>0)
 	{
 	pManager->change_Filled_color_Action(Colour);
@@ -57,6 +60,9 @@ void CNGcolor :: Execute ()
 	{
 		UI.FillColor=Colour;
 	}
+	pManager->GraphSaved = false;
+	pManager->AdjustList(CHNG_FILL_CLR);
+
 }
 CNGcolor :: ~CNGcolor()
 {

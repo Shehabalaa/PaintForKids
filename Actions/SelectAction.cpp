@@ -17,9 +17,12 @@ int ActionSelect::countselect()
 }
 ActionState ActionSelect::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	window* pWind = pOut->GetWindow();
-	//pWind->FlushKeyQueue(); // clear any bad Esc Left 
-	pOut->PrintMessage("Select: Click on a figure");
+	
+	pManager->UserGuide();
+
 
 	pIn->GetPointClickedv2(m.x,m.y);
 	if (m.y < UI.ToolBarHeight)
@@ -33,6 +36,9 @@ ActionState ActionSelect::ReadActionParameters()
 
 void ActionSelect::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	pOut->PrintMessage("Select figure(s)");
 	while (true)
 	{
 		switch (ReadActionParameters())
@@ -72,6 +78,7 @@ void ActionSelect::Execute()
 		}
 		pManager->UpdateInterface();
 	}
+
 }
 
 

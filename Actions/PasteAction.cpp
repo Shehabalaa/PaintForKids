@@ -5,12 +5,23 @@ PasteAction::PasteAction(ApplicationManager * pApp) : Action(pApp)
 {}
 void PasteAction::Execute()
 {
-	ReadActionParameters();
-	pManager->PasteAll(p);
+	if (pManager->GetClipBoardSize())
+	{
+		ReadActionParameters();
+		pManager->PasteAll(p);
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("No Figures In Clipboard to be pasted");
+		Sleep(1000);
+	}
+
 	
 }
 ActionState PasteAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Please Select target Point");
 	pIn->GetPointClicked(p.x,p.y);
 
@@ -18,6 +29,4 @@ ActionState PasteAction::ReadActionParameters()
 }
 PasteAction::~PasteAction()
 {
-	
-	pIn->GetPointClicked(p.x, p.y);
 }

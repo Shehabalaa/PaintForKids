@@ -13,6 +13,7 @@ MoveAction::MoveAction(ApplicationManager *pApp) :Action(pApp)
 
 ActionState MoveAction::ReadActionParameters()
 {
+	Output* pOut = pManager->GetOutput();
 	window * pWind = pOut->GetWindow();
 	do
 	{
@@ -24,45 +25,45 @@ ActionState MoveAction::ReadActionParameters()
 
 	return Successful;
 }
-#include<iostream>
+#include <ctime>
 void  MoveAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
 	window * pWind = pOut->GetWindow();
+	int count = 0;
+	double start = clock();
 
-	pWind->FlushMouseQueue();
-	pWind->GetMouseCoord(next.x, next.y);
-	while (pWind->GetButtonState(LEFT_BUTTON, next.x, next.y) != BUTTON_UP)
-		{
-
-		pWind->FlushMouseQueue();
-		pWind->GetMouseCoord(next.x, next.y);
-
+	while (1)
+	{
 		// these two statments to avoid havig bad parameters mouse going places on edges of window that cause to round edges
+		pWind->GetMouseCoord(present.x, present.y);
+		do
+		{
+			pWind->GetMouseCoord(next.x, next.y);
+
+		} while (abs(next.x - present.x) < 2 && abs(next.y - present.y) < 2);
+
+		if (pWind->GetButtonState(LEFT_BUTTON, next.x, next.y) == BUTTON_UP)
+			break;
 
 		int x = (next.x - present.x);
 		int y = (next.y - present.y);
-		if (next.x > 65000 || next.x < 0)
-		{
-			next.x = 0;
+		if (next.x > UI.width || next.x < 0 || present.x > UI.width || present.x < 0)
 			x = 0;
-		}
-		if (next.y > 65000 || next.y < 0)
-		{
-			next.y = 0;
+		if (next.y > UI.height || next.y < 0 || present.y > UI.width || present.y < 0)
 			y = 0;
 
+		if (x || y) // no need to move if both x and y =0
+			pManager->MoveFigures(x, y);
+		
+
+		if (clock() - start >= 32)
+		{
+			pManager->UpdateInterface();
+			start = clock();
 		}
-
-		if(x||y) // no need to move if both x and y =0
-		 pManager->MoveFigures(x,y);
-
-		present.x = next.x;
-		present.y = next.y;
-
-		Sleep(30);
-
-		}
+	}
 	
 }
 

@@ -29,13 +29,25 @@ ActionState AddCircleAction::ReadActionParameters()
 //Execute the action
 void AddCircleAction::Execute()
 {
-	ReadActionParameters();
-	int figs_count = pManager->GetFigCount();
-	
-	CCircle *cir = new CCircle(c, r, CircleGfxInfo);
-	if (cir->InDrawingArea())
-		pManager->AddFigure(cir);
-	else pManager->GetOutput()->PrintMessage("Out of the Drawing area ");
+	Output* pOut = pManager->GetOutput();
+	if (pManager->GetFigCount() < pManager->GetMaxFigCount())
+	{
+		ReadActionParameters();
+
+		CCircle *cir = new CCircle(c, r, CircleGfxInfo);
+		if (cir->InDrawingArea())
+		{
+			cir->SetID();
+			pManager->AddFigure(cir);
+			pManager->AdjustList(DRAW_CIRC);
+		}
+		else 
+			pOut->PrintMessage("Out of the Drawing area ");
+	}
+	else
+	{
+		pOut->PrintMessage("Can't Add More Figures as figures reached its maximumnumber");
+	}
 }
 
 

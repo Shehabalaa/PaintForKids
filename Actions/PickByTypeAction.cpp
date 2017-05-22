@@ -19,7 +19,8 @@ PickByTypeAction::PickByTypeAction(ApplicationManager *pApp, figures Type) :Acti
 ActionState PickByTypeAction::ReadActionParameters()
 {
 
-
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
 	pIn->GetPointClicked(click.x, click.y);
 
@@ -31,6 +32,8 @@ ActionState PickByTypeAction::ReadActionParameters()
 
 void PickByTypeAction::Execute()
 {
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
 
 	while (pManager->GetFigCount()>0)
 	{

@@ -1,4 +1,3 @@
-
 #include "ApplicationManager.h"
 #include "..\Actions\LoadAction.h"
 #include "..\Actions\AddRectAction.h"
@@ -33,7 +32,7 @@ ApplicationManager::ApplicationManager()
 	//Create Input and output
 	pOut = new Output;
 	pIn = pOut->CreateInput();
-	FigListSaved = true;
+	GraphSaved = true;
 	FigCount = 0;
 		
 	//Create an array of figure pointers and set them to NULL		
@@ -180,8 +179,7 @@ void ApplicationManager::AddFigure(CFigure* pFig)
 	if (FigCount < MaxFigCount)
 	{
 		FigList[FigCount++] = pFig;
-		pFig->SetID(FigCount);
-		FigListSaved = false;
+		GraphSaved = false;
 	}
 	
 }
@@ -223,7 +221,7 @@ CFigure *ApplicationManager::GetSelectedFigure() const
 void ApplicationManager::SaveAll(ofstream& fOut)
 {
 	//firstly writing all colors names and total number of figures then calling all Virtual Save functions of all figures in FigList
-	FigListSaved = true;
+	GraphSaved = true;
 	fOut<<left<<setw(10)<< UI.DrawColor.getColorName() << setw(10) << UI.FillColor.getColorName();
 	fOut << setw(10) << UI.BkGrndColor.getColorName()<<endl;
 	fOut << FigCount << endl;
@@ -258,14 +256,13 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 
 		FigList[i]->Load(InFile);
 	}
-	FigListSaved = true;
-
-
+	GraphSaved = true;
 
 }
 ///////////////////////////////////////////////////////////////
-bool ApplicationManager::MoveFigures(int x,int y)
+void ApplicationManager::MoveFigures(int x,int y)
 {
+	int GraphChanginIndicator = 0;
 	BlockingDirection tmp = No_Block;
 	bool CASE = true;
 	for (int i = 0; i < FigCount; i++)
@@ -276,7 +273,8 @@ bool ApplicationManager::MoveFigures(int x,int y)
 			switch (tmp) // if any figure while moving gets out of drawing area ,unmove already moved figures and return false;
 			{
 			case No_Block:
-				FigListSaved = false;
+				if (i == FigCount-1)
+					GraphSaved = false;
 				break;
 			case Block_in_X_Direction:
 				for (int j = 0; j < i + 1; j++)
@@ -286,7 +284,8 @@ bool ApplicationManager::MoveFigures(int x,int y)
 						FigList[j]->Move(-x, 0);
 					}
 				}
-				CASE = false;
+				if (GraphChanginIndicator == 0)
+					GraphChanginIndicator++;
 				x = 0;
 				break;
 			case Block_in_Y_Direction:
@@ -297,7 +296,8 @@ bool ApplicationManager::MoveFigures(int x,int y)
 						FigList[j]->Move(0, -y);
 					}
 				}
-				CASE = false;
+				if (GraphChanginIndicator==0|| GraphChanginIndicator == 1)
+					GraphChanginIndicator++;
 				y = 0;
 				break;
 
@@ -310,16 +310,18 @@ bool ApplicationManager::MoveFigures(int x,int y)
 					}
 				}
 				CASE = false;
-				return CASE;
 				break;
 
 			}
 		}
 	}
 
+	if (GraphChanginIndicator != 2)
+	{
+		GraphSaved = false;
+		AdjustList(MOVE);
+	}
 
-	UpdateInterface();
-	return CASE;
 }
 
 int ApplicationManager::CountFigure(figures figtype) {
@@ -385,6 +387,108 @@ void ApplicationManager::change_Filled_color_Action(color C)
 		{
 			FigList[i]->ChngFillClr(C);
 
+		}
+	}
+
+}
+
+void ApplicationManager::AdjustList(ActionType act) // start and end have default values start=0 end = figcount
+{
+	if (act == MOVE)
+	{
+		vector<CFigure*> unMoved_Not_Filled;
+		vector<CFigure*> Moved_Not_Filled;
+		vector<CFigure*> unMoved_Filled;
+		vector<CFigure*> Moved_Filled;
+		for  (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected()) // means moved
+			{
+				if (FigList[i]->IsFilled())
+					Moved_Filled.push_back(FigList[i]);
+				else
+					Moved_Not_Filled.push_back(FigList[i]);
+			}
+			else // means unmoved
+			{
+				if (FigList[i]->IsFilled())
+					unMoved_Filled.push_back(FigList[i]);
+				else
+					unMoved_Not_Filled.push_back(FigList[i]);
+
+			}
+
+
+			FigList[i] = NULL;
+
+		}
+		int temp = 0;
+		for (int i = 0; i < unMoved_Not_Filled.size(); i++)
+			FigList[temp++] = unMoved_Not_Filled[i];
+
+		for (int i = 0; i < Moved_Not_Filled.size(); i++)
+			FigList[temp++] = Moved_Not_Filled[i];
+
+		for (int i = 0; i < unMoved_Filled.size(); i++)
+			FigList[temp++] = unMoved_Filled[i];
+
+		for (int i = 0; i < Moved_Filled.size(); i++)
+			FigList[temp++] = Moved_Filled[i];
+
+
+
+	}
+	else if (act == CHNG_FILL_CLR||act == PASTE)
+	{
+		vector<CFigure*> Not_Filled;
+		vector<CFigure*> Filled;
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsFilled())
+				Filled.push_back(FigList[i]);
+			else
+				Not_Filled.push_back(FigList[i]);
+
+			FigList[i] = NULL;
+
+		}
+		int temp = 0;
+		for (int i = 0; i < Not_Filled.size(); i++)
+			FigList[temp++] = Not_Filled[i];
+
+		for (int i = 0; i < Filled.size(); i++)
+			FigList[temp++] = Filled[i];
+
+
+	}
+	else if (act == DEL)
+	{
+		int temp = 0, i = 0;
+		while (temp != FigCount)
+		{
+			if (FigList[i])
+			{
+				FigList[temp++] = FigList[i];
+				if (i != (temp - 1))
+					FigList[i] = NULL;
+			}
+
+			i++;
+		}
+	}
+	else if (act == DRAW_LINE || act == DRAW_CIRC || act == DRAW_TRI || act == DRAW_RECT)
+	{
+		CFigure * ptr = FigList[FigCount - 1];
+		if (!ptr->IsFilled())
+		{
+			int i=0;
+
+			for (i = FigCount-1; i >0&& FigList[i]->IsFilled(); i--)
+			{
+				FigList[i] = FigList[i - 1];
+			}
+
+			FigList[i] = ptr;
 		}
 	}
 
@@ -466,26 +570,11 @@ void ApplicationManager::DeleteAll()
 		}
 	}
 
-	int temp = 0, i = 0;
-
-	while ( temp!=FigCount)
-	{
-		if (FigList[i])
-		{
-			FigList[temp++] = FigList[i];
-			if (i != (temp - 1))
-				FigList[i] = NULL;
-		}
-		i++;
-	}
+	AdjustList(DEL);
 
 	if (FigCount == 0)
-		FigListSaved = true;
-	else
-		for (int i = 0; i < FigCount; i++)
-		{
-			FigList[i]->SetID(i + 1);
-		}
+		GraphSaved = true;
+
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -556,6 +645,7 @@ void ApplicationManager::PasteAll(const Point & p)
 
 				}
 
+				AdjustList(PASTE);
 			}
 		}
 		
@@ -570,7 +660,7 @@ void ApplicationManager::PasteAll(const Point & p)
 
 bool ApplicationManager::GetIfListSaved() const
 {
-	return FigListSaved;
+	return GraphSaved;
 }
 void ApplicationManager::CleanFiglist()
 {
@@ -578,7 +668,7 @@ void ApplicationManager::CleanFiglist()
 		delete FigList[i];
 
 	FigCount = 0;
-	FigListSaved = true;
+	GraphSaved = true;
 }
 
 void ApplicationManager::CleanClipboard()
@@ -643,6 +733,16 @@ ApplicationManager::~ApplicationManager()
 	delete pIn;
 	delete pOut;
 	
+}
+
+int ApplicationManager::GetMaxFigCount() const
+{
+	return MaxFigCount;
+}
+
+int ApplicationManager::GetClipBoardSize() const
+{
+	return ClipBoard.size();
 }
 
 // this fucntion update inter fance but with special list
