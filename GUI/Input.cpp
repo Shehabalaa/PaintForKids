@@ -285,6 +285,7 @@ float Input::GetZoomPercentage()
 		case z100:	return 1;
 		case z125:	return 1.25;
 		case z150:	return 1.5;
+		case z175:	return 1.75;
 		case z200:	return 2;
 
 		default: return -1;
