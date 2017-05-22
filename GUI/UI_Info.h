@@ -45,15 +45,15 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_SELECT,
 	ITM_DELETE,        // Deleting item(s) from graph
 	ITM_MOVE,			// Moving item(s)
-	ITM_ROTATE,         // Rotating item(s)
+	//ITM_ROTATE,         // Rotating item(s)
 	ITM_RESIZE,			// Resising item(s)
 	ITM_ZOOMIN,			// Zooming item(s) in
-	ITM_ZOOMOUT,		// Zooming item(s) out
+	//ITM_ZOOMOUT,		// Zooming item(s) out
 	ITM_COPY,			// Coping item(s)
 	ITM_CUT,			// Cutting item(s)
 	ITM_PASTE,			// Pasting item(s)
-	ITM_UNDO,			// Undo action
-	ITM_REDO,			// Redo action
+	//ITM_UNDO,			// Undo action
+	//ITM_REDO,			// Redo action
 	ITM_SAVE,			// Saving item(s)
 	ITM_LOAD,			// Loading item(s)
 	ITM_TOPLAY,			// Switching to play mode

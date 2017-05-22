@@ -57,23 +57,14 @@ void CNGcolor::Execute()
 	ReadActionParameters();
 	if (C != EMPTY2)
 	{
-		if (pManager->countselected() > 0 && Colour != AZURE)
+		if (pManager->countselected() > 0 )
 		{
 			pManager->change_Filled_color_Action(Colour);
 			pManager->GraphSaved = false;
 			pManager->AdjustList(CHNG_FILL_CLR);
 
 		}
-		else
-		{
-			if (Colour != AZURE)
-			{
-				UI.FillColor = Colour;
-				UI.FilledFigures = true;
-				pManager->GraphSaved = false;
-				pManager->AdjustList(CHNG_FILL_CLR);
-			}
-		}
+		
 	}
 	else { pOut->PrintMessage("you didn't choose a color"); }
 

@@ -23,6 +23,8 @@ void ToPlayAction::Execute()
 		}
 		else
 			pManager->GenerateRandomFigList();
+
+		pOut->GetWindow()->FlushMouseQueue(); // delete bad clicks while waiting input form keyboard
 	}
 	
 }

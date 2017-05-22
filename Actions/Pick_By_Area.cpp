@@ -20,7 +20,6 @@ ActionState PickByArea::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	
-
 	
 	if (!pIn->GetPointClickedv2(click.x, click.y))
 	{
@@ -104,10 +103,14 @@ void PickByArea::Execute()
 							RightCount++;
 							pManager->DeletePickedFigure(PickList, size, F);
 							pManager->UpdateInterface(PickList, size);
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
 						}
 						else
 						{
 							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
 						}
 
 
@@ -136,10 +139,14 @@ void PickByArea::Execute()
 							RightCount++;
 							pManager->DeletePickedFigure(PickList, size, F);
 							pManager->UpdateInterface(PickList, size);
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
 						}
 						else
 						{
 							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
 						}
 
 

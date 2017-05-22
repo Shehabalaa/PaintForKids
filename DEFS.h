@@ -19,9 +19,9 @@ enum ActionType //The actions supported (you can add more if needed)
 	DEL,			//Delete a figure(s)
 	MOVE,			//Move a figure(s)
 	RESIZE,			//Resize a figure(s)
-	ROTATE,			//Rotate a figure(s)
-	UNDO,			//Undo an Action
-	REDO,			//Redo an Action
+	//ROTATE,			//Rotate a figure(s)
+	//UNDO,			//Undo an Action
+	//REDO,			//Redo an Action
 	//SEND_BACK,		//Send a figure to the back of all figures
 	//BRNG_FRNT,		//Bring a figure to the front of all figures
 	SAVE,			//Save the whole graph to a file

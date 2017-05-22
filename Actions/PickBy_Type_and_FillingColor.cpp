@@ -26,7 +26,8 @@ ActionState PickByTypeandFillingColorAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
-	if (!pIn->GetPointClickedv2(click.x, click.y))
+	pIn->GetPointClickedv2(click.x, click.y);
+	if (click.y < UI.ToolBarHeight && click.x >212 &&click.x<276)
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
@@ -82,6 +83,8 @@ void PickByTypeandFillingColorAction::Execute()
 						else
 						{
 							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
 						}
 
 					}
@@ -94,8 +97,15 @@ void PickByTypeandFillingColorAction::Execute()
 							pManager->DeletePickedFigure(PickList, size, F);
 							pManager->UpdateInterface(PickList, size);
 							RightCount++;
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
 						}
-						else WrongCount--;
+						else { 
+							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
+
+						}
 					}
 
 				}

@@ -446,13 +446,26 @@ void ApplicationManager::change_PenWidth_Action(int PW)
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::change_Filled_color_Action(color C)
 {
-
-	for (int i = 0; i<FigCount; i++)
+	if (C == AZURE)
 	{
-		if (FigList[i]->IsSelected())
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i]->ChngFillClr(C);
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->setfilled(false);
 
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->ChngFillClr(C);
+
+			}
 		}
 	}
 

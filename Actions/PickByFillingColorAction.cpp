@@ -18,8 +18,8 @@ ActionState ByFillingColor::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
 	
-
-	if (!pIn->GetPointClickedv2(click.x, click.y))
+	pIn->GetPointClickedv2(click.x, click.y);
+	if (click.y < UI.ToolBarHeight && click.x >212 && click.x<276)
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
@@ -69,6 +69,22 @@ void ByFillingColor::Execute()
 				{
 					if (F->GetFillClr() == Color  && F->FigType() != line)
 					{
+
+						if (F->GetFillClr() == Color  && F->FigType() != line)
+						{
+
+							RightCount++;
+							pManager->DeletePickedFigure(PickList, size, F);
+							pManager->UpdateInterface(PickList, size);
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
+						}
+						else
+						{
+							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
+						}
 
 						RightCount++;
 						pManager->DeletePickedFigure(PickList, size, F);

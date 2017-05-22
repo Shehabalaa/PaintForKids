@@ -10,14 +10,15 @@ ActionState LoadAction::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->GetWindow()->FlushKeyQueue();// avoid non neccessary keypresses before action
-	pOut->PrintMessage("Please Enter name of file to load graph from!");
+	pOut->PrintMessage("Please Enter name of file to load graph from! (Esc to Cancel)");
 	File_Name=pIn->GetSrting(pOut);
 
 	if (File_Name.find(".txt") == string::npos)
 	{
 		File_Name += ".txt";
 	}
-
+	if (File_Name == ".txt")
+		return Just_Canceled;
 	return Successful;
 }
 
@@ -49,7 +50,12 @@ void LoadAction::Execute()
 	pManager->CleanFiglist(); // cleaning fig list preparing to refill it
 
 
-	ReadActionParameters(); //read file_name
+	if (ReadActionParameters() == Just_Canceled) //read file_name
+	{
+		pOut->PrintMessage("ActionCanceld");
+		return;
+	}
+
 	InFile.open(File_Name,ios::in);// opening file
 	while(!InFile.is_open())
 	{
