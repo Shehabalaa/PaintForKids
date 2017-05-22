@@ -20,7 +20,9 @@ bool CCircle::Resize(float ratio)
 	}
 	else
 	{
+
 		rad = tmp;
+		
 		return false;
 	}
 

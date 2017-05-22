@@ -80,14 +80,17 @@ void Cline::UpdateArea()
 	 //	X2=(0.5)*(ratio-1)*X + end.x-z;    
 	 if (InDrawingArea())
 	 {
+		 UpdateArea();
 		 return true;
 	 }
 	 else
 	 {
+		 
 		 start = tmp1;
 		 end = tmp2;
 		 return false;
 	 }
+
  }
 
  void Cline::MovetoRandomCoord(int X_begin, int X_end, int Y_begin, int Y_end)
@@ -167,6 +170,7 @@ figures Cline::FigType() const
 }
 bool Cline::check(int x, int y) const
 {
+
 	if (slope == -1)
 	{
 		
@@ -184,11 +188,12 @@ bool Cline::check(int x, int y) const
 	else
 	{
 		float slope2 = float(y - start.y*UI.ZoomFactor) / float(x - start.x*UI.ZoomFactor);
-		if (abs(slope - slope2) < 1)
+		if (abs(slope - slope2) < 0.01)
 		{
 			float l1 = sqrt(pow((x - start.x*UI.ZoomFactor), 2) + pow((y - start.y*UI.ZoomFactor), 2));
 			float l2 = sqrt(pow((x - end.x*UI.ZoomFactor), 2) + pow((y - end.y*UI.ZoomFactor), 2));
-			if (abs((l1 + l2) - length) <= 1)
+float ZoomArea= sqrt(pow((start.x*UI.ZoomFactor - end.x*UI.ZoomFactor), 2) + pow((start.y*UI.ZoomFactor - end.y*UI.ZoomFactor), 2));
+			if (abs((l1 + l2) - ZoomArea) <= 1)
 				return true;
 			else return false;
 		}
