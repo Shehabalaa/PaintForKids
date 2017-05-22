@@ -749,12 +749,14 @@ void ApplicationManager::PasteAll(const Point & p)
 
 				}
 
-				for (int i = FigCount- ClipBoard.size(); i <FigCount; i++)
-				{
-					FigList[i]->SetID();
-				}
-				AdjustList(PASTE);
 			}
+
+
+			for (int i = FigCount - ClipBoard.size(); i <FigCount; i++)
+			{
+				FigList[i]->SetID();
+			}
+			AdjustList(PASTE);
 		}
 		
 	}
