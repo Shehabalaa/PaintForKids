@@ -74,15 +74,12 @@ void ByFillingColor::Execute()
 					if (F->GetFillClr() == Color  && F->FigType() != line)
 					{
 
-						if (F->GetFillClr() == Color  && F->FigType() != line)
-						{
-
-							RightCount++;
-							pManager->DeletePickedFigure(PickList, size, F);
-							pManager->UpdateInterface(PickList, size);
-							string messege = "Correct ";
-							pOut->PrintMessage(messege);
-						}
+						RightCount++;
+						pManager->DeletePickedFigure(PickList, size, F);
+						pManager->UpdateInterface(PickList, size);
+						string messege = "Correct ";
+						pOut->PrintMessage(messege);
+					}
 						else
 						{
 							WrongCount--;
@@ -90,14 +87,9 @@ void ByFillingColor::Execute()
 							pOut->PrintMessage(messege);
 						}
 
-						RightCount++;
-						pManager->DeletePickedFigure(PickList, size, F);
-						pManager->UpdateInterface(PickList, size);
+					
 					}
-					else
-					{
-						WrongCount--;
-					}
+				
 
 				}
 				else
@@ -108,12 +100,19 @@ void ByFillingColor::Execute()
 						pManager->DeletePickedFigure(PickList, size, F);
 						pManager->UpdateInterface(PickList, size);
 						RightCount++;
+						string messege = "Correct ";
+						pOut->PrintMessage(messege);
 					}
-					else WrongCount--;
+					else
+					{
+						WrongCount--;
+						string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+						pOut->PrintMessage(messege);
+					}
 				}
 
 			}
-		}
+		
 		else { return; }
 	}
 	

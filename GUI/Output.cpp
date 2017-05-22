@@ -245,7 +245,7 @@ void Output::CreateZoomBar() const
 	ZoomMenueItem[z75] = "images\\MenuItems\\75.jpg";
 	ZoomMenueItem[z100]= "images\\MenuItems\\100.jpg";
 	ZoomMenueItem[z125] = "images\\MenuItems\\125.jpg";
-	ZoomMenueItem[z150] = "images\\MenuItems\\125.jpg";
+	ZoomMenueItem[z150] = "images\\MenuItems\\150.jpg";
 		ZoomMenueItem[z175] = "images\\MenuItems\\175.jpg";
 		ZoomMenueItem[z200] = "images\\MenuItems\\200.jpg";
 
