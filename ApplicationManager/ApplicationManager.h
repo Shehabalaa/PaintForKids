@@ -35,6 +35,9 @@ public:
 	int countselected();
 	void PrintSelected();
 	void MoveFigures(int, int);
+	int CountFigure(CFigure ** PickList, int size, figures figtype);
+	int CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled);
+	int CountFigure(CFigure ** PickList, int size, color c, bool filled);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
