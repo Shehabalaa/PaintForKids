@@ -9,6 +9,7 @@ private:
 	Point corner1;
 	Point corner2;
 	Point corner3;
+	
 
 public:
 	CTriangle(const Point& = Point(), const Point& = Point(), const Point& = Point(),const GfxInfo& = GfxInfo());

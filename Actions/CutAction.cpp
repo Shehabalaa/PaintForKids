@@ -5,8 +5,16 @@ CutAction::CutAction(ApplicationManager * pApp) : Action(pApp)
 {}
 void CutAction::Execute()
 {
-	if (pManager->GetFigCount())
-		pManager->CutAll();
+	if (pManager->countselected())
+	{
+		if (pManager->GetFigCount())
+			pManager->CutAll();
+	}
+	else
+	{
+		pManager->GetOutput()->PrintMessage("No Slected Figures to be Cut");
+		Sleep(1000);
+	}
 
 }
 

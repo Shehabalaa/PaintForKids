@@ -13,6 +13,7 @@
 #include "..\Actions\ToDrawAction.h"
 #include "..\Actions\ToPlayAction.h"
 #include "..\Actions\MoveAction.h"
+#include "..\Actions\Zoom.h"
 #include "..\Actions\CutAction.h"
 #include "..\Actions\CopyAction.h"
 #include "..\Actions\PasteAction.h"
@@ -96,6 +97,9 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case RESIZE :
 		pAct = new Resize(this);
 		break;
+	case ZOOMIN:
+		pAct = new Zoom(this);
+		break;
 	case SAVE:
 		pAct = new SaveAction(this);
 		break;
@@ -162,7 +166,29 @@ int ApplicationManager::countselected()
 	return count;
 }
 
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c&&PickList[i]->FigType() == Type)
+				count++;
 
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled() && PickList[i]->FigType() == Type)
+				count++;
+
+		}
+		return count;
+	}
+}
 
 void ApplicationManager::PrintSelected()
 {
@@ -264,7 +290,6 @@ void ApplicationManager::MoveFigures(int x,int y)
 {
 	int GraphChanginIndicator = 0;
 	BlockingDirection tmp = No_Block;
-	bool CASE = true;
 	for (int i = 0; i < FigCount; i++)
 	{
 		if (FigList[i]->IsSelected())
@@ -309,8 +334,12 @@ void ApplicationManager::MoveFigures(int x,int y)
 						FigList[j]->Move(-x, -y);
 					}
 				}
-				CASE = false;
-				break;
+				if (GraphChanginIndicator != 2)
+				{
+					GraphSaved = false;
+					AdjustList(MOVE);
+				}
+				return;
 
 			}
 		}
@@ -322,8 +351,42 @@ void ApplicationManager::MoveFigures(int x,int y)
 		AdjustList(MOVE);
 	}
 
+
+}
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, figures figtype) {
+	int count = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (PickList[i]->FigType() == figtype)
+			count++;
+
+	}
+	return count;
 }
 
+int ApplicationManager::CountFigure(CFigure ** PickList, int size, color c, bool filled) {
+	int count = 0;
+	if (filled)
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (PickList[i]->GetFillClr() == c && PickList[i]->FigType() != line)
+				count++;
+
+		}
+		return count;
+	}
+	else
+	{
+		for (int i = 0; i < size; i++)
+		{
+			if (!PickList[i]->IsFilled())
+				count++;
+
+		}
+		return count;
+	}
+}
 int ApplicationManager::CountFigure(figures figtype) {
 	int count = 0;
 	for (int i = 0; i < FigCount; i++)
@@ -350,31 +413,32 @@ void ApplicationManager::Resize_Action(float Ratio)
 void ApplicationManager::change_border_color_Action(color C)
 {
 
-
-	for (int i = 0; i<FigCount; i++)
+	if (C != AZURE)
 	{
-		if (FigList[i]->IsSelected())
-			FigList[i]->ChngDrawClr(C);
+		for (int i = 0; i < FigCount; i++)
+		{
+			if (FigList[i]->IsSelected())
+				FigList[i]->ChngDrawClr(C);
 
+		}
 	}
-
 }
 ////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::change_PenWidth_Action(int PW)
 {
 
+	
 
-
-	for (int i = 0; i<FigCount; i++)
-	{
-		if (FigList[i]->IsSelected())
+		for (int i = 0; i < FigCount; i++)
 		{
-			FigList[i]->ChngBorderWidth(PW);
+			if (FigList[i]->IsSelected())
+			{
+				FigList[i]->ChngBorderWidth(PW);
 
+			}
 		}
-	}
 
-
+	
 
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -392,85 +456,90 @@ void ApplicationManager::change_Filled_color_Action(color C)
 
 }
 
-void ApplicationManager::AdjustList(ActionType act) // start and end have default values start=0 end = figcount
+
+void ApplicationManager::AdjustList(ActionType act,CFigure **figlist,int figcount) // start and end have default values start=0 end = figcount
 {
+	if (!figlist)
+	{
+		figlist = FigList;
+		figcount = FigCount;
+	}
 	if (act == MOVE)
 	{
 		vector<CFigure*> unMoved_Not_Filled;
 		vector<CFigure*> Moved_Not_Filled;
 		vector<CFigure*> unMoved_Filled;
 		vector<CFigure*> Moved_Filled;
-		for  (int i = 0; i < FigCount; i++)
+		for  (int i = 0; i < figcount; i++)
 		{
-			if (FigList[i]->IsSelected()) // means moved
+			if (figlist[i]->IsSelected()) // means moved
 			{
-				if (FigList[i]->IsFilled())
-					Moved_Filled.push_back(FigList[i]);
+				if (figlist[i]->IsFilled())
+					Moved_Filled.push_back(figlist[i]);
 				else
-					Moved_Not_Filled.push_back(FigList[i]);
+					Moved_Not_Filled.push_back(figlist[i]);
 			}
 			else // means unmoved
 			{
-				if (FigList[i]->IsFilled())
-					unMoved_Filled.push_back(FigList[i]);
+				if (figlist[i]->IsFilled())
+					unMoved_Filled.push_back(figlist[i]);
 				else
-					unMoved_Not_Filled.push_back(FigList[i]);
+					unMoved_Not_Filled.push_back(figlist[i]);
 
 			}
 
-
-			FigList[i] = NULL;
+			figlist[i] = NULL;
 
 		}
 		int temp = 0;
 		for (int i = 0; i < unMoved_Not_Filled.size(); i++)
-			FigList[temp++] = unMoved_Not_Filled[i];
+			figlist[temp++] = unMoved_Not_Filled[i];
 
 		for (int i = 0; i < Moved_Not_Filled.size(); i++)
-			FigList[temp++] = Moved_Not_Filled[i];
+			figlist[temp++] = Moved_Not_Filled[i];
 
 		for (int i = 0; i < unMoved_Filled.size(); i++)
-			FigList[temp++] = unMoved_Filled[i];
+			figlist[temp++] = unMoved_Filled[i];
 
 		for (int i = 0; i < Moved_Filled.size(); i++)
-			FigList[temp++] = Moved_Filled[i];
-
-
+			figlist[temp++] = Moved_Filled[i];
 
 	}
 	else if (act == CHNG_FILL_CLR||act == PASTE)
 	{
 		vector<CFigure*> Not_Filled;
 		vector<CFigure*> Filled;
-		for (int i = 0; i < FigCount; i++)
+
+		for (int i = 0; i < figcount; i++)
 		{
-			if (FigList[i]->IsFilled())
-				Filled.push_back(FigList[i]);
+			if (figlist[i]->IsFilled())
+				Filled.push_back(figlist[i]);
 			else
-				Not_Filled.push_back(FigList[i]);
+				Not_Filled.push_back(figlist[i]);
 
-			FigList[i] = NULL;
-
+			figlist[i] = NULL;
 		}
 		int temp = 0;
 		for (int i = 0; i < Not_Filled.size(); i++)
-			FigList[temp++] = Not_Filled[i];
+			figlist[temp++] = Not_Filled[i];
 
 		for (int i = 0; i < Filled.size(); i++)
-			FigList[temp++] = Filled[i];
+			figlist[temp++] = Filled[i];
 
 
 	}
 	else if (act == DEL)
 	{
 		int temp = 0, i = 0;
-		while (temp != FigCount)
+
+		while (temp != figcount)
 		{
-			if (FigList[i])
+			if (figlist[i])
 			{
-				FigList[temp++] = FigList[i];
+				figlist[temp++] = figlist[i];
 				if (i != (temp - 1))
-					FigList[i] = NULL;
+					figlist[i] = NULL;
+
 			}
 
 			i++;
@@ -478,17 +547,16 @@ void ApplicationManager::AdjustList(ActionType act) // start and end have defaul
 	}
 	else if (act == DRAW_LINE || act == DRAW_CIRC || act == DRAW_TRI || act == DRAW_RECT)
 	{
-		CFigure * ptr = FigList[FigCount - 1];
+		CFigure * ptr = figlist[figcount - 1];
+
 		if (!ptr->IsFilled())
 		{
 			int i=0;
-
-			for (i = FigCount-1; i >0&& FigList[i]->IsFilled(); i--)
+			for (i = figcount-1; i >0&& figlist[i]->IsFilled(); i--)
 			{
-				FigList[i] = FigList[i - 1];
+				figlist[i] = figlist[i - 1];
 			}
-
-			FigList[i] = ptr;
+			figlist[i] = ptr;
 		}
 	}
 
@@ -517,20 +585,41 @@ void ApplicationManager::UserGuide() const
 
 
 }
-void ApplicationManager::DeletePickedFigure(CFigure * FIGURE)
+void ApplicationManager::DeletePickedFigure(CFigure ** PickList, int& size, CFigure * FIGURE)
 {
-
-	for (int i = 0; i < FigCount; i++)
+	int originalsize = size;
+	for (int i = 0; i < originalsize; i++)
 	{
-		if (FigList[i] == FIGURE)
+		if (PickList[i] == FIGURE)
 		{
-			delete FigList[i];
-			FigList[i] = NULL;
-			swap(FigList[i], FigList[FigCount - 1]);
-			FigCount--;
-			i--;
+			delete PickList[i];
+			PickList[i] = NULL;
+			size--;
+			break;// it is only one
 		}
 	}
+
+	AdjustList(DEL, PickList,size);
+
+}
+CFigure *ApplicationManager::GetFigure(int x, int y, CFigure ** PickList, int size) const
+{
+	//If a figure is found return a pointer to it.
+	//if this point (x,y) does not belong to any figure return NULL
+	bool check;
+
+	for (int i = (size - 1); i >= 0; i--)
+	{
+		check = PickList[i]->check(x, y);
+
+		if (check == true)
+		{
+			return PickList[i];
+		}
+	}
+
+
+	return NULL;
 }
 int ApplicationManager::CountFigure(color c , bool filled) {
 	int count = 0;
@@ -714,8 +803,16 @@ void ApplicationManager::UpdateInterface() const
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
 	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height- UI.StatusBarHeight);
 
-	for(int i=0; i<FigCount; i++)
-		FigList[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	for (int i = 0; i<FigCount; i++) 
+		FigList[i]->Draw(pOut);
+
+	if (UI.ZoomFactor != 1)//draw the toolbars to cover the zoomed figures 
+	{
+		pOut->CreateDrawToolBar();
+		pOut->ClearStatusBar();
+	}
+
+	//Call Draw function (virtual member fn)
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
@@ -728,9 +825,10 @@ Output *ApplicationManager::GetOutput() const
 ////////////////////////////////////////////////////////////////////////////////////
 //Destructor
 ApplicationManager::~ApplicationManager()
-{//asdasdasdsaa
+{
 	CleanFiglist();
-	delete pIn;
+	CleanClipboard();
+	delete pIn; // it can be reached only here os it destructed from here although application manager didnot create it
 	delete pOut;
 	
 }

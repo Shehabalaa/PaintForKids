@@ -37,14 +37,17 @@ ActionState CNGborderColor::ReadActionParameters()
 	case SELECT_ROSE_COLOR:
 		Colour=ROSYBROWN;
 		break;
-	case SELECT_GREY_COLOR:
-		Colour=GREY;
+	case SELECT_LIGHT_COLOR:
+		Colour=LIGHTGOLDENRODYELLOW;
 		break;
 	case SELECT_LIME_COLOR:
 		Colour=LIMEGREEN;
 		break;
 	case SELECT_WHITE_COLOR:
 		Colour=WHITE;
+		break;
+	case SELECT_NON_COLOR:
+		Colour = AZURE;
 		break;
 	}
 	return Successful;
@@ -56,11 +59,17 @@ void CNGborderColor ::Execute()
 	if(pManager->countselected()>0)
 	{
 		pManager->change_border_color_Action(Colour);
+		pManager->GraphSaved = false;
 	}
 	
 	else
 	{
-		UI.DrawColor=Colour;
+		if (Colour != AZURE)
+
+		{
+			UI.DrawColor = Colour;
+			pManager->GraphSaved = false;
+		}
 	}
 
 }

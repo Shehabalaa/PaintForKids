@@ -87,8 +87,8 @@ figures CCircle::FigType() const
 bool CCircle::check(int x,int y) const
 {
 	int d;
-	d= sqrt(pow((x - center.x), 2) + pow((y - center.y), 2));
-	if (d <= rad)
+	d= sqrt(pow((x - center.x*UI.ZoomFactor), 2) + pow((y - center.y*UI.ZoomFactor), 2));
+	if (d <= rad*UI.ZoomFactor)
 	{
 		return true;
 	}
@@ -109,7 +109,7 @@ void CCircle::Save(ofstream &fOut) const
 }
 bool  CCircle::InDrawingArea() const
 {
-	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) >= 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
+	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) > 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
 	{
 		return true;
 	}

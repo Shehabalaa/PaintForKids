@@ -16,7 +16,7 @@ ActionState SaveAction::ReadActionParameters()
 		Sleep(1000); // give some time to message(userguide )
 		return Just_Canceled;
 	}
-
+	pOut->GetWindow()->FlushKeyQueue();// avoid non neccessary keypresses before action
 	pOut->PrintMessage("Please Enter filename!(Esc to cancel)");
 	file_name = pIn->GetSrting(pOut);
 

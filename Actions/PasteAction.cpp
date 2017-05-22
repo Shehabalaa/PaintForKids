@@ -12,7 +12,7 @@ void PasteAction::Execute()
 	}
 	else
 	{
-		pManager->GetOutput()->PrintMessage("No Figures In Clipboard to be pasted");
+		pManager->GetOutput()->PrintMessage("No Figures In Clipboard to be Pasted");
 		Sleep(1000);
 	}
 

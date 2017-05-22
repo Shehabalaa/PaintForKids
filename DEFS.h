@@ -47,10 +47,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	PICK_FILL,
 	PICK_TYPEFILL,
 	PICK_AREA,
-	PICKED_rec,
-	PICKED_Line,
-	PICKED_Circ,
-	PICKED_Tri,
+	
 	///TODO: Add more action types (if needed)
 };
 
@@ -80,9 +77,10 @@ enum Colors {
 	SELECT_BROWN_COLOR,
 	SELECT_ORANGE_COLOR,
 	SELECT_ROSE_COLOR,
-	SELECT_GREY_COLOR,
+	SELECT_LIGHT_COLOR,
 	SELECT_LIME_COLOR,
 	SELECT_WHITE_COLOR,
+	SELECT_NON_COLOR,
 	EMPTY2,
 
 };

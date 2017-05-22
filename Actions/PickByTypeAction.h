@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "..\Figures\CFigure.h"
+#include"PickandHideAction.h"
 class PickByTypeAction : public Action
 {
 	Point click;
@@ -9,9 +10,12 @@ class PickByTypeAction : public Action
 	figures type;
 	int PickedFigureNumber;
 	bool Filled;
+	int size;
+	CFigure** PickList;
+	
 public:
 	
-	PickByTypeAction(ApplicationManager *pApp,figures);
+	PickByTypeAction(ApplicationManager *pApp, CFigure **, int&,figures);
 	virtual ActionState ReadActionParameters();
 	~PickByTypeAction();
 	

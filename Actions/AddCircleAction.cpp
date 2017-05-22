@@ -15,7 +15,10 @@ ActionState AddCircleAction::ReadActionParameters()
 	pIn->GetPointClicked(c.x, c.y);
 	pOut->PrintMessage("New Circle: Click at the circumference");
 	pIn->GetPointClicked(r.x, r.y);
-	CircleGfxInfo.isFilled = false;					
+	if (UI.FilledFigures)
+		CircleGfxInfo.isFilled = true;	
+	else 
+		CircleGfxInfo.isFilled = false;
 	CircleGfxInfo.DrawClr = pOut->getCrntDrawColor();
 	CircleGfxInfo.FillClr = pOut->getCrntFillColor();
 	CircleGfxInfo.BorderWidth = pOut->getCrntPenWidth();

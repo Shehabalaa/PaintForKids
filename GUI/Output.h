@@ -12,7 +12,11 @@ public:
 	
 	window* CreateWind(int, int, int , int) const; //creates the application window
 	void CreateDrawToolBar() const;	//creates Draw mode toolbar & menu
-	void CreateColorsBar() const; // create olors bar with animation 
+	void CreateColorsBar() const; 
+	void CreateBorderBar() const;   
+	void CreateResizeBar() const;
+	void CreateZoomBar() const;
+	void CreateAreaTypeBar() const;
 	void CreatePlayToolBar() const;	//creates Play mode toolbar & menu
 	void CreatePickandHideToolBar() const; //  draw the pick and hide toolbar
 	void CreatePickandHideFiguresToolBar() const;

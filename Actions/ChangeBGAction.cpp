@@ -14,6 +14,7 @@ ActionState ChangeBGAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 
 	pOut->CreateColorsBar();
+
 	pOut->PrintMessage("Choose color");
 	co = pIn->GetColor();
 
@@ -52,8 +53,8 @@ void ChangeBGAction::Execute()
 	case SELECT_ROSE_COLOR:
 		pOut->SetBGColor(ROSYBROWN);
 		break;
-	case SELECT_GREY_COLOR:
-		pOut->SetBGColor(GREY);
+	case SELECT_LIGHT_COLOR:
+		pOut->SetBGColor(LIGHTGOLDENRODYELLOW);
 		break;
 	case SELECT_LIME_COLOR:
 		pOut->SetBGColor(LIMEGREEN);
@@ -61,9 +62,15 @@ void ChangeBGAction::Execute()
 	case SELECT_WHITE_COLOR:
 		pOut->SetBGColor(WHITE);
 		break;
-
+	case SELECT_NON_COLOR:
+		pOut->SetBGColor(UI.BkGrndColor);
+		break;
 
 	}
+<<<<<<< HEAD
+=======
+	pManager->GraphSaved = false;
+>>>>>>> 1abee2024522559abad5a5b4515617ab1a597099
 	pOut->PrintMessage("BackGround Color Changed");
 }
 

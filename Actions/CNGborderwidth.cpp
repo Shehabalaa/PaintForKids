@@ -7,22 +7,33 @@ ActionState CNGborderwidth :: ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage(" Please enter pen width of these options (1/3/5/7/9/11 )");
-	string S= pIn->GetSrting(pOut);
-	Pen=stoi(S);
+	pOut->PrintMessage(" choose Pen Width");
+	pOut->CreateBorderBar();
+	Pen = pIn->GetBorder();
 	return Successful;
 }
 
 
 void CNGborderwidth :: Execute ()
 {
+	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
-	if(pManager->countselected()>0)
-		pManager->change_PenWidth_Action(Pen);
-	else
+
+	if (Pen > 0)
 	{
-	UI.PenWidth=Pen;
+		if (pManager->countselected() > 0)
+		{
+			pManager->change_PenWidth_Action(Pen);
+			pManager->GraphSaved = false;
+		}
+		else
+		{
+
+			UI.PenWidth = Pen;
+
+		}
 	}
+	else { pOut->PrintMessage("you didn't choose a width "); }
 }
 CNGborderwidth :: ~ CNGborderwidth()
 {

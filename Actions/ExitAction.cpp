@@ -24,8 +24,6 @@ void ExitAction::Execute()
 		}
 	}
 
-	pManager->CleanFiglist();
-	pManager->CleanClipboard();
 }
 
 ActionState ExitAction::ReadActionParameters()
