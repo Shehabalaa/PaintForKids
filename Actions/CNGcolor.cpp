@@ -75,12 +75,7 @@ void CNGcolor::Execute()
 			}
 		}
 	}
-<<<<<<< HEAD
-	pManager->GraphSaved = false;
-	pManager->AdjustList(CHNG_FILL_CLR);
-=======
 	else { pOut->PrintMessage("you didn't choose a color"); }
->>>>>>> 1abee2024522559abad5a5b4515617ab1a597099
 
 }
 CNGcolor :: ~CNGcolor()
