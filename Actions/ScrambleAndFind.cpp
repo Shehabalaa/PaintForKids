@@ -5,10 +5,22 @@
 #include"../Figures/Cline.h"
 
 
+int ScrampleAndFindAction::GetIndexOfFutureHighLighted()
+{
+	int id = RandomizdList[ListSize - 1]->GetID();
+
+	for (int i = 0; i < ListSize; i++)
+	{
+		if (NormalList[i]->GetID() == id)
+			return i;
+	}
+	return -1;
+}
+
 int ScrampleAndFindAction::GetFigureIDinRandomList(int x, int y)
 {
 
-	for (int i = 0; i < ListSize; i++)
+	for (int i = ListSize-1; i >=0; i--)
 	{
 		if (RandomizdList[i]->check(x, y))
 			return RandomizdList[i]->GetID();
@@ -51,6 +63,8 @@ ScrampleAndFindAction::ScrampleAndFindAction(ApplicationManager * pApp) :Action(
 	CFigure ** RandomizdList = NULL;
 	ListSize = 0;
 }
+
+
 
 ActionState ScrampleAndFindAction::ReadActionParameters()
 {
@@ -99,7 +113,7 @@ ActionState ScrampleAndFindAction::ReadActionParameters()
 
 	return Successful;
 }
-
+#include<iostream>//////////////////////////
 void ScrampleAndFindAction::Execute()
 {
 	int x = 0, y = 0, RightCount = 0, WrongCount = 0, CurrentID = 0;
@@ -118,9 +132,9 @@ void ScrampleAndFindAction::Execute()
 	while (Tries>0)
 	{
 		MSG = "";
-		int rad_index = rand() % (ListSize);
-		NormalList[rad_index]->SetSelected(true);
-		CurrentID = NormalList[rad_index]->GetID();
+		int index = GetIndexOfFutureHighLighted();
+		NormalList[index]->SetSelected(true);
+		CurrentID = NormalList[index]->GetID();
 
 		pManager->UpdateInterface(NormalList, RandomizdList, ListSize);
 		pOut->GetWindow()->DrawLine((UI.width - UI.ColorsBarWidth - 15) / 2, UI.ToolBarHeight, (UI.width - UI.ColorsBarWidth - 15) / 2, UI.height - UI.StatusBarHeight);
@@ -130,9 +144,14 @@ void ScrampleAndFindAction::Execute()
 		{
 			if (x < (UI.width - 15) / 2 || GetFigureIDinRandomList(x, y) != CurrentID)
 			{
+				///////
+				cout << x << " " << y << endl;
+				pOut->GetWindow()->GetMouseCoord(x,y);
+				cout << x << " " << y << endl;
+				////////
 				MSG += "HardLuck Try Again";
 				WrongCount++;
-				NormalList[rad_index]->SetSelected(false);
+				NormalList[index]->SetSelected(false);
 			}
 			else
 			{

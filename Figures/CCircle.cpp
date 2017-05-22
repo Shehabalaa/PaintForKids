@@ -46,7 +46,7 @@ void CCircle::MovetoRandomCoord(int X_begin,int X_end,int Y_begin, int Y_end)
 	X_end -= rad;
 	Y_begin += rad;
 	Y_end -= rad;
-	center.x = rand() % (X_end-X_begin+1) + X_begin;
+	center.x = rand() % (X_end - X_begin + 1) + X_begin;
 	center.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	circum.x = center.x + rad;
 	circum.y = center.y + rad;

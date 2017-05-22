@@ -1,0 +1,14 @@
+BLUE      GREEN     BLACK     
+12
+LINE           29   1125    418     927     605                         BLUE                                3
+LINE           30   1006    436     1174    584                         BLUE                                3
+TRIANGLE       24   305     456     402     482     253     537         BLUE              YELLOW            3
+CIRCLE         25   371     107     24                                  BLUE              YELLOW            3
+CIRCLE         26   312     298     45                                  BLUE              BROWN             3
+CIRCLE         27   491     489     55                                  BLUE              BROWN             3
+TRIANGLE       22   110     327     257     342     18      572         BLUE              YELLOW            3
+TRIANGLE       23   952     131     1184    193     929     463         BLUE              YELLOW            3
+TRIANGLE       28   47      129     86      129     24      251         BLUE              YELLOW            3
+RECTANGLE      19   144     103     220     245                         BLUE              RED               3
+RECTANGLE      20   410     228     497     361                         BLUE              RED               3
+RECTANGLE      21   637     172     816     548                         BLUE              RED               3

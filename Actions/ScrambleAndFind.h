@@ -8,7 +8,7 @@ private:
 	int ListSize; // size of two list randomized and not randomized
 	CFigure ** RandomizdList; // randmized list of figures
 	CFigure **NormalList; // NormaLlist of figures
-	void GenerateNormalAndRandomLLists(); // this utillty func generate normal and random list in random way
+	int GetIndexOfFutureHighLighted();
 	int GetFigureIDinRandomList(int x,int y);
 	void DeleteFigureFromBothLists(int ID);
 public:
