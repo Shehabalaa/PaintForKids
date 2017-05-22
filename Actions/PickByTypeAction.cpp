@@ -25,7 +25,7 @@ ActionState PickByTypeAction::ReadActionParameters()
 	pOut->PrintMessage("Pick A Figure");
 	pIn->GetPointClickedv2(click.x, click.y);
 	
-	if (click.y < UI.ToolBarHeight)
+	if (click.y < UI.ToolBarHeight && click.x >212 && click.x<276)
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
@@ -79,11 +79,17 @@ void PickByTypeAction::Execute()
 
 						pManager->DeletePickedFigure(PickList, size, PickedFigure);
 						pManager->UpdateInterface(PickList, size);
+						string messege = "Correct ";
+						pOut->PrintMessage(messege);
+						Sleep(500);
 					}
 
 					else
 					{
 						WrongCount--;
+						string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+						pOut->PrintMessage(messege);
+						Sleep(500);
 					}
 				}
 			}

@@ -70,50 +70,60 @@ void PickandHideAction::Execute()
 	pOut->PrintMessage("Pick------&-----Hide");
 	if (pManager->GetFigCount() > 0)
 	{
-		ReadActionParameters();
-
-		if (!(PICKING_TYPE == PICK_AREA) && !(PICKING_TYPE == TO_PLAY))
-			InitData();
-
-
-		if (PICKING_TYPE == PICK_TYPE)
+		if (pManager->GetFigCount() > 0)
 		{
-			mode = new PickByTypeAction(pManager, PickList, size, fig);
-			mode->Execute();
+			ReadActionParameters();
+
+			if (!(PICKING_TYPE == PICK_AREA) && !(PICKING_TYPE == TO_PLAY))
+				InitData();
+
+
+			if (PICKING_TYPE == PICK_TYPE)
+			{
+				mode = new PickByTypeAction(pManager, PickList, size, fig);
+				mode->Execute();
+			}
+			else if (PICKING_TYPE == PICK_FILL)
+			{
+				mode = new ByFillingColor(pManager, PickList, size, Color, Filled);
+				mode->Execute();
+			}
+			else if (PICKING_TYPE == PICK_TYPEFILL)
+			{
+				mode = new PickByTypeandFillingColorAction(pManager, PickList, size, fig, Color, Filled);
+				mode->Execute();
+			}
+
+			else if (PICKING_TYPE == PICK_AREA)
+			{
+				mode = new PickByArea(pManager, PickList, size);
+				mode->Execute();
+
+			}
+			else if (PICKING_TYPE == TO_PLAY)
+			{
+				mode = new ToPlayAction(pManager);
+				mode->Execute();
+			}
+
 		}
-		else if (PICKING_TYPE == PICK_FILL)
+		else
 		{
-			mode = new ByFillingColor(pManager, PickList, size, Color, Filled);
-			mode->Execute();
-		}
-		else if (PICKING_TYPE == PICK_TYPEFILL)
-		{
-			mode = new PickByTypeandFillingColorAction(pManager, PickList, size, fig, Color, Filled);
-			mode->Execute();
-		}
-
-		else if (PICKING_TYPE == PICK_AREA)
-		{
-			mode = new PickByArea(pManager, PickList, size);
-			mode->Execute();
-
-		}
-		else if (PICKING_TYPE == TO_PLAY)
-		{
+			pOut->PrintMessage("No Figures To Play With . click to continue");
+			int x, y;
+			pIn->GetPointClicked(x, y);
 			mode = new ToPlayAction(pManager);
 			mode->Execute();
-		}
 
+
+		}
 	}
-	else
-	{
+	else {
 		pOut->PrintMessage("No Figures To Play With . click to continue");
 		int x, y;
 		pIn->GetPointClicked(x, y);
 		mode = new ToPlayAction(pManager);
 		mode->Execute();
-		
-
 	}
 	mode = new ToPlayAction(pManager);
 	mode->Execute();

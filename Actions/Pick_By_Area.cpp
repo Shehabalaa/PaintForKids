@@ -22,7 +22,7 @@ ActionState PickByArea::ReadActionParameters()
 	
 
 	pIn->GetPointClickedv2(click.x, click.y);
-	if (click.y < UI.ToolBarHeight)
+	if (click.y < UI.ToolBarHeight && click.x >212 && click.x<276)
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
@@ -107,10 +107,16 @@ void PickByArea::Execute()
 							RightCount++;
 							pManager->DeletePickedFigure(PickList, size, F);
 							pManager->UpdateInterface(PickList, size);
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
+							Sleep(500);
 						}
 						else
 						{
 							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
+							Sleep(500);
 						}
 
 
@@ -139,10 +145,16 @@ void PickByArea::Execute()
 							RightCount++;
 							pManager->DeletePickedFigure(PickList, size, F);
 							pManager->UpdateInterface(PickList, size);
+							string messege = "Correct ";
+							pOut->PrintMessage(messege);
+							Sleep(500);
 						}
 						else
 						{
 							WrongCount--;
+							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+							pOut->PrintMessage(messege);
+							Sleep(500);
 						}
 
 

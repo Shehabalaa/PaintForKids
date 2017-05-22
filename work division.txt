@@ -1,0 +1,9 @@
+Team 13 Work Divistion : 
+
+Ahmed Salama -> Copy ,Cut ,Paste ,Delete ,Pick And Hide
+
+Esraa Mamdouh -> Resize ,Zoom , Change Fill Color,Change Draw Color , Change Border Width,Scramble And Find
+
+Shehab Alaa -> Save ,Load ,Move ,Scramble And Find 
+
+Mohamed Talaat ->Add Figure ,Select ,Change BackGround Color,Pick And Hide

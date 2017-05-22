@@ -124,7 +124,6 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_MOVE]="images\\MenuItems\\move.jpg";//
 	MenuItemImages[ITM_RESIZE]="images\\MenuItems\\resize.jpg";//
 	MenuItemImages[ITM_ZOOMIN] = "images\\MenuItems\\zoomin.jpg";//
-	MenuItemImages[ITM_ZOOMOUT] = "images\\MenuItems\\zoomout.jpg";//
 	MenuItemImages[ITM_COPY] = "images\\MenuItems\\copy.jpg";//
 	MenuItemImages[ITM_CUT] = "images\\MenuItems\\cut.jpg"; //
 	MenuItemImages[ITM_PASTE] = "images\\MenuItems\\paste.jpg";//
@@ -132,9 +131,6 @@ void Output::CreateDrawToolBar() const
 	MenuItemImages[ITM_LOAD]="images\\MenuItems\\load.jpg";//
 	MenuItemImages[ITM_TOPLAY]="images\\MenuItems\\play.jpg";
 	MenuItemImages[ITM_EXIT1] = "images\\MenuItems\\exit.jpg";//
-	MenuItemImages[ITM_UNDO] = "images\\MenuItems\\undo.jpg";
-	MenuItemImages[ITM_REDO] = "images\\MenuItems\\redo.jpg";
-	MenuItemImages[ITM_ROTATE] = "images\\MenuItems\\rotate.jpg"; 
 	MenuItemImages[ITM_CHNG_BORDER_WIDTH] = "images\\MenuItems\\bwidth.jpg";
 	//TODO: Prepare images for each menu item and add it to the list
 
@@ -509,16 +505,9 @@ void Output::PrintGuideMessages(ActionType ActType)
 			PrintMessage("Resize a figure(s)");
 			break;
 
-		case ROTATE:
-			PrintMessage("Rotate a figure(s)");
-			break;
+		
 
-		case UNDO:
-			PrintMessage("Undo");
-			break;
-		case REDO:
-			PrintMessage("Redo");
-			break;
+		
 			/*
 			case SEND_BACK:
 			PrintMessage("Action: send a figure to the back of all figures ");
