@@ -363,7 +363,7 @@ void Output::CreatePlayToolBar() const
 
 	//Draw a line under the toolbar
 	pWind->SetPen(BLACK, 1);
-	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+	pWind->DrawLine(0, UI.ToolBarHeight-1, UI.width, UI.ToolBarHeight-1);
 
 }
 void Output::CreatePickandHideToolBar() const

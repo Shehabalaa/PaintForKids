@@ -895,7 +895,7 @@ void ApplicationManager::UpdateInterface(CFigure ** Fig_List,int size) const
 {
 	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
 	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
-	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight+1, UI.width, UI.height - UI.StatusBarHeight);
 
 	for (int i = 0; i<size; i++)
 		Fig_List[i]->Draw(pOut);		//Call Draw function (virtual member fn)
