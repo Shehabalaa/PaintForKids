@@ -181,9 +181,10 @@ Colors Input::GetColor()
 
 		switch (Clicked)
 		{
+
 		case ITM_black:	return SELECT_BLACK_COLOR;
 		case ITM_green:	return SELECT_GREEN_COLOR;
-		case ITM_yellow:	return SELECT_YELLOW_COLOR;
+		case ITM_yellow: return SELECT_YELLOW_COLOR;
 		case ITM_red:	return SELECT_RED_COLOR;
 		case ITM_blue:	return SELECT_BLUE_COLOR;
 		case ITM_brown: return SELECT_BROWN_COLOR;

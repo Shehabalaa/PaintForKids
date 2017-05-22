@@ -1,4 +1,4 @@
-BROWN     BLUE      WHITE     
+BROWN     BLUE      BLACK     
 9
 CIRCLE         1    366     248     80                                  BLUE              NO_FILL           3
 RECTANGLE      2    678     213     823     307                         BLUE              NO_FILL           3

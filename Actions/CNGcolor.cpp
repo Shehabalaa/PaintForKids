@@ -55,7 +55,7 @@ void CNGcolor::Execute()
 {
 	Output* pOut = pManager->GetOutput();
 	ReadActionParameters();
-	if (C != EMPTY2)
+	if (C != EMPTY2 )
 	{
 		if (pManager->countselected() > 0 )
 		{
@@ -63,6 +63,18 @@ void CNGcolor::Execute()
 			pManager->GraphSaved = false;
 			pManager->AdjustList(CHNG_FILL_CLR);
 
+		}
+		else
+		{
+			if (Colour != AZURE)
+			{
+				UI.FilledFigures = true;
+				UI.FillColor = Colour;
+			}
+			else
+			{
+				UI.FilledFigures = false;
+			}
 		}
 		
 	}

@@ -25,7 +25,7 @@ ActionState PickByTypeandFillingColorAction::ReadActionParameters()
 
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	pOut->PrintMessage("Pick A Figure");
+	
 	if (!pIn->GetPointClickedv2(click.x, click.y))
 	{
 		if (click.y < UI.ToolBarHeight && click.x >212 && click.x < 276)

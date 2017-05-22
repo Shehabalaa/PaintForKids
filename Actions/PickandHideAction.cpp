@@ -22,7 +22,7 @@ void PickandHideAction::InitData()
 		FirstFigure =pManager->GetFigure(click.x, click.y,PickList,size);
 		
 	} while (FirstFigure == NULL);
-		
+	pOut->ClearStatusBar();
 	if (FirstFigure != NULL)
 	{
 		fig = FirstFigure->FigType();
