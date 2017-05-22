@@ -22,7 +22,10 @@ void ToPlayAction::Execute()
 			pManager->ExecuteAction(TO_DRAW);
 		}
 		else
+		{
 			pManager->GenerateRandomFigList();
+			pOut->PrintMessage("Graph Generated");
+		}
 
 		pOut->GetWindow()->FlushMouseQueue(); // delete bad clicks while waiting input form keyboard
 	}
