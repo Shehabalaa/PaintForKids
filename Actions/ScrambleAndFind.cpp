@@ -182,6 +182,7 @@ void ScrampleAndFindAction::Execute()
 	MSG = "Game is over You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount)+ " Wrong" + " Press Enter To Continue";
 	pOut->PrintMessage(MSG);
 	pIn->GetSrting(pOut);
+	pOut->GetWindow()->FlushMouseQueue();// avoid bad clicking effects if user didnot catch message
 	pOut->ClearStatusBar();
 }
 
