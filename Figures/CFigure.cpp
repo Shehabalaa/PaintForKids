@@ -54,9 +54,19 @@ void CFigure::SetID()
 	ID = ForID++;
 }
 
+void CFigure::SetID(int id)
+{
+	ID = id;
+}
+
 
 void CFigure::UpdateArea()
 {
+}
+
+int CFigure::GetID() const
+{
+	return ID;
 }
 
 CFigure::~CFigure()

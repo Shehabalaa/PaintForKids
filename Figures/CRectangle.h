@@ -23,6 +23,7 @@ public:
 	virtual void MovetoRandomCoord(int, int, int, int);
 	virtual void SetRandomParameter(int, int, int, int);
 	void UpdateArea();
+	void SetScrambleParameter();
 	virtual ~CRectangle();
 };
 

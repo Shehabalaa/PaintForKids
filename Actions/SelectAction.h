@@ -3,8 +3,6 @@
 
 
 
-
-
 class ActionSelect : public Action
 {
 	Point m;

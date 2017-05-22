@@ -34,7 +34,9 @@ ApplicationManager::ApplicationManager()
 	pOut = new Output;
 	pIn = pOut->CreateInput();
 	GraphSaved = true;
+	IsFigListRandomized = false;
 	FigCount = 0;
+	
 		
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
@@ -570,7 +572,7 @@ void ApplicationManager::UserGuide() const
 
 	while (ptr->getifqueuempty() && ptr->GetButtonState(LEFT_BUTTON, x, y) == BUTTON_UP)
 	{
-		a1 = pIn->SeeAction(x, y);
+		a1 = pIn->GetUserAction(x, y);
 		if (a1 != a2 && a1 != DRAWING_AREA)
 			pOut->PrintGuideMessages(a1);
 		//else if (a1 == DRAWING_AREA )
@@ -734,6 +736,10 @@ void ApplicationManager::PasteAll(const Point & p)
 
 				}
 
+				for (int i = FigCount- ClipBoard.size(); i <FigCount; i++)
+				{
+					FigList[i]->SetID();
+				}
 				AdjustList(PASTE);
 			}
 		}
@@ -790,6 +796,47 @@ CFigure ** ApplicationManager::GetDeepCopyFromFigList(int & size) const
 
 	return newlist;
 	
+}
+
+void ApplicationManager::GenerateRandomFigList()
+{
+	IsFigListRandomized = true;
+	// random list size between 5 and 20
+	FigCount = rand() % (10 - 5 + 1) + 4;
+	int tri_num = 0, rec_num = 0, circle_num = 0, line_num = 0;
+	circle_num = rand() % (FigCount + 1);
+	if (circle_num != FigCount)
+		tri_num = rand() % (FigCount - circle_num + 1);
+	if (circle_num + tri_num != FigCount)
+		rec_num = rand() % (FigCount - circle_num - tri_num + 1);
+	if (circle_num + tri_num + rec_num != FigCount)
+		line_num = rand() % (FigCount - circle_num - tri_num - rec_num + 1);
+
+	FigCount = tri_num + rec_num + line_num + circle_num;
+	for (int i = 0; i < circle_num; i++)
+	{
+		FigList[i] = new CCircle;
+		FigList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
+	}
+	for (int i = circle_num; i < circle_num + tri_num; i++)
+	{
+		FigList[i] = new CTriangle;
+		FigList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
+	}
+	for (int i = circle_num + tri_num; i < circle_num + tri_num + rec_num; i++)
+	{
+		FigList[i] = new CRectangle;
+		FigList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
+	}
+	for (int i = circle_num + tri_num + rec_num; i < circle_num + tri_num + rec_num + line_num; i++)
+	{
+		FigList[i] = new Cline;
+		FigList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
+	}
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->SetID(i + 1);
+	}
 }
 
 //==================================================================================//
@@ -854,3 +901,15 @@ void ApplicationManager::UpdateInterface(CFigure ** Fig_List,int size) const
 		Fig_List[i]->Draw(pOut);		//Call Draw function (virtual member fn)
 }
 
+void ApplicationManager::UpdateInterface(CFigure ** List1, CFigure ** List2, int size) const // this fucn update interface with two lists of same size
+{
+	pOut->GetWindow()->SetBrush(UI.BkGrndColor);
+	pOut->GetWindow()->SetPen(UI.BkGrndColor, 0);
+	pOut->GetWindow()->DrawRectangle(0, UI.ToolBarHeight, UI.width, UI.height - UI.StatusBarHeight);
+
+	for (int i = 0; i < size; i++)
+	{
+		List1[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+		List2[i]->Draw(pOut);		//Call Draw function (virtual member fn)
+	}
+}

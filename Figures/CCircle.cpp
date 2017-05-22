@@ -66,6 +66,16 @@ void CCircle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_end)
 	UpdateArea();
 }
 
+void CCircle::SetScrambleParameter()
+{
+	rad *= .5;
+	center.x *= .5;
+	center.y *= .5;
+	circum.x *= .5;
+	circum.y *= .5;
+	UpdateArea();
+}
+
 void CCircle::UpdateArea()
 {
 	Area = 3.14 *rad*rad;
@@ -109,7 +119,7 @@ void CCircle::Save(ofstream &fOut) const
 }
 bool  CCircle::InDrawingArea() const
 {
-	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) > 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
+	if (center.y > UI.ToolBarHeight && center.y < (UI.height - UI.StatusBarHeight) && (center.x - rad) >= 0 && (center.x + rad) < UI.width -15 && center.y - rad > UI.ToolBarHeight && center.y + rad < UI.height - UI.StatusBarHeight)
 	{
 		return true;
 	}
@@ -160,6 +170,8 @@ void CCircle::Load(ifstream & Infile)
 		FigGfxInfo.FillClr = color::getColorObject(temp);
 	}
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
+	circum.x = center.x + rad;
+	circum.y = 0;
 	UpdateArea();
 }
 

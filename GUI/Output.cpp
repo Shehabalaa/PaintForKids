@@ -176,8 +176,6 @@ void Output::CreateColorsBar() const
 	//Draw a line parllel to colors toolbar
 
 	
-
-	
 	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
 	for (int j = 1;j <= UI.ColorsBarWidth; j++)
@@ -364,7 +362,7 @@ void Output::CreatePlayToolBar() const
 
 
 	//Draw a line under the toolbar
-	pWind->SetPen(BLACK, 3);
+	pWind->SetPen(BLACK, 1);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 
 }

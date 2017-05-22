@@ -35,9 +35,9 @@ public:
 	int countselected();
 	void PrintSelected();
 	void MoveFigures(int, int);
-	int CountFigure(CFigure ** PickList, int size, figures figtype);
+	int CountFigure(CFigure **, int, figures);
 	int CountFigure(CFigure ** PickList, int size, figures Type, color c, bool filled);
-	int CountFigure(CFigure ** PickList, int size, color c, bool filled);
+	int CountFigure(CFigure **, int, color, bool);
 	// -- Figures Management Functions
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
@@ -66,8 +66,10 @@ public:
 	Output *GetOutput() const; //Return pointer to the output
 	void UpdateInterface() const;	//Redraws all the drawing window
 	void UpdateInterface(CFigure **,int) const; // over load update inter face with another version
+	void UpdateInterface(CFigure ** , CFigure **, int size) const;// over load update inter face with another version
 	CFigure** GetDeepCopyFromFigList(int&) const; // this fucn big back a copylist from fig list and writes its size to var sent by ref 
-	
+	bool IsFigListRandomized;
+	void GenerateRandomFigList();
 
 };
 

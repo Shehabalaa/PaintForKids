@@ -56,6 +56,7 @@ ActionState  PickandHideAction::ReadActionParameters()
 	Input* pIn = pManager->GetInput();
 	do {
 		pOut->PrintMessage("Choose a Playing Mode ");
+		pManager->UserGuide();
 		PICKING_TYPE = pIn->GetUserAction();
 	} while (PICKING_TYPE != PICK_AREA&&PICKING_TYPE !=PICK_FILL &&PICKING_TYPE !=PICK_TYPEFILL &&PICKING_TYPE !=PICK_TYPE && PICKING_TYPE !=TO_PLAY);
 	return Successful;

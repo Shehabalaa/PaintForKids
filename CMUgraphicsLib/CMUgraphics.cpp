@@ -547,7 +547,7 @@ keytype window::GetKeyPress(char &cKey) {
 	}
 }
 
-clicktype window::WaitMouseClick(int &iX, int &iY) {
+clicktype window::WaitMouseClick(int &iX, int &iY,bool DeleteNODE ) {
 
 	mqueuenode* mqueTmp;
     clicktype ctTmp;
@@ -560,8 +560,11 @@ clicktype window::WaitMouseClick(int &iX, int &iY) {
 	        iX = mqueTmp->iX;
 		    iY = mqueTmp->iY;
             ctTmp = mqueTmp->ctInfo;
+			if(DeleteNODE)
+				delete mqueTmp;
+			else
+				mqueInput.Insert(mqueTmp);
 
-		    delete mqueTmp;
 		    return ctTmp;
 		}
 	}

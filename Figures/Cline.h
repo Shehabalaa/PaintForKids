@@ -25,6 +25,7 @@ public:
 	virtual void PrintInfo(Output* pOut) const;
 	virtual void MovetoRandomCoord(int, int, int, int);
 	virtual void SetRandomParameter(int, int, int, int);
+	void SetScrambleParameter();
 	void UpdateArea();
 	virtual ~Cline();
 };

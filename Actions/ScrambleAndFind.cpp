@@ -4,93 +4,44 @@
 #include"../Figures/CCircle.h"
 #include"../Figures/Cline.h"
 
-//void ScrampleAndFindAction::GenerateNormalAndRandomLLists()
-//{
-//	// random list size between 5 and 20
-//	ListSize = rand() % (10 - 5 + 1) + 4;
-//	int tri_num=0, rec_num=0, circle_num=0, line_num=0;
-//	circle_num = rand() % (ListSize + 1);
-//	if(circle_num!=ListSize)
-//		tri_num = rand() % (ListSize - circle_num + 1) ;
-//	if (circle_num+tri_num != ListSize)
-//		rec_num = rand() % (ListSize - circle_num-tri_num + 1);
-//	if (circle_num + tri_num+rec_num != ListSize)
-//		line_num = rand() % (ListSize - circle_num - tri_num - rec_num + 1);
-//
-//	ListSize = tri_num + rec_num + line_num+circle_num;
-//	NormalList = new CFigure*[ListSize];
-//	RandomizdList = new CFigure*[ListSize];
-//	for (int i = 0; i < circle_num; i++)
-//	{
-//		//NormalList[i] = new CCircle;
-//		RandomizdList[i] = new CCircle;
-//		RandomizdList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
-//	}
-//	for (int i = circle_num ; i < circle_num+tri_num; i++)
-//	{
-//		//NormalList[i] = new CTriangle;
-//		RandomizdList[i] = new CTriangle;
-//		RandomizdList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
-//	}
-//	for (int i = circle_num + tri_num; i < circle_num + tri_num +rec_num; i++)
-//	{
-//		//NormalList[i] = new CRectangle;
-//		RandomizdList[i] = new CRectangle;
-//		RandomizdList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
-//	}
-//	for (int i = circle_num + tri_num + rec_num; i < circle_num + tri_num + rec_num+line_num; i++)
-//	{
-//		//NormalList[i] = new Cline;
-//		RandomizdList[i] = new Cline;
-//		RandomizdList[i]->SetRandomParameter(0, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
-//	}
-//
-//}
 
-void ScrampleAndFindAction::ResizeNormalList()
+int ScrampleAndFindAction::GetFigureIDinRandomList(int x, int y)
 {
-	Point centroid1,centroid2;
-	int x, y;
-	for (int i = 0; i <ListSize; i++)
+
+	for (int i = 0; i < ListSize; i++)
 	{
-		x += NormalList[i]->CentroidOfFigure().x;
-		y += NormalList[i]->CentroidOfFigure().y;
-
+		if (RandomizdList[i]->check(x, y))
+			return RandomizdList[i]->GetID();
 	}
-	centroid1.x = x / ListSize;
-	centroid1.y = y /ListSize;
 
+	return -1;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	for (int i = 0; i <ListSize; i++)
+void ScrampleAndFindAction::DeleteFigureFromBothLists(int ID)
+{
+	for (int i = 0; i < ListSize; i++)
 	{
-		x += NormalList[i]->CentroidOfFigure().x;
-		y += NormalList[i]->CentroidOfFigure().y;
-
+		if (NormalList[i]->GetID() == ID)
+		{
+			delete NormalList[i];
+			NormalList[i] = NULL;
+			break;
+		}
 	}
-	centroid2.x = x / ListSize;
-	centroid2.y = y / ListSize;
+	for (int i = 0; i < ListSize; i++)
+	{
+		if (RandomizdList[i]->GetID() == ID)
+		{
+			delete 	RandomizdList[i];
+			RandomizdList[i] = NULL;
+			break;
+		}
+	}
+	
+	ListSize--;
 
-
-
-
-
-
+	pManager->AdjustList(DEL,NormalList, ListSize);
+	pManager->AdjustList(DEL,RandomizdList, ListSize);
 
 }
 
@@ -105,59 +56,121 @@ ActionState ScrampleAndFindAction::ReadActionParameters()
 {
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
-	NormalList = pManager->GetDeepCopyFromFigList(ListSize);
 
-	RandomizdList = pManager->GetDeepCopyFromFigList(ListSize);
-	if (ListSize)
+
+	NormalList = pManager->GetDeepCopyFromFigList(ListSize);
+	int centroid_y_1, centroid_y_2;
+	int y = 0;
+	for (int i = 0; i <ListSize; i++)
+		y += NormalList[i]->CentroidOfFigure().y;
+
+	centroid_y_1 = y / ListSize;
+
+
+	for (int i = 0; i < ListSize; i++)
 	{
-		for (int i = 0; i < ListSize; i++)
-		{
-			RandomizdList[i]->MovetoRandomCoord(UI.width/2+1, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
-		}
-		return Successful;
+		NormalList[i]->SetScrambleParameter();
 	}
-	/*else
+
+	y = 0;
+
+	for (int i = 0; i <ListSize; i++)
+		y += NormalList[i]->CentroidOfFigure().y;
+
+	centroid_y_2 = y / ListSize;
+
+	for (int i = 0; i < ListSize; i++)
+		NormalList[i]->Move(0, centroid_y_1 - centroid_y_2);
+
+
+
+	// copy normal to randomized
+
+	RandomizdList = new CFigure*[ListSize];
+	int temp = rand() % (ListSize); // in radnom order
+	for (int i = 0; i < ListSize; i++)
 	{
-		pOut->PrintMessage("No Figures to Play with!!Do you want to generate Figures?(Y/n)");
-		string temp = pIn->GetSrting(pOut);
-		if (temp == "n" || temp == "N")
-			return Just_Canceled;
-		else
-		{
-			GenerateNormalAndRandomLLists();
-			pOut->PrintMessage("FiguresList generated successfully");
-		}
-		
+		RandomizdList[temp] = NormalList[i]->CreateCopy();
+		RandomizdList[temp]->MovetoRandomCoord(UI.width / 2 + 1, UI.width - 15, UI.ToolBarHeight + 1, UI.height - UI.StatusBarHeight - 1);
+		temp++;
+		temp %= ListSize;
 	}
-*/
+	
 
 	return Successful;
 }
 
 void ScrampleAndFindAction::Execute()
 {
-	if (ReadActionParameters() == Just_Canceled)
+	int x = 0, y = 0, RightCount = 0, WrongCount = 0, CurrentID = 0;
+	string MSG;
+	Output* pOut = pManager->GetOutput();
+	Input* pIn = pManager->GetInput();
+	ReadActionParameters();
+	int Tries = ListSize;
+	// Drawing Line Between Two graphs
+	if (UI.BkGrndColor == RED)
+		pOut->GetWindow()->SetPen(BLACK, 2);
+	else
+		pOut->GetWindow()->SetPen(RED, 2);
+
+	pOut->PrintMessage("In This Gaame you should Search about and Select the Opposite to the Highlighted Figure(s) in right graph.");
+	while (Tries>0)
+	{
+		MSG = "";
+		int rad_index = rand() % (ListSize);
+		NormalList[rad_index]->SetSelected(true);
+		CurrentID = NormalList[rad_index]->GetID();
+
+		pManager->UpdateInterface(NormalList, RandomizdList, ListSize);
+		pOut->GetWindow()->DrawLine((UI.width - UI.ColorsBarWidth - 15) / 2, UI.ToolBarHeight, (UI.width - UI.ColorsBarWidth - 15) / 2, UI.height - UI.StatusBarHeight);
+		
+		
+		if (pIn->GetPointClickedv2(x, y))
+		{
+			if (x < (UI.width - 15) / 2 || GetFigureIDinRandomList(x, y) != CurrentID)
+			{
+				MSG += "HardLuck Try Again";
+				WrongCount++;
+				NormalList[rad_index]->SetSelected(false);
+			}
+			else
+			{
+				DeleteFigureFromBothLists(CurrentID);
+				MSG += "Good Job";
+				RightCount++;
+
+			}
+
+
+			pManager->UpdateInterface(NormalList, RandomizdList, ListSize);
+			pOut->GetWindow()->DrawLine((UI.width - UI.ColorsBarWidth - 15) / 2, UI.ToolBarHeight, (UI.width - UI.ColorsBarWidth - 15) / 2, UI.height - UI.StatusBarHeight);
+			MSG += " You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount) + " Wrong";
+			pOut->PrintMessage(MSG);
+
+		}
+		else if (x / UI.MenuItemWidth < 4) // selects any of first three icons
 			return;
 
+		Tries--;
+	}
 
+	if (RightCount > WrongCount)
+		pOut->GetWindow()->DrawImage("images\\MenuItems\\WIN.jpg", 340, 150, 500, 350);
+	else 
+		pOut->GetWindow()->DrawImage("images\\MenuItems\\LOSE.jpg", 340, 150, 500, 350);
 
-
-	pManager->UpdateInterface(NormalList, ListSize);
-	pManager->UpdateInterface(RandomizdList,ListSize);
-
-		Sleep(1000);
-
-
+	MSG = "Game is over You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount)+ " Wrong" + " Press Enter To Continue";
+	pOut->PrintMessage(MSG);
+	pIn->GetSrting(pOut);
+	pOut->ClearStatusBar();
 }
 
 ScrampleAndFindAction::~ScrampleAndFindAction()
 {
-	if (NormalList)
-	{
 		for (int i = 0; i < ListSize; i++)
 		{
 			delete NormalList[i];
 			delete RandomizdList[i];
 		}
-	}
 }

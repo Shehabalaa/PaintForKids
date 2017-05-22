@@ -24,12 +24,8 @@ ActionState ActionSelect::ReadActionParameters()
 	pManager->UserGuide();
 
 
-	pIn->GetPointClickedv2(m.x,m.y);
-	if (m.y < UI.ToolBarHeight)
-	{
+	if (!pIn->GetPointClickedv2(m.x, m.y))
 		return Canceled_And_Switched_To_Another_One;
-	}
-	pWind->FlushMouseQueue(); // to delete last mouse click as it won't be used again
 
 	return Successful;
 }

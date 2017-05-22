@@ -12,6 +12,15 @@ void CRectangle::UpdateArea()
 	Area = abs(Corner1.x - Corner2.x)*abs(Corner1.y - Corner2.y);
 }
 
+void CRectangle::SetScrambleParameter()
+{
+	Corner1.x *= .5;
+	Corner1.y *= .5;
+	Corner2.x *= .5;
+	Corner2.y *= .5;
+	UpdateArea();
+}
+
 bool CRectangle::Resize(float ratio)
 {
 	Point tmpc1 = Corner1;

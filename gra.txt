@@ -1,0 +1,11 @@
+BROWN     BLUE      WHITE     
+9
+CIRCLE         1    366     248     80                                  BLUE              NO_FILL           3
+RECTANGLE      2    678     213     823     307                         BLUE              NO_FILL           3
+RECTANGLE      3    151     241     70      446                         BLUE              NO_FILL           3
+CIRCLE         4    705     386     105                                 BROWN             NO_FILL           3
+TRIANGLE       6    981     433     1053    325     1118    446         BROWN             BLUE              3
+CIRCLE         7    986     249     67                                  BROWN             BLUE              3
+CIRCLE         5    428     457     154                                 BROWN             YELLOW            3
+CIRCLE         8    537     239     60                                  BROWN             BLUE              3
+RECTANGLE      9    136     152     221     249                         BROWN             BLUE              3

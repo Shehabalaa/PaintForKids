@@ -14,6 +14,7 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 void Cline::UpdateArea()
 {
 	Area = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
+	length = Area;
 }
 
 
@@ -139,6 +140,17 @@ void Cline::UpdateArea()
 	 start.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	 end.x = rand() % (X_end - X_begin + 1) + X_begin;
 	 end.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+
+ }
+
+ void Cline::SetScrambleParameter()
+ {
+	 start.x *= .5;
+	 start.y *= .5;
+	 end.x *= .5;
+	 end.y *= .5;
+	 length *= .5;
+	 UpdateArea();
  }
 
 

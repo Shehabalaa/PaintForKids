@@ -19,6 +19,7 @@ public:
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	void SetID(); // Changes figure id
+	void SetID(int); // Changes figure id with certian value
 	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
 	void ChngFillClr(color Fclr);	//changes the figure's filling color
 	virtual void Draw(Output* pOut) const  = 0;	  //Draw the figure
@@ -27,6 +28,7 @@ public:
 	virtual figures FigType() const=0;
 	virtual void MovetoRandomCoord(int,int,int,int)=0; // this func change figure coord in random way within certian range
 	virtual void SetRandomParameter(int, int, int, int) = 0; // this func set random parameters to figure
+	virtual void SetScrambleParameter() = 0;// this fucn make figure ready to scrample and find action by changing its coord
 	virtual bool InDrawingArea() const = 0;
 	virtual bool check(int,int) const = 0;
 	color GetDrawClr()const;
@@ -42,6 +44,7 @@ public:
 	bool IsFilled() const;
 	virtual bool Resize(float Ratio) = 0;
 	void UpdateArea(); // this func. is used to update figure area after changing its coords.
+	int GetID() const;
 	virtual ~CFigure(); // virtual destructor to avoid delete with pointer to figure and hold address of real fig(rec,tri,...) in heap
 	
 };

@@ -17,19 +17,15 @@ ActionState ByFillingColor::ReadActionParameters()
 	Output* pOut = pManager->GetOutput();
 	Input* pIn = pManager->GetInput();
 	pOut->PrintMessage("Pick A Figure");
-	pIn->GetPointClickedv2(click.x, click.y);
+	
 
-	if (click.y < UI.ToolBarHeight)
+	if (!pIn->GetPointClickedv2(click.x, click.y))
 	{
 		return Canceled_And_Switched_To_Another_One;
 	}
-	pOut->GetWindow()->FlushMouseQueue(); // to delete last mouse click as it won't be used again
 
-
-										  //pIn->GetPointClicked(click.x, click.y);
 	return Successful;
 	
-
 
 }
 
