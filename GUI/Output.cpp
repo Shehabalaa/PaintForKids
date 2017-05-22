@@ -146,7 +146,7 @@ void Output::CreateDrawToolBar() const
 
 	//Draw a line under actions toolbar
 	pWind->SetPen(BLACK, 1);
-	pWind->DrawLine(0, UI.ToolBarHeight-1, UI.width, UI.ToolBarHeight-1);
+	pWind->DrawLine(0, UI.ToolBarHeight-2, UI.width, UI.ToolBarHeight-1);
 
 	/////////////////////////////////////////////////////////////////////
 

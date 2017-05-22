@@ -46,6 +46,11 @@ bool CFigure::IsFilled() const
 	return FigGfxInfo.isFilled;
 }
 
+void CFigure::setfilled(bool k)
+{
+	FigGfxInfo.isFilled = k;
+}
+
 
 
 

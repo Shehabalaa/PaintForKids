@@ -40,6 +40,7 @@ public:
 	virtual Point CentroidOfFigure() const = 0; // Returns the centre(x,y) of figure as the kind as of the figure
 	virtual void PrintInfo(Output* pOut) const = 0;	//print all figure info on the status bar
 	bool IsFilled() const;
+	void setfilled(bool);
 	virtual bool Resize(float Ratio) = 0;
 	void UpdateArea(); // this func. is used to update figure area after changing its coords.
 	virtual ~CFigure(); // virtual destructor to avoid delete with pointer to figure and hold address of real fig(rec,tri,...) in heap
