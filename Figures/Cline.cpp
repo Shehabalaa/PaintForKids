@@ -236,7 +236,7 @@ BlockingDirection Cline::Move(int x, int y)
 
 	if (!this->InDrawingArea())
 	{
-		if (start.x > UI.width -1 || start.x < 0 || end.x > UI.width -15 || end.x < 0)
+		if (start.x > UI.width -15 || start.x < 0 || end.x > UI.width -15 || end.x < 0)
 			tmp = Block_in_X_Direction;
 
 		if (start.y < UI.ToolBarHeight +1 || start.y > UI.height - UI.StatusBarHeight -2  || end.y < UI.ToolBarHeight +1 || end.y > UI.height - UI.StatusBarHeight -2)
