@@ -181,6 +181,7 @@ void CRectangle::SetRandomParameter(int X_begin, int X_end, int Y_begin, int Y_e
 	Corner1.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	Corner2.x = rand() % (X_end - X_begin + 1) + X_begin;
 	Corner2.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	UpdateArea();
 }
 
 void CRectangle::Save(ofstream & fOut) const

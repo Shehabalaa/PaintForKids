@@ -161,6 +161,8 @@ void Cline::UpdateSlope()
 	 start.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
 	 end.x = rand() % (X_end - X_begin + 1) + X_begin;
 	 end.y = rand() % (Y_end - Y_begin + 1) + Y_begin;
+	 UpdateArea();
+	 UpdateSlope();
 
  }
 
