@@ -80,18 +80,15 @@ void ByFillingColor::Execute()
 						string messege = "Correct ";
 						pOut->PrintMessage(messege);
 					}
-						else
-						{
-							WrongCount--;
-							string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
-							pOut->PrintMessage(messege);
-						}
-
-					
+					else
+					{
+						WrongCount--;
+						string messege = "WRONG.. You Have " + to_string(WrongCount) + " Chances left";
+						pOut->PrintMessage(messege);
 					}
-				
-
 				}
+
+
 				else
 				{
 					if (!F->IsFilled())
@@ -112,6 +109,7 @@ void ByFillingColor::Execute()
 				}
 
 			}
+		}
 		
 		else { return; }
 	}

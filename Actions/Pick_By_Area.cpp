@@ -102,7 +102,7 @@ void PickByArea::Execute()
 					CFigure* F = pManager->GetFigure(click.x, click.y, PickList, size);
 					if (F != NULL)
 					{
-						if (F == MAX.second)
+						if (F->GetArea() == MAX.first)
 						{
 
 							RightCount++;
@@ -138,7 +138,7 @@ void PickByArea::Execute()
 					CFigure* F = pManager->GetFigure(click.x, click.y, PickList, size);
 					if (F != NULL)
 					{
-						if (F == MIN.second)
+						if (F->GetArea() == MIN.first)
 						{
 
 							RightCount++;
