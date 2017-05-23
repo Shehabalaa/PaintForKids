@@ -1,7 +1,5 @@
 BLUE      GREEN     BLACK     
-12
-LINE           29   1125    418     927     605                         BLUE                                3
-LINE           30   1006    436     1174    584                         BLUE                                3
+10
 TRIANGLE       24   305     456     402     482     253     537         BLUE              YELLOW            3
 CIRCLE         25   371     107     24                                  BLUE              YELLOW            3
 CIRCLE         26   312     298     45                                  BLUE              BROWN             3
