@@ -174,10 +174,11 @@ void ScrampleAndFindAction::Execute()
 	else 
 		pOut->GetWindow()->DrawImage("images\\MenuItems\\LOSE.jpg", 340, 150, 500, 350);
 
-	MSG = "Game is over You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount)+ " Wrong" + " Press Enter To Continue";
+	MSG = "Game is over You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount)+ " Wrong" + " Click To Continue";
 	pOut->PrintMessage(MSG);
-	pIn->GetSrting(pOut);
-	pOut->GetWindow()->FlushMouseQueue();// avoid bad clicking effects if user didnot catch message
+	int k, z;
+	pIn->GetPointClicked(k, z);
+	//pOut->GetWindow()->FlushMouseQueue();// avoid bad clicking effects if user didnot catch message//bla avoid bla bta3
 	pOut->ClearStatusBar();
 }
 
