@@ -113,7 +113,7 @@ ActionState ScrampleAndFindAction::ReadActionParameters()
 
 	return Successful;
 }
-#include<iostream>//////////////////////////
+
 void ScrampleAndFindAction::Execute()
 {
 	int x = 0, y = 0, RightCount = 0, WrongCount = 0, CurrentID = 0;
@@ -144,11 +144,6 @@ void ScrampleAndFindAction::Execute()
 		{
 			if (x < (UI.width - 15) / 2 || GetFigureIDinRandomList(x, y) != CurrentID)
 			{
-				///////
-				cout << x << " " << y << endl;
-				pOut->GetWindow()->GetMouseCoord(x,y);
-				cout << x << " " << y << endl;
-				////////
 				MSG += "HardLuck Try Again";
 				WrongCount++;
 				NormalList[index]->SetSelected(false);
