@@ -3,16 +3,8 @@ Cline::Cline(const Point& P1,const Point& P2,const GfxInfo& FigureGfxInfo ) :CFi
 {
 	start = P1;
 	end = P2;
-	if ((P1.x - P2.x) != 0)
-	{
-		slope = float((P1.y - P2.y)) / float(P1.x - P2.x);
-	}
-	else
-	{
-		slope = -9999999999999;
-	}
-	 UpdateArea();
-	 length = Area;
+	UpdateSlope();
+	UpdateArea();
 	ID = -999; // take any wrong id until be put in figlist
 }
 
@@ -20,6 +12,27 @@ void Cline::UpdateArea()
 {
 	Area = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
 	length = Area;
+}
+
+void Cline::UpdateSlope()
+{
+
+	if ((start.x - end.x) != 0)
+	{
+		slope = float((start.y - end.y)) / float(start.x - end.x);
+	}
+	else
+	{
+		slope = -9999999999999;
+	}
+	if ((start.x - end.x) != 0)
+	{
+		slope = float((start.y - end.y)) / float(start.x - end.x);
+	}
+	else
+	{
+		slope = -9999999999999;
+	}
 }
 
 
@@ -275,6 +288,7 @@ void Cline::Load(ifstream & Infile)
 	Infile >> temp; FigGfxInfo.DrawClr = color::getColorObject(temp);
 	Infile >> temp;  FigGfxInfo.BorderWidth = stoi(temp);
 	UpdateArea();
+	UpdateSlope();
 
 }
 

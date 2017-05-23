@@ -27,6 +27,7 @@ public:
 	virtual void SetRandomParameter(int, int, int, int);
 	void SetScrambleParameter();
 	void UpdateArea();
+	void UpdateSlope();
 	virtual ~Cline();
 };
 
