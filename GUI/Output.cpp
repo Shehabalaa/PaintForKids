@@ -535,11 +535,8 @@ void Output::PrintGuideMessages(ActionType ActType)
 			PrintMessage("Drawing Area");
 			break;
 
-		case ZOOMIN:
-			PrintMessage("Zoom In");
-			break;
-		case ZOOMOUT:
-			PrintMessage("Zoom Out");
+		case ZOOM_IN_Out:
+			PrintMessage("Zoom In/Out");
 			break;
 		case CUT:
 			PrintMessage("Cut");

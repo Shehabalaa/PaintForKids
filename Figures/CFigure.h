@@ -12,9 +12,9 @@ protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
 	int Area; // Figure Area
-	static int ForID;
 	/// Add more parameters if needed.
 public:
+	static int ForID;
 	CFigure(GfxInfo FigureGfxInfo);
 	void SetSelected(bool s);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected

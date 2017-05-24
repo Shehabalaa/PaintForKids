@@ -122,11 +122,7 @@ void ScrampleAndFindAction::Execute()
 	Input* pIn = pManager->GetInput();
 	ReadActionParameters();
 	int Tries = ListSize;
-	// Drawing Line Between Two graphs
-	if (UI.BkGrndColor == RED)
-		pOut->GetWindow()->SetPen(BLACK, 2);
-	else
-		pOut->GetWindow()->SetPen(RED, 2);
+
 
 	pOut->PrintMessage("In This Gaame you should Search about and Select the Opposite to the Highlighted Figure(s) in right graph.");
 	while (Tries>0)
@@ -135,8 +131,12 @@ void ScrampleAndFindAction::Execute()
 		int index = GetIndexOfFutureHighLighted();
 		NormalList[index]->SetSelected(true);
 		CurrentID = NormalList[index]->GetID();
-
 		pManager->UpdateInterface(NormalList, RandomizdList, ListSize);
+		// Drawing Line Between Two graphs
+		if (UI.BkGrndColor == RED)
+			pOut->GetWindow()->SetPen(BLACK, 2);
+		else
+			pOut->GetWindow()->SetPen(RED, 2);
 		pOut->GetWindow()->DrawLine((UI.width - UI.ColorsBarWidth - 15) / 2, UI.ToolBarHeight, (UI.width - UI.ColorsBarWidth - 15) / 2, UI.height - UI.StatusBarHeight);
 		
 		
@@ -158,6 +158,10 @@ void ScrampleAndFindAction::Execute()
 
 
 			pManager->UpdateInterface(NormalList, RandomizdList, ListSize);
+			if (UI.BkGrndColor == RED)
+				pOut->GetWindow()->SetPen(BLACK, 2);
+			else
+				pOut->GetWindow()->SetPen(RED, 2);
 			pOut->GetWindow()->DrawLine((UI.width - UI.ColorsBarWidth - 15) / 2, UI.ToolBarHeight, (UI.width - UI.ColorsBarWidth - 15) / 2, UI.height - UI.StatusBarHeight);
 			MSG += " You did " + to_string(RightCount) + " Right" + " and " + to_string(WrongCount) + " Wrong";
 			pOut->PrintMessage(MSG);

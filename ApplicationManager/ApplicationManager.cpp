@@ -99,7 +99,7 @@ void ApplicationManager::ExecuteAction(ActionType ActType)
 	case RESIZE :
 		pAct = new Resize(this);
 		break;
-	case ZOOMIN:
+	case ZOOM_IN_Out:
 		pAct = new Zoom(this);
 		break;
 	case SAVE:
@@ -284,6 +284,16 @@ void ApplicationManager::LoadAll( ifstream & InFile)
 
 		FigList[i]->Load(InFile);
 	}
+
+
+	int max = 0;
+	for (int i = 0; i < FigCount; i++)
+	{
+		if (FigList[i]->GetID() > max)
+			max = FigList[i]->GetID();
+	}
+
+	CFigure::ForID = max + 1;
 	GraphSaved = true;
 
 }

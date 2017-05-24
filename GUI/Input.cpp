@@ -74,7 +74,7 @@ ActionType Input::GetUserAction(int x ,int y) const
 			case ITM_DELETE:	return DEL;
 			case ITM_MOVE:	return MOVE;
 			case ITM_RESIZE:	return RESIZE;
-			case ITM_ZOOMIN:	return ZOOMIN;
+			case ITM_ZOOMIN:	return ZOOM_IN_Out;
 			case ITM_COPY:	return COPY;
 			case ITM_CUT:	return CUT;
 			case ITM_PASTE:	return PASTE;
