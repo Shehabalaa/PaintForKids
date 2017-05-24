@@ -646,14 +646,14 @@ void Output::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) co
 		else
 			DrawingClr = LineGfxInfo.DrawClr;
 
-		pWind->SetPen(DrawingClr, LineGfxInfo.BorderWidth*UI.ZoomFactor);	//Set Drawing color & width
+		pWind->SetPen(DrawingClr,LineGfxInfo.BorderWidth*UI.ZoomFactor);	//Set Drawing color & width
 
 		drawstyle style;
 
 			style = FRAME;
 
-
-		pWind->DrawLine(P1.x*UI.ZoomFactor, P1.y*UI.ZoomFactor, P2.x*UI.ZoomFactor, P2.y*UI.ZoomFactor, style);
+			
+				pWind->DrawLine(P1.x*UI.ZoomFactor , P1.y*UI.ZoomFactor, P2.x*UI.ZoomFactor, P2.y*UI.ZoomFactor, style);
 
 }
 //Trianlge
